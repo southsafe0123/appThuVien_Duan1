@@ -6,6 +6,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.teammobile.appthuvien_duan1.interfaces.Callback_Interface;
 import com.teammobile.appthuvien_duan1.model.User;
@@ -42,16 +43,21 @@ public class Dao_User {
 
     public void login(String taikhoan, String matkhau, Callback_Interface.CheckBoolean checkBoolean){
 
-        userRef.orderByChild("taikhoan").equalTo(taikhoan).addListenerForSingleValueEvent(new ValueEventListener() {
+        Query query = userRef.orderByChild("taikhoan").equalTo(taikhoan);
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 boolean check = false;
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    user = snapshot.getValue(User.class);
+
+                    user = dataSnapshot.getValue(User.class);
                     if(user.getMatkhau().equals(matkhau)){
+
                         check = true;
                         break;
                     }
+
                 }
                 checkBoolean.isSuccess(check);
             }
@@ -67,5 +73,11 @@ public class Dao_User {
     //lấy dữ liệu user đã lấy khi login.
     public User getUser(){
         return user;
+    }
+
+    public void putUser(String taikhoan,String matkhau,String hoten,String trangthai,String role){
+        String maUser = userRef.push().getKey(); // Tạo key ngẫu nhiên cho người dùng
+
+        userRef.child(maUser).setValue(new User(taikhoan,matkhau,hoten,trangthai,role));
     }
 }
