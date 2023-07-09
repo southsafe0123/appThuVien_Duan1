@@ -78,6 +78,6 @@ public class Dao_User {
     public void putUser(String taikhoan,String matkhau,String hoten,String trangthai,String role){
         String maUser = userRef.push().getKey(); // Tạo key ngẫu nhiên cho người dùng
 
-        userRef.child(maUser).setValue(new User(taikhoan,matkhau,hoten,trangthai,role));
+        userRef.child(maUser).setValue(new User(maUser,taikhoan,matkhau,hoten,trangthai,role));
     }
 }

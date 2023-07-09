@@ -1,11 +1,20 @@
 package com.teammobile.appthuvien_duan1.model;
 
 public class User {
+    private String maUser;
     private String taikhoan;
     private String matkhau;
     private String hoten;
     private String trangthai;
     private String role;
+
+    public String getMaUser() {
+        return maUser;
+    }
+
+    public void setMaUser(String maUser) {
+        this.maUser = maUser;
+    }
 
     public String getTaikhoan() {
         return taikhoan;
@@ -47,14 +56,15 @@ public class User {
         this.role = role;
     }
 
-    public User() {
-    }
-
-    public User(String taikhoan, String matkhau, String hoten, String trangthai, String role) {
+    public User(String maUser, String taikhoan, String matkhau, String hoten, String trangthai, String role) {
+        this.maUser = maUser;
         this.taikhoan = taikhoan;
         this.matkhau = matkhau;
         this.hoten = hoten;
         this.trangthai = trangthai;
         this.role = role;
+    }
+
+    public User() {
     }
 }
