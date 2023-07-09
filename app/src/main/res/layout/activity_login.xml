@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFBABA"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".Login_Activity">
+
+    <TextView
+        android:textStyle="bold|italic"
+        android:layout_margin="20dp"
+        android:textColor="#FF0505"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:text="Login App"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:hint="Tài khoản"
+            android:id="@+id/edtTaikhoan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></EditText>
+
+        <EditText
+            android:hint="Mật khẩu"
+            android:id="@+id/edtMatkhau"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></EditText>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnDangnhap"
+        android:text = "Đăng nhập"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></Button>
+
+
+</LinearLayout>
