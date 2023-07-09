@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "862033213126",
+    "project_id": "duan1appthuvien",
+    "storage_bucket": "duan1appthuvien.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862033213126:android:ae686e357becc656ba89c7",
+        "android_client_info": {
+          "package_name": "com.teammobile.appthuvien_duan1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "862033213126-a0f9sgn84hmq01tm3hfvp14f47tcmg2f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.teammobile.appthuvien_duan1",
+            "certificate_hash": "818336d282a4fc5b0939ec65a2ce657ddb03c33b"
+          }
+        },
+        {
+          "client_id": "862033213126-tb2bfpcc6fqrbb7k0llcbn7gif5t4ia5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyzbv6hvZW1AyU0HGgfJENfkgLx5keWXM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "862033213126-tb2bfpcc6fqrbb7k0llcbn7gif5t4ia5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
