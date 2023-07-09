@@ -1,4 +1,4 @@
-package com.teammobile.appthuvien_duan1;
+package com.teammobile.appthuvien_duan1.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,18 +7,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.teammobile.appthuvien_duan1.R;
+
 public class MainActivity extends AppCompatActivity {
-    Button btnLogin;
+    BottomNavigationView bnvMain;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnLogin=findViewById(R.id.btnLogin);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this,"ok",Toast.LENGTH_SHORT).show();
-            }
-        });
+        bnvMain=findViewById(R.id.bnvMain);
+
     }
+
 }
