@@ -4,6 +4,10 @@ public class LoaiSach {
     private String maLoai;
     private String tenLoai;
 
+    public LoaiSach(String name) {
+        this.tenLoai=name;
+    }
+
     public String getMaLoai() {
         return maLoai;
     }
