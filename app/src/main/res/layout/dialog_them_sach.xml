@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+   <EditText
+       android:id="@+id/edtTen"
+       android:hint="Nhập tên sách"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"/>
+   <EditText
+       android:id="@+id/edtGia"
+       android:inputType="number"
+       android:hint="Nhập giá sách"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"/>
+   <EditText
+       android:id="@+id/edtViTri"
+       android:hint="Nhập vị trí sách"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"/>
+   <EditText
+       android:id="@+id/edtSL"
+       android:inputType="number"
+       android:hint="Nhập số lượng"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"/>
+   <AutoCompleteTextView
+       android:id="@+id/actvLoai"
+       android:hint="Nhập tên loại...."
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"/>
+   <AutoCompleteTextView
+       android:id="@+id/actvTG"
+       android:hint="Nhập tên tác giả...."
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"/>
+   <Button
+       android:text="Chọn ảnh"
+       android:id="@+id/btnPickImg"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"/>
+   <Button
+       android:text="Thêm sách"
+       android:id="@+id/btnAdd"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"/>
+</LinearLayout>
