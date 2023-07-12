@@ -10,17 +10,28 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.teammobile.appthuvien_duan1.activity.SearchActivity;
 import com.teammobile.appthuvien_duan1.fragment.UserFragment;
 
 public class MainActivity extends AppCompatActivity {
     NavigationBarView bnvMain;
+    FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bnvMain=findViewById(R.id.bnvMain);
+//        mAuth=FirebaseAuth.getInstance();
+//        mAuth.signInAnonymously().addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+//            @Override
+//            public void onSuccess(AuthResult authResult) {
+//
+//            }
+//        });
         bnvMain.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

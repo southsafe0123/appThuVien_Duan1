@@ -4,31 +4,71 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.teammobile.appthuvien_duan1.interfaces.ITacGia;
+import com.google.firebase.database.ValueEventListener;
+import com.teammobile.appthuvien_duan1.interfaces.ITacGiaDAO;
+import com.teammobile.appthuvien_duan1.model.Sach;
 import com.teammobile.appthuvien_duan1.model.TacGia;
+
+import java.util.ArrayList;
 
 public class TacGiaDAO {
     private FirebaseDatabase mDatabase;
     private DatabaseReference reference;
+    ArrayList<TacGia> list=new ArrayList<>();
     public TacGiaDAO(){
         mDatabase=FirebaseDatabase.getInstance();
         reference=mDatabase.getReference().child("TacGia");
     }
-    public void insert(TacGia tacGia,ITacGia iTacGia)
+    public void insert(TacGia tacGia, ITacGiaDAO iTacGiaDAO)
     {
         reference.push().setValue(tacGia).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                iTacGia.onCallBack(true);
+                iTacGiaDAO.onCallBackInsert(true);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                iTacGia.onCallBack(false);
+                iTacGiaDAO.onCallBackInsert(false);
 
             }
         });
+    }
+    public void getAll(ITacGiaDAO iTacGiaDAO)
+    {
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+                for(DataSnapshot data : snapshot.getChildren()){
+                    TacGia tacGia=data.getValue(TacGia.class);
+                    list.add(new TacGia(data.getKey(),tacGia.getTenTacGia(),tacGia.getList()));
+                }
+                iTacGiaDAO.onCallBackGetAll(list);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    public void insertBook(String key,Sach sach,TGInsertBook tgInsertBook)
+    {
+        DatabaseReference myRef=reference.child(sach.getTacGia().getMaTG()+"/Sach/"+key);
+        myRef.setValue(new Sach(sach.getLoaiSach(),sach.getTenSach(),sach.getHinhAnh(),
+                sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach())).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                tgInsertBook.onCallBack(true);
+            }
+        });
+    }
+    public interface TGInsertBook{
+        public void onCallBack(Boolean check);
     }
 }
