@@ -7,33 +7,34 @@ import java.util.ArrayList;
 public class Loai {
     private String maLoai;
     private String tenLoai;
-    private ArrayList<Sach> list;
+    private int isActive;
 
-    public Loai(String maLoai, String tenLoai, ArrayList<Sach> list) {
+
+    public Loai(String maLoai, String tenLoai, int isActive) {
         this.maLoai = maLoai;
         this.tenLoai = tenLoai;
-        this.list = list;
+        this.isActive = isActive;
     }
 
-    public Loai(String tenLoai, ArrayList<Sach> list) {
+    public Loai(String tenLoai, int isActive) {
         this.tenLoai = tenLoai;
-        this.list = list;
+        this.isActive = isActive;
     }
 
+    public int getIsActive() {
+        return isActive;
+    }
+
+    public Loai()
+    {
+
+    }
     public String getMaLoai() {
         return maLoai;
     }
 
     public String getTenLoai() {
         return tenLoai;
-    }
-
-    public ArrayList<Sach> getList() {
-        return list;
-    }
-
-    public Loai() {
-
     }
 
     @NonNull

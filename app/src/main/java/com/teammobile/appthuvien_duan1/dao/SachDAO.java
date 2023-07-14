@@ -6,10 +6,15 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.teammobile.appthuvien_duan1.interfaces.ISachDAO;
 import com.teammobile.appthuvien_duan1.model.Sach;
+
+import java.util.ArrayList;
 
 public class SachDAO {
     FirebaseDatabase mDatabase;
@@ -29,26 +34,34 @@ public class SachDAO {
             public void onSuccess(Void unused) {
                 LoaiDAO loaiDAO=new LoaiDAO();
                 TacGiaDAO tacGiaDAO=new TacGiaDAO();
-                loaiDAO.insertBook(key,sach, new LoaiDAO.LoaiInsertBook() {
-                    @Override
-                    public void onCallBack(Boolean check) {
-                        //Toast.makeText(context, "Thêm sách vào loại thành công", Toast.LENGTH_SHORT).show();
 
-                    }
-                });
-                tacGiaDAO.insertBook(key,sach, new TacGiaDAO.TGInsertBook() {
-                    @Override
-                    public void onCallBack(Boolean check) {
-                        //Toast.makeText(context, "Thêm sách vào tác giả thành công", Toast.LENGTH_SHORT).show();
 
-                    }
-                });
                 iSachDAO.onCallBackInsert(true);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 iSachDAO.onCallBackInsert(false);
+
+            }
+        });
+    }
+    public void getAll(ISachDAO iSachDAO)
+    {
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Sach> kq=new ArrayList<>();
+                for(DataSnapshot data: snapshot.getChildren()){
+                    Sach sach=data.getValue(Sach.class);
+                    kq.add(sach);
+                }
+                iSachDAO.onCallBackGetAll(kq);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });

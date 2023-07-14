@@ -9,39 +9,11 @@ public class Sach {
     private int soLuong;
     private int giaThue;
     private String vitridesach;
-
+    private int isActive;
     public Sach() {
     }
 
-    public Sach(TacGia tacGia, String tenSach, String hinhAnh, int soLuong, int giaThue, String vitridesach) {
-        this.tacGia = tacGia;
-        this.tenSach = tenSach;
-        this.hinhAnh = hinhAnh;
-        this.soLuong = soLuong;
-        this.giaThue = giaThue;
-        this.vitridesach = vitridesach;
-    }
-
-    public Sach(Loai loai, String tenSach, String hinhAnh, int soLuong, int giaThue, String vitridesach) {
-        this.loai = loai;
-        this.tenSach = tenSach;
-        this.hinhAnh = hinhAnh;
-        this.soLuong = soLuong;
-        this.giaThue = giaThue;
-        this.vitridesach = vitridesach;
-    }
-
-    public Sach(Loai loai, TacGia tacGia, String tenSach, String hinhAnh, int soLuong, int giaThue, String vitridesach) {
-        this.loai = loai;
-        this.tacGia = tacGia;
-        this.tenSach = tenSach;
-        this.hinhAnh = hinhAnh;
-        this.soLuong = soLuong;
-        this.giaThue = giaThue;
-        this.vitridesach = vitridesach;
-    }
-
-    public Sach(String maSach, Loai loai, TacGia tacGia, String tenSach, String hinhAnh, int soLuong, int giaThue, String vitridesach) {
+    public Sach(String maSach, Loai loai, TacGia tacGia, String tenSach, String hinhAnh, int soLuong, int giaThue, String vitridesach, int isActive) {
         this.maSach = maSach;
         this.loai = loai;
         this.tacGia = tacGia;
@@ -50,13 +22,25 @@ public class Sach {
         this.soLuong = soLuong;
         this.giaThue = giaThue;
         this.vitridesach = vitridesach;
+        this.isActive = isActive;
+    }
+
+    public Sach(Loai loai, TacGia tacGia, String tenSach, String hinhAnh, int soLuong, int giaThue, String vitridesach, int isActive) {
+        this.loai = loai;
+        this.tacGia = tacGia;
+        this.tenSach = tenSach;
+        this.hinhAnh = hinhAnh;
+        this.soLuong = soLuong;
+        this.giaThue = giaThue;
+        this.vitridesach = vitridesach;
+        this.isActive = isActive;
     }
 
     public String getMaSach() {
         return maSach;
     }
 
-    public Loai getLoaiSach() {
+    public Loai getLoai() {
         return loai;
     }
 
@@ -82,5 +66,9 @@ public class Sach {
 
     public String getVitridesach() {
         return vitridesach;
+    }
+
+    public int getIsActive() {
+        return isActive;
     }
 }

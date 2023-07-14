@@ -7,17 +7,20 @@ import java.util.ArrayList;
 public class TacGia {
     private String maTG;
     private String tenTacGia;
-    private ArrayList<Sach> list;
+    private int isActive;
 
-    public TacGia(String maTG, String tenTacGia, ArrayList<Sach> list) {
+    public TacGia(String maTG, String tenTacGia, int isActive) {
         this.maTG = maTG;
         this.tenTacGia = tenTacGia;
-        this.list = list;
+        this.isActive = isActive;
     }
 
-    public TacGia(String tenTacGia, ArrayList<Sach> list) {
+    public TacGia(String tenTacGia, int isActive) {
         this.tenTacGia = tenTacGia;
-        this.list = list;
+        this.isActive = isActive;
+    }
+
+    public TacGia() {
     }
 
     public String getMaTG() {
@@ -28,11 +31,8 @@ public class TacGia {
         return tenTacGia;
     }
 
-    public ArrayList<Sach> getList() {
-        return list;
-    }
-
-    public TacGia() {
+    public int getIsActive() {
+        return isActive;
     }
 
     @NonNull

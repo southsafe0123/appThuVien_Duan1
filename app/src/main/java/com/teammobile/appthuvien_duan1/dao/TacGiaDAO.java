@@ -46,7 +46,7 @@ public class TacGiaDAO {
                 list.clear();
                 for(DataSnapshot data : snapshot.getChildren()){
                     TacGia tacGia=data.getValue(TacGia.class);
-                    list.add(new TacGia(data.getKey(),tacGia.getTenTacGia(),tacGia.getList()));
+                    list.add(new TacGia(data.getKey(),tacGia.getTenTacGia(),tacGia.getIsActive()));
                 }
                 iTacGiaDAO.onCallBackGetAll(list);
             }
@@ -57,18 +57,6 @@ public class TacGiaDAO {
             }
         });
     }
-    public void insertBook(String key,Sach sach,TGInsertBook tgInsertBook)
-    {
-        DatabaseReference myRef=reference.child(sach.getTacGia().getMaTG()+"/Sach/"+key);
-        myRef.setValue(new Sach(sach.getLoaiSach(),sach.getTenSach(),sach.getHinhAnh(),
-                sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach())).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                tgInsertBook.onCallBack(true);
-            }
-        });
-    }
-    public interface TGInsertBook{
-        public void onCallBack(Boolean check);
-    }
+
+
 }

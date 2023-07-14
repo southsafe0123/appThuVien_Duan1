@@ -49,7 +49,7 @@ public class LoaiDAO {
                 list.clear();
                 for(DataSnapshot data : snapshot.getChildren()){
                     Loai loai =data.getValue(Loai.class);
-                    list.add(new Loai(data.getKey(), loai.getTenLoai(), loai.getList()));
+                    list.add(new Loai(data.getKey(),loai.getTenLoai(),loai.getIsActive()));
                 }
 
                 iLoaiDAO.onCallBackGetAll(list);
@@ -61,19 +61,6 @@ public class LoaiDAO {
             }
         });
     }
-    public void insertBook(String key,Sach sach,LoaiInsertBook loaiInsertBook)
-    {
-        DatabaseReference myRef=reference.child(sach.getLoaiSach().getMaLoai()+"/Sach/"+key);
-        myRef.setValue(new Sach(sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),
-                sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach())).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                loaiInsertBook.onCallBack(true);
-            }
-        });
 
-    }
-    public interface LoaiInsertBook{
-        public void onCallBack(Boolean check);
-    }
+
 }

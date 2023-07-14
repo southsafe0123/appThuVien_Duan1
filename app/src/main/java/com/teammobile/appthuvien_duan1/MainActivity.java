@@ -5,17 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.teammobile.appthuvien_duan1.activity.SearchActivity;
-import com.teammobile.appthuvien_duan1.fragment.UserFragment;
+import com.teammobile.appthuvien_duan1.fragment.QuanLyMenuFragment;
 
 public class MainActivity extends AppCompatActivity {
     NavigationBarView bnvMain;
@@ -46,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.mnSearch:
                     {
                         Toast.makeText(MainActivity.this,"Bạn chọn Search",Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(MainActivity.this, SearchActivity.class));
                         break;
                     }
                     case R.id.mnCart:
@@ -56,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     case R.id.mnUser:
                     {
-                        fragment=new UserFragment();
+                        fragment=new QuanLyMenuFragment();
                         Toast.makeText(MainActivity.this,"Bạn chọn User",Toast.LENGTH_SHORT).show();
                         break;
                     }

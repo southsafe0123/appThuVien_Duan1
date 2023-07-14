@@ -7,5 +7,4 @@ import java.util.ArrayList;
 public interface ILoaiDAO {
     public void onCallBackInsert(Boolean check);
     public void onCallBackGetAll(ArrayList<Loai> list);
-    public void onCallBackInsertBook(Boolean check);
 }
