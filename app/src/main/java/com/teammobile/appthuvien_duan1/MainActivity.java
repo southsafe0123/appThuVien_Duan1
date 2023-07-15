@@ -11,8 +11,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+
         String a="";
 
+
+
+        String b="Nghia ne";
 
     }
 }
