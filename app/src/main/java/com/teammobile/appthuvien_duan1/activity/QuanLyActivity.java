@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.SearchManager;
 import android.content.Intent;
@@ -40,7 +41,11 @@ public class QuanLyActivity extends AppCompatActivity {
     public void loadFragment(Fragment fragment)
     {
         FragmentManager fm=getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.viewFragmentQuanLy,fragment).commit();
+        FragmentTransaction ft=fm.beginTransaction();
+        ft.setCustomAnimations(R.anim.slide_up,0);
+        ft.replace(R.id.viewFragmentQuanLy,fragment);
+        ft.addToBackStack(null);
+        ft.commit();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

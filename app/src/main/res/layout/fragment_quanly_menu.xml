@@ -5,38 +5,144 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnFMLoai"
-        android:layout_width="100dp"
+    <LinearLayout
 
-        android:layout_height="80dp"
-        android:layout_marginStart="84dp"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="68dp"
         android:layout_marginTop="44dp"
-        android:background="@drawable/buttonstyle1"
-        android:text="Loại"
+        android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnFMTacGia"
-        android:layout_width="100dp"
-        android:layout_height="80dp"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnFMLoai"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="10dp">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_loai" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Loại"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="176dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnFMSach"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="10dp"
+
+            >
+
+            <ImageView
+
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_sach" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Sách"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_marginStart="232dp"
         android:layout_marginTop="44dp"
-        android:background="@drawable/buttonstyle1"
-        android:text="Tác giả"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:orientation="vertical"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        >
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnFMTacGia"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="10dp"
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnFMSach"
-        android:layout_width="100dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="140dp"
-        android:background="@drawable/buttonstyle1"
-        android:text="Sách"
+            android:text="Tác giả">
+           <ImageView
+               android:layout_margin="10dp"
+               android:src="@drawable/ic_inkbottle"
+               android:layout_width="60dp"
+               android:layout_height="60dp"/>
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:fontFamily="sans-serif-condensed-medium"
+            android:layout_margin="3dp"
+            android:textSize="15sp"
+            android:text="Tác giả"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginStart="232dp"
+        android:layout_marginTop="176dp"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:orientation="vertical"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        >
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnFMUser"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="10dp"
+
+            android:text="Người dùng">
+            <ImageView
+                android:layout_margin="10dp"
+                android:src="@drawable/img_1"
+                android:layout_width="60dp"
+                android:layout_height="60dp"/>
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:fontFamily="sans-serif-condensed-medium"
+            android:layout_margin="3dp"
+            android:textSize="15sp"
+            android:text="Người dùng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -63,6 +63,7 @@ public class QuanLyLoaiFragment extends Fragment {
         builder.setView(view);
         EditText edtName=view.findViewById(R.id.edtName);
         Button btnAdd=view.findViewById(R.id.btnAdd);
+        Button btnCancel=view.findViewById(R.id.btnCancel);
         Dialog dialog=builder.create();
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +86,12 @@ public class QuanLyLoaiFragment extends Fragment {
 
 
                 });
+            }
+        });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
             }
         });
         dialog.show();

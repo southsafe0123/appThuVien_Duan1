@@ -10,19 +10,24 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -56,7 +61,8 @@ public class QuanLyMenuFragment extends Fragment {
     private FirebaseStorage storage;
 
     private Uri selectedImg;
-    private Button btnFMLoai,btnFMTacGia,btnFMSach;
+    private CardView btnFMLoai,btnFMSach,btnFMTacGia;
+
     public Loai getCurLoai() {
         return curLoai;
     }
@@ -107,8 +113,13 @@ public class QuanLyMenuFragment extends Fragment {
     public void loadFragment(Fragment fragment,String tag)
     {
         FragmentManager fm=getActivity().getSupportFragmentManager();
-        fm.beginTransaction()
-                .replace(R.id.viewFragmentQuanLy,fragment,tag).commit();
+        FragmentTransaction ft=fm.beginTransaction();
+        ft.setCustomAnimations(R.anim.slide_up,R.anim.slide_down);
+        ft.replace(R.id.viewFragmentQuanLy,fragment,tag);
+        ft.addToBackStack(null);
+        ft.commit();
+
+
 
     }
 
