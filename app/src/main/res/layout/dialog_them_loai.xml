@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="350dp"
+    app:cardElevation="20dp"
+
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/dialogHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="sans-serif-light"
+            android:text="Nhập tên thể loại"
+            android:textSize="35sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:textSize="15sp"
+            android:fontFamily="sans-serif-light"
+            android:id="@+id/dialogTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dialogHeader"
+            android:text="Tên loại:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:fontFamily="sans-serif-light"
+
+            app:layout_constraintTop_toBottomOf="@+id/dialogTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/edtName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:weightSum="2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtName"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:fontFamily="sans-serif-light"
+
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_weight="1"
+                android:id="@+id/btnCancel"
+                android:textColor="@color/white"
+                android:text="HỦy"
+                android:backgroundTint="#D83838"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:backgroundTint="#3737BD"
+                android:id="@+id/btnAdd"
+                android:text="Thêm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
