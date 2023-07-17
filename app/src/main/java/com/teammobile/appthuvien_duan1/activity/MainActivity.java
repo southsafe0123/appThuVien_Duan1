@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.teammobile.appthuvien_duan1.R;
+import com.teammobile.appthuvien_duan1.fragment.UserFragment;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.item_user:
                         Toast.makeText(MainActivity.this, "item_user", Toast.LENGTH_SHORT).show();
                         // fragment = new ...();
+                        loadFragment(new UserFragment());
                         break;
                 }
 //                FragmentManager fragmentManager = getSupportFragmentManager();
@@ -53,5 +55,10 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+    public void loadFragment(Fragment fragment)
+    {
+        FragmentManager fm=getSupportFragmentManager();
+        fm.beginTransaction().replace(R.id.frag_main,fragment).commit();
     }
 }
