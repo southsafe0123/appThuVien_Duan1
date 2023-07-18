@@ -36,6 +36,18 @@
             android:layout_height="wrap_content"></EditText>
     </LinearLayout>
 
+    <TextView
+
+        android:layout_margin="3dp"
+        android:textStyle="italic"
+        android:textSize="18dp"
+        android:textColor="#0929FF"
+        android:textAlignment="center"
+        android:text="@string/quenmatkhau"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+
+
     <Button
         android:id="@+id/btnDangnhap"
         android:text = "Đăng nhập"
@@ -58,6 +70,7 @@
         android:textSize="20dp"
         android:textColor="#0929FF"
         android:textAlignment="center"
+        android:id="@+id/txtDangky"
         android:text="@string/underline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></TextView>

@@ -24,6 +24,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:hint="Nhập gmail"
+            android:id="@+id/edtNhapgmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></EditText>
+
+        <EditText
             android:hint="Tài khoản"
             android:id="@+id/edtTaikhoan"
             android:layout_width="match_parent"
