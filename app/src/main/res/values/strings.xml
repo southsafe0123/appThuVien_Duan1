@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">appThuVien_Duan1</string>
+    <string name="underline"><u>Đăng ký</u></string>
+    <string name="quenmatkhau"><u>Quên mật khẩu</u></string>
 </resources>
