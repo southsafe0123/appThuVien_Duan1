@@ -49,7 +49,8 @@ public class LoaiDAO {
                 list.clear();
                 for(DataSnapshot data : snapshot.getChildren()){
                     Loai loai =data.getValue(Loai.class);
-                    list.add(new Loai(data.getKey(),loai.getTenLoai(),loai.getIsActive()));
+                    if(loai.getIsActive()>0)
+                        list.add(new Loai(data.getKey(),loai.getTenLoai(),loai.getIsActive()));
                 }
 
                 iLoaiDAO.onCallBackGetAll(list);
@@ -61,6 +62,23 @@ public class LoaiDAO {
             }
         });
     }
-
+    public void delete(String ma,DeleteLoaiCallBack deleteLoaiCallBack)
+    {
+        reference.child(ma).child("isActive").setValue(0).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                deleteLoaiCallBack.onCallBack(true);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                deleteLoaiCallBack.onCallBack(false);
+            }
+        });
+    }
+    public interface DeleteLoaiCallBack
+    {
+        public void onCallBack(Boolean check);
+    }
 
 }

@@ -24,6 +24,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.teammobile.appthuvien_duan1.R;
 import com.teammobile.appthuvien_duan1.adapter.LoaiAdapter;
 import com.teammobile.appthuvien_duan1.dao.LoaiDAO;
+import com.teammobile.appthuvien_duan1.dao.SachDAO;
 import com.teammobile.appthuvien_duan1.interfaces.ILoaiDAO;
 import com.teammobile.appthuvien_duan1.model.Loai;
 
@@ -94,6 +95,7 @@ public class QuanLyLoaiFragment extends Fragment {
                 dialog.dismiss();
             }
         });
+
         dialog.show();
     }
     public void fetchingData()

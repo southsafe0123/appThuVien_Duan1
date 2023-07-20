@@ -44,7 +44,6 @@ public class QuanLyActivity extends AppCompatActivity {
         FragmentTransaction ft=fm.beginTransaction();
         ft.setCustomAnimations(R.anim.slide_up,0);
         ft.replace(R.id.viewFragmentQuanLy,fragment);
-        ft.addToBackStack(null);
         ft.commit();
     }
     @Override
@@ -56,6 +55,7 @@ public class QuanLyActivity extends AppCompatActivity {
         SearchManager searchManager = (SearchManager) getSystemService(QuanLyActivity.SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -87,11 +87,12 @@ public class QuanLyActivity extends AppCompatActivity {
         {
             case android.R.id.home:
             {
-                loadFragment(new QuanLyMenuFragment());
+                finish();
                 break;
             }
         }
         return true;
     }
+
 
 }

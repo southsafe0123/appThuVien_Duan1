@@ -83,7 +83,7 @@ public class QuanLyMenuFragment extends Fragment {
        View view=inflater.inflate(R.layout.fragment_quanly_menu,container,false);
        context=getContext();
        
-       btnBackToUser=view.findViewById(R.id.btnBackToUser);
+
        btnFMLoai=view.findViewById(R.id.btnFMLoai);
        btnFMTacGia=view.findViewById(R.id.btnFMTacGia);
        btnFMSach=view.findViewById(R.id.btnFMSach);
@@ -108,12 +108,7 @@ public class QuanLyMenuFragment extends Fragment {
        });
        loaiDAO=new LoaiDAO();
        tacGiaDAO=new TacGiaDAO();
-       btnBackToUser.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               getActivity().finish();
-           }
-       });
+
        return view;
     }
     public void loadFragment(Fragment fragment,String tag)

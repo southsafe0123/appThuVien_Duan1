@@ -46,7 +46,8 @@ public class TacGiaDAO {
                 list.clear();
                 for(DataSnapshot data : snapshot.getChildren()){
                     TacGia tacGia=data.getValue(TacGia.class);
-                    list.add(new TacGia(data.getKey(),tacGia.getTenTacGia(),tacGia.getIsActive()));
+                    if(tacGia.getIsActive()>0)
+                        list.add(new TacGia(data.getKey(),tacGia.getTenTacGia(),tacGia.getIsActive()));
                 }
                 iTacGiaDAO.onCallBackGetAll(list);
             }
@@ -57,6 +58,23 @@ public class TacGiaDAO {
             }
         });
     }
-
+    public void delete(String ma,DeleteTGCallBack deleteTGCallBack)
+    {
+        reference.child(ma+"/isActive").setValue(0).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                deleteTGCallBack.onCallBack(true);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                deleteTGCallBack.onCallBack(false);
+            }
+        });
+    }
+    public interface DeleteTGCallBack
+    {
+        public void onCallBack(Boolean check);
+    }
 
 }

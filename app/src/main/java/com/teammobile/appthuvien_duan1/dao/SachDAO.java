@@ -1,5 +1,6 @@
 package com.teammobile.appthuvien_duan1.dao;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 public class SachDAO {
     FirebaseDatabase mDatabase;
     DatabaseReference reference;
-
+    ArrayList<Sach> list=new ArrayList<>();
     public SachDAO()
     {
         mDatabase=FirebaseDatabase.getInstance();
@@ -65,5 +66,55 @@ public class SachDAO {
 
             }
         });
+    }
+    public void getSLSachByLoai(String ma,IGetSLSachByLoai iGetSLSachByLoai)
+    {
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+                for(DataSnapshot data: snapshot.getChildren()){
+                    Sach sach=data.getValue(Sach.class);
+                    if(sach.getLoai().getMaLoai().equals(ma)&&sach.getIsActive()>0)
+                        list.add(sach);
+                }
+                iGetSLSachByLoai.onCallBack(list);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    public void getSLSachByTG(String ma,IGetSLSachByTG iGetSLSachByTG)
+    {
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+                for(DataSnapshot data: snapshot.getChildren()){
+                    Sach sach=data.getValue(Sach.class);
+                    if(ma.equals(sach.getTacGia().getMaTG())&&sach.getIsActive()>0){
+                        list.add(sach);
+                    }
+                }
+                Log.d("OK",list.size()+"");
+                iGetSLSachByTG.onCallBack(list);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        })        ;
+    }
+    public interface IGetSLSachByLoai
+    {
+        public void onCallBack(ArrayList<Sach> list);
+    }
+    public interface IGetSLSachByTG
+    {
+        public void onCallBack(ArrayList<Sach> list);
     }
 }

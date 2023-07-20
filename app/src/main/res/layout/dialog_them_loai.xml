@@ -19,7 +19,7 @@
             android:layout_margin="5dp"
             android:layout_marginTop="4dp"
             android:fontFamily="sans-serif-light"
-            android:text="Nhập tên thể loại"
+            android:text="Thông tin thể loại"
             android:textSize="35sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
