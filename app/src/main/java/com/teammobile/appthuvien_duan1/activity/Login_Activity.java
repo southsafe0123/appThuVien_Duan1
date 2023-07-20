@@ -7,10 +7,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,10 +35,14 @@ public class Login_Activity extends AppCompatActivity {
 
 		EditText edtTaikhoan,edtMatkhau;
 		Button btnDangnhap;
+		CheckBox chkRemember;
 		TextView txtDangky = findViewById(R.id.txtDangky);
 		edtTaikhoan = findViewById(R.id.edtTaikhoan);
 		edtMatkhau = findViewById(R.id.edtMatkhau);
+		chkRemember = findViewById(R.id.chkRemember);
 		btnDangnhap = findViewById(R.id.btnDangnhap);
+
+
 		Intent intent = getIntent();
 		Bundle bundle = intent.getExtras();
 
@@ -47,6 +53,7 @@ public class Login_Activity extends AppCompatActivity {
 			edtTaikhoan.setText(email);
 			edtMatkhau.setText(password);
 		}
+
 
 
 
@@ -61,6 +68,8 @@ public class Login_Activity extends AppCompatActivity {
 					public void onComplete(@NonNull Task<AuthResult> task) {
 						if(task.isSuccessful()){
 							Toast.makeText(Login_Activity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+
+
 							checkUser();
 						} else{
 							Toast.makeText(Login_Activity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
