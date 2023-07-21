@@ -13,44 +13,38 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.teammobile.appthuvien_duan1.R;
 import com.teammobile.appthuvien_duan1.fragment.UserFragment;
+import com.teammobile.appthuvien_duan1.fragment.FragmentHome;
+
 
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        FragmentHome fragmentHome = new FragmentHome();
         BottomNavigationView navMain = findViewById(R.id.navMain);
 
         navMain.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment fragment = null;
                 switch (item.getItemId()){
                     default:
                         Toast.makeText(MainActivity.this, "default", Toast.LENGTH_SHORT).show();
-                        // fragment = new ...();
                         break;
                     case R.id.item_home:
                         Toast.makeText(MainActivity.this, "item_home", Toast.LENGTH_SHORT).show();
-                        // fragment = new ...();
                         break;
                     case R.id.item_giohang:
                         Toast.makeText(MainActivity.this, "item_giohang", Toast.LENGTH_SHORT).show();
-                        // fragment = new ...();
                         break;
                     case R.id.item_search:
                         Toast.makeText(MainActivity.this, "item_search", Toast.LENGTH_SHORT).show();
-                        // fragment = new ...();
                         break;
                     case R.id.item_user:
                         Toast.makeText(MainActivity.this, "item_user", Toast.LENGTH_SHORT).show();
-                        // fragment = new ...();
                         loadFragment(new UserFragment());
                         break;
                 }
-//                FragmentManager fragmentManager = getSupportFragmentManager();
-//                fragmentManager.beginTransaction().replace(R.id.frag_main,fragment).commit();
 
                 return true;
             }
