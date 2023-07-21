@@ -12,11 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.teammobile.appthuvien_duan1.R;
 
-public class FragmentHome extends Fragment {
+public class CartFragment extends Fragment {
+    private RecyclerView recyclerView;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_cart, container, false);
+        recyclerView = view.findViewById(R.id.RvCart);
 
         return view;
     }

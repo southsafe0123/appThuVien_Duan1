@@ -12,8 +12,9 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.teammobile.appthuvien_duan1.R;
+import com.teammobile.appthuvien_duan1.fragment.CartFragment;
 import com.teammobile.appthuvien_duan1.fragment.UserFragment;
-import com.teammobile.appthuvien_duan1.fragment.FragmentHome;
+import com.teammobile.appthuvien_duan1.fragment.HomeFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FragmentHome fragmentHome = new FragmentHome();
+        HomeFragment fragmentHome = new HomeFragment();
         BottomNavigationView navMain = findViewById(R.id.navMain);
 
         navMain.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -30,12 +31,15 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     default:
                         Toast.makeText(MainActivity.this, "default", Toast.LENGTH_SHORT).show();
+                        loadFragment(new HomeFragment());
                         break;
                     case R.id.item_home:
                         Toast.makeText(MainActivity.this, "item_home", Toast.LENGTH_SHORT).show();
+                        loadFragment(new HomeFragment());
                         break;
                     case R.id.item_giohang:
                         Toast.makeText(MainActivity.this, "item_giohang", Toast.LENGTH_SHORT).show();
+                        loadFragment(new CartFragment());
                         break;
                     case R.id.item_search:
                         Toast.makeText(MainActivity.this, "item_search", Toast.LENGTH_SHORT).show();
