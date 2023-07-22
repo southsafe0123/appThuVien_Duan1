@@ -32,7 +32,8 @@ public class Login_Activity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		mAuth = FirebaseAuth.getInstance();
-
+		mUser=mAuth.getCurrentUser();
+		checkUser();
 		EditText edtTaikhoan,edtMatkhau;
 		Button btnDangnhap;
 		CheckBox chkRemember;

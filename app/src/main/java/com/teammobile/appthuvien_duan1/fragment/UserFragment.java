@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.teammobile.appthuvien_duan1.R;
@@ -18,7 +19,7 @@ import com.teammobile.appthuvien_duan1.activity.QuanLyActivity;
 
 public class UserFragment extends Fragment {
     private Context context;
-    private Button btnQuanLy;
+    private CardView btnQuanLy;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
