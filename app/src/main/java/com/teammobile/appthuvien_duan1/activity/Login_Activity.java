@@ -41,7 +41,16 @@ public class Login_Activity extends AppCompatActivity {
 		edtMatkhau = findViewById(R.id.edtMatkhau);
 		chkRemember = findViewById(R.id.chkRemember);
 		btnDangnhap = findViewById(R.id.btnDangnhap);
+		SharedPreferences sharedPreferences = getSharedPreferences("Info", MODE_PRIVATE);
+		SharedPreferences.Editor editor = sharedPreferences.edit();
 
+		String user = sharedPreferences.getString("user", "");
+		String pass = sharedPreferences.getString("pass", "");
+		edtTaikhoan.setText(user);
+		edtMatkhau.setText(pass);
+
+		boolean reMemBer = sharedPreferences.getBoolean("remember", false);
+		chkRemember.setChecked(reMemBer);
 
 		Intent intent = getIntent();
 		Bundle bundle = intent.getExtras();
@@ -68,8 +77,15 @@ public class Login_Activity extends AppCompatActivity {
 					public void onComplete(@NonNull Task<AuthResult> task) {
 						if(task.isSuccessful()){
 							Toast.makeText(Login_Activity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-
-
+							if (chkRemember.isChecked()) {
+								editor.putString("user", edtTaikhoan.getText().toString());
+								editor.putString("pass", edtMatkhau.getText().toString());
+								editor.putBoolean("remember", true);
+								editor.apply();
+							} else {
+								editor.clear();
+								editor.apply();
+							}
 							checkUser();
 						} else{
 							Toast.makeText(Login_Activity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
@@ -92,6 +108,8 @@ public class Login_Activity extends AppCompatActivity {
 		if(mUser!=null){
 			Intent intent = new Intent(Login_Activity.this,MainActivity.class);
 			startActivity(intent);
+			finish();
 		}
 	}
+
 }

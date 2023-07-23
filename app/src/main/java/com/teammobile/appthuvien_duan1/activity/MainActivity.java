@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         HomeFragment fragmentHome = new HomeFragment();
         BottomNavigationView navMain = findViewById(R.id.navMain);
 
+
         navMain.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
