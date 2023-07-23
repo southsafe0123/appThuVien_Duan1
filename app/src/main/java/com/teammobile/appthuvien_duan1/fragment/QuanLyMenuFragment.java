@@ -31,6 +31,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -61,13 +62,13 @@ public class QuanLyMenuFragment extends Fragment {
     private FirebaseStorage storage;
 
     private Uri selectedImg;
-    private CardView btnFMLoai,btnFMSach,btnFMTacGia;
+    private CardView btnFMLoai,btnFMSach,btnFMTacGia,btnFMUser;
     private Button btnBackToUser;
     public Loai getCurLoai() {
         return curLoai;
     }
 
-
+    private FirebaseAuth mAuth;
 
     public TacGia getCurTG() {
         return curTG;
@@ -87,10 +88,11 @@ public class QuanLyMenuFragment extends Fragment {
        btnFMLoai=view.findViewById(R.id.btnFMLoai);
        btnFMTacGia=view.findViewById(R.id.btnFMTacGia);
        btnFMSach=view.findViewById(R.id.btnFMSach);
-
+       btnFMUser=view.findViewById(R.id.btnFMUser);
        btnFMLoai.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
+
                 loadFragment(new QuanLyLoaiFragment(),"fragment_loai");
            }
        });
@@ -104,6 +106,12 @@ public class QuanLyMenuFragment extends Fragment {
            @Override
            public void onClick(View v) {
                loadFragment(new QuanLySachFragment(),"fragment_sach");
+           }
+       });
+       btnFMUser.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               loadFragment(new QuanLyUserFragment(),"fragment_user");
            }
        });
        loaiDAO=new LoaiDAO();

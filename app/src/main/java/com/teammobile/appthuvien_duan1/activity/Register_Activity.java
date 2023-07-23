@@ -17,16 +17,22 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.ktx.Firebase;
 import com.teammobile.appthuvien_duan1.R;
+import com.teammobile.appthuvien_duan1.dao.UserDAO;
+import com.teammobile.appthuvien_duan1.model.User;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Register_Activity extends AppCompatActivity {
 	private FirebaseAuth mAuth;
 	private FirebaseUser mUser;
-
+	private UserDAO userDAO;
+	private EditText edtUsername;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
-
+		userDAO=new UserDAO();
 		EditText edtTaikhoan,edtMatkhau,edtNhaplai,edtEmail;
 		Button btnDangky;
 
@@ -37,13 +43,15 @@ public class Register_Activity extends AppCompatActivity {
 		edtMatkhau = findViewById(R.id.edtMatkhau);
 		edtNhaplai = findViewById(R.id.edtNhaplai);
 		btnDangky = findViewById(R.id.btnDangky);
-
+		edtUsername=findViewById(R.id.edtTaikhoan);
 		btnDangky.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				String username=edtUsername.getText().toString();
 				String email = edtEmail.getText().toString();
 				String matkhau = edtMatkhau.getText().toString();
 				String nhaplai = edtNhaplai.getText().toString();
+				Map<String,Object> map=new HashMap<>();
 
 
 				if(!matkhau.equals(nhaplai)){
@@ -56,11 +64,21 @@ public class Register_Activity extends AppCompatActivity {
 					public void onComplete(@NonNull Task<AuthResult> task) {
 						if(task.isSuccessful()){
 							mUser = mAuth.getCurrentUser();
-							String gmailnehihi = mUser.getEmail();
-							Toast.makeText(Register_Activity.this,""+ gmailnehihi, Toast.LENGTH_SHORT).show();
 
+							User user=new User(mUser.getUid(),email,username,matkhau,0,1);
+
+							userDAO.insert(user, new UserDAO.InsertCallBack() {
+								@Override
+								public void onCallBack(Boolean check) {
+									if(check)
+										Toast.makeText(Register_Activity.this, "Thêm ng dùng thành công", Toast.LENGTH_SHORT).show();
+									else
+										Toast.makeText(Register_Activity.this, "Thêm ng dùng thất bại", Toast.LENGTH_SHORT).show();
+
+								}
+							});
 							Bundle bundle = new Bundle();
-							bundle.putString("email",gmailnehihi);
+							bundle.putString("email",email);
 							bundle.putString("password",nhaplai);
 
 							Intent intent = new Intent(Register_Activity.this,Login_Activity.class);
