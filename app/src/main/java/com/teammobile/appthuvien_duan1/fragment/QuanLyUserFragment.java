@@ -23,6 +23,11 @@ public class QuanLyUserFragment extends Fragment {
     private Context context;
     private RecyclerView rcv;
     private UserDAO userDAO;
+    private UserAdapter adapter;
+
+    public UserAdapter getAdapter() {
+        return adapter;
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -50,7 +55,7 @@ public class QuanLyUserFragment extends Fragment {
     {
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(context);
         rcv.setLayoutManager(linearLayoutManager);
-        UserAdapter adapter=new UserAdapter(context,data);
+        adapter=new UserAdapter(context,data);
         rcv.setAdapter(adapter);
     }
 }

@@ -21,6 +21,7 @@ import com.teammobile.appthuvien_duan1.R;
 import com.teammobile.appthuvien_duan1.fragment.QuanLyLoaiFragment;
 import com.teammobile.appthuvien_duan1.fragment.QuanLyMenuFragment;
 import com.teammobile.appthuvien_duan1.fragment.QuanLyTGFragment;
+import com.teammobile.appthuvien_duan1.fragment.QuanLyUserFragment;
 
 public class QuanLyActivity extends AppCompatActivity {
     private SearchView searchView;
@@ -73,6 +74,9 @@ public class QuanLyActivity extends AppCompatActivity {
                 QuanLyTGFragment quanLyTGFragment= (QuanLyTGFragment) fm.findFragmentByTag("fragment_tg");
                 if(quanLyTGFragment!=null)
                     quanLyTGFragment.getAdapter().getFilter().filter(newText);
+                QuanLyUserFragment quanLyUserFragment= (QuanLyUserFragment) fm.findFragmentByTag("fragment_user");
+                if(quanLyUserFragment!=null)
+                    quanLyUserFragment.getAdapter().getFilter().filter(newText);
                 return false;
             }
         });

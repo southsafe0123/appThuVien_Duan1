@@ -5,6 +5,8 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,13 +20,16 @@ import com.teammobile.appthuvien_duan1.model.User;
 
 import java.util.ArrayList;
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> implements Filterable {
     private Context context;
-    private ArrayList<User> list;
+    private ArrayList<User> list,tmp;
+
+
     private UserDAO userDAO;
     public UserAdapter(Context context, ArrayList<User> list) {
         this.context = context;
         this.list = list;
+        tmp=list;
         userDAO=new UserDAO();
     }
 
@@ -71,6 +76,34 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String str=constraint.toString();
+                ArrayList<User> kq=new ArrayList<>();
+                if(str.equals(""))
+                    kq=tmp;
+                else{
+                    for(User user: list){
+                        if(user.getEmail().toLowerCase().contains(str.toLowerCase()))
+                            kq.add(user);
+                    }
+                }
+                FilterResults results=new FilterResults();
+                results.values=kq;
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                list= (ArrayList<User>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{

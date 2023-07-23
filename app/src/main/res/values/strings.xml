@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">appThuVien_Duan1</string>
 
-    <string name="app_label" />
-    <string name="search_hint" />
-    <string name="search_title" />
+
 
     <string name="app_label" />
     <string name="search_hint" />

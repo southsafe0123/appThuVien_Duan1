@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.teammobile.appthuvien_duan1.R;
+import com.teammobile.appthuvien_duan1.activity.Login_Activity;
 import com.teammobile.appthuvien_duan1.activity.MainActivity;
 import com.teammobile.appthuvien_duan1.activity.QuanLyActivity;
 
@@ -61,7 +62,7 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 FirebaseAuth.getInstance().signOut();
-                getActivity().finish();
+                startActivity(new Intent(context, Login_Activity.class));
             }
         });
         builder.show();
