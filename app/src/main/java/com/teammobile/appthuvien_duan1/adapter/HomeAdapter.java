@@ -2,6 +2,8 @@ package com.teammobile.appthuvien_duan1.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.teammobile.appthuvien_duan1.R;
 import com.teammobile.appthuvien_duan1.dao.SachDAO;
+import com.teammobile.appthuvien_duan1.fragment.HomeFragment;
+import com.teammobile.appthuvien_duan1.interfaces.IGioHang;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
 import java.util.ArrayList;
@@ -26,6 +30,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
 
     private ArrayList<Sach> list;
     private Context context;
+    private ArrayList<Sach> gioHang;
+    private IGioHang iGioHang;
+
+    public HomeAdapter(IGioHang iGioHang) {
+        this.iGioHang = iGioHang;
+    }
 
     public HomeAdapter(ArrayList<Sach> list, Context context){
         this.list = list;
@@ -46,6 +56,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
         holder.tvTheloai.setText(list.get(holder.getAdapterPosition()).getLoai().getTenLoai());
         holder.tvSoluong.setText(""+list.get(holder.getAdapterPosition()).getSoLuong());
         holder.tvTacGia.setText(list.get(holder.getAdapterPosition()).getTacGia().getTenTacGia());
+        holder.btnThemGioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gioHang.add(list.get(holder.getAdapterPosition()));
+                iGioHang.themGioHang(gioHang);
+            }
+        });
     }
 
     @Override
