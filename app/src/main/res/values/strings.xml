@@ -5,6 +5,9 @@
     <string name="search_hint" />
     <string name="search_title" />
 
+    <string name="app_label" />
+    <string name="search_hint" />
+    <string name="search_title" />
     <string name="underline"><u>Đăng ký</u></string>
     <string name="quenmatkhau"><u>Quên mật khẩu</u></string>
 
