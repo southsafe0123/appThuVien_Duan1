@@ -20,6 +20,7 @@ import com.teammobile.appthuvien_duan1.R;
 import com.teammobile.appthuvien_duan1.dao.SachDAO;
 import com.teammobile.appthuvien_duan1.fragment.HomeFragment;
 import com.teammobile.appthuvien_duan1.interfaces.IGioHang;
+import com.teammobile.appthuvien_duan1.model.Cart;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
 import java.util.ArrayList;
@@ -60,7 +61,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
             @Override
             public void onClick(View view) {
                 gioHang.add(list.get(holder.getAdapterPosition()));
-                iGioHang.themGioHang(gioHang);
+                Cart.getInstance().setList(gioHang);
             }
         });
     }
