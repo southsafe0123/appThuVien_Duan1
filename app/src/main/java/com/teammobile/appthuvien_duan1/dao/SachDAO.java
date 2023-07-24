@@ -5,8 +5,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,7 +57,8 @@ public class SachDAO {
                 ArrayList<Sach> kq=new ArrayList<>();
                 for(DataSnapshot data: snapshot.getChildren()){
                     Sach sach=data.getValue(Sach.class);
-                    kq.add(sach);
+                    if(sach.getIsActive()>0)
+                        kq.add(new Sach(data.getKey(),sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(), sach.getVitridesach(), sach.getIsActive()));
                 }
                 iSachDAO.onCallBackGetAll(kq);
 
@@ -76,7 +79,7 @@ public class SachDAO {
                 for(DataSnapshot data: snapshot.getChildren()){
                     Sach sach=data.getValue(Sach.class);
                     if(sach.getLoai().getMaLoai().equals(ma)&&sach.getIsActive()>0)
-                        list.add(sach);
+                        list.add(new Sach(data.getKey(),sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(), sach.getVitridesach(), sach.getIsActive()));
                 }
                 iGetSLSachByLoai.onCallBack(list);
             }
@@ -96,7 +99,7 @@ public class SachDAO {
                 for(DataSnapshot data: snapshot.getChildren()){
                     Sach sach=data.getValue(Sach.class);
                     if(ma.equals(sach.getTacGia().getMaTG())&&sach.getIsActive()>0){
-                        list.add(sach);
+                        list.add(new Sach(data.getKey(),sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(), sach.getVitridesach(), sach.getIsActive()));
                     }
                 }
                 Log.d("OK",list.size()+"");
@@ -109,6 +112,18 @@ public class SachDAO {
             }
         })        ;
     }
+    public void delete(String ma,DeleteCallBack deleteCallBack)
+    {
+        DatabaseReference mRef=reference.child(ma+"/isActive");
+        mRef.setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful())
+                    deleteCallBack.onCallBack(true);
+            }
+        });
+
+    }
     public interface IGetSLSachByLoai
     {
         public void onCallBack(ArrayList<Sach> list);
@@ -116,5 +131,9 @@ public class SachDAO {
     public interface IGetSLSachByTG
     {
         public void onCallBack(ArrayList<Sach> list);
+    }
+    public interface DeleteCallBack
+    {
+        public void onCallBack(Boolean check);
     }
 }

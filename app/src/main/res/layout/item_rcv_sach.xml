@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp">
+    <LinearLayout
+        android:weightSum="4"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivHInh"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+        <RelativeLayout
+            android:gravity="left"
+            android:layout_weight="2"
+            android:padding="10dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvTen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:fontFamily="sans-serif-light"
+                android:text="Ten:"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvSL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tvTen"
+                android:layout_alignParentStart="true"
+
+
+                android:layout_marginTop="30dp"
+                android:fontFamily="sans-serif-light"
+                android:text="SL:"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvDoanhThu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tvSL"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="30dp"
+                android:fontFamily="sans-serif-light"
+                android:text="Doanh Thu:"
+                android:textSize="20sp" />
+        </RelativeLayout>
+        <ImageView
+            android:id="@+id/btnDelete"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/baseline_delete_24"
+            android:layout_width="0dp"
+            android:layout_height="30dp"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
