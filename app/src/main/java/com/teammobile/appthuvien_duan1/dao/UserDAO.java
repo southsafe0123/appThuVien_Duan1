@@ -2,12 +2,13 @@ package com.teammobile.appthuvien_duan1.dao;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -85,24 +86,27 @@ public class UserDAO {
                 });
 
     }
-    public void loadRole(String ma,LoadRoleCallBack loadRoleCallBack)
+    public void loadInfo(String ma, LoadInfoCallBack loadInfoCallBack)
     {
-        DatabaseReference mRef=reference.child(ma+"/role");
-        mRef.addValueEventListener(new ValueEventListener() {
+        DatabaseReference mRef=reference.child(ma);
+        SharedPreferences sharedPreferences=context.getSharedPreferences("Info",Context.MODE_PRIVATE);
+
+        mRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                SharedPreferences sharedPreferences=context.getSharedPreferences("Info",Context.MODE_PRIVATE);
-                sharedPreferences.edit().putInt("role",snapshot.getValue(Integer.class)).apply();
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if(task.isSuccessful()){
+                        DataSnapshot data=task.getResult();
+                        sharedPreferences.edit().putInt("role",data.child("role").getValue(Integer.class)).apply();
+                        sharedPreferences.edit().putString("uid",ma).apply();
+                        sharedPreferences.edit().putString("email",data.child("email").getValue(String.class)).apply();
+                        sharedPreferences.edit().putString("username",data.child("username").getValue(String.class)).apply();
+                        sharedPreferences.edit().putString("password",data.child("password").getValue(String.class)).apply();
 
-                Toast.makeText(context, "Role has been loaded", Toast.LENGTH_SHORT).show();
-                loadRoleCallBack.onCallBack();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+                }
+                loadInfoCallBack.onCallBack();
             }
         });
+
     }
     public interface  InsertCallBack
     {
@@ -116,7 +120,7 @@ public class UserDAO {
     {
         public void onCallBack(Boolean check);
     }
-    public interface LoadRoleCallBack
+    public interface LoadInfoCallBack
     {
         public void onCallBack();
     }

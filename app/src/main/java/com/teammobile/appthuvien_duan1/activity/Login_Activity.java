@@ -1,16 +1,12 @@
 package com.teammobile.appthuvien_duan1.activity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -116,7 +112,7 @@ public class Login_Activity extends AppCompatActivity {
 			userDAO=new UserDAO(this);
 			ProgressDialog progressDialog=new ProgressDialog(Login_Activity.this);
 			progressDialog.show();
-			userDAO.loadRole(mUser.getUid(), new UserDAO.LoadRoleCallBack() {
+			userDAO.loadInfo(mUser.getUid(), new UserDAO.LoadInfoCallBack() {
 				@Override
 				public void onCallBack() {
 					progressDialog.dismiss();

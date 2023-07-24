@@ -1,6 +1,8 @@
 package com.teammobile.appthuvien_duan1.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,19 +47,10 @@ public class QLSachAdapter extends RecyclerView.Adapter<QLSachAdapter.ViewHolder
         holder.tvTen.setText(list.get(position).getTenSach());
         holder.tvSL.setText("Tồn: "+list.get(position).getSoLuong());
         String maSach=list.get(position).getMaSach();
-        Toast.makeText(context, ""+maSach, Toast.LENGTH_SHORT).show();
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sachDAO.delete(maSach, new SachDAO.DeleteCallBack() {
-                    @Override
-                    public void onCallBack(Boolean check) {
-//                        if(check)
-//                            Toast.makeText(context, "Xóa sách thành công", Toast.LENGTH_SHORT).show();
-//                        else
-//                            Toast.makeText(context, "Xóa sách thất bại", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                showDialog(maSach);
             }
         });
     }
@@ -108,5 +101,31 @@ public class QLSachAdapter extends RecyclerView.Adapter<QLSachAdapter.ViewHolder
             tvSL=itemView.findViewById(R.id.tvSL);
             btnDelete=itemView.findViewById(R.id.btnDelete);
         }
+    }
+    public void showDialog(String maSach)
+    {
+        AlertDialog.Builder builder=new AlertDialog.Builder(context);
+        builder.setTitle("HỆ THỐNG");
+        builder.setMessage("Xóa sẽ ko thể hoàn tác ?");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                sachDAO.delete(maSach, new SachDAO.DeleteCallBack() {
+                    @Override
+                    public void onCallBack(Boolean check) {
+                        if(check)
+                            Toast.makeText(context, "Xóa sách thành công", Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(context, "Xóa sách thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        }).setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
     }
 }
