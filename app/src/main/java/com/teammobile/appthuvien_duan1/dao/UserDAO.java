@@ -96,7 +96,7 @@ public class UserDAO {
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if(task.isSuccessful()){
                         DataSnapshot data=task.getResult();
-                        sharedPreferences.edit().putInt("role",data.child("role").getValue(Integer.class)).apply();
+                            sharedPreferences.edit().putInt("role",data.child("role").getValue(Integer.class)).apply();
                         sharedPreferences.edit().putString("uid",ma).apply();
                         sharedPreferences.edit().putString("email",data.child("email").getValue(String.class)).apply();
                         sharedPreferences.edit().putString("username",data.child("username").getValue(String.class)).apply();
