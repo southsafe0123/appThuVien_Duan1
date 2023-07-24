@@ -36,6 +36,7 @@ public class QuanLyActivity extends AppCompatActivity {
 
         actionBar=getSupportActionBar();
        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.baseline_home_24);
         loadFragment(new QuanLyMenuFragment());
 
     }

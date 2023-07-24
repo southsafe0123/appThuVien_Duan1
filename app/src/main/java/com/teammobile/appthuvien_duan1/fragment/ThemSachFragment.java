@@ -1,7 +1,9 @@
 package com.teammobile.appthuvien_duan1.fragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -58,7 +60,7 @@ public class ThemSachFragment extends Fragment {
     private AutoCompleteTextView actvLoai,actvTG;
     private Uri selectedImg;
     private StorageReference reference;
-
+    private ProgressDialog progressDialog;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -78,7 +80,10 @@ public class ThemSachFragment extends Fragment {
         actvLoai=view.findViewById(R.id.actvLoai);
         actvTG=view.findViewById(R.id.actvTG);
         reference= FirebaseStorage.getInstance().getReference();
-
+        progressDialog=new ProgressDialog(context);
+        progressDialog.setTitle("Đang tải sách");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setCancelable(false);
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,6 +125,7 @@ public class ThemSachFragment extends Fragment {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog.show();
                 themSach(view);
             }
         });
@@ -152,6 +158,7 @@ public class ThemSachFragment extends Fragment {
                     public void onCallBackInsert(Boolean check) {
                         if(check){
                             //Toast.makeText(context, "Thêm sách thành công", Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
                             closeFragment();
                         }
                         else{
