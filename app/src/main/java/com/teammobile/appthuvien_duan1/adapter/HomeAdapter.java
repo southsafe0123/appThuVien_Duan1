@@ -29,11 +29,12 @@ import java.util.ArrayList;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
 
-
     private ArrayList<Sach> list;
     private Context context;
     private ArrayList<Sach> gioHang;
     private IGioHang iGioHang;
+
+    private Cart cart;
 
     public HomeAdapter(IGioHang iGioHang) {
         this.iGioHang = iGioHang;
@@ -43,6 +44,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
         this.list = list;
         this.context = context;
     }
+
+
 
     @NonNull
     @Override
@@ -64,7 +67,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
                 Sach sach = list.get(holder.getAdapterPosition());
                 gioHang.add(sach);
                 Toast.makeText(context, ""+gioHang.size(), Toast.LENGTH_SHORT).show();
-//                Cart.getInstance().setList(gioHang);
+                cart.setList(gioHang);
             }
         });
     }

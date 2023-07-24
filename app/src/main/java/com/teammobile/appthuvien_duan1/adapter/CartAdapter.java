@@ -61,7 +61,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 			txtTacGia = itemView.findViewById(R.id.txtTacgia);
 
 
-
 		}
 	}
 }

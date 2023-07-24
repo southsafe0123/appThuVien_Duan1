@@ -29,7 +29,8 @@ public class CartFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         recyclerView = view.findViewById(R.id.RvCart);
 
-        ArrayList<Sach> list = Cart.getInstance().getList();
+        Cart cart = Cart.getInstance();
+        ArrayList<Sach> list = cart.getList();
         if(list==null){
 
         } else {
