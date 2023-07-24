@@ -30,7 +30,7 @@ public class CartFragment extends Fragment {
         recyclerView = view.findViewById(R.id.RvCart);
 
         ArrayList<Sach> list = Cart.getInstance().getList();
-        if(list.isEmpty()){
+        if(list==null){
 
         } else {
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

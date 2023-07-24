@@ -12,6 +12,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -60,8 +61,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
         holder.btnThemGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gioHang.add(list.get(holder.getAdapterPosition()));
-                Cart.getInstance().setList(gioHang);
+                Sach sach = list.get(holder.getAdapterPosition());
+                gioHang.add(sach);
+                Toast.makeText(context, ""+gioHang.size(), Toast.LENGTH_SHORT).show();
+//                Cart.getInstance().setList(gioHang);
             }
         });
     }
