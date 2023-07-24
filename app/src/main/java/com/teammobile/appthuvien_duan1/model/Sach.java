@@ -1,6 +1,8 @@
 package com.teammobile.appthuvien_duan1.model;
 
-public class Sach {
+import java.io.Serializable;
+
+public class Sach implements Serializable {
     private String maSach;
     private Loai loai;
     private TacGia tacGia;
