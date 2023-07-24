@@ -4,11 +4,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +27,7 @@ import com.teammobile.appthuvien_duan1.activity.QuanLyActivity;
 public class UserFragment extends Fragment {
     private Context context;
     private CardView btnQuanLy,btnLogOut;
-
+    private int role=-1;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -33,11 +35,15 @@ public class UserFragment extends Fragment {
         View view=LayoutInflater.from(context).inflate(R.layout.fragment_user,container,false);
         btnQuanLy=view.findViewById(R.id.btnQuanLy);
         btnLogOut=view.findViewById(R.id.btnLogOut);
-
+        SharedPreferences sharedPreferences=context.getSharedPreferences("Info",Context.MODE_PRIVATE);
+        role=sharedPreferences.getInt("role",-1);
         btnQuanLy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(context, QuanLyActivity.class));
+                if(role>0)
+                    startActivity(new Intent(context, QuanLyActivity.class));
+                else
+                    Toast.makeText(context, "LỖI ", Toast.LENGTH_SHORT).show();
             }
         });
         btnLogOut.setOnClickListener(new View.OnClickListener() {

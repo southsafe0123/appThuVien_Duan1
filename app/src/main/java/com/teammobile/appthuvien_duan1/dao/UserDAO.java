@@ -1,5 +1,9 @@
 package com.teammobile.appthuvien_duan1.dao;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -12,17 +16,18 @@ import com.google.firebase.database.ValueEventListener;
 import com.teammobile.appthuvien_duan1.model.User;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class UserDAO {
     FirebaseDatabase mDatabase;
     DatabaseReference reference;
     ArrayList<User> list=new ArrayList<>();
-    public UserDAO()
+    private Context context;
+    public UserDAO(Context context)
     {
         mDatabase=FirebaseDatabase.getInstance();
         reference=mDatabase.getReference().child("User");
+        this.context=context;
+
     }
     public void insert(User user, InsertCallBack insertCallBack)
     {
@@ -64,7 +69,8 @@ public class UserDAO {
     }
     public void upgradeRole(String ma,UpgradeRoleCallBack upgradeRoleCallBack)
     {
-        reference.child(ma+"/role").setValue(1)
+        DatabaseReference mRef=reference.child(ma+"/role");
+        mRef.setValue(1)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -77,6 +83,26 @@ public class UserDAO {
                         upgradeRoleCallBack.onCallBack(false);
                     }
                 });
+
+    }
+    public void loadRole(String ma,LoadRoleCallBack loadRoleCallBack)
+    {
+        DatabaseReference mRef=reference.child(ma+"/role");
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                SharedPreferences sharedPreferences=context.getSharedPreferences("Info",Context.MODE_PRIVATE);
+                sharedPreferences.edit().putInt("role",snapshot.getValue(Integer.class)).apply();
+
+                Toast.makeText(context, "Role has been loaded", Toast.LENGTH_SHORT).show();
+                loadRoleCallBack.onCallBack();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
     public interface  InsertCallBack
     {
@@ -89,5 +115,9 @@ public class UserDAO {
     public interface UpgradeRoleCallBack
     {
         public void onCallBack(Boolean check);
+    }
+    public interface LoadRoleCallBack
+    {
+        public void onCallBack();
     }
 }

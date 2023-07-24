@@ -40,7 +40,7 @@ public class QuanLyUserFragment extends Fragment {
     public void khoiTao(View view)
     {
         rcv=view.findViewById(R.id.rcv);
-        userDAO=new UserDAO();
+        userDAO=new UserDAO(context);
     }
     public void fetchingData()
     {

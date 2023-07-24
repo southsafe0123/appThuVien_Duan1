@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -40,6 +42,7 @@ import com.teammobile.appthuvien_duan1.activity.QuanLyActivity;
 import com.teammobile.appthuvien_duan1.dao.LoaiDAO;
 import com.teammobile.appthuvien_duan1.dao.SachDAO;
 import com.teammobile.appthuvien_duan1.dao.TacGiaDAO;
+import com.teammobile.appthuvien_duan1.dao.UserDAO;
 import com.teammobile.appthuvien_duan1.interfaces.IFirebaseStorage;
 import com.teammobile.appthuvien_duan1.interfaces.ILoaiDAO;
 import com.teammobile.appthuvien_duan1.interfaces.ISachDAO;
@@ -54,68 +57,70 @@ import java.util.Calendar;
 
 public class QuanLyMenuFragment extends Fragment {
     private Context context;
-    private LoaiDAO loaiDAO;
-    private TacGiaDAO tacGiaDAO;
-    private Loai curLoai;
-    private TacGia curTG;
-    private SachDAO sachDAO;
-    private FirebaseStorage storage;
+    private int role;
+    private CardView btnFMLoai,btnFMSach,btnFMTacGia,btnFMUser,btnFMHoaDon;
+    private UserDAO userDAO;
 
-    private Uri selectedImg;
-    private CardView btnFMLoai,btnFMSach,btnFMTacGia,btnFMUser;
-    private Button btnBackToUser;
-    public Loai getCurLoai() {
-        return curLoai;
-    }
-
-    private FirebaseAuth mAuth;
-
-    public TacGia getCurTG() {
-        return curTG;
-    }
-
-    public void setCurTG(TacGia curTG) {
-        this.curTG = curTG;
-    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
        View view=inflater.inflate(R.layout.fragment_quanly_menu,container,false);
        context=getContext();
-       
+
+       SharedPreferences sharedPreferences=getActivity().getSharedPreferences("Info",Context.MODE_PRIVATE);
+       role=sharedPreferences.getInt("role",-1);
+
 
        btnFMLoai=view.findViewById(R.id.btnFMLoai);
        btnFMTacGia=view.findViewById(R.id.btnFMTacGia);
        btnFMSach=view.findViewById(R.id.btnFMSach);
        btnFMUser=view.findViewById(R.id.btnFMUser);
+       btnFMHoaDon=view.findViewById(R.id.btnFMHoaDon);
        btnFMLoai.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-
-                loadFragment(new QuanLyLoaiFragment(),"fragment_loai");
+                if(role==2)
+                    loadFragment(new QuanLyLoaiFragment(),"fragment_loai");
+                else
+                    showDialog();
            }
        });
        btnFMTacGia.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               loadFragment(new QuanLyTGFragment(),"fragment_tg");
+               if(role==2)
+                    loadFragment(new QuanLyTGFragment(),"fragment_tg");
+                else
+                    showDialog();
            }
        });
        btnFMSach.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               loadFragment(new QuanLySachFragment(),"fragment_sach");
+               if(role==2)
+                    loadFragment(new QuanLySachFragment(),"fragment_sach");
+               else
+                   showDialog();
            }
        });
        btnFMUser.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               loadFragment(new QuanLyUserFragment(),"fragment_user");
+               if(role==2)
+                    loadFragment(new QuanLyUserFragment(),"fragment_user");
+               else showDialog();
            }
        });
-       loaiDAO=new LoaiDAO();
-       tacGiaDAO=new TacGiaDAO();
+        btnFMHoaDon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(role>0){
+
+                }
+                else showDialog();
+            }
+        });
 
        return view;
     }
@@ -129,10 +134,21 @@ public class QuanLyMenuFragment extends Fragment {
         ft.commit();
 
 
-
     }
 
+    public void showDialog()
+    {
+        AlertDialog.Builder builder=new AlertDialog.Builder(context);
+        builder.setTitle("HỆ THỐNG");
+        builder.setMessage("Bạn chưa được cấp quyền này!");
+        builder.setPositiveButton("Đã hiểu", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
+            }
+        });
+        builder.show();
+    }
 
 
 

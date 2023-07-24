@@ -32,7 +32,7 @@ public class Register_Activity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
-		userDAO=new UserDAO();
+		userDAO=new UserDAO(this);
 		EditText edtTaikhoan,edtMatkhau,edtNhaplai,edtEmail;
 		Button btnDangky;
 

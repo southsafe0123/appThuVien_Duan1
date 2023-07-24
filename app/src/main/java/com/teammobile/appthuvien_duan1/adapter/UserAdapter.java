@@ -30,7 +30,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> im
         this.context = context;
         this.list = list;
         tmp=list;
-        userDAO=new UserDAO();
+        userDAO=new UserDAO(context);
     }
 
     @NonNull

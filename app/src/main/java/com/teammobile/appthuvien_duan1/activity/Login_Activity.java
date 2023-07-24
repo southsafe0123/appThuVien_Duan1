@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,16 +24,17 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.teammobile.appthuvien_duan1.R;
+import com.teammobile.appthuvien_duan1.dao.UserDAO;
 
 public class Login_Activity extends AppCompatActivity {
 	private FirebaseAuth mAuth;
 	private FirebaseUser mUser;
+	private UserDAO userDAO;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-		mAuth = FirebaseAuth.getInstance();
-		mUser=mAuth.getCurrentUser();
+		mAuth=FirebaseAuth.getInstance();
 		checkUser();
 		EditText edtTaikhoan,edtMatkhau;
 		Button btnDangnhap;
@@ -72,7 +74,8 @@ public class Login_Activity extends AppCompatActivity {
 			public void onClick(View v) {
 				String taikhoan = edtTaikhoan.getText().toString();
 				String matkhau = edtMatkhau.getText().toString();
-
+				if(taikhoan.equals("")&&matkhau.equals(""))
+					return;
 				mAuth.signInWithEmailAndPassword(taikhoan,matkhau).addOnCompleteListener(Login_Activity.this, new OnCompleteListener<AuthResult>() {
 					@Override
 					public void onComplete(@NonNull Task<AuthResult> task) {
@@ -82,6 +85,7 @@ public class Login_Activity extends AppCompatActivity {
 								editor.putString("user", edtTaikhoan.getText().toString());
 								editor.putString("pass", edtMatkhau.getText().toString());
 								editor.putBoolean("remember", true);
+
 								editor.apply();
 							} else {
 								editor.clear();
@@ -107,9 +111,21 @@ public class Login_Activity extends AppCompatActivity {
 	public void checkUser(){
 		mUser = mAuth.getCurrentUser();
 		if(mUser!=null){
-			Intent intent = new Intent(Login_Activity.this,MainActivity.class);
-			startActivity(intent);
-			finish();
+			mAuth = FirebaseAuth.getInstance();
+			mUser=mAuth.getCurrentUser();
+			userDAO=new UserDAO(this);
+			ProgressDialog progressDialog=new ProgressDialog(Login_Activity.this);
+			progressDialog.show();
+			userDAO.loadRole(mUser.getUid(), new UserDAO.LoadRoleCallBack() {
+				@Override
+				public void onCallBack() {
+					progressDialog.dismiss();
+					Intent intent = new Intent(Login_Activity.this,MainActivity.class);
+					startActivity(intent);
+					finish();
+				}
+			});
+
 		}
 	}
 
