@@ -24,10 +24,12 @@ import com.teammobile.appthuvien_duan1.interfaces.IGioHang;
 import com.teammobile.appthuvien_duan1.model.Cart;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
+import java.sql.Array;
 import java.util.ArrayList;
 
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
+
 
     private ArrayList<Sach> list;
     private Context context;
@@ -43,9 +45,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
     public HomeAdapter(ArrayList<Sach> list, Context context){
         this.list = list;
         this.context = context;
+        cart = Cart.getInstance();
+        gioHang = new ArrayList<>();
     }
-
-
 
     @NonNull
     @Override
@@ -65,9 +67,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
             @Override
             public void onClick(View view) {
                 Sach sach = list.get(holder.getAdapterPosition());
-                gioHang.add(sach);
-                Toast.makeText(context, ""+gioHang.size(), Toast.LENGTH_SHORT).show();
-                cart.setList(gioHang);
+                cart.addCart(sach);
             }
         });
     }
