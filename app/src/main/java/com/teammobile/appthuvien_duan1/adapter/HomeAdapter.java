@@ -63,11 +63,25 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
         holder.tvTheloai.setText(list.get(holder.getAdapterPosition()).getLoai().getTenLoai());
         holder.tvSoluong.setText(""+list.get(holder.getAdapterPosition()).getSoLuong());
         holder.tvTacGia.setText(list.get(holder.getAdapterPosition()).getTacGia().getTenTacGia());
+
         holder.btnThemGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Sach sach = list.get(holder.getAdapterPosition());
-                cart.addCart(sach);
+                gioHang = cart.getList();
+                if(gioHang.isEmpty()){
+                    cart.addCart(sach);
+                } else{
+                    Toast.makeText(context, ""+list.get(holder.getAdapterPosition()).getMaSach(), Toast.LENGTH_SHORT).show();
+//                    for(int i =0;i<gioHang.size();i++){
+//                        if (gioHang.get(i).getMaSach().equals(list.get(holder.getAdapterPosition()).getMaSach())){
+//                            Toast.makeText(context, "Giỏ hàng đã có sách này", Toast.LENGTH_SHORT).show();
+//                            break;
+//                        } else {
+//                            cart.addCart(sach);
+//                        }
+//                    }
+                }
             }
         });
     }

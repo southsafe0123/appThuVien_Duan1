@@ -36,7 +36,6 @@ public class CartFragment extends Fragment {
         } else {
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerView.setAdapter(new CartAdapter(list,getContext()));
-
         }
 
 
