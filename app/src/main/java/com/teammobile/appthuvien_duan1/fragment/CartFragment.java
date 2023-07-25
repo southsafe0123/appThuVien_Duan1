@@ -38,6 +38,7 @@ public class CartFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         recyclerView = view.findViewById(R.id.RvCart);
+
         btnSumbit=view.findViewById(R.id.btnSumbit);
         Cart cart = Cart.getInstance();
         khoiTao();
@@ -57,6 +58,7 @@ public class CartFragment extends Fragment {
                 }
             }
         });
+
 
         return view;
     }
