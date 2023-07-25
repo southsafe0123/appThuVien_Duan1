@@ -101,6 +101,7 @@ public class UserDAO {
                         sharedPreferences.edit().putString("email",data.child("email").getValue(String.class)).apply();
                         sharedPreferences.edit().putString("username",data.child("username").getValue(String.class)).apply();
                         sharedPreferences.edit().putString("password",data.child("password").getValue(String.class)).apply();
+                        sharedPreferences.edit().putInt("isActive",data.child("isActive").getValue(Integer.class)).apply();
 
                 }
                 loadInfoCallBack.onCallBack();
