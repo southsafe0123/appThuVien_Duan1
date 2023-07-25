@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 public class Cart {
 
+	private boolean check;
+	public boolean kiemtraThayDoi(){
+		return check;
+	}
 
 	private static Cart instance;
 	private ArrayList<Sach> list;
@@ -21,6 +25,11 @@ public class Cart {
 
 	public ArrayList<Sach> getList() {
 		return list;
+	}
+
+	public void updateList(ArrayList<Sach> list){
+		this.list = list;
+		check = true;
 	}
 
 	public void addCart(Sach sach) {

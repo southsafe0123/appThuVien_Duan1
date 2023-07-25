@@ -73,4 +73,40 @@ public class Sach implements Serializable {
     public int getIsActive() {
         return isActive;
     }
+
+    public void setMaSach(String maSach) {
+        this.maSach = maSach;
+    }
+
+    public void setLoai(Loai loai) {
+        this.loai = loai;
+    }
+
+    public void setTacGia(TacGia tacGia) {
+        this.tacGia = tacGia;
+    }
+
+    public void setTenSach(String tenSach) {
+        this.tenSach = tenSach;
+    }
+
+    public void setHinhAnh(String hinhAnh) {
+        this.hinhAnh = hinhAnh;
+    }
+
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
+    }
+
+    public void setGiaThue(int giaThue) {
+        this.giaThue = giaThue;
+    }
+
+    public void setVitridesach(String vitridesach) {
+        this.vitridesach = vitridesach;
+    }
+
+    public void setIsActive(int isActive) {
+        this.isActive = isActive;
+    }
 }

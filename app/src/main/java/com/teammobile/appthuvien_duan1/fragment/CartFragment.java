@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.teammobile.appthuvien_duan1.R;
 import com.teammobile.appthuvien_duan1.adapter.CartAdapter;
 import com.teammobile.appthuvien_duan1.adapter.HomeAdapter;
+import com.teammobile.appthuvien_duan1.dao.CartDAO;
 import com.teammobile.appthuvien_duan1.dao.PhieuMuonDAO;
 import com.teammobile.appthuvien_duan1.interfaces.IGioHang;
 import com.teammobile.appthuvien_duan1.model.Cart;
@@ -42,9 +43,12 @@ public class CartFragment extends Fragment {
         recyclerView = view.findViewById(R.id.RvCart);
 
         btnSumbit=view.findViewById(R.id.btnSumbit);
-        Cart cart = Cart.getInstance();
         khoiTao();
-        ArrayList<Sach> list = cart.getList();
+        CartDAO cartDAO = new CartDAO();
+        ArrayList<Sach> list = cartDAO.defaultSoluong();
+
+
+
         if(list==null){
 
         } else {
