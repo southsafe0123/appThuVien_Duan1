@@ -13,6 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.teammobile.appthuvien_duan1.R;
 import com.teammobile.appthuvien_duan1.fragment.CartFragment;
+import com.teammobile.appthuvien_duan1.fragment.SearchFragment;
 import com.teammobile.appthuvien_duan1.fragment.UserFragment;
 import com.teammobile.appthuvien_duan1.fragment.HomeFragment;
 
@@ -24,11 +25,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         HomeFragment fragmentHome = new HomeFragment();
         BottomNavigationView navMain = findViewById(R.id.navMain);
-
-
+        loadFragment(new HomeFragment());
         navMain.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
                 switch (item.getItemId()){
                     default:
                         Toast.makeText(MainActivity.this, "default", Toast.LENGTH_SHORT).show();
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
                         loadFragment(new CartFragment());
                         break;
                     case R.id.item_search:
+                        loadFragment(new SearchFragment());
                         Toast.makeText(MainActivity.this, "item_search", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.item_user:

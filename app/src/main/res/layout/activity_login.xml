@@ -30,6 +30,7 @@
 
         <EditText
             android:hint="Mật khẩu"
+            android:text="04092002"
             android:id="@+id/edtMatkhau"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></EditText>
