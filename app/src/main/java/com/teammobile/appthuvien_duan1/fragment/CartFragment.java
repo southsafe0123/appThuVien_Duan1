@@ -46,6 +46,7 @@ public class CartFragment extends Fragment {
         khoiTao();
         CartDAO cartDAO = new CartDAO();
         ArrayList<Sach> list = cartDAO.defaultSoluong();
+        ArrayList<Sach> listSach = Cart.getInstance().getListSach();
 
 
 
@@ -53,7 +54,7 @@ public class CartFragment extends Fragment {
 
         } else {
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            recyclerView.setAdapter(new CartAdapter(list,getContext()));
+            recyclerView.setAdapter(new CartAdapter(list,listSach,getContext()));
         }
         btnSumbit.setOnClickListener(new View.OnClickListener() {
             @Override

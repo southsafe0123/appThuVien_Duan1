@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Cart {
 
+	private ArrayList<Sach> listSach;
 	private boolean check;
 	public boolean kiemtraThayDoi(){
 		return check;
@@ -13,6 +14,7 @@ public class Cart {
 	private ArrayList<Sach> list;
 
 	private Cart(){
+		listSach = new ArrayList<>();
 		list = new ArrayList<>();
 	}
 
@@ -27,6 +29,10 @@ public class Cart {
 		return list;
 	}
 
+	public ArrayList<Sach> getListSach() {
+		return listSach;
+	}
+
 	public void updateList(ArrayList<Sach> list){
 		this.list = list;
 		check = true;
@@ -34,5 +40,6 @@ public class Cart {
 
 	public void addCart(Sach sach) {
 		list.add(sach);
+		listSach.add(sach);
 	}
 }
