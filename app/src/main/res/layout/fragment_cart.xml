@@ -12,9 +12,10 @@
         android:layout_height="0dp"/>
 
     <Button
-        android:layout_weight="1"
-        android:text="Thanh toán"
+        android:id="@+id/btnSumbit"
         android:layout_width="match_parent"
-        android:layout_height="0dp"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Thanh toán" />
 
 </LinearLayout>
