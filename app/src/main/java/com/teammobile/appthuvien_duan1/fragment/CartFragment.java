@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,6 +34,7 @@ public class CartFragment extends Fragment {
     private User user;
     private PhieuMuonDAO phieuMuonDAO;
     private SharedPreferences sharedPreferences;
+    private Context context;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,9 +54,23 @@ public class CartFragment extends Fragment {
         btnSumbit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(user==null||user.getIsActive()==0){
+                    Toast.makeText(context, "Tài khoản ko tồn tại", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if(list!=null){
-//                    PhieuMuon pm=new PhieuMuon(list,)
-//                    phieuMuonDAO.insert();
+                    PhieuMuon pm=new PhieuMuon(list,user,"25/7/2023","25/7/2023",0,0);
+
+                    phieuMuonDAO.insert(pm, new PhieuMuonDAO.InsertCallBack() {
+                        @Override
+                        public void onCallBack(Boolean check) {
+                            if(check){
+                                Toast.makeText(context, "Thêm phiếu mượn thành công", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                                Toast.makeText(context, "Thêm phiếu mượn thất bại", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
         });
@@ -72,6 +88,7 @@ public class CartFragment extends Fragment {
        String password=sharedPreferences.getString("password","N/A");
        int role=sharedPreferences.getInt("role",-1);
        int isActive=sharedPreferences.getInt("isActive",-1);
-
+       user=new User(uid,email,username,password,role,isActive);
+       context=getContext();
    }
 }
