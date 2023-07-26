@@ -9,11 +9,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,7 @@ import com.teammobile.appthuvien_duan1.R;
 public class Login_Activity extends AppCompatActivity {
 	private FirebaseAuth mAuth;
 	private FirebaseUser mUser;
+	private boolean isPasswordVisible = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,6 +44,8 @@ public class Login_Activity extends AppCompatActivity {
 		edtMatkhau = findViewById(R.id.edtMatkhau);
 		chkRemember = findViewById(R.id.chkRemember);
 		btnDangnhap = findViewById(R.id.btnDangnhap);
+		ImageView imageViewShowPassword = findViewById(R.id.imageViewShowPassword);
+
 
 
 		Intent intent = getIntent();
@@ -54,6 +59,23 @@ public class Login_Activity extends AppCompatActivity {
 			edtMatkhau.setText(password);
 		}
 
+		imageViewShowPassword.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (isPasswordVisible) {
+					// Ẩn mật khẩu
+					edtMatkhau.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+					imageViewShowPassword.setImageResource(R.drawable.ic_hide_pass);
+					isPasswordVisible = false;
+				} else {
+					// Hiển thị mật khẩu
+					edtMatkhau.setInputType(InputType.TYPE_CLASS_TEXT);
+					imageViewShowPassword.setImageResource(R.drawable.ic_show_pass);
+					isPasswordVisible = true;
+				}
+				edtMatkhau.setSelection(edtMatkhau.getText().length());
+			}
+		});
 
 
 

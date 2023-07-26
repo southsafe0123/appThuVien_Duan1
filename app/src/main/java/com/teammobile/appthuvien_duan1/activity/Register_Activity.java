@@ -28,7 +28,7 @@ public class Register_Activity extends AppCompatActivity {
 		setContentView(R.layout.activity_register);
 
 		EditText edtTaikhoan,edtMatkhau,edtNhaplai,edtEmail;
-		Button btnDangky;
+		Button btnDangky, btnLogin;
 
 		mAuth = FirebaseAuth.getInstance();
 
@@ -37,6 +37,7 @@ public class Register_Activity extends AppCompatActivity {
 		edtMatkhau = findViewById(R.id.edtMatkhau);
 		edtNhaplai = findViewById(R.id.edtNhaplai);
 		btnDangky = findViewById(R.id.btnDangky);
+		btnLogin = findViewById(R.id.btnLogin);
 
 		btnDangky.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -77,6 +78,13 @@ public class Register_Activity extends AppCompatActivity {
 			}
 
 
+		});
+		btnLogin.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(Register_Activity.this, Login_Activity.class);
+				startActivity(intent);
+			}
 		});
 	}
 }

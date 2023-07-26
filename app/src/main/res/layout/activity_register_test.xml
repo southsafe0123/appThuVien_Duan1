@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@mipmap/top_background">
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Đăng ký \n Tài Khoản"
+            android:textSize="33sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_marginRight="10dp"/>
+
+        <ImageView
+            android:layout_weight="0.5"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:src="@mipmap/women1"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/txtGmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="Gmail"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#2F3363"
+        android:layout_marginTop="0dp" />
+
+    <EditText
+        android:id="@+id/edtGmail"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="32sp"
+        android:layout_marginEnd="32sp"
+        android:padding="6dp"
+        android:textColor="#7A7676"
+        android:ems="10"
+        android:background="@drawable/edttext"
+        android:inputType="textPersonName"
+        android:hint="Nhập gmail vào đây"
+        android:textSize="16sp"
+        android:layout_marginTop="8sp"/>
+
+    <TextView
+        android:id="@+id/txtUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="Tên Tài Khoản"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#2F3363"
+        android:layout_marginTop="12dp"
+        />
+
+    <EditText
+        android:id="@+id/edtUser"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="32sp"
+        android:layout_marginEnd="32sp"
+        android:padding="6dp"
+        android:textColor="#7A7676"
+        android:ems="10"
+        android:background="@drawable/edttext"
+        android:inputType="textPersonName"
+        android:hint="Nhập tên tài khoản"
+        android:textSize="16sp"
+        android:layout_marginTop="8sp"/>
+    <TextView
+        android:id="@+id/txtPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="Mật Khẩu"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#2F3363"
+        android:layout_marginTop="12dp" />
+
+    <EditText
+        android:id="@+id/edtPass"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="32sp"
+        android:layout_marginTop="8sp"
+        android:layout_marginEnd="32sp"
+        android:background="@drawable/edttext"
+        android:ems="10"
+        android:hint="Nhập mật khẩu"
+        android:inputType="textPersonName"
+        android:padding="6dp"
+        android:textColor="#7A7676"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/txtPass2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="12dp"
+        android:text="Nhập lại mật khẩu"
+        android:textColor="#2F3363"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+
+    <EditText
+        android:id="@+id/edtPass2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="32sp"
+        android:layout_marginTop="8sp"
+        android:layout_marginEnd="32sp"
+        android:background="@drawable/edttext"
+        android:ems="10"
+        android:hint="Hãy nhập lại mật khẩu"
+        android:inputType="textPersonName"
+        android:padding="6dp"
+        android:textColor="#7A7676"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@android:color/holo_green_light"
+        android:padding="4dp"
+        android:text="Đăng Ký"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+    <Button
+        android:layout_marginTop="5dp"
+        android:id="@+id/btnGoogle"
+        android:text = "Google"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></Button>
+
+    <TextView
+        android:id="@+id/txtPass3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="15dp"
+        android:text="Already have an account?"
+        android:textColor="#757578"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/backgr_btn"
+        android:padding="4dp"
+        android:text="Login"
+        android:textColor="#5A5959"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

@@ -39,7 +39,7 @@ public class SearchFragment extends Fragment {
         TacGiaDAO tacGiaDAO = new TacGiaDAO();
         LoaiDAO theloaiDAO = new LoaiDAO();
 
-        
+
         theloaiDAO.getAll(new ILoaiDAO() {
             @Override
             public void onCallBackInsert(Boolean check) {
