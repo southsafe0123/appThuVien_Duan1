@@ -18,6 +18,7 @@ import com.teammobile.appthuvien_duan1.interfaces.ISachDAO;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class SachDAO {
     FirebaseDatabase mDatabase;
@@ -122,6 +123,10 @@ public class SachDAO {
                     deleteCallBack.onCallBack(true);
             }
         });
+
+    }
+    public void getSome(Map<String,Sach> map)
+    {
 
     }
     public interface IGetSLSachByLoai

@@ -26,6 +26,8 @@ import com.teammobile.appthuvien_duan1.model.Sach;
 import com.teammobile.appthuvien_duan1.model.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CartFragment extends Fragment {
     private HomeAdapter homeAdapter;
@@ -45,11 +47,13 @@ public class CartFragment extends Fragment {
         Cart cart = Cart.getInstance();
         khoiTao();
         ArrayList<Sach> list = cart.getList();
+        Map<String,Sach> map=new HashMap<>();
         if(list==null){
 
         } else {
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerView.setAdapter(new CartAdapter(list,getContext()));
+
         }
         btnSumbit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +63,11 @@ public class CartFragment extends Fragment {
                     return;
                 }
                 if(list!=null){
-                    PhieuMuon pm=new PhieuMuon(list,user,"25/7/2023","25/7/2023",0,0);
+                    for(Sach sach: list){
+                        Sach item=new Sach(sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach(),sach.getIsActive());
+                        map.put(sach.getMaSach(),item);
+                    }
+                    PhieuMuon pm=new PhieuMuon(map,user,"25/7/2023","25/7/2023",0,0);
 
                     phieuMuonDAO.insert(pm, new PhieuMuonDAO.InsertCallBack() {
                         @Override

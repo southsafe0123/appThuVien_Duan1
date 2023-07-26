@@ -3,17 +3,18 @@ package com.teammobile.appthuvien_duan1.model;
 import com.teammobile.appthuvien_duan1.dao.UserDAO;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class PhieuMuon {
     private String ma;
-    private ArrayList<Sach> list;
+    Map<String,Sach> sach;
     private User user;
     private String ngayTao,ngayTra;
     private int tongTien,trangThai;
 
-    public PhieuMuon(String ma, ArrayList<Sach> list, User user, String ngayTao, String ngayTra, int tongTien, int trangThai) {
+    public PhieuMuon(String ma, Map<String, Sach> sach, User user, String ngayTao, String ngayTra, int tongTien, int trangThai) {
         this.ma = ma;
-        this.list = list;
+        this.sach = sach;
         this.user = user;
         this.ngayTao = ngayTao;
         this.ngayTra = ngayTra;
@@ -21,17 +22,13 @@ public class PhieuMuon {
         this.trangThai = trangThai;
     }
 
-    public PhieuMuon(ArrayList<Sach> list, User user, String ngayTao, String ngayTra, int tongTien, int trangThai) {
-        this.list = list;
+    public PhieuMuon(Map<String, Sach> sach, User user, String ngayTao, String ngayTra, int tongTien, int trangThai) {
+        this.sach = sach;
         this.user = user;
         this.ngayTao = ngayTao;
         this.ngayTra = ngayTra;
         this.tongTien = tongTien;
         this.trangThai = trangThai;
-    }
-
-    public ArrayList<Sach> getList() {
-        return list;
     }
 
     public PhieuMuon() {
@@ -41,6 +38,9 @@ public class PhieuMuon {
         return ma;
     }
 
+    public Map<String, Sach> getSach() {
+        return sach;
+    }
 
     public User getUser() {
         return user;
