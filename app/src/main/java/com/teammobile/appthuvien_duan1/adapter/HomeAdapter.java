@@ -82,6 +82,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
                         }
                     }
                     if (!flag){
+                        Toast.makeText(context, ""+sach.getMaSach(), Toast.LENGTH_SHORT).show();
                         cart.addCart(sach);
                     }
                 }

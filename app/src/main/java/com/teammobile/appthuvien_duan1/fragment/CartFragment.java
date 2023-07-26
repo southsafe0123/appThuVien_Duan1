@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.teammobile.appthuvien_duan1.R;
 import com.teammobile.appthuvien_duan1.adapter.CartAdapter;
 import com.teammobile.appthuvien_duan1.adapter.HomeAdapter;
+import com.teammobile.appthuvien_duan1.dao.CartDAO;
 import com.teammobile.appthuvien_duan1.dao.PhieuMuonDAO;
 import com.teammobile.appthuvien_duan1.interfaces.IGioHang;
 import com.teammobile.appthuvien_duan1.model.Cart;
@@ -44,16 +45,25 @@ public class CartFragment extends Fragment {
         recyclerView = view.findViewById(R.id.RvCart);
 
         btnSumbit=view.findViewById(R.id.btnSumbit);
-        Cart cart = Cart.getInstance();
         khoiTao();
         ArrayList<Sach> list = cart.getList();
         Map<String,Sach> map=new HashMap<>();
+
+        CartDAO cartDAO = new CartDAO();
+        ArrayList<Sach> list = cartDAO.defaultSoluong();
+        ArrayList<Integer> maxSoluong = Cart.getInstance().getMaxSoLuong();
+
+
+
+ 
         if(list==null){
 
         } else {
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerView.setAdapter(new CartAdapter(list,getContext()));
 
+
+            recyclerView.setAdapter(new CartAdapter(list,maxSoluong,getContext()));
         }
         btnSumbit.setOnClickListener(new View.OnClickListener() {
             @Override

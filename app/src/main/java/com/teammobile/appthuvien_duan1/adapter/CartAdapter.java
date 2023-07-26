@@ -15,26 +15,25 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.teammobile.appthuvien_duan1.R;
+import com.teammobile.appthuvien_duan1.dao.CartDAO;
+import com.teammobile.appthuvien_duan1.dao.SachDAO;
+import com.teammobile.appthuvien_duan1.model.Cart;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
 import java.util.ArrayList;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 	private ArrayList<Sach> list;
+	private ArrayList<Integer> maxSoluong;
 	private Context context;
 
-	private ArrayList<Integer> soluonglist;
 
-	private int soluong;
-
-	public CartAdapter(ArrayList<Sach> list, Context context) {
+	public CartAdapter(ArrayList<Sach> list, ArrayList<Integer> maxSoluong,Context context) {
 		this.list = list;
 		this.context = context;
-		soluonglist = new ArrayList<>();
-		for(int i = 0;list.size()>i;i++){
-			soluonglist.add(1);
-		}
+		this.maxSoluong = maxSoluong;
 	}
+
 
 
 
@@ -52,8 +51,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 		holder.txtGia.setText("" + list.get(holder.getAdapterPosition()).getGiaThue());
 		holder.txtTacGia.setText(list.get(holder.getAdapterPosition()).getTacGia().getTenTacGia());
 		holder.txtTheLoai.setText(list.get(holder.getAdapterPosition()).getLoai().getTenLoai());
-		soluong = soluonglist.get(holder.getAdapterPosition());
-		holder.txtSoluong.setText(""+soluong);
+		holder.txtSoluong.setText(""+list.get(holder.getAdapterPosition()).getSoLuong());
 
 		holder.ivXoa.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -66,16 +64,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 			@Override
 			public void onClick(View v) {
 				int vitribam = holder.getAdapterPosition();
-				int soluong = soluonglist.get(vitribam);
-
-				if(soluong>2){
-					Toast.makeText(context, "Bạn đã đạt giới hạn số lượng cho thuê", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, ""+maxSoluong.get(holder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
+				if(list.get(holder.getAdapterPosition()).getSoLuong()==maxSoluong.get(holder.getAdapterPosition())){
+					Toast.makeText(context, "Bạn đã đạt giới hạn số lượng sách có", Toast.LENGTH_SHORT).show();
 				} else{
+					Sach sach = list.get(holder.getAdapterPosition());
+					int soluong = sach.getSoLuong();
 					soluong++;
-					soluonglist.set(vitribam,soluong);
-					notifyDataSetChanged();
+					sach.setSoLuong(soluong);
+					list.set(vitribam,sach);
+					loadData();
 				}
-
 			}
 		});
 
@@ -83,14 +82,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 			@Override
 			public void onClick(View v) {
 				int vitribam = holder.getAdapterPosition();
-				int soluong = soluonglist.get(vitribam);
-
-				if(soluong==1){
+				if(list.get(holder.getAdapterPosition()).getSoLuong()==1){
 					canhbaoXoa(holder);
+					Toast.makeText(context, "Bạn đã đạt giới hạn số lượng cho thuê", Toast.LENGTH_SHORT).show();
 				} else{
+					Sach sach = list.get(holder.getAdapterPosition());
+					int soluong = sach.getSoLuong();
 					soluong--;
-					soluonglist.set(vitribam,soluong);
-					notifyDataSetChanged();
+					sach.setSoLuong(soluong);
+					list.set(vitribam,sach);
+					loadData();
 				}
 			}
 		});
@@ -132,8 +133,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				list.remove(holder.getAdapterPosition());
-				soluonglist.remove(holder.getAdapterPosition());
-				notifyDataSetChanged();
+				maxSoluong.remove(holder.getAdapterPosition());
+				loadData();
 			}
 		});
 
@@ -146,6 +147,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
 		AlertDialog alertDialog = builder.create();
 		alertDialog.show();
+	}
+
+	public void loadData(){
+		Cart cart = Cart.getInstance();
+		cart.updateList(list,maxSoluong);
+		notifyDataSetChanged();
 	}
 }
 

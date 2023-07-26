@@ -32,23 +32,23 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (item.getItemId()){
                     default:
-                        Toast.makeText(MainActivity.this, "default", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MainActivity.this, "default", Toast.LENGTH_SHORT).show();
                         loadFragment(new HomeFragment());
                         break;
                     case R.id.item_home:
-                        Toast.makeText(MainActivity.this, "item_home", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MainActivity.this, "item_home", Toast.LENGTH_SHORT).show();
                         loadFragment(new HomeFragment());
                         break;
                     case R.id.item_giohang:
-                        Toast.makeText(MainActivity.this, "item_giohang", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MainActivity.this, "item_giohang", Toast.LENGTH_SHORT).show();
                         loadFragment(new CartFragment());
                         break;
                     case R.id.item_search:
                         loadFragment(new SearchFragment());
-                        Toast.makeText(MainActivity.this, "item_search", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MainActivity.this, "item_search", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.item_user:
-                        Toast.makeText(MainActivity.this, "item_user", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MainActivity.this, "item_user", Toast.LENGTH_SHORT).show();
                         loadFragment(new UserFragment());
                         break;
                 }
