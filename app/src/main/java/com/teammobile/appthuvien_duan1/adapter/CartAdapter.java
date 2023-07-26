@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.teammobile.appthuvien_duan1.R;
 import com.teammobile.appthuvien_duan1.dao.CartDAO;
 import com.teammobile.appthuvien_duan1.dao.SachDAO;
+import com.teammobile.appthuvien_duan1.fragment.CartFragment;
 import com.teammobile.appthuvien_duan1.model.Cart;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
@@ -27,8 +28,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 	private ArrayList<Integer> maxSoluong;
 	private Context context;
 
+	private TongTien tongTien;
 
-	public CartAdapter(ArrayList<Sach> list, ArrayList<Integer> maxSoluong,Context context) {
+	int tongGiohang = 0;
+
+
+	public void setTongTien(TongTien tongTien) {
+		this.tongTien = tongTien;
+	}
+
+	public CartAdapter(ArrayList<Sach> list, ArrayList<Integer> maxSoluong, Context context) {
 		this.list = list;
 		this.context = context;
 		this.maxSoluong = maxSoluong;
@@ -64,13 +73,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 			@Override
 			public void onClick(View v) {
 				int vitribam = holder.getAdapterPosition();
-				Toast.makeText(context, ""+maxSoluong.get(holder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
+//				Toast.makeText(context, ""+maxSoluong.get(holder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
 				if(list.get(holder.getAdapterPosition()).getSoLuong()==maxSoluong.get(holder.getAdapterPosition())){
 					Toast.makeText(context, "Bạn đã đạt giới hạn số lượng sách có", Toast.LENGTH_SHORT).show();
 				} else{
 					Sach sach = list.get(holder.getAdapterPosition());
 					int soluong = sach.getSoLuong();
 					soluong++;
+
 					sach.setSoLuong(soluong);
 					list.set(vitribam,sach);
 					loadData();
@@ -84,7 +94,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 				int vitribam = holder.getAdapterPosition();
 				if(list.get(holder.getAdapterPosition()).getSoLuong()==1){
 					canhbaoXoa(holder);
-					Toast.makeText(context, "Bạn đã đạt giới hạn số lượng cho thuê", Toast.LENGTH_SHORT).show();
 				} else{
 					Sach sach = list.get(holder.getAdapterPosition());
 					int soluong = sach.getSoLuong();
@@ -95,6 +104,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 				}
 			}
 		});
+
 
 
 
@@ -149,7 +159,24 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 		alertDialog.show();
 	}
 
+	public interface TongTien{
+		void thayDoiTongTien(int tongTien);
+	}
+
+
+
+
+
+
+
 	public void loadData(){
+		tongGiohang = 0;
+		for(Sach sach: list){
+			tongGiohang += sach.getGiaThue()*sach.getSoLuong();
+		}
+		if(tongTien!=null){
+			tongTien.thayDoiTongTien(tongGiohang);
+		}
 		Cart cart = Cart.getInstance();
 		cart.updateList(list,maxSoluong);
 		notifyDataSetChanged();

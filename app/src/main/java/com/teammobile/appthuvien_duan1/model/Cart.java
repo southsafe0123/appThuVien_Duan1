@@ -1,5 +1,7 @@
 package com.teammobile.appthuvien_duan1.model;
 
+import com.teammobile.appthuvien_duan1.dao.CartDAO;
+
 import java.util.ArrayList;
 
 public class Cart {

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,8 @@ import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 import com.teammobile.appthuvien_duan1.model.Sach;
 import com.teammobile.appthuvien_duan1.model.User;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +36,7 @@ import java.util.Map;
 public class CartFragment extends Fragment {
     private HomeAdapter homeAdapter;
     private RecyclerView recyclerView;
+    private TextView txtTongtien;
     private Button btnSumbit;
     private User user;
     private PhieuMuonDAO phieuMuonDAO;
@@ -45,26 +49,37 @@ public class CartFragment extends Fragment {
         recyclerView = view.findViewById(R.id.RvCart);
 
         btnSumbit=view.findViewById(R.id.btnSumbit);
+        txtTongtien = view.findViewById(R.id.txtTongtien);
+
         khoiTao();
         //ArrayList<Sach> list = cart.getList();
         Map<String,Sach> map=new HashMap<>();
 
         CartDAO cartDAO = new CartDAO();
-        ArrayList<Sach> list = cartDAO.defaultSoluong();
+        ArrayList<Sach> list = cartDAO.setSoluong1();
         ArrayList<Integer> maxSoluong = Cart.getInstance().getMaxSoLuong();
-
+        CartAdapter adapter = new CartAdapter(list,maxSoluong,context);
 
 
  
         if(list==null){
 
         } else {
+            int tongGiohang = 0;
+            for(Sach sach: list){
+                tongGiohang += sach.getGiaThue()*sach.getSoLuong();
+            }
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            //recyclerView.setAdapter(new CartAdapter(list,getContext()));
 
-
-            recyclerView.setAdapter(new CartAdapter(list,maxSoluong,getContext()));
+            recyclerView.setAdapter(adapter);
+            txtTongtien.setText("Tổng đơn hàng: "+tongGiohang+" VNĐ");
         }
+        adapter.setTongTien(new CartAdapter.TongTien() {
+            @Override
+            public void thayDoiTongTien(int tongTien) {
+                txtTongtien.setText("Tổng đơn hàng: " + tongTien + " VNĐ");
+            }
+        });
         btnSumbit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +87,10 @@ public class CartFragment extends Fragment {
                     Toast.makeText(context, "Tài khoản ko tồn tại", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(list!=null){
+
+        
+                if(list!=null || !list.isEmpty()){
+
                     for(Sach sach: list){
                         Sach item=new Sach(sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach(),sach.getIsActive());
                         map.put(sach.getMaSach(),item);
@@ -94,6 +112,9 @@ public class CartFragment extends Fragment {
         });
 
 
+
+
+
         return view;
     }
    private void khoiTao()
@@ -109,4 +130,6 @@ public class CartFragment extends Fragment {
        user=new User(uid,email,username,password,role,isActive);
        context=getContext();
    }
+
+
 }
