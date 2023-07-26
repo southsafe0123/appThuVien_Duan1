@@ -46,7 +46,7 @@ public class CartFragment extends Fragment {
 
         btnSumbit=view.findViewById(R.id.btnSumbit);
         khoiTao();
-        ArrayList<Sach> list = cart.getList();
+        //ArrayList<Sach> list = cart.getList();
         Map<String,Sach> map=new HashMap<>();
 
         CartDAO cartDAO = new CartDAO();
@@ -60,7 +60,7 @@ public class CartFragment extends Fragment {
 
         } else {
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            recyclerView.setAdapter(new CartAdapter(list,getContext()));
+            //recyclerView.setAdapter(new CartAdapter(list,getContext()));
 
 
             recyclerView.setAdapter(new CartAdapter(list,maxSoluong,getContext()));

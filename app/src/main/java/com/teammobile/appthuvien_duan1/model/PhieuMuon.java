@@ -2,10 +2,11 @@ package com.teammobile.appthuvien_duan1.model;
 
 import com.teammobile.appthuvien_duan1.dao.UserDAO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class PhieuMuon {
+public class PhieuMuon implements Serializable {
     private String ma;
     Map<String,Sach> sach;
     private User user;
@@ -61,4 +62,5 @@ public class PhieuMuon {
     public int getTrangThai() {
         return trangThai;
     }
+
 }

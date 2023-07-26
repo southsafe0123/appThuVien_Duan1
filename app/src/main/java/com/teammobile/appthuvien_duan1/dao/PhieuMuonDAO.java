@@ -90,6 +90,21 @@ public class PhieuMuonDAO {
             }
         });
     }
+    public void update(PhieuMuon pm,IUpdate iUpdate)
+    {
+        PhieuMuon pm1=new PhieuMuon(pm.getSach(),pm.getUser(),pm.getNgayTao(), pm.getNgayTra(), pm.getTongTien(),pm.getTrangThai());
+        reference.child(pm.getMa()).setValue(pm1).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                iUpdate.onCallBack(true);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                iUpdate.onCallBack(false);
+            }
+        });
+    }
     public interface InsertCallBack
     {
         public void onCallBack(Boolean check);
@@ -105,5 +120,9 @@ public class PhieuMuonDAO {
     public interface IGetPM
     {
         public void onCallBack(Map<String,Sach> list);
+    }
+    public interface IUpdate
+    {
+        public void onCallBack(Boolean check);
     }
 }

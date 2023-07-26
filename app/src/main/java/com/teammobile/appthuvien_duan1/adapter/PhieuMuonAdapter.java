@@ -1,6 +1,5 @@
 package com.teammobile.appthuvien_duan1.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,13 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.teammobile.appthuvien_duan1.R;
 import com.teammobile.appthuvien_duan1.activity.QuanLyActivity;
-import com.teammobile.appthuvien_duan1.fragment.ChitietPmFragment;
-import com.teammobile.appthuvien_duan1.fragment.QLPhieuMuonFragment;
+import com.teammobile.appthuvien_duan1.fragment.AdminPmFragment;
 import com.teammobile.appthuvien_duan1.model.PhieuMuon;
-import com.teammobile.appthuvien_duan1.model.Sach;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.ViewHolder> {
     private Context context;
@@ -56,9 +52,10 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.View
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ChitietPmFragment fragment=new ChitietPmFragment();
+                AdminPmFragment fragment=new AdminPmFragment();
                 Bundle bundle=new Bundle();
-                bundle.putString("maPM",list.get(holder.getAdapterPosition()).getMa());
+                bundle.putSerializable("pm",list.get(position));
+                activity.setTrangThai(list.get(position).getTrangThai());
                 fragment.setArguments(bundle);
                 activity.loadFragment(fragment);
 

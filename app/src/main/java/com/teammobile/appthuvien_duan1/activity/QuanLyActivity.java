@@ -35,6 +35,9 @@ public class QuanLyActivity extends AppCompatActivity {
     private SearchView searchView;
     private ActionBar actionBar;
     private SachDAO sachDAO;
+    private int trangThai=-1;
+    private int tongGia=0;
+    private Map<String,Sach> stock;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,23 @@ public class QuanLyActivity extends AppCompatActivity {
         ft.addToBackStack(null);
         ft.commit();
     }
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    public Map<String, Sach> getStock() {
+        return stock;
+    }
+
+    public void setStock(Map<String, Sach> stock) {
+        this.stock = stock;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater=getMenuInflater();
@@ -113,5 +133,5 @@ public class QuanLyActivity extends AppCompatActivity {
         }
         return true;
     }
-   
+
 }
