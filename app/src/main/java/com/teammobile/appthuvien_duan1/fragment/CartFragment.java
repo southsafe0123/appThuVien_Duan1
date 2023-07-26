@@ -51,7 +51,7 @@ public class CartFragment extends Fragment {
 
         khoiTao();
         CartDAO cartDAO = new CartDAO();
-        ArrayList<Sach> list = cartDAO.defaultSoluong();
+        ArrayList<Sach> list = cartDAO.setSoluong1();
         ArrayList<Integer> maxSoluong = Cart.getInstance().getMaxSoLuong();
         CartAdapter adapter = new CartAdapter(list,maxSoluong,context);
 
@@ -80,7 +80,7 @@ public class CartFragment extends Fragment {
                     Toast.makeText(context, "Tài khoản ko tồn tại", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(list!=null){
+                if(list!=null || !list.isEmpty()){
                     PhieuMuon pm=new PhieuMuon(list,user,"25/7/2023","25/7/2023",0,0);
 
                     phieuMuonDAO.insert(pm, new PhieuMuonDAO.InsertCallBack() {
