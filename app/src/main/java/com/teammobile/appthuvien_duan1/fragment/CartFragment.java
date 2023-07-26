@@ -46,7 +46,7 @@ public class CartFragment extends Fragment {
         khoiTao();
         CartDAO cartDAO = new CartDAO();
         ArrayList<Sach> list = cartDAO.defaultSoluong();
-        ArrayList<Sach> listSach = Cart.getInstance().getListSach();
+        ArrayList<Integer> maxSoluong = Cart.getInstance().getMaxSoLuong();
 
 
 
@@ -54,7 +54,7 @@ public class CartFragment extends Fragment {
 
         } else {
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            recyclerView.setAdapter(new CartAdapter(list,listSach,getContext()));
+            recyclerView.setAdapter(new CartAdapter(list,maxSoluong,getContext()));
         }
         btnSumbit.setOnClickListener(new View.OnClickListener() {
             @Override

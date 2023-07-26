@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Cart {
 
-	private ArrayList<Sach> listSach;
+
 	private boolean check;
 	public boolean kiemtraThayDoi(){
 		return check;
@@ -12,9 +12,10 @@ public class Cart {
 
 	private static Cart instance;
 	private ArrayList<Sach> list;
+	private ArrayList<Integer> maxSoluong;
 
 	private Cart(){
-		listSach = new ArrayList<>();
+		maxSoluong = new ArrayList<>();
 		list = new ArrayList<>();
 	}
 
@@ -29,17 +30,19 @@ public class Cart {
 		return list;
 	}
 
-	public ArrayList<Sach> getListSach() {
-		return listSach;
+	public ArrayList<Integer> getMaxSoLuong() {
+		return maxSoluong;
 	}
 
-	public void updateList(ArrayList<Sach> list){
+	public void updateList(ArrayList<Sach> list,ArrayList<Integer> maxSoluong){
 		this.list = list;
+		this.maxSoluong = maxSoluong;
 		check = true;
 	}
 
 	public void addCart(Sach sach) {
 		list.add(sach);
-		listSach.add(sach);
+		maxSoluong.add(sach.getSoLuong());
+		check = false;
 	}
 }

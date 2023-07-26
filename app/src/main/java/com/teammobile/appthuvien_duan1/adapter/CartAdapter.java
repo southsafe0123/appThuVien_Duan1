@@ -24,14 +24,14 @@ import java.util.ArrayList;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 	private ArrayList<Sach> list;
-	private ArrayList<Sach> listSach;
+	private ArrayList<Integer> maxSoluong;
 	private Context context;
 
 
-	public CartAdapter(ArrayList<Sach> list, ArrayList<Sach> listSach,Context context) {
+	public CartAdapter(ArrayList<Sach> list, ArrayList<Integer> maxSoluong,Context context) {
 		this.list = list;
 		this.context = context;
-		this.listSach = listSach;
+		this.maxSoluong = maxSoluong;
 	}
 
 
@@ -64,7 +64,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 			@Override
 			public void onClick(View v) {
 				int vitribam = holder.getAdapterPosition();
-				if(list.get(holder.getAdapterPosition()).getSoLuong()>listSach.get(holder.getAdapterPosition()).getSoLuong()){
+				Toast.makeText(context, ""+maxSoluong.get(holder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
+				if(list.get(holder.getAdapterPosition()).getSoLuong()==maxSoluong.get(holder.getAdapterPosition())){
 					Toast.makeText(context, "Bạn đã đạt giới hạn số lượng sách có", Toast.LENGTH_SHORT).show();
 				} else{
 					Sach sach = list.get(holder.getAdapterPosition());
@@ -132,7 +133,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				list.remove(holder.getAdapterPosition());
-				listSach.remove(holder.getAdapterPosition());
+				maxSoluong.remove(holder.getAdapterPosition());
 				loadData();
 			}
 		});
@@ -150,7 +151,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
 	public void loadData(){
 		Cart cart = Cart.getInstance();
-		cart.updateList(list);
+		cart.updateList(list,maxSoluong);
 		notifyDataSetChanged();
 	}
 }
