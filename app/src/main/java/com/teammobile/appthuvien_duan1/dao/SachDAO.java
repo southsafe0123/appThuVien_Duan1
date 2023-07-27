@@ -125,9 +125,20 @@ public class SachDAO {
         });
 
     }
-    public void getSome(Map<String,Sach> map)
+    public void update(String ma,int sl,IUpdate iUpdate)
     {
-
+        //Sach sach1=new Sach(sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach(),sach.getIsActive());
+        reference.child(ma+"/soLuong").setValue(sl).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                iUpdate.onCallBack(true);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                iUpdate.onCallBack(false);
+            }
+        });
     }
     public interface IGetSLSachByLoai
     {
@@ -138,6 +149,10 @@ public class SachDAO {
         public void onCallBack(ArrayList<Sach> list);
     }
     public interface DeleteCallBack
+    {
+        public void onCallBack(Boolean check);
+    }
+    public interface IUpdate
     {
         public void onCallBack(Boolean check);
     }

@@ -80,7 +80,26 @@ public class AdminPmFragment extends Fragment {
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "ok ne", Toast.LENGTH_SHORT).show();
+                int tt=pm.getTrangThai();
+                switch (tt){
+                    case 0:
+                    {
+                        pm.setTrangThai(2);
+                        updatePM();
+                    }
+                    case 1:
+                    {
+                        pm.setTrangThai(2);
+                        updatePM();
+                        break;
+                    }
+                    case 2:{
+                        thanhToan();
+
+                        break;
+                    }
+                    default:
+                }
             }
         });
         fetchingData();
@@ -134,5 +153,35 @@ public class AdminPmFragment extends Fragment {
                 linearLayoutManager.getOrientation());
         rcv.addItemDecoration(dividerItemDecoration);
         rcv.setAdapter(adapter);
+    }
+    public void thanhToan()
+    {
+        for(Sach sach: myList){
+            int mx=activity.getStock().get(sach.getMaSach()).getSoLuong();
+            int buy=sach.getSoLuong();
+            if(mx>=buy){
+                sachDAO.update(sach.getMaSach(),mx-buy, new SachDAO.IUpdate() {
+                    @Override
+                    public void onCallBack(Boolean check) {
+                        if(check){
+                            Toast.makeText(context, "Thanh toán thành công!", Toast.LENGTH_SHORT).show();
+                            pm.setTrangThai(3);
+                            updatePM();
+                        }
+                    }
+                });
+            }
+
+        }
+    }
+    public void updatePM()
+    {
+        phieuMuonDAO.update(pm, new PhieuMuonDAO.IUpdate() {
+            @Override
+            public void onCallBack(Boolean check) {
+                if(check)
+                    Toast.makeText(context, "Update hóa đơn thành công!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

@@ -97,7 +97,7 @@ public class CartFragment extends Fragment {
                         Sach item=new Sach(sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach(),sach.getIsActive());
                         map.put(sach.getMaSach(),item);
                     }
-                    String timeStamp = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
+                    String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
                     PhieuMuon pm=new PhieuMuon(map,user,timeStamp,"N/A",tongGiohang,0);
 
                     phieuMuonDAO.insert(pm, new PhieuMuonDAO.InsertCallBack() {

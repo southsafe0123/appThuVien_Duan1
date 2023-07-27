@@ -38,6 +38,28 @@ public class PhieuMuonUserAdapter extends RecyclerView.Adapter<PhieuMuonUserAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        String tt="";
+        switch (list.get(position).getTrangThai())
+        {
+            case 0:
+                tt="Chờ xác nhận";
+                break;
+            case 1:
+                tt="Hóa đơn được thay đổi";
+                break;
+            case 2:
+                tt="Xác nhận(nhận sách tại thư viện) ";
+                break;
+            case 3:
+                tt="Đã nhận sách";
+                break;
+            default:
+
+        }
+        holder.tvTrangThai.setText("Trạng thái: "+tt);
+        holder.tvNgay.setText("Ngày thuê: "+list.get(position).getNgayTao());
+        holder.tvMaPM.setText("Mã hóa đơn: "+list.get(position).getMa());
+        holder.tvTongTien.setText("Tổng tiền: "+list.get(position).getTongTien()+" VNĐ");
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

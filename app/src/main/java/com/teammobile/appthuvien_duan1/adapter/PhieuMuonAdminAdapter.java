@@ -48,7 +48,12 @@ public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAd
             case 1:
                 tt="Bị thay đổi";
                 break;
-
+            case 2:
+                tt="Đã xác nhận";
+                break;
+            case 3:
+                tt="Thanh toán thành công và giao sách";
+                break;
             default:
 
         }
