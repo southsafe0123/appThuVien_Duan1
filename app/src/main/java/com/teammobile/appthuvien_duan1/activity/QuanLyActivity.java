@@ -59,7 +59,7 @@ public class QuanLyActivity extends AppCompatActivity {
         FragmentManager fm=getSupportFragmentManager();
         FragmentTransaction ft=fm.beginTransaction();
         ft.setCustomAnimations(R.anim.slide_up,0);
-        ft.replace(R.id.viewFragmentQuanLy,fragment);
+        ft.replace(R.id.viewFragmentQuanLy,fragment,"fragment_menu");
         ft.addToBackStack(null);
         ft.commit();
     }
@@ -134,4 +134,12 @@ public class QuanLyActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        FragmentManager fm=getSupportFragmentManager();
+        if(fm.findFragmentByTag("fragment_menu")!=null&&fm.findFragmentByTag("fragment_menu").isVisible()){
+            finish();
+        }
+    }
 }

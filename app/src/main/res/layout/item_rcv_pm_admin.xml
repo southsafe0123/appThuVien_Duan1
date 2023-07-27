@@ -1,36 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="15dp"
     android:layout_height="150dp">
     <LinearLayout
         android:orientation="horizontal"
         android:weightSum="6"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ImageView
-            android:layout_weight="1"
-            android:id="@+id/ivHinh"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"/>
+
         <RelativeLayout
-            android:padding="5dp"
-            android:layout_weight="3"
+            android:padding="10dp"
+            android:layout_weight="5"
             android:layout_width="0dp"
             android:layout_height="match_parent">
             <TextView
+                android:id="@+id/tvNgay"
+                android:text="Ngày: "
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_below="@id/tvNgay"
                 android:id="@+id/tvMa"
-                android:textSize="20sp"
                 android:text="Mã hóa đơn"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_below="@+id/tvMa"
+                android:text="Tên khách hàng:"
+                android:id="@+id/tvTenKH"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:layout_marginTop="10dp"
-                android:layout_below="@+id/tvMa"
+                android:layout_below="@+id/tvTenKH"
                 android:id="@+id/tvTT"
-                android:textSize="20sp"
                 android:text="Trạng thái: "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_below="@+id/tvTT"
+                android:text="Tổng tiền: "
+                android:id="@+id/tvTongTien"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
         </RelativeLayout>
 
         <ImageView
@@ -40,12 +59,5 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:src="@drawable/baseline_info_24" />
-        <ImageView
-            android:layout_gravity="center"
-            android:src="@drawable/baseline_delete_24"
-            android:layout_weight="1"
-            android:id="@+id/btnDelete"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

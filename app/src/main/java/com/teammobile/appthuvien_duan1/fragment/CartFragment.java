@@ -29,7 +29,9 @@ import com.teammobile.appthuvien_duan1.model.User;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,6 +44,7 @@ public class CartFragment extends Fragment {
     private PhieuMuonDAO phieuMuonDAO;
     private SharedPreferences sharedPreferences;
     private Context context;
+    private int tongGiohang;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -65,12 +68,11 @@ public class CartFragment extends Fragment {
         if(list==null){
 
         } else {
-            int tongGiohang = 0;
+            tongGiohang = 0;
             for(Sach sach: list){
                 tongGiohang += sach.getGiaThue()*sach.getSoLuong();
             }
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
             recyclerView.setAdapter(adapter);
             txtTongtien.setText("Tổng đơn hàng: "+tongGiohang+" VNĐ");
         }
@@ -95,7 +97,8 @@ public class CartFragment extends Fragment {
                         Sach item=new Sach(sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach(),sach.getIsActive());
                         map.put(sach.getMaSach(),item);
                     }
-                    PhieuMuon pm=new PhieuMuon(map,user,"25/7/2023","25/7/2023",0,0);
+                    String timeStamp = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
+                    PhieuMuon pm=new PhieuMuon(map,user,timeStamp,"N/A",tongGiohang,0);
 
                     phieuMuonDAO.insert(pm, new PhieuMuonDAO.InsertCallBack() {
                         @Override

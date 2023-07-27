@@ -1,5 +1,7 @@
 package com.teammobile.appthuvien_duan1.dao;
 
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -11,6 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 import com.teammobile.appthuvien_duan1.model.Sach;
+import com.teammobile.appthuvien_duan1.model.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,25 +66,30 @@ public class PhieuMuonDAO {
             }
         });
     }
-    public void update(Map<String,Sach> map,UpdateCallBack updateCallBack)
+    public void update(PhieuMuon phieuMuon,UpdateCallBack updateCallBack)
     {
-        reference.child("sach").setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+        PhieuMuon pm=new PhieuMuon(phieuMuon.getSach(),phieuMuon.getUser(),phieuMuon.getNgayTao(), phieuMuon.getNgayTra(), phieuMuon.getTongTien(), phieuMuon.getTrangThai());
+
+        reference.child(phieuMuon.getMa()).setValue(pm).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 updateCallBack.onCallBack(true);
             }
         });
     }
-    public void getPM(String maPM,IGetPM iGetPM)
+    public void getPM(String uid,IGetPM iGetPM)
     {
-        reference.child(maPM+"/sach").addValueEventListener(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Map<String,Sach> map=new HashMap<>();
+                list.clear();
                 for(DataSnapshot data: snapshot.getChildren()){
-                    map.put(data.getKey(),data.getValue(Sach.class));
+                    PhieuMuon pm=data.getValue(PhieuMuon.class);
+
+                    if(pm.getTrangThai()>=0&&pm.getUser().getMa().equals(uid))
+                        list.add(new PhieuMuon(data.getKey(),pm.getSach(),pm.getUser(),pm.getNgayTao(),pm.getNgayTra(),pm.getTongTien(), pm.getTrangThai()));
                 }
-                iGetPM.onCallBack(map);
+                iGetPM.onCallBack(list);
             }
 
             @Override
@@ -119,7 +127,7 @@ public class PhieuMuonDAO {
     }
     public interface IGetPM
     {
-        public void onCallBack(Map<String,Sach> list);
+        public void onCallBack(ArrayList<PhieuMuon> list);
     }
     public interface IUpdate
     {

@@ -1,6 +1,8 @@
 package com.teammobile.appthuvien_duan1.model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String ma;
     private String email;
     private String username;

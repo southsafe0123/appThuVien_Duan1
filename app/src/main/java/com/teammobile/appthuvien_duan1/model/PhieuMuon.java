@@ -63,4 +63,31 @@ public class PhieuMuon implements Serializable {
         return trangThai;
     }
 
+    public void setMa(String ma) {
+        this.ma = ma;
+    }
+
+    public void setSach(Map<String, Sach> sach) {
+        this.sach = sach;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setNgayTao(String ngayTao) {
+        this.ngayTao = ngayTao;
+    }
+
+    public void setNgayTra(String ngayTra) {
+        this.ngayTra = ngayTra;
+    }
+
+    public void setTongTien(int tongTien) {
+        this.tongTien = tongTien;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
 }

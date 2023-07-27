@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,7 +35,8 @@ public class AdminPmFragment extends Fragment {
     private RecyclerView rcv;
     private Cart2Adapter adapter;
     private String maPM="N/A";
-    private Button btnSubmit;
+    private Button btnSubmit,btnAccept;
+    
     private SachDAO sachDAO;
     private PhieuMuonDAO phieuMuonDAO;
     private ArrayList<Sach> myList;
@@ -46,25 +48,39 @@ public class AdminPmFragment extends Fragment {
         view=LayoutInflater.from(context).inflate( R.layout.fragment_admin_pm,container,false);
         rcv=view.findViewById(R.id.rcv);
         btnSubmit=view.findViewById(R.id.btnSubmit);
+        btnAccept=view.findViewById(R.id.btnAccept);
+        
+        if(pm.getTrangThai()>0){
+            btnSubmit.setVisibility(View.GONE);
+        }
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Map<String,Sach> map=new HashMap<>();
-                for(Sach item: myList){
-                    Sach sach=new Sach(item.getLoai(),item.getTacGia(),item.getTenSach(),item.getHinhAnh(),item.getSoLuong(),item.getGiaThue(),item.getVitridesach(),item.getIsActive());
-                    map.put(item.getMaSach(),sach);
-                }
-                PhieuMuon pm1=new PhieuMuon(pm.getMa(),map,pm.getUser(),pm.getNgayTao(),pm.getNgayTra(),pm.getTongTien(), pm.getTrangThai());
-                phieuMuonDAO.update(pm1, new PhieuMuonDAO.IUpdate() {
-                    @Override
-                    public void onCallBack(Boolean check) {
-                        if(check)
-                            Toast.makeText(context, "Cập nhật phiếu mượn thành công!", Toast.LENGTH_SHORT).show();
-                        else
-                            Toast.makeText(context, "Cập nhật phiếu mượn thất bại!", Toast.LENGTH_SHORT).show();
-
+                if(pm.getTrangThai()==0){
+                    Map<String,Sach> map=new HashMap<>();
+                    for(Sach item: myList){
+                        Sach sach=new Sach(item.getLoai(),item.getTacGia(),item.getTenSach(),item.getHinhAnh(),item.getSoLuong(),item.getGiaThue(),item.getVitridesach(),item.getIsActive());
+                        map.put(item.getMaSach(),sach);
                     }
-                });
+                    PhieuMuon pm1=new PhieuMuon(pm.getMa(),map,pm.getUser(),pm.getNgayTao(),pm.getNgayTra(),pm.getTongTien(), 1);
+                    phieuMuonDAO.update(pm1, new PhieuMuonDAO.IUpdate() {
+                        @Override
+                        public void onCallBack(Boolean check) {
+                            if(check)
+                                Toast.makeText(context, "Cập nhật phiếu mượn thành công!", Toast.LENGTH_SHORT).show();
+                            else
+                                Toast.makeText(context, "Cập nhật phiếu mượn thất bại!", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                }
+
+            }
+        });
+        btnAccept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "ok ne", Toast.LENGTH_SHORT).show();
             }
         });
         fetchingData();
@@ -79,7 +95,7 @@ public class AdminPmFragment extends Fragment {
         Bundle bundle=getArguments();
         phieuMuonDAO=new PhieuMuonDAO();
         pm= (PhieuMuon) bundle.getSerializable("pm");
-        
+
     }
     public void fetchingData()
     {
@@ -114,6 +130,9 @@ public class AdminPmFragment extends Fragment {
         }
         adapter=new Cart2Adapter(context,myList);
         rcv.setLayoutManager(linearLayoutManager);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rcv.getContext(),
+                linearLayoutManager.getOrientation());
+        rcv.addItemDecoration(dividerItemDecoration);
         rcv.setAdapter(adapter);
     }
 }
