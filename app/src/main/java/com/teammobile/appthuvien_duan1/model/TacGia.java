@@ -2,9 +2,10 @@ package com.teammobile.appthuvien_duan1.model;
 
 import androidx.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TacGia {
+public class TacGia implements Serializable {
     private String maTG;
     private String tenTacGia;
     private int isActive;

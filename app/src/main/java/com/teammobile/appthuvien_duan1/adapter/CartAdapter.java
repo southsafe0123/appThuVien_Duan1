@@ -85,7 +85,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 			@Override
 			public void onClick(View v) {
 				int vitribam = holder.getAdapterPosition();
-				Toast.makeText(context, ""+maxSoluong.get(holder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
+//				Toast.makeText(context, ""+maxSoluong.get(holder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
 				if(list.get(holder.getAdapterPosition()).getSoLuong()==maxSoluong.get(holder.getAdapterPosition())){
 					Toast.makeText(context, "Bạn đã đạt giới hạn số lượng sách có", Toast.LENGTH_SHORT).show();
 				} else{
@@ -106,7 +106,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 				int vitribam = holder.getAdapterPosition();
 				if(list.get(holder.getAdapterPosition()).getSoLuong()==1){
 					canhbaoXoa(holder);
-					Toast.makeText(context, "Bạn đã đạt giới hạn số lượng cho thuê", Toast.LENGTH_SHORT).show();
 				} else{
 					Sach sach = list.get(holder.getAdapterPosition());
 					int soluong = sach.getSoLuong();

@@ -18,6 +18,7 @@ import com.teammobile.appthuvien_duan1.interfaces.ISachDAO;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class SachDAO {
     FirebaseDatabase mDatabase;
@@ -124,6 +125,21 @@ public class SachDAO {
         });
 
     }
+    public void update(String ma,int sl,IUpdate iUpdate)
+    {
+        //Sach sach1=new Sach(sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach(),sach.getIsActive());
+        reference.child(ma+"/soLuong").setValue(sl).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                iUpdate.onCallBack(true);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                iUpdate.onCallBack(false);
+            }
+        });
+    }
     public interface IGetSLSachByLoai
     {
         public void onCallBack(ArrayList<Sach> list);
@@ -133,6 +149,10 @@ public class SachDAO {
         public void onCallBack(ArrayList<Sach> list);
     }
     public interface DeleteCallBack
+    {
+        public void onCallBack(Boolean check);
+    }
+    public interface IUpdate
     {
         public void onCallBack(Boolean check);
     }

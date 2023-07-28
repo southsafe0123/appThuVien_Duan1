@@ -31,7 +31,11 @@ import com.teammobile.appthuvien_duan1.model.User;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CartFragment extends Fragment implements CartAdapter.TongTien {
     private HomeAdapter homeAdapter;
@@ -42,6 +46,7 @@ public class CartFragment extends Fragment implements CartAdapter.TongTien {
     private PhieuMuonDAO phieuMuonDAO;
     private SharedPreferences sharedPreferences;
     private Context context;
+    private int tongGiohang;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,16 +57,20 @@ public class CartFragment extends Fragment implements CartAdapter.TongTien {
         txtTongtien = view.findViewById(R.id.txtTongtien);
 
         khoiTao();
+        //ArrayList<Sach> list = cart.getList();
+        Map<String,Sach> map=new HashMap<>();
+
         CartDAO cartDAO = new CartDAO();
-        ArrayList<Sach> list = cartDAO.defaultSoluong();
+        ArrayList<Sach> list = cartDAO.setSoluong1();
         ArrayList<Integer> maxSoluong = Cart.getInstance().getMaxSoLuong();
         CartAdapter adapter = new CartAdapter(list,maxSoluong,context);
 
 
+ 
         if(list==null){
 
         } else {
-            int tongGiohang = 0;
+            tongGiohang = 0;
             for(Sach sach: list){
                 tongGiohang += sach.getGiaThue()*sach.getSoLuong();
             }
@@ -86,8 +95,16 @@ public class CartFragment extends Fragment implements CartAdapter.TongTien {
                     Toast.makeText(context, "Tài khoản ko tồn tại", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(list!=null){
-                    PhieuMuon pm=new PhieuMuon(list,user,"25/7/2023","25/7/2023",0,0);
+
+        
+                if(list!=null || !list.isEmpty()){
+
+                    for(Sach sach: list){
+                        Sach item=new Sach(sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach(),sach.getIsActive());
+                        map.put(sach.getMaSach(),item);
+                    }
+                    String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+                    PhieuMuon pm=new PhieuMuon(map,user,timeStamp,"N/A",tongGiohang,0);
 
                     phieuMuonDAO.insert(pm, new PhieuMuonDAO.InsertCallBack() {
                         @Override

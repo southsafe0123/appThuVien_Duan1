@@ -1,5 +1,6 @@
 package com.teammobile.appthuvien_duan1.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,11 +22,13 @@ import com.teammobile.appthuvien_duan1.model.Sach;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
+    private Context context;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         RecyclerView rvHome = view.findViewById(R.id.rvHome);
+        khoiTao();
         SachDAO sachDAO = new SachDAO();
         sachDAO.getAll(new ISachDAO() {
             @Override
@@ -35,6 +38,8 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onCallBackGetAll(ArrayList<Sach> list) {
+
+                Toast.makeText(context, ""+list.size(), Toast.LENGTH_SHORT).show();
 //                Toast.makeText(getContext(), ""+list.size(), Toast.LENGTH_SHORT).show();
                 rvHome.setAdapter(new HomeAdapter(list,getContext()));
                 rvHome.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -42,5 +47,8 @@ public class HomeFragment extends Fragment {
         });
         return view;
     }
-
+    private void khoiTao()
+    {
+        context=getContext();
+    }
 }

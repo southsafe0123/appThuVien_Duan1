@@ -18,37 +18,68 @@ import android.view.View;
 import android.widget.Button;
 
 import com.teammobile.appthuvien_duan1.R;
+import com.teammobile.appthuvien_duan1.dao.SachDAO;
 import com.teammobile.appthuvien_duan1.fragment.QuanLyLoaiFragment;
 import com.teammobile.appthuvien_duan1.fragment.QuanLyMenuFragment;
 import com.teammobile.appthuvien_duan1.fragment.QuanLySachFragment;
 import com.teammobile.appthuvien_duan1.fragment.QuanLyTGFragment;
 import com.teammobile.appthuvien_duan1.fragment.QuanLyUserFragment;
+import com.teammobile.appthuvien_duan1.interfaces.ISachDAO;
+import com.teammobile.appthuvien_duan1.model.Sach;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class QuanLyActivity extends AppCompatActivity {
     private SearchView searchView;
     private ActionBar actionBar;
-
+    private SachDAO sachDAO;
+    private int trangThai=-1;
+    private int tongGia=0;
+    private Map<String,Sach> stock;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quan_ly);
-
+        khoiTao();
         actionBar=getSupportActionBar();
        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.baseline_home_24);
         loadFragment(new QuanLyMenuFragment());
 
     }
-
+    public void khoiTao()
+    {
+        sachDAO=new SachDAO();
+    }
     public void loadFragment(Fragment fragment)
     {
         FragmentManager fm=getSupportFragmentManager();
         FragmentTransaction ft=fm.beginTransaction();
         ft.setCustomAnimations(R.anim.slide_up,0);
-        ft.replace(R.id.viewFragmentQuanLy,fragment);
+        ft.replace(R.id.viewFragmentQuanLy,fragment,"fragment_menu");
+        ft.addToBackStack(null);
         ft.commit();
     }
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    public Map<String, Sach> getStock() {
+        return stock;
+    }
+
+    public void setStock(Map<String, Sach> stock) {
+        this.stock = stock;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater=getMenuInflater();
@@ -103,5 +134,12 @@ public class QuanLyActivity extends AppCompatActivity {
         return true;
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        FragmentManager fm=getSupportFragmentManager();
+        if(fm.findFragmentByTag("fragment_menu")!=null&&fm.findFragmentByTag("fragment_menu").isVisible()){
+            finish();
+        }
+    }
 }

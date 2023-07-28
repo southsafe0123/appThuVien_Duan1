@@ -116,7 +116,7 @@ public class QuanLyMenuFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(role>0){
-
+                    loadFragment(new QLPhieuMuonFragment(),"fragment_pm");
                 }
                 else showDialog();
             }

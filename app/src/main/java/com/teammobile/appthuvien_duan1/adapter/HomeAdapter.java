@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.teammobile.appthuvien_duan1.R;
+import com.teammobile.appthuvien_duan1.dao.CartDAO;
 import com.teammobile.appthuvien_duan1.dao.SachDAO;
 import com.teammobile.appthuvien_duan1.fragment.HomeFragment;
 import com.teammobile.appthuvien_duan1.interfaces.IGioHang;
@@ -33,12 +34,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
 
     private ArrayList<Sach> list;
     private Context context;
-
     private ArrayList<Sach> gioHang;
     private IGioHang iGioHang;
-
-
+    private CartDAO cartDAO;
     private Cart cart;
+    private Sach sach;
 
     public HomeAdapter(IGioHang iGioHang) {
         this.iGioHang = iGioHang;
@@ -49,6 +49,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
         this.context = context;
         cart = Cart.getInstance();
         gioHang = new ArrayList<>();
+        cartDAO = new CartDAO();
     }
 
     @NonNull
@@ -70,12 +71,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
 
             @Override
             public void onClick(View view) {
-
-                Sach sach = list.get(holder.getAdapterPosition());
+                sach = list.get(holder.getAdapterPosition());
                 gioHang = cart.getList();
                 boolean flag = false;
                 if(gioHang.isEmpty()){
-                    cart.addCart(sach);
+                    setGioHang();
                 } else{
                     for(int i =0;i<gioHang.size();i++){
                         if (gioHang.get(i).getMaSach().equals(list.get(holder.getAdapterPosition()).getMaSach())){
@@ -85,8 +85,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
                         }
                     }
                     if (!flag){
-                        Toast.makeText(context, ""+sach.getMaSach(), Toast.LENGTH_SHORT).show();
-                        cart.addCart(sach);
+//                        Toast.makeText(context, ""+sach.getMaSach(), Toast.LENGTH_SHORT).show();
+                        setGioHang();
                     }
                 }
             }
@@ -110,6 +110,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
             tvTheloai = itemView.findViewById(R.id.tvTheloai);
             btnThemGioHang = itemView.findViewById(R.id.btnThemGioHang);
         }
+    }
+    public void setGioHang(){
+        cart.addCart(sach);
+        gioHang = cartDAO.setSoluong1();
     }
 }
 
