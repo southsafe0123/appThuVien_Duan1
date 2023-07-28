@@ -30,7 +30,7 @@ public class Login_Activity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-		mAuth=FirebaseAuth.getInstance();
+		mAuth = FirebaseAuth.getInstance();
 		checkUser();
 		EditText edtTaikhoan,edtMatkhau;
 		Button btnDangnhap;

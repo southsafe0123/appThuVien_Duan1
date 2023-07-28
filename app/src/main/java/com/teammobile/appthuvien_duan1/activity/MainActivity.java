@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void loadFragment(Fragment fragment)
     {
-        FragmentManager fm=getSupportFragmentManager();
+        FragmentManager fm= getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.frag_main,fragment).commit();
     }
 }

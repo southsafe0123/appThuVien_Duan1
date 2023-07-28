@@ -2,25 +2,96 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-    <EditText
-        android:id="@+id/edtTenTruyen"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:padding="5dp"
+            android:text="Tên Truyện: "/>
+
+        <EditText
+            android:id="@+id/edtTenTruyen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+    <Space
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Ten Truyen"/>
-    <Spinner
-        android:id="@+id/spnTacGia"
+        android:layout_height="15dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="6"
+                android:textSize="20dp"
+                android:layout_height="match_parent"
+                android:gravity="center|start"
+                android:text="Tác Giả: "/>
+
+            <CheckBox
+                android:id="@+id/chkTacgia"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"/>
+
+        </LinearLayout>
+        <Spinner
+            android:id="@+id/spnTacGia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            />
+
+    <Space
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-    <Spinner
-        android:id="@+id/spnTheLoai"
+        android:layout_height="15dp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="6"
+                android:textSize="20dp"
+                android:layout_height="match_parent"
+                android:gravity="center|start"
+                android:text="Thể Loại: "/>
+
+            <CheckBox
+                android:id="@+id/chkTheloai"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"/>
+
+        </LinearLayout>
+
+        <Spinner
+            android:id="@+id/spnTheLoai"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <Button
-        android:id="@+id/btnTimKiem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tim Kiem"
-        />
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/btnTimKiem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tim Kiem"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
 </LinearLayout>

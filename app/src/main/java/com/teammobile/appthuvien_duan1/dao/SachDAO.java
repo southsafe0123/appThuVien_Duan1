@@ -27,7 +27,6 @@ public class SachDAO {
     {
         mDatabase=FirebaseDatabase.getInstance();
         reference=mDatabase.getReference("Sach");
-
     }
     public void insert(Sach sach, ISachDAO iSachDAO)
     {
@@ -110,7 +109,29 @@ public class SachDAO {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        })        ;
+        });
+    }
+
+    public void getDsByTen(String ten, IGetSlSachByTen iGetSlSachByTen){
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+                for (DataSnapshot data: snapshot.getChildren()){
+                    Sach sach = data.getValue(Sach.class);
+                    if (ten.equals(sach.getTenSach()) && sach.getIsActive()>0){
+                        list.add(new Sach(data.getKey(),sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(), sach.getVitridesach(), sach.getIsActive()));
+                    }
+                }
+                Log.d("OK",list.size()+"");
+                iGetSlSachByTen.onCallBack(list);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
     public void delete(String ma,DeleteCallBack deleteCallBack)
     {
@@ -132,6 +153,11 @@ public class SachDAO {
     {
         public void onCallBack(ArrayList<Sach> list);
     }
+
+    public interface IGetSlSachByTen{
+        public void onCallBack(ArrayList<Sach> list);
+    }
+
     public interface DeleteCallBack
     {
         public void onCallBack(Boolean check);
