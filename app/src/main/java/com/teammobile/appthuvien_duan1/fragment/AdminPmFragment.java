@@ -141,7 +141,7 @@ public class AdminPmFragment extends Fragment {
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(context);
         myList=new ArrayList<>();
        
-
+        
         for(Map.Entry<String,Sach> entry: pm.getSach().entrySet()){
             Sach sach=entry.getValue();
             myList.add(new Sach(entry.getKey(),sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(), sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach(),sach.getIsActive()));
