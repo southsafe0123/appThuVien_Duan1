@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import com.bumptech.glide.Glide;
+
+import android.graphics.Color;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
@@ -29,6 +32,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 	private ArrayList<Sach> list;
 	private ArrayList<Integer> maxSoluong;
 	private Context context;
+	private int originalTextColor;
 
 	private TongTien tongTien;
 	private TongTien tongTienListener;
@@ -66,13 +70,28 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-		 Sach sach = list.get(position);
+		Sach sach = list.get(position);
 
-		holder.txtTen.setText("Tên sách: "+list.get(holder.getAdapterPosition()).getTenSach());
+		holder.txtTen.setText("Tên sách "+list.get(holder.getAdapterPosition()).getTenSach());
 		holder.txtGia.setText("Giá tiền: " + list.get(holder.getAdapterPosition()).getGiaThue() + " VND");
 		holder.txtTacGia.setText("Tác giả: "+list.get(holder.getAdapterPosition()).getTacGia().getTenTacGia());
 		holder.txtTheLoai.setText("Thể loại: "+list.get(holder.getAdapterPosition()).getLoai().getTenLoai());
-		holder.txtSoluong.setText(""+list.get(holder.getAdapterPosition()).getSoLuong());
+		String soluong = "" + list.get(holder.getAdapterPosition()).getSoLuong();
+		SpannableString underlineSoluong = new SpannableString(soluong);
+		underlineSoluong.setSpan(new UnderlineSpan(), 0, soluong.length(), 0);
+		holder.txtSoluong.setText(underlineSoluong);
+
+
+
+
+
+
+		Glide.with(context).load(list.get(position).getHinhAnh()).into(holder.ivAnh);
+
+
+
+
+
 
 		holder.ivXoa.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -92,10 +111,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 					Sach sach = list.get(holder.getAdapterPosition());
 					int soluong = sach.getSoLuong();
 					soluong++;
-
 					sach.setSoLuong(soluong);
 					list.set(vitribam,sach);
+					holder.txtSoluong.setTextColor(Color.RED);
 					loadData();
+
+
 				}
 			}
 		});
@@ -110,9 +131,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 					Sach sach = list.get(holder.getAdapterPosition());
 					int soluong = sach.getSoLuong();
 					soluong--;
+
 					sach.setSoLuong(soluong);
 					list.set(vitribam,sach);
+					holder.txtSoluong.setTextColor(Color.RED);
 					loadData();
+
 				}
 			}
 		});
@@ -132,6 +156,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 	public class ViewHolder extends RecyclerView.ViewHolder {
 		TextView txtTen,txtTheLoai,txtGia,txtSoluong,txtTacGia,txtTonggiatri;
 		ImageView ivAnh,ivTang,ivGiam,ivXoa;
+
 		public ViewHolder(@NonNull View itemView) {
 			super(itemView);
 			txtGia = itemView.findViewById(R.id.txtGia);
@@ -139,6 +164,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 			txtSoluong = itemView.findViewById(R.id.txtSoluong);
 			txtTen = itemView.findViewById(R.id.txtTen);
 			txtTacGia = itemView.findViewById(R.id.txtTacgia);
+			originalTextColor = txtSoluong.getCurrentTextColor();
+
 
 
 			ivAnh = itemView.findViewById(R.id.ivAnh);
@@ -195,4 +222,3 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 		notifyDataSetChanged();
 	}
 }
-

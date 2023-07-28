@@ -2,10 +2,11 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     app:cardCornerRadius="10dp"
     android:layout_margin="6dp"
     android:layout_height="wrap_content">
+
+
 
     <LinearLayout
         android:background="#FFEEEE"
@@ -19,12 +20,15 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="6dp"
                 android:background="#FFFAFA"
                 android:id="@+id/ivAnh"
+                android:layout_marginRight="10dp"
                 android:src="@drawable/baseline_add_24"
-                android:layout_width="0dp"
+                android:layout_width="150dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent"/>
+                android:layout_height="200dp"/>
 
 
             <LinearLayout
@@ -35,10 +39,12 @@
 
 
                 <TextView
-                    android:textColor="#121212"
-                    android:layout_marginLeft="5dp"
+                    android:textColor="#C85353"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="6dp"
                     android:id="@+id/txtTen"
-                    android:text="Tên sách: "
+                    android:textSize="30dp"
+                    android:text="Tên sách "
                     android:textStyle="bold|italic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -48,6 +54,8 @@
                     android:layout_marginLeft="5dp"
                     android:textColor="#121212"
                     android:id="@+id/txtTacgia"
+                    android:textSize="16dp"
+                    android:layout_margin="6dp"
                     android:text="Tác giả: "
                     android:textStyle="bold|italic"
                     android:layout_width="match_parent"
@@ -58,6 +66,9 @@
                     android:textColor="#121212"
                     android:id="@+id/txtGia"
                     android:text="Giá: "
+                    android:layout_margin="6dp"
+                    android:textSize="16dp"
+
                     android:textStyle="bold|italic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -67,10 +78,14 @@
                     android:layout_marginLeft="5dp"
                     android:textColor="#121212"
                     android:id="@+id/txtTheLoai"
+                    android:layout_marginBottom="10dp"
+                    android:textSize="16dp"
+
                     android:text="Thể loại: "
                     android:textStyle="bold|italic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
+
 
             </LinearLayout>
 
@@ -80,6 +95,7 @@
 
 
         <LinearLayout
+            android:gravity="center"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -87,8 +103,10 @@
 
 
             <ImageView
+                android:layout_marginTop="5dp"
                 android:id="@+id/ivTang"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="66dp"
                 android:src="@drawable/baseline_add_24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -96,19 +114,28 @@
             <TextView
                 android:id="@+id/txtSoluong"
                 android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:textSize="19dp"
-                android:text="1"
+                android:layout_marginRight="60dp"
+                android:textSize="32dp"
+                android:text="@string/soluong"
                 android:textColor="#222222"
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
             <ImageView
+                android:layout_marginTop="5dp"
                 android:id="@+id/ivGiam"
                 android:src="@drawable/outline_horizontal_rule_24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:layout_marginLeft="145dp"
+                android:id="@+id/ivXoa"
+                android:src="@drawable/baseline_delete_24"
+                android:layout_width="32dp"
+                android:layout_height="32dp"/>
+
 
 
             <LinearLayout
@@ -118,17 +145,13 @@
                 android:layout_height="wrap_content">
 
 
-                <ImageView
-                    android:id="@+id/ivXoa"
-                    android:src="@drawable/baseline_delete_24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
+
 
 
 
