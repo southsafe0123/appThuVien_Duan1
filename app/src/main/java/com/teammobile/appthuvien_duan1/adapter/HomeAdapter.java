@@ -33,8 +33,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
 
     private ArrayList<Sach> list;
     private Context context;
+
     private ArrayList<Sach> gioHang;
     private IGioHang iGioHang;
+
 
     private Cart cart;
 
@@ -68,6 +70,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
 
             @Override
             public void onClick(View view) {
+
                 Sach sach = list.get(holder.getAdapterPosition());
                 gioHang = cart.getList();
                 boolean flag = false;
