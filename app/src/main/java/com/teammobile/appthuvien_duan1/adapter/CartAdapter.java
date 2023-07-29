@@ -4,6 +4,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import com.bumptech.glide.Glide;
+
+import android.graphics.Color;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,8 +32,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 	private ArrayList<Sach> list;
 	private ArrayList<Integer> maxSoluong;
 	private Context context;
+	private int originalTextColor;
 
 	private TongTien tongTien;
+	private TongTien tongTienListener;
+
+
+
+	public void setTongTienListener(TongTien tongTienListener) {
+		this.tongTienListener = tongTienListener;
+	}
 
 	int tongGiohang = 0;
 
@@ -51,16 +64,33 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		LayoutInflater inflater = ((Activity)context).getLayoutInflater();
 		View view  = inflater.inflate(R.layout.item_cart,parent,false);
+
 		return new ViewHolder(view);
 	}
 
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-		holder.txtTen.setText(list.get(holder.getAdapterPosition()).getTenSach());
-		holder.txtGia.setText("" + list.get(holder.getAdapterPosition()).getGiaThue());
-		holder.txtTacGia.setText(list.get(holder.getAdapterPosition()).getTacGia().getTenTacGia());
-		holder.txtTheLoai.setText(list.get(holder.getAdapterPosition()).getLoai().getTenLoai());
-		holder.txtSoluong.setText(""+list.get(holder.getAdapterPosition()).getSoLuong());
+		Sach sach = list.get(position);
+
+		holder.txtTen.setText("Tên sách "+list.get(holder.getAdapterPosition()).getTenSach());
+		holder.txtGia.setText("Giá tiền: " + list.get(holder.getAdapterPosition()).getGiaThue() + " VND");
+		holder.txtTacGia.setText("Tác giả: "+list.get(holder.getAdapterPosition()).getTacGia().getTenTacGia());
+		holder.txtTheLoai.setText("Thể loại: "+list.get(holder.getAdapterPosition()).getLoai().getTenLoai());
+		String soluong = "" + list.get(holder.getAdapterPosition()).getSoLuong();
+		SpannableString underlineSoluong = new SpannableString(soluong);
+		underlineSoluong.setSpan(new UnderlineSpan(), 0, soluong.length(), 0);
+		holder.txtSoluong.setText(underlineSoluong);
+
+
+
+
+
+		Glide.with(context).load(list.get(position).getHinhAnh()).into(holder.ivAnh);
+
+
+
+
+
 
 		holder.ivXoa.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -76,14 +106,22 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 //				Toast.makeText(context, ""+maxSoluong.get(holder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
 				if(list.get(holder.getAdapterPosition()).getSoLuong()==maxSoluong.get(holder.getAdapterPosition())){
 					Toast.makeText(context, "Bạn đã đạt giới hạn số lượng sách có", Toast.LENGTH_SHORT).show();
+					holder.txtSoluong.setTextColor(Color.parseColor("#707070")	);
+					holder.ivTang.setColorFilter(Color.parseColor("#C3C3C3"));
 				} else{
 					Sach sach = list.get(holder.getAdapterPosition());
 					int soluong = sach.getSoLuong();
 					soluong++;
-
 					sach.setSoLuong(soluong);
 					list.set(vitribam,sach);
+					holder.txtSoluong.setTextColor(Color.RED);
+					holder.ivTang.setColorFilter(Color.BLACK);
+					holder.ivGiam.setColorFilter(originalTextColor);
+
+
 					loadData();
+
+
 				}
 			}
 		});
@@ -94,13 +132,23 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 				int vitribam = holder.getAdapterPosition();
 				if(list.get(holder.getAdapterPosition()).getSoLuong()==1){
 					canhbaoXoa(holder);
+					holder.txtSoluong.setTextColor(Color.parseColor("#707070"));
+					holder.ivGiam.setColorFilter(Color.parseColor("#C3C3C3"));
 				} else{
 					Sach sach = list.get(holder.getAdapterPosition());
 					int soluong = sach.getSoLuong();
 					soluong--;
+
 					sach.setSoLuong(soluong);
 					list.set(vitribam,sach);
+					holder.txtSoluong.setTextColor(Color.RED);
+					holder.ivGiam.setColorFilter(Color.BLACK);
+					holder.ivTang.setColorFilter(originalTextColor);
+
+
+
 					loadData();
+
 				}
 			}
 		});
@@ -118,8 +166,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 	}
 
 	public class ViewHolder extends RecyclerView.ViewHolder {
-		TextView txtTen,txtTheLoai,txtGia,txtSoluong,txtTacGia;
+		TextView txtTen,txtTheLoai,txtGia,txtSoluong,txtTacGia,txtTonggiatri;
 		ImageView ivAnh,ivTang,ivGiam,ivXoa;
+
 		public ViewHolder(@NonNull View itemView) {
 			super(itemView);
 			txtGia = itemView.findViewById(R.id.txtGia);
@@ -127,6 +176,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 			txtSoluong = itemView.findViewById(R.id.txtSoluong);
 			txtTen = itemView.findViewById(R.id.txtTen);
 			txtTacGia = itemView.findViewById(R.id.txtTacgia);
+			originalTextColor = txtSoluong.getCurrentTextColor();
+
+
 
 			ivAnh = itemView.findViewById(R.id.ivAnh);
 			ivTang = itemView.findViewById(R.id.ivTang);
@@ -182,4 +234,3 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 		notifyDataSetChanged();
 	}
 }
-

@@ -3,6 +3,8 @@ package com.teammobile.appthuvien_duan1.fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +37,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CartFragment extends Fragment {
+public class CartFragment extends Fragment implements CartAdapter.TongTien {
     private HomeAdapter homeAdapter;
     private RecyclerView recyclerView;
     private TextView txtTongtien;
@@ -74,12 +76,16 @@ public class CartFragment extends Fragment {
             }
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerView.setAdapter(adapter);
-            txtTongtien.setText("Tổng đơn hàng: "+tongGiohang+" VNĐ");
+
+            txtTongtien.setText("Tổng đơn hàng: "+tongGiohang+" VND");
         }
         adapter.setTongTien(new CartAdapter.TongTien() {
             @Override
             public void thayDoiTongTien(int tongTien) {
-                txtTongtien.setText("Tổng đơn hàng: " + tongTien + " VNĐ");
+                String tongGiaTri = "Tổng đơn hàng: " + tongTien + " VND";
+                SpannableString spannableString = new SpannableString(tongGiaTri);
+                spannableString.setSpan(new UnderlineSpan(), 0, tongGiaTri.length(), 0);
+                txtTongtien.setText(spannableString);
             }
         });
         btnSumbit.setOnClickListener(new View.OnClickListener() {
@@ -135,4 +141,11 @@ public class CartFragment extends Fragment {
    }
 
 
+    @Override
+    public void thayDoiTongTien(int tongTien) {
+        String tongGiaTri = "Tổng đơn hàng: " + tongTien + " VND";
+        SpannableString spannableString = new SpannableString(tongGiaTri);
+        spannableString.setSpan(new UnderlineSpan(), 0, tongGiaTri.length(), 0);
+        txtTongtien.setText(spannableString);
+    }
 }
