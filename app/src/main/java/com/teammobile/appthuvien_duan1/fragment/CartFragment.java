@@ -89,10 +89,16 @@ public class CartFragment extends Fragment implements CartAdapter.TongTien {
         adapter.setTongTien(new CartAdapter.TongTien() {
             @Override
             public void thayDoiTongTien(int tongTien) {
-                String tongGiaTri = "Tổng đơn hàng: " + tongTien + " VND";
-                SpannableString spannableString = new SpannableString(tongGiaTri);
-                spannableString.setSpan(new UnderlineSpan(), 0, tongGiaTri.length(), 0);
-                txtTongtien.setText(spannableString);
+                if(tongGiohang==0){
+                    String tongGiaTri = "Giỏ hàng hiện không có sách";
+                    txtTongtien.setText(tongGiaTri);
+                } else {
+                    String tongGiaTri = "Tổng đơn hàng: " + tongTien + " VND";
+                    SpannableString spannableString = new SpannableString(tongGiaTri);
+                    spannableString.setSpan(new UnderlineSpan(), 0, tongGiaTri.length(), 0);
+                    txtTongtien.setText(spannableString);
+                }
+
             }
         });
         if(list==null || list.isEmpty()){

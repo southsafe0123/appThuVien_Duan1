@@ -75,7 +75,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 		Sach sach = list.get(position);
 
-		holder.txtTen.setText("Tên sách "+list.get(holder.getAdapterPosition()).getTenSach());
+		holder.txtTen.setText(""+list.get(holder.getAdapterPosition()).getTenSach());
 		holder.txtGia.setText("Giá tiền: " + list.get(holder.getAdapterPosition()).getGiaThue() + " VND");
 		holder.txtTacGia.setText("Tác giả: "+list.get(holder.getAdapterPosition()).getTacGia().getTenTacGia());
 		holder.txtTheLoai.setText("Thể loại: "+list.get(holder.getAdapterPosition()).getLoai().getTenLoai());

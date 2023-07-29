@@ -43,9 +43,9 @@
                 <TextView
                     android:textColor="#C85353"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="6dp"
+                    android:layout_marginLeft="3dp"
                     android:id="@+id/txtTen"
-                    android:textSize="28dp"
+                    android:textSize="30dp"
                     android:text="Tên sách "
                     android:textStyle="bold|italic"
                     android:layout_width="match_parent"
@@ -56,7 +56,7 @@
                     android:layout_marginLeft="5dp"
                     android:textColor="#121212"
                     android:id="@+id/txtTacgia"
-                    android:textSize="16dp"
+                    android:textSize="17dp"
                     android:layout_margin="6dp"
                     android:text="Tác giả: "
                     android:textStyle="bold|italic"
@@ -69,7 +69,7 @@
                     android:id="@+id/txtGia"
                     android:text="Giá: "
                     android:layout_margin="6dp"
-                    android:textSize="16dp"
+                    android:textSize="17dp"
 
                     android:textStyle="bold|italic"
                     android:layout_width="match_parent"
@@ -81,7 +81,8 @@
                     android:textColor="#121212"
                     android:id="@+id/txtTheLoai"
                     android:layout_marginTop="3dp"
-                    android:textSize="16dp"
+                    android:textSize="18dp"
+                    android:layout_marginBottom="-1dp"
 
                     android:text="Thể loại: "
                     android:textStyle="bold|italic"
@@ -136,7 +137,9 @@
                 android:layout_height="wrap_content"/>
 
             <ImageView
-                android:layout_marginLeft="143dp"
+                android:layout_marginLeft="140dp"
+                android:layout_marginRight="-100dp"
+
                 android:id="@+id/ivXoa"
                 android:src="@drawable/baseline_delete_24"
                 android:layout_width="32dp"
