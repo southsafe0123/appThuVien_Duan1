@@ -1,6 +1,7 @@
 package com.teammobile.appthuvien_duan1.fragment;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -9,11 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,6 +44,7 @@ public class CartFragment extends Fragment implements CartAdapter.TongTien {
     private HomeAdapter homeAdapter;
     private RecyclerView recyclerView;
     private TextView txtTongtien;
+    private AlertDialog alertDialog;
     private Button btnSumbit;
     private User user;
     private PhieuMuonDAO phieuMuonDAO;
@@ -76,8 +80,11 @@ public class CartFragment extends Fragment implements CartAdapter.TongTien {
             }
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerView.setAdapter(adapter);
-
-            txtTongtien.setText("Tổng đơn hàng: "+tongGiohang+" VND");
+            if(tongGiohang==0){
+                txtTongtien.setText("Giỏ hàng hiện không có sách");
+            } else{
+                txtTongtien.setText("Tổng đơn hàng: "+tongGiohang+" VND");
+            }
         }
         adapter.setTongTien(new CartAdapter.TongTien() {
             @Override
@@ -88,34 +95,78 @@ public class CartFragment extends Fragment implements CartAdapter.TongTien {
                 txtTongtien.setText(spannableString);
             }
         });
+        if(list==null || list.isEmpty()){
+            Toast.makeText(context, "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
+        } else{
+
+        }
         btnSumbit.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                if(user==null||user.getIsActive()==0){
-                    Toast.makeText(context, "Tài khoản ko tồn tại", Toast.LENGTH_SHORT).show();
+                if(list==null || list.isEmpty()){
+                    Toast.makeText(context, "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
                     return;
-                }
+                } else{
 
-        
-                if(list!=null || !list.isEmpty()){
-
-                    for(Sach sach: list){
-                        Sach item=new Sach(sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach(),sach.getIsActive());
-                        map.put(sach.getMaSach(),item);
-                    }
-                    String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
-                    PhieuMuon pm=new PhieuMuon(map,user,timeStamp,"N/A",tongGiohang,0);
-
-                    phieuMuonDAO.insert(pm, new PhieuMuonDAO.InsertCallBack() {
+                    LayoutInflater inflater = getLayoutInflater();
+                    View dialogView = inflater.inflate(R.layout.item_alertdialog, null);
+                    Button btnHuy,btnXacNhan;
+                    btnHuy = dialogView.findViewById(R.id.btnHuy);
+                    btnXacNhan = dialogView.findViewById(R.id.btnXacnhan);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setView(dialogView);
+                    btnXacNhan.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onCallBack(Boolean check) {
-                            if(check){
-                                Toast.makeText(context, "Thêm phiếu mượn thành công", Toast.LENGTH_SHORT).show();
+                        public void onClick(View v) {
+                            if(user==null||user.getIsActive()==0){
+                                Toast.makeText(context, "Tài khoản không tồn tại", Toast.LENGTH_SHORT).show();
+                                return;
                             }
-                            else
-                                Toast.makeText(context, "Thêm phiếu mượn thất bại", Toast.LENGTH_SHORT).show();
+
+
+                            if(list!=null || !list.isEmpty()){
+
+                                for(Sach sach: list){
+                                    Sach item=new Sach(sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach(),sach.getIsActive());
+                                    map.put(sach.getMaSach(),item);
+                                }
+                                String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+                                PhieuMuon pm=new PhieuMuon(map,user,timeStamp,"N/A",tongGiohang,0);
+
+                                phieuMuonDAO.insert(pm, new PhieuMuonDAO.InsertCallBack() {
+                                    @Override
+                                    public void onCallBack(Boolean check) {
+                                        if(list==null || list.isEmpty()){
+                                            Toast.makeText(context, "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
+                                            alertDialog.dismiss();
+                                            return;
+                                        }
+
+                                        if(check){
+                                            Toast.makeText(context, "Thanh toán đơn hàng thành công", Toast.LENGTH_SHORT).show();
+                                            list.clear();
+                                            adapter.loadData();
+                                            txtTongtien.setText("Xin cảm ơn quý khách!");
+                                        }
+                                        else
+                                            Toast.makeText(context, "Thanh toán đơn hàng thất bại", Toast.LENGTH_SHORT).show();
+                                        alertDialog.dismiss();
+                                    }
+                                });
+                            }
                         }
                     });
+
+                    btnHuy.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            alertDialog.dismiss();
+                        }
+                    });
+                    alertDialog = builder.create();
+                    alertDialog.show();
                 }
             }
         });
@@ -139,6 +190,9 @@ public class CartFragment extends Fragment implements CartAdapter.TongTien {
        user=new User(uid,email,username,password,role,isActive);
        context=getContext();
    }
+
+
+
 
 
     @Override

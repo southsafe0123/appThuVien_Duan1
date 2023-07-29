@@ -16,25 +16,26 @@
 
     <TextView
 
-        android:layout_marginRight="-47dp"
+        android:layout_marginRight="-40dp"
         android:paddingEnd="50dp"
         android:gravity="end"
         android:id="@+id/txtTongtien"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="12dp"
         android:layout_weight="1"
-        android:text="@string/gachduoiTongtien"
+        android:text=""
         android:textColor="#222121"
         android:textSize="19dp"
         android:textStyle="bold" />
 
     <Button
-        android:layout_margin="6dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="3dp"
         android:backgroundTint="#FFC20C"
         android:id="@+id/btnSumbit"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="5dp"
         android:layout_weight="1"
         android:text="Thanh toán" />
 
