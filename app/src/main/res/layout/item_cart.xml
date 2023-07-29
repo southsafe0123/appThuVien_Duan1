@@ -3,7 +3,10 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp"
-    android:layout_margin="6dp"
+    android:layout_margin="5dp"
+    android:cardBackgroundColor="#000000"
+    app:cardElevation="30dp"
+    app:cardBackgroundColor="#FF0000"
     android:layout_height="wrap_content">
 
 
@@ -32,6 +35,7 @@
 
 
             <LinearLayout
+                android:layout_marginTop="2dp"
                 android:layout_weight="4"
                 android:orientation="vertical"
                 android:layout_width="0dp"
@@ -43,7 +47,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="6dp"
                     android:id="@+id/txtTen"
-                    android:textSize="30dp"
+                    android:textSize="28dp"
                     android:text="Tên sách "
                     android:textStyle="bold|italic"
                     android:layout_width="match_parent"
@@ -78,7 +82,7 @@
                     android:layout_marginLeft="5dp"
                     android:textColor="#121212"
                     android:id="@+id/txtTheLoai"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="3dp"
                     android:textSize="16dp"
 
                     android:text="Thể loại: "
@@ -96,6 +100,8 @@
 
         <LinearLayout
             android:gravity="center"
+            android:scaleType="centerCrop"
+
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -112,6 +118,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+
                 android:id="@+id/txtSoluong"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="60dp"
@@ -136,26 +143,16 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"/>
 
-
-
             <LinearLayout
                 android:paddingEnd="10dp"
                 android:gravity="end"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-
-
             </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
-
-
-
-
-
-
 
 </androidx.cardview.widget.CardView>

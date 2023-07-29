@@ -85,7 +85,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
 
 
-
 		Glide.with(context).load(list.get(position).getHinhAnh()).into(holder.ivAnh);
 
 
@@ -107,6 +106,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 //				Toast.makeText(context, ""+maxSoluong.get(holder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
 				if(list.get(holder.getAdapterPosition()).getSoLuong()==maxSoluong.get(holder.getAdapterPosition())){
 					Toast.makeText(context, "Bạn đã đạt giới hạn số lượng sách có", Toast.LENGTH_SHORT).show();
+					holder.txtSoluong.setTextColor(Color.parseColor("#707070")	);
+					holder.ivTang.setColorFilter(Color.parseColor("#C3C3C3"));
 				} else{
 					Sach sach = list.get(holder.getAdapterPosition());
 					int soluong = sach.getSoLuong();
@@ -114,6 +115,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 					sach.setSoLuong(soluong);
 					list.set(vitribam,sach);
 					holder.txtSoluong.setTextColor(Color.RED);
+					holder.ivTang.setColorFilter(Color.BLACK);
+					holder.ivGiam.setColorFilter(originalTextColor);
+
+
 					loadData();
 
 
@@ -127,6 +132,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 				int vitribam = holder.getAdapterPosition();
 				if(list.get(holder.getAdapterPosition()).getSoLuong()==1){
 					canhbaoXoa(holder);
+					holder.txtSoluong.setTextColor(Color.parseColor("#707070"));
+					holder.ivGiam.setColorFilter(Color.parseColor("#C3C3C3"));
 				} else{
 					Sach sach = list.get(holder.getAdapterPosition());
 					int soluong = sach.getSoLuong();
@@ -135,6 +142,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 					sach.setSoLuong(soluong);
 					list.set(vitribam,sach);
 					holder.txtSoluong.setTextColor(Color.RED);
+					holder.ivGiam.setColorFilter(Color.BLACK);
+					holder.ivTang.setColorFilter(originalTextColor);
+
+
+
 					loadData();
 
 				}
