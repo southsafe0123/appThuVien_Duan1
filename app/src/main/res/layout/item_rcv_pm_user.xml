@@ -30,16 +30,22 @@
                 android:text="Mã hóa đơn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-
             <TextView
-                android:layout_marginTop="10dp"
+                android:text="Trạng thái: "
+                android:id="@+id/tvTitleTT"
                 android:layout_below="@+id/tvMa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_marginTop="39dp"
+                android:layout_toRightOf="@id/tvTitleTT"
                 android:id="@+id/tvTT"
+
                 android:text="Trạng thái: "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
-                android:layout_below="@+id/tvTT"
+                android:layout_below="@+id/tvTitleTT"
                 android:text="Tổng tiền: "
                 android:id="@+id/tvTongTien"
                 android:layout_width="match_parent"

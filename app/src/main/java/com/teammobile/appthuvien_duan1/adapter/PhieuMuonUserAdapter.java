@@ -2,6 +2,7 @@ package com.teammobile.appthuvien_duan1.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,20 +44,29 @@ public class PhieuMuonUserAdapter extends RecyclerView.Adapter<PhieuMuonUserAdap
         {
             case 0:
                 tt="Chờ xác nhận";
+                holder.tvTrangThai.setTextColor(Color.parseColor("#FFD700"));
                 break;
             case 1:
                 tt="Hóa đơn được thay đổi";
+                holder.tvTrangThai.setTextColor(Color.parseColor("#9ACD32"));
                 break;
             case 2:
-                tt="Xác nhận(nhận sách tại thư viện) ";
+                tt="Nhận sách tại thư viện";
+                holder.tvTrangThai.setTextColor(Color.parseColor("#9370DB"));
+
                 break;
             case 3:
                 tt="Đã nhận sách";
+                holder.tvTrangThai.setTextColor(Color.parseColor("#0000CD"));
+                break;
+            case 4:
+                tt="Đã trả sách";
+                holder.tvTrangThai.setTextColor(Color.parseColor("#00FF7F"));
                 break;
             default:
 
         }
-        holder.tvTrangThai.setText("Trạng thái: "+tt);
+        holder.tvTrangThai.setText(tt);
         holder.tvNgay.setText("Ngày thuê: "+list.get(position).getNgayTao());
         holder.tvMaPM.setText("Mã hóa đơn: "+list.get(position).getMa());
         holder.tvTongTien.setText("Tổng tiền: "+list.get(position).getTongTien()+" VNĐ");
@@ -64,9 +74,7 @@ public class PhieuMuonUserAdapter extends RecyclerView.Adapter<PhieuMuonUserAdap
             @Override
             public void onClick(View v) {
                 ClientPmFragment fragment=new ClientPmFragment();
-
                 Bundle bundle=new Bundle();
-
                 bundle.putSerializable("pm",list.get(holder.getAdapterPosition()));
                 fragment.setArguments(bundle);
                 activity.loadFragment(fragment);

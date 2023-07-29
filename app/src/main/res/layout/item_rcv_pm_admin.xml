@@ -5,8 +5,10 @@
     android:layout_margin="5dp"
     app:cardCornerRadius="15dp"
     app:cardElevation="15dp"
+
     android:layout_height="150dp">
     <LinearLayout
+
         android:orientation="horizontal"
         android:weightSum="6"
         android:layout_width="match_parent"
@@ -18,6 +20,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent">
             <TextView
+                style="@style/myStyle"
+
                 android:id="@+id/tvNgay"
                 android:text="Ngày: "
                 android:layout_alignParentTop="true"
@@ -25,26 +29,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <TextView
+                style="@style/myStyle"
+
                 android:layout_below="@id/tvNgay"
                 android:id="@+id/tvMa"
                 android:text="Mã hóa đơn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <TextView
+                style="@style/myStyle"
+
                 android:layout_below="@+id/tvMa"
                 android:text="Tên khách hàng:"
                 android:id="@+id/tvTenKH"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <TextView
-                android:layout_marginTop="10dp"
-                android:layout_below="@+id/tvTenKH"
-                android:id="@+id/tvTT"
+                style="@style/myStyle"
+
                 android:text="Trạng thái: "
+                android:id="@+id/tvTitleTT"
+                android:layout_below="@+id/tvTenKH"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+
             <TextView
-                android:layout_below="@+id/tvTT"
+                style="@style/myStyle"
+
+                android:id="@+id/tvTT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="65dp"
+
+                android:layout_toRightOf="@+id/tvTitleTT"
+                android:text="Trạng thái: " />
+            <TextView
+                style="@style/myStyle"
+
+                android:layout_below="@+id/tvTitleTT"
                 android:text="Tổng tiền: "
                 android:id="@+id/tvTongTien"
                 android:layout_width="match_parent"
@@ -53,6 +75,7 @@
         </RelativeLayout>
 
         <ImageView
+
             android:layout_gravity="center"
             android:id="@+id/btnEdit"
             android:layout_width="0dp"

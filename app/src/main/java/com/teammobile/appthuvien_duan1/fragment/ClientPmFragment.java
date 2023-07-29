@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,8 +50,10 @@ public class ClientPmFragment extends Fragment {
                     phieuMuonDAO.update(phieuMuon, new PhieuMuonDAO.IUpdate() {
                         @Override
                         public void onCallBack(Boolean check) {
-                            if(check)
+                            if(check){
                                 Toast.makeText(context, "Xác nhận hóa đơn với thủ thư", Toast.LENGTH_SHORT).show();
+                                reload();
+                            }
                         }
                     });
                 }
@@ -82,5 +85,14 @@ public class ClientPmFragment extends Fragment {
         LinearLayoutManager layoutManager=new LinearLayoutManager(context);
         rcv.setLayoutManager(layoutManager);
         rcv.setAdapter(adapter);
+    }
+    public void reload()
+    {
+        Fragment fragment=new ClientPmFragment();
+        Bundle bundle=new Bundle();
+        bundle.putSerializable("pm",phieuMuon);
+        fragment.setArguments(bundle);
+        FragmentManager fm=getActivity().getSupportFragmentManager();
+        fm.beginTransaction().addToBackStack(null).replace(R.id.frag_main,fragment).commit();
     }
 }

@@ -1,6 +1,7 @@
 package com.teammobile.appthuvien_duan1.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,20 +45,29 @@ public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAd
         switch (list.get(position).getTrangThai()){
             case 0:
                 tt="Chờ xác nhận";
+                holder.tvTT.setTextColor(Color.parseColor("#FFD700"));
                 break;
             case 1:
                 tt="Bị thay đổi";
+                holder.tvTT.setTextColor(Color.parseColor("#9ACD32"));
+
                 break;
             case 2:
                 tt="Đã xác nhận";
+                holder.tvTT.setTextColor(Color.parseColor("#9370DB"));
+
                 break;
             case 3:
-                tt="Thanh toán thành công và giao sách";
+                tt="Thanh toán thành công";
+                holder.tvTT.setTextColor(Color.parseColor("#0000CD"));
                 break;
+            case 4:
+                tt="Hoàn thành";
+                holder.tvTT.setTextColor(Color.parseColor("#00FF7F"));
             default:
 
         }
-        holder.tvTT.setText("Trạng thái: "+tt);
+        holder.tvTT.setText(tt);
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +93,7 @@ public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAd
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvMa,tvTT,tvTenKH,tvTongTien,tvNgay;
         private ImageView btnEdit;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvMa=itemView.findViewById(R.id.tvMa);

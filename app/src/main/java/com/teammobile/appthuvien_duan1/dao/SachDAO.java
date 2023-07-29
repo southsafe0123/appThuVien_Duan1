@@ -103,7 +103,6 @@ public class SachDAO {
                         list.add(new Sach(data.getKey(),sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(), sach.getVitridesach(), sach.getIsActive()));
                     }
                 }
-                Log.d("OK",list.size()+"");
                 iGetSLSachByTG.onCallBack(list);
             }
 
