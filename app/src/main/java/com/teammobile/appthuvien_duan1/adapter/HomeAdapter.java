@@ -12,16 +12,20 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.teammobile.appthuvien_duan1.R;
+import com.teammobile.appthuvien_duan1.dao.CartDAO;
 import com.teammobile.appthuvien_duan1.dao.SachDAO;
 import com.teammobile.appthuvien_duan1.fragment.HomeFragment;
 import com.teammobile.appthuvien_duan1.interfaces.IGioHang;
+import com.teammobile.appthuvien_duan1.model.Cart;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
+import java.sql.Array;
 import java.util.ArrayList;
 
 
@@ -32,6 +36,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
     private Context context;
     private ArrayList<Sach> gioHang;
     private IGioHang iGioHang;
+    private CartDAO cartDAO;
+    private Cart cart;
+    private Sach sach;
 
     public HomeAdapter(IGioHang iGioHang) {
         this.iGioHang = iGioHang;
@@ -40,6 +47,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
     public HomeAdapter(ArrayList<Sach> list, Context context){
         this.list = list;
         this.context = context;
+        cart = Cart.getInstance();
+        gioHang = new ArrayList<>();
+        cartDAO = new CartDAO();
     }
 
     @NonNull
@@ -56,11 +66,29 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
         holder.tvTheloai.setText(list.get(holder.getAdapterPosition()).getLoai().getTenLoai());
         holder.tvSoluong.setText(""+list.get(holder.getAdapterPosition()).getSoLuong());
         holder.tvTacGia.setText(list.get(holder.getAdapterPosition()).getTacGia().getTenTacGia());
+
         holder.btnThemGioHang.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                gioHang.add(list.get(holder.getAdapterPosition()));
-                iGioHang.themGioHang(gioHang);
+                sach = list.get(holder.getAdapterPosition());
+                gioHang = cart.getList();
+                boolean flag = false;
+                if(gioHang.isEmpty()){
+                    setGioHang();
+                } else{
+                    for(int i =0;i<gioHang.size();i++){
+                        if (gioHang.get(i).getMaSach().equals(list.get(holder.getAdapterPosition()).getMaSach())){
+                            flag = true;
+                            Toast.makeText(context, "Giỏ hàng đã có sách này", Toast.LENGTH_SHORT).show();
+                            break;
+                        }
+                    }
+                    if (!flag){
+//                        Toast.makeText(context, ""+sach.getMaSach(), Toast.LENGTH_SHORT).show();
+                        setGioHang();
+                    }
+                }
             }
         });
     }
@@ -82,6 +110,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
             tvTheloai = itemView.findViewById(R.id.tvTheloai);
             btnThemGioHang = itemView.findViewById(R.id.btnThemGioHang);
         }
+    }
+    public void setGioHang(){
+        cart.addCart(sach);
+        gioHang = cartDAO.setSoluong1();
     }
 }
 

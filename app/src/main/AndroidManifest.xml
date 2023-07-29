@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
+
     xmlns:tools="http://schemas.android.com/tools">
 
 
@@ -19,7 +21,12 @@
 
         <activity
             android:name=".activity.MainActivity"
+
+
             android:exported="false">
+
+
+
         </activity>
         <activity android:name=".activity.QuanLyActivity"
             android:exported="false">
@@ -44,6 +51,7 @@
             </intent-filter>
         </activity>
 
+
         <activity
             android:name=".activity.Login_Activity"
             android:exported="true" >
@@ -58,6 +66,7 @@
         <activity
             android:name=".activity.Register_Activity"
             android:exported="false" />
+
     </application>
 
 </manifest>
