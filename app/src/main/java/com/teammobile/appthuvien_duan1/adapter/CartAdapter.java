@@ -12,6 +12,7 @@ import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 	private ArrayList<Integer> maxSoluong;
 	private Context context;
 	private int originalTextColor;
+
+	private AlertDialog alertDialog;
 
 	private TongTien tongTien;
 	private TongTien tongTienListener;
@@ -72,7 +75,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 		Sach sach = list.get(position);
 
-		holder.txtTen.setText("Tên sách "+list.get(holder.getAdapterPosition()).getTenSach());
+		holder.txtTen.setText(""+list.get(holder.getAdapterPosition()).getTenSach());
 		holder.txtGia.setText("Giá tiền: " + list.get(holder.getAdapterPosition()).getGiaThue() + " VND");
 		holder.txtTacGia.setText("Tác giả: "+list.get(holder.getAdapterPosition()).getTacGia().getTenTacGia());
 		holder.txtTheLoai.setText("Thể loại: "+list.get(holder.getAdapterPosition()).getLoai().getTenLoai());
@@ -108,6 +111,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 					Toast.makeText(context, "Bạn đã đạt giới hạn số lượng sách có", Toast.LENGTH_SHORT).show();
 					holder.txtSoluong.setTextColor(Color.parseColor("#707070")	);
 					holder.ivTang.setColorFilter(Color.parseColor("#C3C3C3"));
+
 				} else{
 					Sach sach = list.get(holder.getAdapterPosition());
 					int soluong = sach.getSoLuong();
@@ -188,26 +192,33 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 		}
 	}
 	private void canhbaoXoa(ViewHolder holder){
+		LayoutInflater inflater = ((Activity)context).getLayoutInflater();
+		View dialogView = inflater.inflate(R.layout.item_xoadialog, null);
+		Button btnHuy,btnXacNhan;
+		btnHuy = dialogView.findViewById(R.id.btnHuy);
+		btnXacNhan = dialogView.findViewById(R.id.btnXacnhan);
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
-		builder.setTitle("Bạn có chắc muốn bỏ khỏi giỏ hàng?");
-		builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+		builder.setView(dialogView);
+		builder = new AlertDialog.Builder(context);
+		builder.setView(dialogView);
+		btnXacNhan.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
+			public void onClick(View v) {
 				list.remove(holder.getAdapterPosition());
 				maxSoluong.remove(holder.getAdapterPosition());
 				loadData();
+				alertDialog.dismiss();
 			}
 		});
-
-		builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+		btnHuy.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
-
+			public void onClick(View v) {
+				alertDialog.dismiss();
 			}
 		});
 
-		AlertDialog alertDialog = builder.create();
+		alertDialog = builder.create();
 		alertDialog.show();
 	}
 

@@ -77,6 +77,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
                 if(gioHang.isEmpty()){
                     setGioHang();
                 } else{
+
                     for(int i =0;i<gioHang.size();i++){
                         if (gioHang.get(i).getMaSach().equals(list.get(holder.getAdapterPosition()).getMaSach())){
                             flag = true;
