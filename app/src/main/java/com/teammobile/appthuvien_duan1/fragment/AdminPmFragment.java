@@ -12,14 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.teammobile.appthuvien_duan1.R;
 import com.teammobile.appthuvien_duan1.activity.QuanLyActivity;
-import com.teammobile.appthuvien_duan1.adapter.Cart2Adapter;
+import com.teammobile.appthuvien_duan1.adapter.AdminCartAdapter;
 import com.teammobile.appthuvien_duan1.dao.PhieuMuonDAO;
 import com.teammobile.appthuvien_duan1.dao.SachDAO;
 import com.teammobile.appthuvien_duan1.interfaces.ISachDAO;
@@ -35,7 +34,7 @@ public class AdminPmFragment extends Fragment {
     private QuanLyActivity activity;
     private View view;
     private RecyclerView rcv;
-    private Cart2Adapter adapter;
+    private AdminCartAdapter adapter;
     private String maPM = "N/A";
     private Button btnSubmit, btnAccept,btnDecline;
 
@@ -140,7 +139,7 @@ public class AdminPmFragment extends Fragment {
         Bundle bundle = getArguments();
         phieuMuonDAO = new PhieuMuonDAO();
         pm = (PhieuMuon) bundle.getSerializable("pm");
-
+        activity.setTrangThai(pm.getTrangThai());
     }
 
     public void fetchingData() {
@@ -171,7 +170,7 @@ public class AdminPmFragment extends Fragment {
             myList.add(new Sach(entry.getKey(), sach.getLoai(), sach.getTacGia(), sach.getTenSach(), sach.getHinhAnh(), sach.getSoLuong(), sach.getGiaThue(), sach.getVitridesach(), sach.getIsActive()));
 
         }
-        adapter = new Cart2Adapter(context, myList);
+        adapter = new AdminCartAdapter(context, myList);
         rcv.setLayoutManager(linearLayoutManager);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rcv.getContext(),
                 linearLayoutManager.getOrientation());
@@ -190,7 +189,7 @@ public class AdminPmFragment extends Fragment {
             public void onCallBack(Boolean check) {
                 if (check) {
                     reload();
-
+                    activity.setTrangThai(pm.getTrangThai());
                 }
             }
         });

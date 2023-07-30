@@ -1,6 +1,5 @@
 package com.teammobile.appthuvien_duan1.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,14 +17,13 @@ import com.teammobile.appthuvien_duan1.activity.QuanLyActivity;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
 import java.util.ArrayList;
-import java.util.Map;
 
-public class Cart2Adapter extends RecyclerView.Adapter<Cart2Adapter.ViewHodler> {
+public class AdminCartAdapter extends RecyclerView.Adapter<AdminCartAdapter.ViewHodler> {
     private Context context;
     private ArrayList<Sach> list;
     private QuanLyActivity activity;
 
-    public Cart2Adapter(Context context, ArrayList<Sach> list) {
+    public AdminCartAdapter(Context context, ArrayList<Sach> list) {
         this.context = context;
         this.list = list;
         activity= (QuanLyActivity) context;

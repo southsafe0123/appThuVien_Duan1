@@ -16,7 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.teammobile.appthuvien_duan1.R;
-import com.teammobile.appthuvien_duan1.adapter.Cart3Adapter;
+import com.teammobile.appthuvien_duan1.activity.MainActivity;
+import com.teammobile.appthuvien_duan1.activity.QuanLyActivity;
+import com.teammobile.appthuvien_duan1.adapter.ClientCartAdapter;
 import com.teammobile.appthuvien_duan1.dao.PhieuMuonDAO;
 import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 import com.teammobile.appthuvien_duan1.model.Sach;
@@ -30,7 +32,7 @@ public class ClientPmFragment extends Fragment {
     private PhieuMuon pm;
     private AppCompatButton btnConfirm,btnDecline;
     private PhieuMuonDAO phieuMuonDAO;
-    private Cart3Adapter adapter;
+    private ClientCartAdapter adapter;
     private RecyclerView rcv;
 
     @Nullable
@@ -99,7 +101,7 @@ public class ClientPmFragment extends Fragment {
     }
     public void loadUI(ArrayList<Sach> list)
     {
-        adapter=new Cart3Adapter(context,list);
+        adapter=new ClientCartAdapter(context,list);
         LinearLayoutManager layoutManager=new LinearLayoutManager(context);
         rcv.setLayoutManager(layoutManager);
         rcv.setAdapter(adapter);
@@ -119,7 +121,12 @@ public class ClientPmFragment extends Fragment {
         phieuMuonDAO.update(pm, new PhieuMuonDAO.IUpdate() {
             @Override
             public void onCallBack(Boolean check) {
-                reload();
+                if(check){
+                    reload();
+                    pm.setTrangThai(pm.getTrangThai());
+
+                }
+
             }
         });
     }

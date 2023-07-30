@@ -107,7 +107,7 @@ public class Register_Activity extends AppCompatActivity {
 									startActivity(intent);
 									Toast.makeText(Register_Activity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
 								} else {
-									Toast.makeText(Register_Activity.this, "Vui lòng nhập đúng email thật của bạn", Toast.LENGTH_SHORT).show();
+									Toast.makeText(Register_Activity.this, "Email không hợp lê", Toast.LENGTH_SHORT).show();
 								}
 							}
 						});
