@@ -119,7 +119,7 @@ public class SachDAO {
                 list.clear();
                 for (DataSnapshot data: snapshot.getChildren()){
                     Sach sach = data.getValue(Sach.class);
-                    if (ten.equals(sach.getTenSach()) && sach.getIsActive()>0){
+                    if (sach.getTenSach().toLowerCase().contains(ten.toLowerCase()) && sach.getIsActive()>0){
                         list.add(new Sach(data.getKey(),sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(), sach.getVitridesach(), sach.getIsActive()));
                     }
                 }

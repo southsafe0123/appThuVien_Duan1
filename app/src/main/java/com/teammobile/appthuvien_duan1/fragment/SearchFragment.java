@@ -81,7 +81,7 @@ public class SearchFragment extends Fragment {
                 if (!chkTacgia.isChecked() && !chkTheloai.isChecked()){
                     String ten = edtTenTruyen.getText().toString();
                     Bundle bundle = new Bundle();
-                    bundle.putString( "ten", ten);
+                    bundle.putString("ten", ten);
                     SearchFragment2 searchFragment2 = new SearchFragment2();
                     searchFragment2.setArguments(bundle);
                     FragmentManager fm= requireActivity().getSupportFragmentManager();
