@@ -102,29 +102,48 @@ public class Login_Activity extends AppCompatActivity {
 			public void onClick(View v) {
 				String taikhoan = edtTaikhoan.getText().toString();
 				String matkhau = edtMatkhau.getText().toString();
-				if(taikhoan.equals("")&&matkhau.equals(""))
-					return;
-				mAuth.signInWithEmailAndPassword(taikhoan,matkhau).addOnCompleteListener(Login_Activity.this, new OnCompleteListener<AuthResult>() {
-					@Override
-					public void onComplete(@NonNull Task<AuthResult> task) {
-						if(task.isSuccessful()){
-							Toast.makeText(Login_Activity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-							if (chkRemember.isChecked()) {
-								editor.putString("user", edtTaikhoan.getText().toString());
-								editor.putString("pass", edtMatkhau.getText().toString());
-								editor.putBoolean("remember", true);
 
-								editor.apply();
-							} else {
-								editor.clear();
-								editor.apply();
+
+
+
+				if (taikhoan.isEmpty() && matkhau.isEmpty()) {
+					Toast.makeText(Login_Activity.this, "Vui lòng nhập tài khoản và mật khẩu", Toast.LENGTH_SHORT).show();
+				} else if(matkhau.length() < 6) {
+					Toast.makeText(Login_Activity.this, "Mật khẩu phải có ít nhất 6 ký tự", Toast.LENGTH_SHORT).show();
+				}else if (taikhoan.isEmpty()) {
+					Toast.makeText(Login_Activity.this, "Không được để trống tài khoản", Toast.LENGTH_SHORT).show();
+				} else if (matkhau.isEmpty()) {
+					Toast.makeText(Login_Activity.this, "Không được để trống mật khẩu", Toast.LENGTH_SHORT).show();
+				}else if (matkhau.matches(".*[@#$%^&+=]+.*")) {
+					Toast.makeText(Login_Activity.this, "Không được sử dụng ký tự đặc biệt trong mật khẩu", Toast.LENGTH_SHORT).show();
+				}else {
+
+					mAuth.signInWithEmailAndPassword(taikhoan,matkhau).addOnCompleteListener(Login_Activity.this, new OnCompleteListener<AuthResult>() {
+						@Override
+						public void onComplete(@NonNull Task<AuthResult> task) {
+							if(task.isSuccessful()){
+								Toast.makeText(Login_Activity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+								if (chkRemember.isChecked()) {
+									editor.putString("user", edtTaikhoan.getText().toString());
+									editor.putString("pass", edtMatkhau.getText().toString());
+									editor.putBoolean("remember", true);
+
+									editor.apply();
+								} else {
+									editor.clear();
+									editor.apply();
+								}
+								checkUser();
+							} else{
+								Toast.makeText(Login_Activity.this, "Tài khoản hoặc mật khẩu không đúng", Toast.LENGTH_SHORT).show();
 							}
-							checkUser();
-						} else{
-							Toast.makeText(Login_Activity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
 						}
-					}
-				});
+					});
+				}
+
+
+
+
 			}
 		});
 		txtDangky.setOnClickListener(new View.OnClickListener() {

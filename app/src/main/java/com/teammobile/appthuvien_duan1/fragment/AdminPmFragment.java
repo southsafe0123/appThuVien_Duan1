@@ -12,14 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.teammobile.appthuvien_duan1.R;
 import com.teammobile.appthuvien_duan1.activity.QuanLyActivity;
-import com.teammobile.appthuvien_duan1.adapter.Cart2Adapter;
+import com.teammobile.appthuvien_duan1.adapter.AdminCartAdapter;
 import com.teammobile.appthuvien_duan1.dao.PhieuMuonDAO;
 import com.teammobile.appthuvien_duan1.dao.SachDAO;
 import com.teammobile.appthuvien_duan1.interfaces.ISachDAO;
@@ -35,7 +34,7 @@ public class AdminPmFragment extends Fragment {
     private QuanLyActivity activity;
     private View view;
     private RecyclerView rcv;
-    private Cart2Adapter adapter;
+    private AdminCartAdapter adapter;
     private String maPM = "N/A";
     private Button btnSubmit, btnAccept,btnDecline;
 
@@ -53,21 +52,27 @@ public class AdminPmFragment extends Fragment {
         btnSubmit = view.findViewById(R.id.btnSubmit);
         btnAccept = view.findViewById(R.id.btnAccept);
         btnDecline=view.findViewById(R.id.btnDecline);
-
+        if(pm.getTrangThai()==-1){
+            btnDecline.setText("Hóa đơn đã hủy");
+            btnDecline.setEnabled(false);
+        }
         if (pm.getTrangThai() ==0) {
             btnSubmit.setVisibility(View.VISIBLE);
-        }
-        if(pm.getTrangThai()<=1){
             btnAccept.setText("Xác nhận phiếu mượn");
-
+            btnAccept.setVisibility(View.VISIBLE);
         }
         if(pm.getTrangThai()==3){
+            btnAccept.setVisibility(View.VISIBLE);
             btnAccept.setText("Trả hàng");
-
+            btnDecline.setEnabled(false);
+        }
+        if(pm.getTrangThai()==2){
+            btnAccept.setVisibility(View.VISIBLE);
+            btnAccept.setText("Thanh toán");
         }
         if(pm.getTrangThai()>3){
-            btnAccept.setVisibility(View.INVISIBLE);
-            btnDecline.setVisibility(View.INVISIBLE);
+            btnAccept.setEnabled(false);
+            btnDecline.setEnabled(false);
         }
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,8 +118,17 @@ public class AdminPmFragment extends Fragment {
                 }
             }
         });
-        fetchingData();
+        btnDecline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(pm.getTrangThai()<3){
+                    pm.setTrangThai(-1);
+                    updatePM();
+                }
 
+            }
+        });
+        fetchingData();
         return view;
     }
 
@@ -125,7 +139,7 @@ public class AdminPmFragment extends Fragment {
         Bundle bundle = getArguments();
         phieuMuonDAO = new PhieuMuonDAO();
         pm = (PhieuMuon) bundle.getSerializable("pm");
-
+        activity.setTrangThai(pm.getTrangThai());
     }
 
     public void fetchingData() {
@@ -151,14 +165,12 @@ public class AdminPmFragment extends Fragment {
     public void loadUI() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         myList = new ArrayList<>();
-
-
         for (Map.Entry<String, Sach> entry : pm.getSach().entrySet()) {
             Sach sach = entry.getValue();
             myList.add(new Sach(entry.getKey(), sach.getLoai(), sach.getTacGia(), sach.getTenSach(), sach.getHinhAnh(), sach.getSoLuong(), sach.getGiaThue(), sach.getVitridesach(), sach.getIsActive()));
 
         }
-        adapter = new Cart2Adapter(context, myList);
+        adapter = new AdminCartAdapter(context, myList);
         rcv.setLayoutManager(linearLayoutManager);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rcv.getContext(),
                 linearLayoutManager.getOrientation());
@@ -177,7 +189,7 @@ public class AdminPmFragment extends Fragment {
             public void onCallBack(Boolean check) {
                 if (check) {
                     reload();
-
+                    activity.setTrangThai(pm.getTrangThai());
                 }
             }
         });
@@ -190,6 +202,7 @@ public class AdminPmFragment extends Fragment {
         Bundle bundle=new Bundle();
         bundle.putSerializable("pm",pm);
         fragment.setArguments(bundle);
+        fm.popBackStack();
         fm.beginTransaction().addToBackStack(null).replace(R.id.viewFragmentQuanLy,fragment).commit();
 
     }

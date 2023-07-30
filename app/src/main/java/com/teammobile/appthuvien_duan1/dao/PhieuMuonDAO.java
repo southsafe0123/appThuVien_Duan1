@@ -53,8 +53,7 @@ public class PhieuMuonDAO {
                 for(DataSnapshot data: snapshot.getChildren()){
 
                     PhieuMuon pm=data.getValue(PhieuMuon.class);
-                    if(pm.getTrangThai()>=0)
-                        list.add(new PhieuMuon(data.getKey(),pm.getSach(),pm.getUser(),pm.getNgayTao(), pm.getNgayTra(), pm.getTongTien(), pm.getTrangThai()));
+                    list.add(new PhieuMuon(data.getKey(),pm.getSach(),pm.getUser(),pm.getNgayTao(), pm.getNgayTra(), pm.getTongTien(), pm.getTrangThai()));
 
                 }
                 getAllCalBack.onCallBack(list);
@@ -74,6 +73,7 @@ public class PhieuMuonDAO {
             @Override
             public void onSuccess(Void unused) {
                 updateCallBack.onCallBack(true);
+
             }
         });
     }
@@ -86,7 +86,7 @@ public class PhieuMuonDAO {
                 for(DataSnapshot data: snapshot.getChildren()){
                     PhieuMuon pm=data.getValue(PhieuMuon.class);
 
-                    if(pm.getTrangThai()>=0&&pm.getUser().getMa().equals(uid))
+                    if(pm.getUser().getMa().equals(uid))
                         list.add(new PhieuMuon(data.getKey(),pm.getSach(),pm.getUser(),pm.getNgayTao(),pm.getNgayTra(),pm.getTongTien(), pm.getTrangThai()));
                 }
                 iGetPM.onCallBack(list);

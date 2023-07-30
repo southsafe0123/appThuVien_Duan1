@@ -16,11 +16,11 @@ import com.teammobile.appthuvien_duan1.model.Sach;
 
 import java.util.ArrayList;
 
-public class Cart3Adapter extends RecyclerView.Adapter<Cart3Adapter.ViewHolder> {
+public class ClientCartAdapter extends RecyclerView.Adapter<ClientCartAdapter.ViewHolder> {
     private Context context;
     private ArrayList<Sach> list;
 
-    public Cart3Adapter(Context context, ArrayList<Sach> list) {
+    public ClientCartAdapter(Context context, ArrayList<Sach> list) {
         this.context = context;
         this.list = list;
     }
@@ -36,8 +36,8 @@ public class Cart3Adapter extends RecyclerView.Adapter<Cart3Adapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tvTenSach.setText(list.get(position).getTenSach());
         Glide.with(context).load(list.get(position).getHinhAnh()).into(holder.ivHinh);
-        holder.tvSL.setText(list.get(position).getSoLuong()+"");
-
+        holder.tvSL.setText(""+list.get(position).getSoLuong());
+        holder.tvGia.setText("Giá: "+list.get(position).getSoLuong()*list.get(position).getGiaThue());
     }
 
     @Override
@@ -46,13 +46,14 @@ public class Cart3Adapter extends RecyclerView.Adapter<Cart3Adapter.ViewHolder> 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvTenSach,tvSL;
-        private ImageView ivHinh,btnEdit;
+        private TextView tvTenSach,tvSL,tvGia;
+        private ImageView ivHinh;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTenSach=itemView.findViewById(R.id.tvTen);
             tvSL=itemView.findViewById(R.id.tvSL);
             ivHinh=itemView.findViewById(R.id.ivHinh);
+            tvGia=itemView.findViewById(R.id.tvGia);
         }
     }
 }

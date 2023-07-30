@@ -8,5 +8,8 @@
     <string name="search_title" />
     <string name="underline"><u>Đăng ký</u></string>
     <string name="quenmatkhau"><u>Quên mật khẩu</u></string>
+    <string name="gachduoiTongtien"><u>Tổng đơn hàng: 0 VND</u></string>
+    <string name="soluong"><u>1</u></string>
+
 
 </resources>

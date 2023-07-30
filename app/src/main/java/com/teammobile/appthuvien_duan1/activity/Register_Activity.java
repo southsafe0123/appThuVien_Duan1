@@ -52,51 +52,72 @@ public class Register_Activity extends AppCompatActivity {
 		btnDangky.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String username=edtUsername.getText().toString();
+				String taikhoan=edtUsername.getText().toString();
 				String email = edtEmail.getText().toString();
 				String matkhau = edtMatkhau.getText().toString();
 				String nhaplai = edtNhaplai.getText().toString();
 				Map<String,Object> map=new HashMap<>();
 
 
-				if(!matkhau.equals(nhaplai)){
-					Toast.makeText(Register_Activity.this, "Mật khẩu không trùng", Toast.LENGTH_SHORT).show();
 
+
+				if (taikhoan.isEmpty() && email.isEmpty() && matkhau.isEmpty() && nhaplai.isEmpty()) {
+					Toast.makeText(Register_Activity.this, "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
 					return;
-				}
-				mAuth.createUserWithEmailAndPassword(email,nhaplai).addOnCompleteListener(Register_Activity.this, new OnCompleteListener<AuthResult>() {
-					@Override
-					public void onComplete(@NonNull Task<AuthResult> task) {
-						if(task.isSuccessful()){
-							mUser = mAuth.getCurrentUser();
+				}else if (taikhoan.isEmpty()) {
+						 Toast.makeText(Register_Activity.this, "Vui lòng nhập tài khoản", Toast.LENGTH_SHORT).show();
+					 } else if (taikhoan.matches(".*[@#$%^&+=]+.*")) {
+					Toast.makeText(Register_Activity.this, "Không được sử dụng ký tự đặc biệt để đăng ký", Toast.LENGTH_SHORT).show();
+					}else if (email.isEmpty()) {
+						Toast.makeText(Register_Activity.this, "Vui lòng nhập email", Toast.LENGTH_SHORT).show();
+					} else if (matkhau.matches(".*[@#$%^&+=]+.*")) {
+						Toast.makeText(Register_Activity.this, "Không được sử dụng ký tự đặc biệt để đăng ký", Toast.LENGTH_SHORT).show();
+					} else if (matkhau.isEmpty()) {
+						Toast.makeText(Register_Activity.this, "Vui lòng nhập mật khẩu", Toast.LENGTH_SHORT).show();
+					} else if (!matkhau.equals(nhaplai)) {
+						Toast.makeText(Register_Activity.this, "Mật khẩu không trùng", Toast.LENGTH_SHORT).show();
+						return;
+					} else if (matkhau.length() < 6) {
+						Toast.makeText(Register_Activity.this, "Mật khẩu phải có ít nhất 6 ký tự", Toast.LENGTH_SHORT).show();
+					} else if (!matkhau.matches(".*[a-zA-Z].*")) {
+						Toast.makeText(Register_Activity.this, "Mật khẩu phải chứa ít nhất 1 ký tự chữ", Toast.LENGTH_SHORT).show();
+					} else if (!matkhau.matches(".*\\d.*")) {
+						Toast.makeText(Register_Activity.this, "Mật khẩu phải chứa ít nhất 1 số", Toast.LENGTH_SHORT).show();
+					} else {
+						mAuth.createUserWithEmailAndPassword(email, nhaplai).addOnCompleteListener(Register_Activity.this, new OnCompleteListener<AuthResult>() {
+							@Override
+							public void onComplete(@NonNull Task<AuthResult> task) {
+								if (task.isSuccessful()) {
+									mUser = mAuth.getCurrentUser();
 
-							User user=new User(mUser.getUid(),email,username,matkhau,0,1);
+									User user = new User(mUser.getUid(), email, taikhoan, matkhau, 0, 1);
 
-							userDAO.insert(user, new UserDAO.InsertCallBack() {
-								@Override
-								public void onCallBack(Boolean check) {
-									if(check)
-										Toast.makeText(Register_Activity.this, "Thêm ng dùng thành công", Toast.LENGTH_SHORT).show();
-									else
-										Toast.makeText(Register_Activity.this, "Thêm ng dùng thất bại", Toast.LENGTH_SHORT).show();
+									userDAO.insert(user, new UserDAO.InsertCallBack() {
+										@Override
+										public void onCallBack(Boolean check) {
+											if (check) {
+												Toast.makeText(Register_Activity.this, "Thêm người dùng thành công", Toast.LENGTH_SHORT).show();
+											} else {
+												Toast.makeText(Register_Activity.this, "Thêm người dùng thất bại", Toast.LENGTH_SHORT).show();
+											}
+										}
+									});
 
+									Bundle bundle = new Bundle();
+									bundle.putString("email", email);
+									bundle.putString("password", nhaplai);
+
+									Intent intent = new Intent(Register_Activity.this, Login_Activity.class);
+									intent.putExtras(bundle);
+									startActivity(intent);
+									Toast.makeText(Register_Activity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+								} else {
+									Toast.makeText(Register_Activity.this, "Email không hợp lê", Toast.LENGTH_SHORT).show();
 								}
-							});
-							Bundle bundle = new Bundle();
-							bundle.putString("email",email);
-							bundle.putString("password",nhaplai);
+							}
+						});
+				}
 
-							Intent intent = new Intent(Register_Activity.this,Login_Activity.class);
-							intent.putExtras(bundle);
-							startActivity(intent);
-							Toast.makeText(Register_Activity.this, "Success", Toast.LENGTH_SHORT).show();
-						}
-						else{
-							Toast.makeText(Register_Activity.this, "Fail", Toast.LENGTH_SHORT).show();
-
-						}
-					}
-				});
 			}
 
 
