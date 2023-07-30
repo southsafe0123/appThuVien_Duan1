@@ -47,7 +47,7 @@ public class SearchFragment extends Fragment {
         TacGiaDAO tacGiaDAO = new TacGiaDAO();
         LoaiDAO theloaiDAO = new LoaiDAO();
 
-        
+
         theloaiDAO.getAll(new ILoaiDAO() {
             @Override
             public void onCallBackInsert(Boolean check) {
@@ -78,22 +78,17 @@ public class SearchFragment extends Fragment {
         btnTimKiem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!chkTacgia.isChecked() && !chkTheloai.isChecked()){
-                    String ten = edtTenTruyen.getText().toString();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("ten", ten);
-                    SearchFragment2 searchFragment2 = new SearchFragment2();
-                    searchFragment2.setArguments(bundle);
-                    FragmentManager fm= requireActivity().getSupportFragmentManager();
-                    fm.beginTransaction().replace(R.id.frag_main,searchFragment2).commit();
-                } else if (chkTacgia.isChecked() && !chkTheloai.isChecked()){
-
-                } else if (chkTacgia.isChecked() && chkTheloai.isChecked()){
-
+                if (!chkTacgia.isChecked() && !chkTheloai.isChecked()) {
+                    checkSearch(1);
+                } else if (chkTacgia.isChecked() && !chkTheloai.isChecked()) {
+                    checkSearch(2);
+                } else if (chkTacgia.isChecked() && chkTheloai.isChecked()) {
+                    checkSearch(3);
+                } else {
+                    checkSearch(4);
                 }
             }
         });
-
         return view;
     }
 
@@ -104,7 +99,7 @@ public class SearchFragment extends Fragment {
         chkTacgia.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (chkTacgia.isChecked()){
+                if (chkTacgia.isChecked()) {
                     spnTacGia.setVisibility(View.VISIBLE);
                 } else {
                     spnTacGia.setVisibility(View.GONE);
@@ -115,13 +110,37 @@ public class SearchFragment extends Fragment {
         chkTheloai.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (chkTheloai.isChecked()){
+                if (chkTheloai.isChecked()) {
                     spnTheLoai.setVisibility(View.VISIBLE);
                 } else {
                     spnTheLoai.setVisibility(View.GONE);
                 }
             }
         });
+    }
 
+    void checkSearch(int typeSearch) {
+        String ten = edtTenTruyen.getText().toString();
+        String tenTg = spnTacGia.getSelectedItem().toString();
+        String tenTloai = spnTheLoai.getSelectedItem().toString();
+        if (ten.isEmpty()) {
+            ten = "";
+        }
+        if (tenTg == null) {
+            tenTg = "";
+        }
+        if (tenTloai == null) {
+            tenTloai = "";
+        }
+
+        Bundle bundle = new Bundle();
+        bundle.putString("ten", ten);
+        bundle.putString("tenTg", tenTg);
+        bundle.putString("tenTloai", tenTloai);
+        bundle.putInt("search", typeSearch);
+        SearchFragment2 searchFragment2 = new SearchFragment2();
+        searchFragment2.setArguments(bundle);
+        FragmentManager fm = requireActivity().getSupportFragmentManager();
+        fm.beginTransaction().replace(R.id.frag_main, searchFragment2).commit();
     }
 }

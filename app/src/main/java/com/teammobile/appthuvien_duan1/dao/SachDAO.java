@@ -117,10 +117,19 @@ public class SachDAO {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
-                for (DataSnapshot data: snapshot.getChildren()){
-                    Sach sach = data.getValue(Sach.class);
-                    if (sach.getTenSach().toLowerCase().contains(ten.toLowerCase()) && sach.getIsActive()>0){
-                        list.add(new Sach(data.getKey(),sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(), sach.getVitridesach(), sach.getIsActive()));
+                if (ten.equals("")){
+                    for (DataSnapshot data: snapshot.getChildren()){
+                        Sach sach = data.getValue(Sach.class);
+                        if (sach.getIsActive()>0){
+                            list.add(new Sach(data.getKey(),sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(), sach.getVitridesach(), sach.getIsActive()));
+                        }
+                    }
+                } else {
+                    for (DataSnapshot data: snapshot.getChildren()){
+                        Sach sach = data.getValue(Sach.class);
+                        if (sach.getTenSach().toLowerCase().contains(ten.toLowerCase()) && sach.getIsActive()>0){
+                            list.add(new Sach(data.getKey(),sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(), sach.getVitridesach(), sach.getIsActive()));
+                        }
                     }
                 }
                 Log.d("OK",list.size()+"");
@@ -133,9 +142,30 @@ public class SachDAO {
             }
         });
     }
+
+    public void searchDsByTgia(String tenTg, ArrayList<Sach> sach, ISachDAO iSachDAO0){
+        ArrayList<Sach> list = new ArrayList<>();
+        for (Sach sach1 : sach){
+            if (sach1.getTacGia().getTenTacGia().equals(tenTg)){
+                list.add(sach1);
+            }
+        }
+        iSachDAO0.onCallBackGetAll(list);
+    }
+
+    public void searchDsByTloai(String tenTloai, ArrayList<Sach> sach, ISachDAO iSachDAO0){
+        ArrayList<Sach> list = new ArrayList<>();
+        for (Sach sach1 : sach){
+            if (sach1.getLoai().getTenLoai().equals(tenTloai)){
+                list.add(sach1);
+            }
+        }
+        iSachDAO0.onCallBackGetAll(list);
+    }
+
     public void delete(String ma,DeleteCallBack deleteCallBack)
     {
-        DatabaseReference mRef=reference.child(ma+"/isActive");
+        DatabaseReference mRef = reference.child(ma + "/isActive");
         mRef.setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
