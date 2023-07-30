@@ -36,8 +36,8 @@ public class Cart3Adapter extends RecyclerView.Adapter<Cart3Adapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tvTenSach.setText(list.get(position).getTenSach());
         Glide.with(context).load(list.get(position).getHinhAnh()).into(holder.ivHinh);
-        holder.tvSL.setText(list.get(position).getSoLuong()+"");
-
+        holder.tvSL.setText("SL: "+list.get(position).getSoLuong());
+        holder.tvGia.setText(list.get(position).getSoLuong()*list.get(position).getGiaThue()+"");
     }
 
     @Override
@@ -46,13 +46,14 @@ public class Cart3Adapter extends RecyclerView.Adapter<Cart3Adapter.ViewHolder> 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvTenSach,tvSL;
+        private TextView tvTenSach,tvSL,tvGia;
         private ImageView ivHinh,btnEdit;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTenSach=itemView.findViewById(R.id.tvTen);
             tvSL=itemView.findViewById(R.id.tvSL);
             ivHinh=itemView.findViewById(R.id.ivHinh);
+            tvGia=itemView.findViewById(R.id.tvGia);
         }
     }
 }

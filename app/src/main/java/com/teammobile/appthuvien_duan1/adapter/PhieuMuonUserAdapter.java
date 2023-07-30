@@ -42,6 +42,10 @@ public class PhieuMuonUserAdapter extends RecyclerView.Adapter<PhieuMuonUserAdap
         String tt="";
         switch (list.get(position).getTrangThai())
         {
+            case -1:
+                tt="Bị hủy";
+                holder.tvTrangThai.setTextColor(Color.parseColor("#FF0000"));
+                break;
             case 0:
                 tt="Chờ xác nhận";
                 holder.tvTrangThai.setTextColor(Color.parseColor("#FFD700"));

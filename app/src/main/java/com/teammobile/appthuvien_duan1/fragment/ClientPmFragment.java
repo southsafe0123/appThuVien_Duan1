@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.teammobile.appthuvien_duan1.R;
 import com.teammobile.appthuvien_duan1.adapter.Cart3Adapter;
-import com.teammobile.appthuvien_duan1.adapter.CartAdapter;
 import com.teammobile.appthuvien_duan1.dao.PhieuMuonDAO;
 import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 import com.teammobile.appthuvien_duan1.model.Sach;
@@ -28,8 +27,8 @@ import java.util.Map;
 
 public class ClientPmFragment extends Fragment {
     private Context context;
-    private PhieuMuon phieuMuon;
-    private AppCompatButton btnConfirm;
+    private PhieuMuon pm;
+    private AppCompatButton btnConfirm,btnDecline;
     private PhieuMuonDAO phieuMuonDAO;
     private Cart3Adapter adapter;
     private RecyclerView rcv;
@@ -40,14 +39,19 @@ public class ClientPmFragment extends Fragment {
         khoiTao();
         View view=LayoutInflater.from(context).inflate(R.layout.fragment_client_pm,container,false);
         btnConfirm=view.findViewById(R.id.btnConfirm);
+        btnDecline=view.findViewById(R.id.btnDecline);
         rcv=view.findViewById(R.id.rcv);
-        if(phieuMuon.getTrangThai()==1){
+        if(pm.getTrangThai()==-1){
+            btnDecline.setText("Đã hủy đơn");
+            btnDecline.setEnabled(false);
+        }
+        if(pm.getTrangThai()==1){
             btnConfirm.setVisibility(View.VISIBLE);
             btnConfirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    phieuMuon.setTrangThai(0);
-                    phieuMuonDAO.update(phieuMuon, new PhieuMuonDAO.IUpdate() {
+                    pm.setTrangThai(0);
+                    phieuMuonDAO.update(pm, new PhieuMuonDAO.IUpdate() {
                         @Override
                         public void onCallBack(Boolean check) {
                             if(check){
@@ -59,6 +63,20 @@ public class ClientPmFragment extends Fragment {
                 }
             });
         }
+        btnDecline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(pm.getTrangThai()==3){
+                    Toast.makeText(context, "Bạn ko thể hủy đơn này do đang giữ sách!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if(pm.getTrangThai()!=-1){
+                    pm.setTrangThai(-1);
+                    updatePM();
+                }
+
+            }
+        });
         fetchingData();
         return view;
     }
@@ -66,12 +84,12 @@ public class ClientPmFragment extends Fragment {
     {
         context=getContext();
         Bundle bundle=getArguments();
-        phieuMuon= (PhieuMuon) bundle.getSerializable("pm");
+        pm = (PhieuMuon) bundle.getSerializable("pm");
         phieuMuonDAO=new PhieuMuonDAO();
     }
     public void fetchingData()
     {
-        Map<String, Sach> map= (HashMap<String, Sach>) phieuMuon.getSach();
+        Map<String, Sach> map= (HashMap<String, Sach>) pm.getSach();
         ArrayList<Sach> list=new ArrayList<>();
         for(Map.Entry<String,Sach> entry: map.entrySet()){
             Sach sach=entry.getValue();
@@ -90,9 +108,19 @@ public class ClientPmFragment extends Fragment {
     {
         Fragment fragment=new ClientPmFragment();
         Bundle bundle=new Bundle();
-        bundle.putSerializable("pm",phieuMuon);
+        bundle.putSerializable("pm", pm);
         fragment.setArguments(bundle);
         FragmentManager fm=getActivity().getSupportFragmentManager();
+        fm.popBackStack();
         fm.beginTransaction().addToBackStack(null).replace(R.id.frag_main,fragment).commit();
+    }
+    public void updatePM()
+    {
+        phieuMuonDAO.update(pm, new PhieuMuonDAO.IUpdate() {
+            @Override
+            public void onCallBack(Boolean check) {
+                reload();
+            }
+        });
     }
 }

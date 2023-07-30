@@ -8,9 +8,15 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv"
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="550dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="50dp"
+        android:layout_alignParentEnd="true"
+
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +33,7 @@
             android:id="@+id/btnConfirm"
             android:layout_height="wrap_content"/>
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnHuy"
+            android:id="@+id/btnDecline"
             android:text="Hủy đơn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

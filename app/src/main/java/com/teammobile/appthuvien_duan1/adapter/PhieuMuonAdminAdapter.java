@@ -43,6 +43,10 @@ public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAd
         holder.tvMa.setText("Mã hóa đơn: "+list.get(position).getMa()+"");
         String tt="";
         switch (list.get(position).getTrangThai()){
+            case -1:
+                tt="Hóa đơn bị hủy";
+                holder.tvTT.setTextColor(Color.parseColor("#FF0000"));
+                break;
             case 0:
                 tt="Chờ xác nhận";
                 holder.tvTT.setTextColor(Color.parseColor("#FFD700"));

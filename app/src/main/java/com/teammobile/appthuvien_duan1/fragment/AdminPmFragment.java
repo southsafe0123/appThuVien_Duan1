@@ -53,21 +53,27 @@ public class AdminPmFragment extends Fragment {
         btnSubmit = view.findViewById(R.id.btnSubmit);
         btnAccept = view.findViewById(R.id.btnAccept);
         btnDecline=view.findViewById(R.id.btnDecline);
-
+        if(pm.getTrangThai()==-1){
+            btnDecline.setText("Hóa đơn đã hủy");
+            btnDecline.setEnabled(false);
+        }
         if (pm.getTrangThai() ==0) {
             btnSubmit.setVisibility(View.VISIBLE);
-        }
-        if(pm.getTrangThai()<=1){
             btnAccept.setText("Xác nhận phiếu mượn");
-
+            btnAccept.setVisibility(View.VISIBLE);
         }
         if(pm.getTrangThai()==3){
+            btnAccept.setVisibility(View.VISIBLE);
             btnAccept.setText("Trả hàng");
-
+            btnDecline.setEnabled(false);
+        }
+        if(pm.getTrangThai()==2){
+            btnAccept.setVisibility(View.VISIBLE);
+            btnAccept.setText("Thanh toán");
         }
         if(pm.getTrangThai()>3){
-            btnAccept.setVisibility(View.INVISIBLE);
-            btnDecline.setVisibility(View.INVISIBLE);
+            btnAccept.setEnabled(false);
+            btnDecline.setEnabled(false);
         }
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,8 +119,17 @@ public class AdminPmFragment extends Fragment {
                 }
             }
         });
-        fetchingData();
+        btnDecline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(pm.getTrangThai()<3){
+                    pm.setTrangThai(-1);
+                    updatePM();
+                }
 
+            }
+        });
+        fetchingData();
         return view;
     }
 
@@ -151,8 +166,6 @@ public class AdminPmFragment extends Fragment {
     public void loadUI() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         myList = new ArrayList<>();
-
-
         for (Map.Entry<String, Sach> entry : pm.getSach().entrySet()) {
             Sach sach = entry.getValue();
             myList.add(new Sach(entry.getKey(), sach.getLoai(), sach.getTacGia(), sach.getTenSach(), sach.getHinhAnh(), sach.getSoLuong(), sach.getGiaThue(), sach.getVitridesach(), sach.getIsActive()));
@@ -190,6 +203,7 @@ public class AdminPmFragment extends Fragment {
         Bundle bundle=new Bundle();
         bundle.putSerializable("pm",pm);
         fragment.setArguments(bundle);
+        fm.popBackStack();
         fm.beginTransaction().addToBackStack(null).replace(R.id.viewFragmentQuanLy,fragment).commit();
 
     }

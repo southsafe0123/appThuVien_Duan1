@@ -46,7 +46,6 @@ public class Cart2Adapter extends RecyclerView.Adapter<Cart2Adapter.ViewHodler> 
         holder.tvTen.setText(list.get(position).getTenSach());
         int sl= Integer.parseInt(holder.tvSL.getText().toString());
         if(activity.getTrangThai()==0){
-            Toast.makeText(context, "ok", Toast.LENGTH_SHORT).show();
             holder.btnTang.setVisibility(View.VISIBLE);
             holder.btnGiam.setVisibility(View.VISIBLE);
             holder.btnTang.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +74,7 @@ public class Cart2Adapter extends RecyclerView.Adapter<Cart2Adapter.ViewHodler> 
                 }
             });
         }
-        holder.tvGia.setText(list.get(position).getSoLuong()*list.get(position).getGiaThue()+"");
+        holder.tvGia.setText("Giá: "+list.get(position).getSoLuong()*list.get(position).getGiaThue()+" VNĐ");
     }
 
     @Override

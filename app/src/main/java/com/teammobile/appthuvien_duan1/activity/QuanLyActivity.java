@@ -137,9 +137,6 @@ public class QuanLyActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        FragmentManager fm=getSupportFragmentManager();
-        if(fm.findFragmentByTag("fragment_menu")!=null&&fm.findFragmentByTag("fragment_menu").isVisible()){
-            finish();
-        }
+
     }
 }
