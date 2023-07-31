@@ -47,6 +47,8 @@ public class ClientPmFragment extends Fragment {
             btnDecline.setText("Đã hủy đơn");
             btnDecline.setEnabled(false);
         }
+        if(pm.getTrangThai()==4)
+            btnDecline.setText("DONE");
         if(pm.getTrangThai()==1){
             btnConfirm.setVisibility(View.VISIBLE);
             btnConfirm.setOnClickListener(new View.OnClickListener() {
@@ -68,8 +70,8 @@ public class ClientPmFragment extends Fragment {
         btnDecline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(pm.getTrangThai()==3){
-                    Toast.makeText(context, "Bạn ko thể hủy đơn này do đang giữ sách!", Toast.LENGTH_SHORT).show();
+                if(pm.getTrangThai()>=3){
+                    Toast.makeText(context, "Bạn ko thể hủy hóa đơn ngay lúc này!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else if(pm.getTrangThai()!=-1){
