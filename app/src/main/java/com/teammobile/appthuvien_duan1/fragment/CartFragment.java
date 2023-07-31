@@ -91,6 +91,7 @@ public class CartFragment extends Fragment implements CartAdapter.TongTien {
             public void thayDoiTongTien(int tongTien) {
                 if(tongGiohang==0){
                     String tongGiaTri = "Giỏ hàng hiện không có sách";
+
                     txtTongtien.setText(tongGiaTri);
                 } else {
                     String tongGiaTri = "Tổng đơn hàng: " + tongTien + " VND";
@@ -132,8 +133,9 @@ public class CartFragment extends Fragment implements CartAdapter.TongTien {
 
 
                             if(list!=null || !list.isEmpty()){
-
+                                tongGiohang = 0;
                                 for(Sach sach: list){
+                                    tongGiohang+=sach.getGiaThue()*sach.getSoLuong();
                                     Sach item=new Sach(sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach(),sach.getIsActive());
                                     map.put(sach.getMaSach(),item);
                                 }

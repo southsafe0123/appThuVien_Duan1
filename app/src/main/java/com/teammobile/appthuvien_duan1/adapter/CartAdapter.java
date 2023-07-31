@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.teammobile.appthuvien_duan1.R;
@@ -38,13 +39,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 	private AlertDialog alertDialog;
 
 	private TongTien tongTien;
-	private TongTien tongTienListener;
 
 
-
-	public void setTongTienListener(TongTien tongTienListener) {
-		this.tongTienListener = tongTienListener;
-	}
 
 	int tongGiohang = 0;
 
