@@ -90,12 +90,7 @@ public class ClientPmFragment extends Fragment {
         Bundle bundle=getArguments();
         pm = (PhieuMuon) bundle.getSerializable("pm");
         phieuMuonDAO=new PhieuMuonDAO();
-//        phieuMuonDAO.getCurPM(pm.getMa(), new PhieuMuonDAO.IGetCurPM() {
-//            @Override
-//            public void onCallBack(PhieuMuon phieuMuon) {
-//                reload();
-//            }
-//        });
+//
     }
     public void fetchingData()
     {
@@ -120,9 +115,12 @@ public class ClientPmFragment extends Fragment {
         Bundle bundle=new Bundle();
         bundle.putSerializable("pm", pm);
         fragment.setArguments(bundle);
-        FragmentManager fm=activity .getSupportFragmentManager();
-        fm.popBackStack();
-        fm.beginTransaction().addToBackStack(null).replace(R.id.frag_main,fragment).commit();
+        FragmentManager fm=activity.getSupportFragmentManager();
+        if(fm.findFragmentById(R.id.frag_main)!=null){
+            fm.popBackStack();
+            fm.beginTransaction().addToBackStack(null).replace(R.id.frag_main,fragment).commit();
+        }
+
     }
     public void updatePM()
     {
@@ -137,5 +135,13 @@ public class ClientPmFragment extends Fragment {
 
             }
         });
+        phieuMuonDAO.getCurPM(pm.getMa(), new PhieuMuonDAO.IGetCurPM() {
+            @Override
+            public void onCallBack(PhieuMuon phieuMuon) {
+                if(pm.getTrangThai()!=phieuMuon.getTrangThai())
+                    reload();
+            }
+        });
+
     }
 }
