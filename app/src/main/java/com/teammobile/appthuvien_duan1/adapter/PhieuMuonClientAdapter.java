@@ -1,6 +1,5 @@
 package com.teammobile.appthuvien_duan1.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -20,11 +19,11 @@ import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 
 import java.util.ArrayList;
 
-public class PhieuMuonUserAdapter extends RecyclerView.Adapter<PhieuMuonUserAdapter.ViewHolder> {
+public class PhieuMuonClientAdapter extends RecyclerView.Adapter<PhieuMuonClientAdapter.ViewHolder> {
     private Context context;
     private ArrayList<PhieuMuon> list;
     private MainActivity activity;
-    public PhieuMuonUserAdapter(Context context, ArrayList<PhieuMuon> list) {
+    public PhieuMuonClientAdapter(Context context, ArrayList<PhieuMuon> list) {
         this.context = context;
         this.list = list;
         activity= (MainActivity) context;
@@ -104,4 +103,5 @@ public class PhieuMuonUserAdapter extends RecyclerView.Adapter<PhieuMuonUserAdap
             btnEdit=itemView.findViewById(R.id.btnEdit);
         }
     }
+
 }

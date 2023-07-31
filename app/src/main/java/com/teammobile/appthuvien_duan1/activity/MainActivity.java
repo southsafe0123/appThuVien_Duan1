@@ -16,9 +16,11 @@ import com.teammobile.appthuvien_duan1.fragment.CartFragment;
 import com.teammobile.appthuvien_duan1.fragment.SearchFragment;
 import com.teammobile.appthuvien_duan1.fragment.UserFragment;
 import com.teammobile.appthuvien_duan1.fragment.HomeFragment;
+import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 
 
 public class MainActivity extends AppCompatActivity {
+    private PhieuMuon curPM;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,5 +63,13 @@ public class MainActivity extends AppCompatActivity {
     {
         FragmentManager fm=getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.frag_main,fragment).addToBackStack(null).commit();
+    }
+
+    public PhieuMuon getCurPM() {
+        return curPM;
+    }
+
+    public void setCurPM(PhieuMuon curPM) {
+        this.curPM = curPM;
     }
 }

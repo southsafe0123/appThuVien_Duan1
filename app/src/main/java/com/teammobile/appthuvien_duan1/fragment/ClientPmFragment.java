@@ -34,7 +34,7 @@ public class ClientPmFragment extends Fragment {
     private PhieuMuonDAO phieuMuonDAO;
     private ClientCartAdapter adapter;
     private RecyclerView rcv;
-
+    private MainActivity activity;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -84,10 +84,18 @@ public class ClientPmFragment extends Fragment {
     }
     public void khoiTao()
     {
+
         context=getContext();
+        activity= (MainActivity) context;
         Bundle bundle=getArguments();
         pm = (PhieuMuon) bundle.getSerializable("pm");
         phieuMuonDAO=new PhieuMuonDAO();
+        phieuMuonDAO.getCurPM(pm.getMa(), new PhieuMuonDAO.IGetCurPM() {
+            @Override
+            public void onCallBack(PhieuMuon phieuMuon) {
+                reload();
+            }
+        });
     }
     public void fetchingData()
     {
