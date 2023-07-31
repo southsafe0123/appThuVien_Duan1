@@ -128,6 +128,7 @@ public class QuanLyActivity extends AppCompatActivity {
         {
             case android.R.id.home:
             {
+                startActivity(new Intent(this,MainActivity.class));
                 finish();
                 break;
             }
