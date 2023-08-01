@@ -3,6 +3,7 @@ package com.teammobile.appthuvien_duan1.adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +11,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.teammobile.appthuvien_duan1.R;
 import com.teammobile.appthuvien_duan1.activity.QuanLyActivity;
+import com.teammobile.appthuvien_duan1.dao.PhieuMuonDAO;
 import com.teammobile.appthuvien_duan1.fragment.AdminPmFragment;
 import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 
@@ -23,11 +27,12 @@ public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAd
     private Context context;
     private ArrayList<PhieuMuon> list;
     private QuanLyActivity activity;
+    private PhieuMuonDAO phieuMuonDAO;
     public PhieuMuonAdminAdapter(Context context, ArrayList<PhieuMuon> list) {
         this.context = context;
         this.list = list;
         activity= (QuanLyActivity) context;
-
+        phieuMuonDAO=new PhieuMuonDAO();
     }
 
     @NonNull
@@ -75,12 +80,28 @@ public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAd
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AdminPmFragment fragment=new AdminPmFragment();
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("pm",list.get(holder.getAdapterPosition()));
-                activity.setTrangThai(list.get(holder.getAdapterPosition()).getTrangThai());
-                fragment.setArguments(bundle);
-                activity.loadFragment(fragment);
+                activity.setCurPM(list.get(holder.getAdapterPosition()));
+                phieuMuonDAO.getCurPM(list.get(holder.getAdapterPosition()).getMa(), new PhieuMuonDAO.IGetCurPM() {
+                    @Override
+                    public void onCallBack(PhieuMuon phieuMuon) {
+                        Fragment fragment=new AdminPmFragment();
+                        Bundle bundle=new Bundle();
+                        bundle.putSerializable("pm",phieuMuon);
+                        fragment.setArguments(bundle);
+                        if(activity.getCurPM()!=null){
+                            FragmentManager fm=activity.getSupportFragmentManager();
+                            if(!fm.isDestroyed()&&fm.findFragmentByTag("curPM")!=null){
+                                fm.popBackStack();
+                                fm.beginTransaction().addToBackStack(null).replace(R.id.viewFragmentQuanLy,fragment,"curPM").commit();
+
+                            }
+                            else if(!fm.isDestroyed()&&fm.findFragmentByTag("curPM")==null){
+                                loadFragment(fragment,"curPM");
+                            }
+                        }
+
+                    }
+                });
 
             }
         });
@@ -106,6 +127,15 @@ public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAd
             tvTenKH=itemView.findViewById(R.id.tvTenKH);
             tvTongTien=itemView.findViewById(R.id.tvTongTien);
             tvNgay=itemView.findViewById(R.id.tvNgay);
+        }
+    }
+    private void loadFragment(Fragment fragment,String tag)
+    {
+        FragmentManager fm=activity.getSupportFragmentManager();
+
+        if(!fm.isDestroyed()){
+
+            fm.beginTransaction().addToBackStack(null).replace(R.id.viewFragmentQuanLy,fragment,"curPM").commit();
         }
     }
 }

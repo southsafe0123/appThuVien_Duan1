@@ -42,11 +42,11 @@ public class AdminPmFragment extends Fragment {
     private PhieuMuonDAO phieuMuonDAO;
     private ArrayList<Sach> myList;
     private PhieuMuon pm;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         khoiTao();
+
         view = LayoutInflater.from(context).inflate(R.layout.fragment_admin_pm, container, false);
         rcv = view.findViewById(R.id.rcv);
         btnSubmit = view.findViewById(R.id.btnSubmit);
@@ -73,6 +73,7 @@ public class AdminPmFragment extends Fragment {
         if(pm.getTrangThai()>3){
             btnAccept.setEnabled(false);
             btnDecline.setEnabled(false);
+            btnDecline.setText("Hoàn thành");
         }
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,6 +141,7 @@ public class AdminPmFragment extends Fragment {
         phieuMuonDAO = new PhieuMuonDAO();
         pm = (PhieuMuon) bundle.getSerializable("pm");
         activity.setTrangThai(pm.getTrangThai());
+
     }
 
     public void fetchingData() {
@@ -188,22 +190,35 @@ public class AdminPmFragment extends Fragment {
             @Override
             public void onCallBack(Boolean check) {
                 if (check) {
-                    reload();
+                    //reload();
                     activity.setTrangThai(pm.getTrangThai());
                 }
             }
         });
-
+        phieuMuonDAO.getCurPM(pm.getMa(), new PhieuMuonDAO.IGetCurPM() {
+            @Override
+            public void onCallBack(PhieuMuon phieuMuon) {
+                Toast.makeText(context, "Thay đổi rồi nè!", Toast.LENGTH_SHORT).show();
+                pm=phieuMuon;
+                reload();
+            }
+        });
     }
     public void reload()
     {
         FragmentManager fm=activity.getSupportFragmentManager();
-        Fragment fragment=new AdminPmFragment();
-        Bundle bundle=new Bundle();
-        bundle.putSerializable("pm",pm);
-        fragment.setArguments(bundle);
-        fm.popBackStack();
-        fm.beginTransaction().addToBackStack(null).replace(R.id.viewFragmentQuanLy,fragment).commit();
+        if(fm!=null){
+            Fragment fragment=new AdminPmFragment();
+            Bundle bundle=new Bundle();
+            bundle.putSerializable("pm",pm);
+            fragment.setArguments(bundle);
+            if(fm.findFragmentById(R.id.viewFragmentQuanLy)!=null){
+                fm.popBackStack();
+                fm.beginTransaction().addToBackStack(null).replace(R.id.viewFragmentQuanLy,fragment).commit();
+            }
+
+        }
+
 
     }
     public void updateStock(ArrayList<Sach> list,int choice)

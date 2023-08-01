@@ -15,8 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.teammobile.appthuvien_duan1.R;
-import com.teammobile.appthuvien_duan1.adapter.PhieuMuonAdminAdapter;
-import com.teammobile.appthuvien_duan1.adapter.PhieuMuonUserAdapter;
+import com.teammobile.appthuvien_duan1.adapter.PhieuMuonClientAdapter;
 import com.teammobile.appthuvien_duan1.dao.PhieuMuonDAO;
 import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 
@@ -27,7 +26,7 @@ public class User_DSPM_Fragment extends Fragment {
     private SharedPreferences sharedPreferences;
     private String uid;
     private PhieuMuonDAO phieuMuonDAO;
-    private PhieuMuonUserAdapter adapter;
+    private PhieuMuonClientAdapter adapter;
     private RecyclerView rcv;
     @Nullable
     @Override
@@ -56,7 +55,7 @@ public class User_DSPM_Fragment extends Fragment {
     public void loadUI(ArrayList<PhieuMuon> list)
     {
         LinearLayoutManager layoutManager=new LinearLayoutManager(context);
-        adapter= new PhieuMuonUserAdapter(context,list);
+        adapter= new PhieuMuonClientAdapter(context,list);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rcv.getContext(),
                 layoutManager.getOrientation());
         rcv.addItemDecoration(dividerItemDecoration);

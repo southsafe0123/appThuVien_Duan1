@@ -134,6 +134,7 @@ public class CartFragment extends Fragment implements CartAdapter.TongTien {
                             if(list!=null || !list.isEmpty()){
 
                                 for(Sach sach: list){
+
                                     Sach item=new Sach(sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach(),sach.getIsActive());
                                     map.put(sach.getMaSach(),item);
                                 }

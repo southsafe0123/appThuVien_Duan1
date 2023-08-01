@@ -34,7 +34,7 @@ public class ClientPmFragment extends Fragment {
     private PhieuMuonDAO phieuMuonDAO;
     private ClientCartAdapter adapter;
     private RecyclerView rcv;
-
+    private MainActivity activity;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,6 +47,8 @@ public class ClientPmFragment extends Fragment {
             btnDecline.setText("Đã hủy đơn");
             btnDecline.setEnabled(false);
         }
+        if(pm.getTrangThai()==4)
+            btnDecline.setText("DONE");
         if(pm.getTrangThai()==1){
             btnConfirm.setVisibility(View.VISIBLE);
             btnConfirm.setOnClickListener(new View.OnClickListener() {
@@ -68,8 +70,8 @@ public class ClientPmFragment extends Fragment {
         btnDecline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(pm.getTrangThai()==3){
-                    Toast.makeText(context, "Bạn ko thể hủy đơn này do đang giữ sách!", Toast.LENGTH_SHORT).show();
+                if(pm.getTrangThai()>=3){
+                    Toast.makeText(context, "Bạn ko thể hủy hóa đơn ngay lúc này!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 else if(pm.getTrangThai()!=-1){
@@ -84,10 +86,13 @@ public class ClientPmFragment extends Fragment {
     }
     public void khoiTao()
     {
+
         context=getContext();
+        activity= (MainActivity) context;
         Bundle bundle=getArguments();
         pm = (PhieuMuon) bundle.getSerializable("pm");
         phieuMuonDAO=new PhieuMuonDAO();
+//
     }
     public void fetchingData()
     {
@@ -112,9 +117,12 @@ public class ClientPmFragment extends Fragment {
         Bundle bundle=new Bundle();
         bundle.putSerializable("pm", pm);
         fragment.setArguments(bundle);
-        FragmentManager fm=getActivity().getSupportFragmentManager();
-        fm.popBackStack();
-        fm.beginTransaction().addToBackStack(null).replace(R.id.frag_main,fragment).commit();
+        FragmentManager fm=activity.getSupportFragmentManager();
+        if(fm.findFragmentById(R.id.frag_main)!=null){
+            fm.popBackStack();
+            fm.beginTransaction().addToBackStack(null).replace(R.id.frag_main,fragment).commit();
+        }
+
     }
     public void updatePM()
     {
@@ -129,5 +137,13 @@ public class ClientPmFragment extends Fragment {
 
             }
         });
+        phieuMuonDAO.getCurPM(pm.getMa(), new PhieuMuonDAO.IGetCurPM() {
+            @Override
+            public void onCallBack(PhieuMuon phieuMuon) {
+                if(pm.getTrangThai()!=phieuMuon.getTrangThai())
+                    reload();
+            }
+        });
+
     }
 }

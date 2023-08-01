@@ -42,8 +42,10 @@ public class UserFragment extends Fragment {
         btnQuanLy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(role>0)
+                if(role>0){
                     startActivity(new Intent(context, QuanLyActivity.class));
+                    getActivity().finish();
+                }
                 else
                     Toast.makeText(context, "LỖI ", Toast.LENGTH_SHORT).show();
             }

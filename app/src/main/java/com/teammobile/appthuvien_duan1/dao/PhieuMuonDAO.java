@@ -98,6 +98,21 @@ public class PhieuMuonDAO {
             }
         });
     }
+    public void getCurPM(String ma,IGetCurPM iGetCurPM)
+    {
+        reference.child(ma).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                PhieuMuon pm=snapshot.getValue(PhieuMuon.class);
+                iGetCurPM.onCallBack(new PhieuMuon(snapshot.getKey(),pm.getSach(),pm.getUser(),pm.getNgayTao(),pm.getNgayTra(),pm.getTongTien(), pm.getTrangThai()));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     public void update(PhieuMuon pm,IUpdate iUpdate)
     {
         PhieuMuon pm1=new PhieuMuon(pm.getSach(),pm.getUser(),pm.getNgayTao(), pm.getNgayTra(), pm.getTongTien(),pm.getTrangThai());
@@ -132,5 +147,9 @@ public class PhieuMuonDAO {
     public interface IUpdate
     {
         public void onCallBack(Boolean check);
+    }
+    public interface IGetCurPM
+    {
+        public void onCallBack(PhieuMuon phieuMuon);
     }
 }

@@ -1,6 +1,5 @@
 package com.teammobile.appthuvien_duan1.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,23 +10,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.teammobile.appthuvien_duan1.R;
 import com.teammobile.appthuvien_duan1.activity.MainActivity;
+import com.teammobile.appthuvien_duan1.dao.PhieuMuonDAO;
 import com.teammobile.appthuvien_duan1.fragment.ClientPmFragment;
 import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 
 import java.util.ArrayList;
 
-public class PhieuMuonUserAdapter extends RecyclerView.Adapter<PhieuMuonUserAdapter.ViewHolder> {
+public class PhieuMuonClientAdapter extends RecyclerView.Adapter<PhieuMuonClientAdapter.ViewHolder> {
     private Context context;
     private ArrayList<PhieuMuon> list;
     private MainActivity activity;
-    public PhieuMuonUserAdapter(Context context, ArrayList<PhieuMuon> list) {
+    private PhieuMuonDAO phieuMuonDAO;
+    public PhieuMuonClientAdapter(Context context, ArrayList<PhieuMuon> list) {
         this.context = context;
         this.list = list;
         activity= (MainActivity) context;
+        phieuMuonDAO=new PhieuMuonDAO();
     }
 
     @NonNull
@@ -77,11 +81,21 @@ public class PhieuMuonUserAdapter extends RecyclerView.Adapter<PhieuMuonUserAdap
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ClientPmFragment fragment=new ClientPmFragment();
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("pm",list.get(holder.getAdapterPosition()));
-                fragment.setArguments(bundle);
-                activity.loadFragment(fragment);
+                activity.setCurPM(list.get(holder.getAdapterPosition()));
+                phieuMuonDAO.getCurPM(list.get(holder.getAdapterPosition()).getMa(), new PhieuMuonDAO.IGetCurPM() {
+                    @Override
+                    public void onCallBack(PhieuMuon phieuMuon) {
+                        Fragment fragment=new ClientPmFragment();
+                        Bundle bundle=new Bundle();
+                        bundle.putSerializable("pm",phieuMuon);
+                        fragment.setArguments(bundle);
+                        if(activity.getCurPM()==null)
+                            loadFragment(fragment);
+                        else{
+                            activity.loadFragment(fragment);
+                        }
+                    }
+                });
 
             }
         });
@@ -102,6 +116,14 @@ public class PhieuMuonUserAdapter extends RecyclerView.Adapter<PhieuMuonUserAdap
             tvTongTien=itemView.findViewById(R.id.tvTongTien);
             tvNgay=itemView.findViewById(R.id.tvNgay);
             btnEdit=itemView.findViewById(R.id.btnEdit);
+        }
+    }
+    private void loadFragment(Fragment fragment)
+    {
+        FragmentManager fm=activity.getSupportFragmentManager();
+        if(!fm.isDestroyed()){
+
+            fm.beginTransaction().addToBackStack("haha").replace(R.id.frag_main,fragment).commit();
         }
     }
 }
