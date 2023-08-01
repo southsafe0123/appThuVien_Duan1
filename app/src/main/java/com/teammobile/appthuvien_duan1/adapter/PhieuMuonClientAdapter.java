@@ -27,6 +27,8 @@ public class PhieuMuonClientAdapter extends RecyclerView.Adapter<PhieuMuonClient
     private ArrayList<PhieuMuon> list;
     private MainActivity activity;
     private PhieuMuonDAO phieuMuonDAO;
+
+
     public PhieuMuonClientAdapter(Context context, ArrayList<PhieuMuon> list) {
         this.context = context;
         this.list = list;
@@ -125,6 +127,8 @@ public class PhieuMuonClientAdapter extends RecyclerView.Adapter<PhieuMuonClient
             btnEdit=itemView.findViewById(R.id.btnEdit);
         }
     }
+
+
     private void loadFragment(Fragment fragment,String tag)
     {
         FragmentManager fm=activity.getSupportFragmentManager();
