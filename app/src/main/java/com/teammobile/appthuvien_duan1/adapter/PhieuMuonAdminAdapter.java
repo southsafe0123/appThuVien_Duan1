@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -91,6 +92,7 @@ public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAd
                         if(activity.getCurPM()!=null){
                             FragmentManager fm=activity.getSupportFragmentManager();
                             if(!fm.isDestroyed()&&fm.findFragmentByTag("curPM")!=null){
+                                Toast.makeText(context, "HAHA", Toast.LENGTH_SHORT).show();
                                 fm.popBackStack();
                                 fm.beginTransaction().addToBackStack(null).replace(R.id.viewFragmentQuanLy,fragment,"curPM").commit();
 
