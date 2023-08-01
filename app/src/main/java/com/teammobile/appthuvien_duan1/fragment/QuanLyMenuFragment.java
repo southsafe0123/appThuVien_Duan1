@@ -127,12 +127,12 @@ public class QuanLyMenuFragment extends Fragment {
     public void loadFragment(Fragment fragment,String tag)
     {
         FragmentManager fm=getActivity().getSupportFragmentManager();
-        FragmentTransaction ft=fm.beginTransaction();
-        ft.setCustomAnimations(R.anim.slide_up,R.anim.slide_down);
-        ft.replace(R.id.viewFragmentQuanLy,fragment,tag);
-        ft.addToBackStack(null);
-        ft.commit();
-
+//        FragmentTransaction ft=fm.beginTransaction();
+//        ft.setCustomAnimations(R.anim.slide_up,R.anim.slide_down);
+//        ft.replace(R.id.viewFragmentQuanLy,fragment,tag);
+//        ft.addToBackStack(null);
+//        ft.commit();
+        fm.beginTransaction().addToBackStack(null).replace(R.id.viewFragmentQuanLy,fragment,tag).commit();
 
     }
 

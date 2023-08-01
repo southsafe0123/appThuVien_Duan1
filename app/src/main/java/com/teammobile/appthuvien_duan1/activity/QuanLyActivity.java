@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,6 +26,7 @@ import com.teammobile.appthuvien_duan1.fragment.QuanLySachFragment;
 import com.teammobile.appthuvien_duan1.fragment.QuanLyTGFragment;
 import com.teammobile.appthuvien_duan1.fragment.QuanLyUserFragment;
 import com.teammobile.appthuvien_duan1.interfaces.ISachDAO;
+import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
 import java.util.ArrayList;
@@ -38,7 +40,7 @@ public class QuanLyActivity extends AppCompatActivity {
     private int trangThai=-1;
     private int tongGia=0;
     private Map<String,Sach> stock;
-
+    private PhieuMuon curPM;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +52,15 @@ public class QuanLyActivity extends AppCompatActivity {
         loadFragment(new QuanLyMenuFragment());
 
     }
+
+    public PhieuMuon getCurPM() {
+        return curPM;
+    }
+
+    public void setCurPM(PhieuMuon curPM) {
+        this.curPM = curPM;
+    }
+
     public void khoiTao()
     {
         sachDAO=new SachDAO();
@@ -57,12 +68,14 @@ public class QuanLyActivity extends AppCompatActivity {
     public void loadFragment(Fragment fragment)
     {
         FragmentManager fm=getSupportFragmentManager();
-        FragmentTransaction ft=fm.beginTransaction();
+        if(!fm.isDestroyed()){
+//            FragmentTransaction ft=fm.beginTransaction();
+//            ft.setCustomAnimations(R.anim.slide_up,0);
+//            ft.addToBackStack(null).replace(R.id.viewFragmentQuanLy,fragment,"fragment_menu");
+//            ft.commit();
+            fm.beginTransaction().addToBackStack(null).replace(R.id.viewFragmentQuanLy,fragment).commit();
+        }
 
-        ft.setCustomAnimations(R.anim.slide_up,0);
-        ft.replace(R.id.viewFragmentQuanLy,fragment,"fragment_menu");
-        ft.addToBackStack(null);
-        ft.commit();
     }
 
     public int getTrangThai() {
@@ -139,6 +152,16 @@ public class QuanLyActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        if(getCurPM()!=null){
+            Log.d("Ok: QL","PM is null");
+            setCurPM(null);
+        }
+        FragmentManager fm=getSupportFragmentManager();
+        Fragment fragment=fm.findFragmentByTag("fragment_menu");
+        if(fragment!=null){
+            startActivity(new Intent(QuanLyActivity.this,MainActivity.class));
+            finish();
 
+        }
     }
 }

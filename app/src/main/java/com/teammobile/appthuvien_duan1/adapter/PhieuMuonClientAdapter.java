@@ -81,6 +81,7 @@ public class PhieuMuonClientAdapter extends RecyclerView.Adapter<PhieuMuonClient
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                activity.setCurPM(list.get(holder.getAdapterPosition()));
                 phieuMuonDAO.getCurPM(list.get(holder.getAdapterPosition()).getMa(), new PhieuMuonDAO.IGetCurPM() {
                     @Override
                     public void onCallBack(PhieuMuon phieuMuon) {
@@ -88,8 +89,11 @@ public class PhieuMuonClientAdapter extends RecyclerView.Adapter<PhieuMuonClient
                         Bundle bundle=new Bundle();
                         bundle.putSerializable("pm",phieuMuon);
                         fragment.setArguments(bundle);
-//                        activity.loadFragment(fragment);
-                        loadFragment(fragment);
+                        if(activity.getCurPM()==null)
+                            loadFragment(fragment);
+                        else{
+                            activity.loadFragment(fragment);
+                        }
                     }
                 });
 
@@ -118,7 +122,7 @@ public class PhieuMuonClientAdapter extends RecyclerView.Adapter<PhieuMuonClient
     {
         FragmentManager fm=activity.getSupportFragmentManager();
         if(!fm.isDestroyed()){
-            fm.popBackStack();
+
             fm.beginTransaction().addToBackStack("haha").replace(R.id.frag_main,fragment).commit();
         }
     }

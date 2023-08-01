@@ -3,6 +3,7 @@ package com.teammobile.appthuvien_duan1.adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,6 +80,7 @@ public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAd
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                activity.setCurPM(list.get(holder.getAdapterPosition()));
                 phieuMuonDAO.getCurPM(list.get(holder.getAdapterPosition()).getMa(), new PhieuMuonDAO.IGetCurPM() {
                     @Override
                     public void onCallBack(PhieuMuon phieuMuon) {
@@ -86,8 +88,18 @@ public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAd
                         Bundle bundle=new Bundle();
                         bundle.putSerializable("pm",phieuMuon);
                         fragment.setArguments(bundle);
-                        //activity.loadFragment(fragment);
-                        loadFragment(fragment);
+                        if(activity.getCurPM()!=null){
+                            FragmentManager fm=activity.getSupportFragmentManager();
+                            if(!fm.isDestroyed()&&fm.findFragmentByTag("curPM")!=null){
+                                fm.popBackStack();
+                                fm.beginTransaction().addToBackStack(null).replace(R.id.viewFragmentQuanLy,fragment,"curPM").commit();
+
+                            }
+                            else if(!fm.isDestroyed()&&fm.findFragmentByTag("curPM")==null){
+                                loadFragment(fragment,"curPM");
+                            }
+                        }
+
                     }
                 });
 
@@ -117,13 +129,13 @@ public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAd
             tvNgay=itemView.findViewById(R.id.tvNgay);
         }
     }
-    private void loadFragment(Fragment fragment)
+    private void loadFragment(Fragment fragment,String tag)
     {
         FragmentManager fm=activity.getSupportFragmentManager();
 
         if(!fm.isDestroyed()){
-            fm.popBackStack();
-            fm.beginTransaction().addToBackStack("haha").replace(R.id.viewFragmentQuanLy,fragment).commit();
+
+            fm.beginTransaction().addToBackStack(null).replace(R.id.viewFragmentQuanLy,fragment,"curPM").commit();
         }
     }
 }

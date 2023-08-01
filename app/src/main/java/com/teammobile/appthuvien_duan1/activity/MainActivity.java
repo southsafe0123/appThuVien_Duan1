@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -62,8 +63,11 @@ public class MainActivity extends AppCompatActivity {
     public void loadFragment(Fragment fragment)
     {
         FragmentManager fm=getSupportFragmentManager();
-        //fm.popBackStack();
-        fm.beginTransaction().replace(R.id.frag_main,fragment).addToBackStack(null).commit();
+        if(!fm.isDestroyed()){
+//            fm.popBackStack();
+            fm.beginTransaction().addToBackStack(null).replace(R.id.frag_main,fragment).commit();
+        }
+
     }
 
     public PhieuMuon getCurPM() {
@@ -72,5 +76,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void setCurPM(PhieuMuon curPM) {
         this.curPM = curPM;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(getCurPM()!=null){
+            Log.d("ok","PM is null");
+            setCurPM(null);
+        }
     }
 }

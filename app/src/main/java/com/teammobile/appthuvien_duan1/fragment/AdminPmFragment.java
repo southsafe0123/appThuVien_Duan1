@@ -73,6 +73,7 @@ public class AdminPmFragment extends Fragment {
         if(pm.getTrangThai()>3){
             btnAccept.setEnabled(false);
             btnDecline.setEnabled(false);
+            btnDecline.setText("Hoàn thành");
         }
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
