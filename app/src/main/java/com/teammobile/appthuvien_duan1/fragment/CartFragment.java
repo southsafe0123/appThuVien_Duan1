@@ -50,7 +50,7 @@
         private HomeAdapter homeAdapter;
         private RecyclerView recyclerView;
 
-        private PhieuMuonClientAdapter phieuMuonClientAdapter;
+        private User_DSPM_Fragment user_dspm_fragment;
 
 
         private TextView txtTongtien;
@@ -79,7 +79,7 @@
             ArrayList<Integer> maxSoluong = Cart.getInstance().getMaxSoLuong();
             CartAdapter adapter = new CartAdapter(list,maxSoluong,context);
             ArrayList<PhieuMuon> listPm = new ArrayList<>();
-            phieuMuonClientAdapter = new PhieuMuonClientAdapter(context,listPm);
+            user_dspm_fragment = new User_DSPM_Fragment();
 
 
 
@@ -170,17 +170,16 @@
                                                 adapter.loadData();
                                                 txtTongtien.setText("Xin cảm ơn quý khách!");
                                                 btnSumbit.setText("Đến đơn hàng");
-//
-//                                                btnSumbit.setOnClickListener(new View.OnClickListener() {
-//                                                    @Override
-//                                                    public void onClick(View v) {
-//                                                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//                                                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                                                        fragmentTransaction.replace(R.id.item_user, new PhieuMuonClientAdapter(context,listPm));
-//                                                        fragmentTransaction.commit();
-//
-//                                                    }
-//                                                });
+
+                                                btnSumbit.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View v) {
+                                                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                                        fragmentTransaction.addToBackStack(null).replace(R.id.frag_main, new User_DSPM_Fragment());
+                                                        fragmentTransaction.commit();
+                                                    }
+                                                });
 
                                             }
                                             else
