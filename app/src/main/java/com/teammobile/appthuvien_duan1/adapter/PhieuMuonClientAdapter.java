@@ -129,6 +129,7 @@ public class PhieuMuonClientAdapter extends RecyclerView.Adapter<PhieuMuonClient
     {
         FragmentManager fm=activity.getSupportFragmentManager();
         if(!fm.isDestroyed()){
+            fm.popBackStack();
             fm.beginTransaction().addToBackStack(null).replace(R.id.frag_main,fragment,tag).commit();
         }
     }
