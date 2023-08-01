@@ -192,9 +192,6 @@ public class SachDAO {
             }
         });
     }
-    public interface IGetSLSachByLoai
-    {
-
 
     public interface IGetSLSachByLoai {
         public void onCallBack(ArrayList<Sach> list);
