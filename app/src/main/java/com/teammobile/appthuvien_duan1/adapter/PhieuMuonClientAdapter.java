@@ -90,7 +90,7 @@ public class PhieuMuonClientAdapter extends RecyclerView.Adapter<PhieuMuonClient
                         bundle.putSerializable("pm",phieuMuon);
                         fragment.setArguments(bundle);
                         FragmentManager fm=activity.getSupportFragmentManager();
-                        if(!fm.isDestroyed()&&fm.findFragmentByTag("curPM")!=null){
+                        if(!fm.isDestroyed()&&fm.findFragmentByTag("curPM")!=null&&phieuMuon.getMa().equals(activity.getCurPM().getMa())){
                             fm.popBackStack();
                             loadFragment(fragment,"curPM");
                         }

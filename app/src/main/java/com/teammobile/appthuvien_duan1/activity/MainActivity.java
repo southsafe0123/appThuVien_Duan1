@@ -81,9 +81,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(getCurPM()!=null){
-            Log.d("ok","PM is null");
-            setCurPM(null);
-        }
+        setCurPM(null);
     }
 }
