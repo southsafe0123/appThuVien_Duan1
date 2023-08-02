@@ -89,14 +89,18 @@ public class PhieuMuonClientAdapter extends RecyclerView.Adapter<PhieuMuonClient
                         Bundle bundle=new Bundle();
                         bundle.putSerializable("pm",phieuMuon);
                         fragment.setArguments(bundle);
-                        if(activity.getCurPM()==null)
-                            loadFragment(fragment);
-                        else{
-                            activity.loadFragment(fragment);
+                        FragmentManager fm=activity.getSupportFragmentManager();
+                        if(!fm.isDestroyed()&&fm.findFragmentByTag("curPM")!=null){
+                            fm.popBackStack();
+                            loadFragment(fragment,"curPM");
                         }
                     }
                 });
-
+                Fragment fragment=new ClientPmFragment();
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("pm",list.get(holder.getAdapterPosition()));
+                fragment.setArguments(bundle);
+                loadFragment(fragment,"curPM");
             }
         });
     }
@@ -118,12 +122,12 @@ public class PhieuMuonClientAdapter extends RecyclerView.Adapter<PhieuMuonClient
             btnEdit=itemView.findViewById(R.id.btnEdit);
         }
     }
-    private void loadFragment(Fragment fragment)
+    private void loadFragment(Fragment fragment,String tag)
     {
         FragmentManager fm=activity.getSupportFragmentManager();
         if(!fm.isDestroyed()){
 
-            fm.beginTransaction().addToBackStack("haha").replace(R.id.frag_main,fragment).commit();
+            fm.beginTransaction().addToBackStack(null).replace(R.id.frag_main,fragment,tag).commit();
         }
     }
 }

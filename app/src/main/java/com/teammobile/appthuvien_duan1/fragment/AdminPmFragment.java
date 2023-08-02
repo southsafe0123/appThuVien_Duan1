@@ -203,8 +203,8 @@ public class AdminPmFragment extends Fragment {
             @Override
             public void onCallBack(PhieuMuon phieuMuon) {
                 Toast.makeText(context, "Thay đổi rồi nè!", Toast.LENGTH_SHORT).show();
-                pm=phieuMuon;
-                reload();
+//                pm=phieuMuon;
+//                reload();
             }
         });
     }
