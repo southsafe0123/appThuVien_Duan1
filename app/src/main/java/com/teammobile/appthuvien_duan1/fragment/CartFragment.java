@@ -180,7 +180,6 @@
                                                         fragmentTransaction.commit();
                                                     }
                                                 });
-
                                             }
                                             else
                                                 Toast.makeText(context, "Thanh toán đơn hàng thất bại", Toast.LENGTH_SHORT).show();
