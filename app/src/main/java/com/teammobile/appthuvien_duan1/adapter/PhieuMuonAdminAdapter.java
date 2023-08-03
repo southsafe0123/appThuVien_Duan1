@@ -90,19 +90,23 @@ public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAd
                         fragment.setArguments(bundle);
                         if(activity.getCurPM()!=null){
                             FragmentManager fm=activity.getSupportFragmentManager();
-                            if(!fm.isDestroyed()&&fm.findFragmentByTag("curPM")!=null){
+                            if(!fm.isDestroyed()&&fm.findFragmentByTag("curPM")!=null&&phieuMuon.getMa().equals(activity.getCurPM().getMa())){
                                 fm.popBackStack();
                                 fm.beginTransaction().addToBackStack(null).replace(R.id.viewFragmentQuanLy,fragment,"curPM").commit();
 
                             }
-                            else if(!fm.isDestroyed()&&fm.findFragmentByTag("curPM")==null){
-                                loadFragment(fragment,"curPM");
-                            }
+//                            else if(!fm.isDestroyed()&&fm.findFragmentByTag("curPM")==null){
+//                                loadFragment(fragment,"curPM");
+
                         }
 
                     }
                 });
-
+                Fragment fragment=new AdminPmFragment();
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("pm",list.get(holder.getAdapterPosition()));
+                fragment.setArguments(bundle);
+                loadFragment(fragment,"curPM");
             }
         });
         holder.tvTenKH.setText("Tên KH: "+list.get(position).getUser().getUsername());

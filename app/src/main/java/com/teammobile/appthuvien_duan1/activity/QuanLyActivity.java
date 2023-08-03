@@ -143,6 +143,7 @@ public class QuanLyActivity extends AppCompatActivity {
             {
                 FragmentManager fm=getSupportFragmentManager();
                 fm.popBackStack();
+                setCurPM(null);
                 break;
             }
         }
@@ -152,10 +153,10 @@ public class QuanLyActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(getCurPM()!=null){
-            Log.d("Ok: QL","PM is null");
-            setCurPM(null);
-        }
+//        if(getCurPM()!=null){
+//            Log.d("Ok: QL","PM is null");
+//            setCurPM(null);
+//        }
         startActivity(new Intent(this,MainActivity.class));
         finish();
     }
