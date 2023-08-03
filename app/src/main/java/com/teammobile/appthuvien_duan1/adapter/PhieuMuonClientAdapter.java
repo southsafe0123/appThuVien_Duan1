@@ -3,11 +3,13 @@ package com.teammobile.appthuvien_duan1.adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -89,21 +91,20 @@ public class PhieuMuonClientAdapter extends RecyclerView.Adapter<PhieuMuonClient
                         Bundle bundle=new Bundle();
                         bundle.putSerializable("pm",phieuMuon);
                         fragment.setArguments(bundle);
-                        if(activity.getCurPM()!=null){
-
-                            FragmentManager fm=activity.getSupportFragmentManager();
-                            if(!fm.isDestroyed()&&fm.findFragmentByTag("curPM")!=null){
-                                fm.popBackStack();
-                                fm.beginTransaction().addToBackStack(null).replace(R.id.frag_main,fragment,"curPM").commit();
-
-                            }
-                            else if(!fm.isDestroyed()&&fm.findFragmentByTag("curPM")==null){
-                                loadFragment(fragment,"curPM");
-                            }
+                        FragmentManager fm=activity.getSupportFragmentManager();
+                        if(!fm.isDestroyed()&&fm.findFragmentByTag("curPM")!=null&&phieuMuon.getMa().equals(activity.getCurPM().getMa())){
+                            Log.d("OK","fragment da load len");
+                            Toast.makeText(context, "fragment da load len", Toast.LENGTH_SHORT).show();
+                            fm.popBackStack();
+                            loadFragment(fragment,"curPM");
                         }
                     }
                 });
-
+                Fragment fragment=new ClientPmFragment();
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("pm",list.get(holder.getAdapterPosition()));
+                fragment.setArguments(bundle);
+                loadFragment(fragment,"curPM");
             }
         });
     }
@@ -129,7 +130,7 @@ public class PhieuMuonClientAdapter extends RecyclerView.Adapter<PhieuMuonClient
     {
         FragmentManager fm=activity.getSupportFragmentManager();
         if(!fm.isDestroyed()){
-            fm.popBackStack();
+
             fm.beginTransaction().addToBackStack(null).replace(R.id.frag_main,fragment,tag).commit();
         }
     }
