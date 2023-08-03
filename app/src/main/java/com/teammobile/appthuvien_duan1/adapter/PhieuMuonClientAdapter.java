@@ -3,11 +3,13 @@ package com.teammobile.appthuvien_duan1.adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -91,6 +93,8 @@ public class PhieuMuonClientAdapter extends RecyclerView.Adapter<PhieuMuonClient
                         fragment.setArguments(bundle);
                         FragmentManager fm=activity.getSupportFragmentManager();
                         if(!fm.isDestroyed()&&fm.findFragmentByTag("curPM")!=null&&phieuMuon.getMa().equals(activity.getCurPM().getMa())){
+                            Log.d("OK","fragment da load len");
+                            Toast.makeText(context, "fragment da load len", Toast.LENGTH_SHORT).show();
                             fm.popBackStack();
                             loadFragment(fragment,"curPM");
                         }

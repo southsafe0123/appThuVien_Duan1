@@ -106,7 +106,7 @@ public class AdminPmFragment extends Fragment {
                     }
                     case 1: {
                         Toast.makeText(context, "Bạn phải đơi người dùng duyệt!", Toast.LENGTH_SHORT).show();
-                        reload();
+                        //reload();
                         break;
                     }
                     case 2: {
@@ -208,23 +208,7 @@ public class AdminPmFragment extends Fragment {
             }
         });
     }
-    public void reload()
-    {
-        FragmentManager fm=activity.getSupportFragmentManager();
-        if(fm!=null){
-            Fragment fragment=new AdminPmFragment();
-            Bundle bundle=new Bundle();
-            bundle.putSerializable("pm",pm);
-            fragment.setArguments(bundle);
-            if(fm.findFragmentById(R.id.viewFragmentQuanLy)!=null){
-                fm.popBackStack();
-                fm.beginTransaction().addToBackStack(null).replace(R.id.viewFragmentQuanLy,fragment).commit();
-            }
 
-        }
-
-
-    }
     public void updateStock(ArrayList<Sach> list,int choice)
     {
         for(Sach sach: list){
