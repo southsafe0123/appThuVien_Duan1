@@ -2,6 +2,7 @@ package com.teammobile.appthuvien_duan1.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +61,7 @@ public class ClientPmFragment extends Fragment {
                         public void onCallBack(Boolean check) {
                             if(check){
                                 Toast.makeText(context, "Xác nhận hóa đơn với thủ thư", Toast.LENGTH_SHORT).show();
-                                reload();
+
                             }
                         }
                     });
@@ -92,6 +93,7 @@ public class ClientPmFragment extends Fragment {
         Bundle bundle=getArguments();
         pm = (PhieuMuon) bundle.getSerializable("pm");
         phieuMuonDAO=new PhieuMuonDAO();
+        Log.d("OK",pm.getTrangThai()+"");
 //
     }
     public void fetchingData()
@@ -111,40 +113,28 @@ public class ClientPmFragment extends Fragment {
         rcv.setLayoutManager(layoutManager);
         rcv.setAdapter(adapter);
     }
-    public void reload()
-    {
-        Fragment fragment=new ClientPmFragment();
-        Bundle bundle=new Bundle();
-        bundle.putSerializable("pm", pm);
-        fragment.setArguments(bundle);
-        FragmentManager fm=activity.getSupportFragmentManager();
-        if(fm.findFragmentById(R.id.frag_main)!=null){
-            fm.popBackStack();
-            fm.beginTransaction().addToBackStack(null).replace(R.id.frag_main,fragment).commit();
-        }
 
-    }
     public void updatePM()
     {
         phieuMuonDAO.update(pm, new PhieuMuonDAO.IUpdate() {
             @Override
             public void onCallBack(Boolean check) {
                 if(check){
-
-                    pm.setTrangThai(pm.getTrangThai());
+                    Toast.makeText(context, "KKKK", Toast.LENGTH_SHORT).show();
+                    //pm.setTrangThai(pm.getTrangThai());
+                    phieuMuonDAO.getCurPM(pm.getMa(), new PhieuMuonDAO.IGetCurPM() {
+                        @Override
+                        public void onCallBack(PhieuMuon phieuMuon) {
+                            Toast.makeText(context, "Thay đổi rồi nè!", Toast.LENGTH_SHORT).show();
+//                if(pm.getTrangThai()!=phieuMuon.getTrangThai())
+//                    reload();
+                        }
+                    });
 
                 }
 
             }
         });
-        phieuMuonDAO.getCurPM(pm.getMa(), new PhieuMuonDAO.IGetCurPM() {
-            @Override
-            public void onCallBack(PhieuMuon phieuMuon) {
-                Toast.makeText(context, "Thay đổi rồi nè!", Toast.LENGTH_SHORT).show();
-//                if(pm.getTrangThai()!=phieuMuon.getTrangThai())
-//                    reload();
-            }
-        });
-
+        
     }
 }
