@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -16,9 +17,11 @@ import com.teammobile.appthuvien_duan1.fragment.CartFragment;
 import com.teammobile.appthuvien_duan1.fragment.SearchFragment;
 import com.teammobile.appthuvien_duan1.fragment.UserFragment;
 import com.teammobile.appthuvien_duan1.fragment.HomeFragment;
+import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 
 
 public class MainActivity extends AppCompatActivity {
+    private PhieuMuon curPM;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,23 +35,23 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (item.getItemId()){
                     default:
-                        Toast.makeText(MainActivity.this, "default", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MainActivity.this, "default", Toast.LENGTH_SHORT).show();
                         loadFragment(new HomeFragment());
                         break;
                     case R.id.item_home:
-                        Toast.makeText(MainActivity.this, "item_home", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MainActivity.this, "item_home", Toast.LENGTH_SHORT).show();
                         loadFragment(new HomeFragment());
                         break;
                     case R.id.item_giohang:
-                        Toast.makeText(MainActivity.this, "item_giohang", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MainActivity.this, "item_giohang", Toast.LENGTH_SHORT).show();
                         loadFragment(new CartFragment());
                         break;
                     case R.id.item_search:
                         loadFragment(new SearchFragment());
-                        Toast.makeText(MainActivity.this, "item_search", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MainActivity.this, "item_search", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.item_user:
-                        Toast.makeText(MainActivity.this, "item_user", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MainActivity.this, "item_user", Toast.LENGTH_SHORT).show();
                         loadFragment(new UserFragment());
                         break;
                 }
@@ -60,6 +63,24 @@ public class MainActivity extends AppCompatActivity {
     public void loadFragment(Fragment fragment)
     {
         FragmentManager fm=getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.frag_main,fragment).commit();
+        if(!fm.isDestroyed()){
+//            fm.popBackStack();
+            fm.beginTransaction().addToBackStack(null).replace(R.id.frag_main,fragment).commit();
+        }
+
+    }
+
+    public PhieuMuon getCurPM() {
+        return curPM;
+    }
+
+    public void setCurPM(PhieuMuon curPM) {
+        this.curPM = curPM;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setCurPM(null);
     }
 }

@@ -24,6 +24,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -33,6 +35,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.teammobile.appthuvien_duan1.R;
+import com.teammobile.appthuvien_duan1.adapter.QLSachAdapter;
 import com.teammobile.appthuvien_duan1.dao.LoaiDAO;
 import com.teammobile.appthuvien_duan1.dao.SachDAO;
 import com.teammobile.appthuvien_duan1.dao.TacGiaDAO;
@@ -52,12 +55,13 @@ public class QuanLySachFragment extends Fragment {
     private Context context;
     private FloatingActionButton floatingActionButton;
     private RecyclerView rcv;
-
-
+    private SachDAO sachDAO;
+    private QLSachAdapter adapter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        context=getContext();
+
+        khoiTao();
         View view=LayoutInflater.from(context).inflate(R.layout.fragment_quanly_sach,container,false);
         floatingActionButton=view.findViewById(R.id.btnFloatingAdd);
         rcv=view.findViewById(R.id.rcvLoai);
@@ -67,7 +71,13 @@ public class QuanLySachFragment extends Fragment {
                 loadFragment();
             }
         });
+        fetchingData();
         return view;
+    }
+    public void khoiTao()
+    {
+        sachDAO=new SachDAO();
+        context=getContext();
     }
     public void loadFragment()
     {
@@ -76,15 +86,30 @@ public class QuanLySachFragment extends Fragment {
 
 
     }
+    public void fetchingData()
+    {
+        sachDAO.getAll(new ISachDAO() {
+            @Override
+            public void onCallBackInsert(Boolean check) {
 
+            }
 
+            @Override
+            public void onCallBackGetAll(ArrayList<Sach> list) {
+                loadUI(list);
+            }
+        });
+    }
+    public void loadUI(ArrayList<Sach> list)
+    {
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(context);
+        adapter=new QLSachAdapter(context,list);
+        rcv.setLayoutManager(linearLayoutManager);
+        rcv.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
+        rcv.setAdapter(adapter);
+    }
 
-
-
-
-
-
-
-
-
+    public QLSachAdapter getAdapter() {
+        return adapter;
+    }
 }

@@ -2,9 +2,10 @@ package com.teammobile.appthuvien_duan1.model;
 
 import androidx.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Loai {
+public class Loai implements Serializable {
     private String maLoai;
     private String tenLoai;
     private int isActive;

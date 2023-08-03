@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFBABA"
     android:orientation="vertical"
     android:gravity="center"
     tools:context=".activity.Login_Activity">
@@ -31,6 +30,7 @@
 
         <EditText
             android:hint="Mật khẩu"
+            android:text="04092002"
             android:id="@+id/edtMatkhau"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></EditText>
