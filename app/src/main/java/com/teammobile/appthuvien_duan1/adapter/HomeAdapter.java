@@ -78,36 +78,44 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
 
         holder.tvTacGia.setText(list.get(holder.getAdapterPosition()).getTacGia().getTenTacGia());
 
-        holder.btnThemGioHang.setOnClickListener(new View.OnClickListener() {
+        if(list.get(holder.getAdapterPosition()).getSoLuong()<1){
+            holder.btnThemGioHang.setText("Đã hết hàng");
+            holder.btnThemGioHang.setTextColor(Color.parseColor("#FFFFFF"));
+            holder.btnThemGioHang.setBackgroundColor(Color.RED);
 
-            @Override
-            public void onClick(View view) {
-                sach = list.get(holder.getAdapterPosition());
-                
-                if(sach.getSoLuong()<1){
-                    Toast.makeText(context, "Sách đã hết hàng", Toast.LENGTH_SHORT).show();
-                }else{
+        } else{
+            holder.btnThemGioHang.setOnClickListener(new View.OnClickListener() {
 
-                    gioHang = cart.getList();
-                    boolean flag = false;
-                    if(gioHang.isEmpty()){
-                        setGioHang();
-                    } else{
-                        for(int i =0;i<gioHang.size();i++){
-                            if (gioHang.get(i).getMaSach().equals(list.get(holder.getAdapterPosition()).getMaSach())){
-                                flag = true;
-                                Toast.makeText(context, "Giỏ hàng đã có sách này", Toast.LENGTH_SHORT).show();
-                                break;
-                            }
-                        }
-                        if (!flag){
-//                        Toast.makeText(context, ""+sach.getMaSach(), Toast.LENGTH_SHORT).show();
+                @Override
+                public void onClick(View view) {
+                    sach = list.get(holder.getAdapterPosition());
+
+                    if(sach.getSoLuong()<1){
+                        Toast.makeText(context, "Sách đã hết hàng", Toast.LENGTH_SHORT).show();
+                    }else{
+
+                        gioHang = cart.getList();
+                        boolean flag = false;
+                        if(gioHang.isEmpty()){
                             setGioHang();
+                        } else{
+                            for(int i =0;i<gioHang.size();i++){
+                                if (gioHang.get(i).getMaSach().equals(list.get(holder.getAdapterPosition()).getMaSach())){
+                                    flag = true;
+                                    Toast.makeText(context, "Giỏ hàng đã có sách này", Toast.LENGTH_SHORT).show();
+                                    break;
+                                }
+                            }
+                            if (!flag){
+//                        Toast.makeText(context, ""+sach.getMaSach(), Toast.LENGTH_SHORT).show();
+                                setGioHang();
+                            }
                         }
                     }
                 }
-            }
-        });
+            });
+        }
+
     }
 
     @Override

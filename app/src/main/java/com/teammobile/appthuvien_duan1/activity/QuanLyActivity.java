@@ -48,7 +48,7 @@ public class QuanLyActivity extends AppCompatActivity {
         khoiTao();
         actionBar=getSupportActionBar();
        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.baseline_home_24);
+        actionBar.setHomeAsUpIndicator(R.drawable.baseline_arrow_back_24);
         loadFragment(new QuanLyMenuFragment());
 
     }
@@ -141,8 +141,9 @@ public class QuanLyActivity extends AppCompatActivity {
         {
             case android.R.id.home:
             {
-                startActivity(new Intent(this,MainActivity.class));
-                finish();
+                FragmentManager fm=getSupportFragmentManager();
+                fm.popBackStack();
+                setCurPM(null);
                 break;
             }
         }
@@ -152,16 +153,11 @@ public class QuanLyActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(getCurPM()!=null){
-            Log.d("Ok: QL","PM is null");
-            setCurPM(null);
-        }
-        FragmentManager fm=getSupportFragmentManager();
-        Fragment fragment=fm.findFragmentByTag("fragment_menu");
-        if(fragment!=null){
-            startActivity(new Intent(QuanLyActivity.this,MainActivity.class));
-            finish();
-
-        }
+//        if(getCurPM()!=null){
+//            Log.d("Ok: QL","PM is null");
+//            setCurPM(null);
+//        }
+        startActivity(new Intent(this,MainActivity.class));
+        finish();
     }
 }

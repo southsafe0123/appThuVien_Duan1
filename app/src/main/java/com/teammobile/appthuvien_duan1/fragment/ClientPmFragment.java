@@ -130,7 +130,7 @@ public class ClientPmFragment extends Fragment {
             @Override
             public void onCallBack(Boolean check) {
                 if(check){
-                    reload();
+
                     pm.setTrangThai(pm.getTrangThai());
 
                 }
@@ -140,8 +140,9 @@ public class ClientPmFragment extends Fragment {
         phieuMuonDAO.getCurPM(pm.getMa(), new PhieuMuonDAO.IGetCurPM() {
             @Override
             public void onCallBack(PhieuMuon phieuMuon) {
-                if(pm.getTrangThai()!=phieuMuon.getTrangThai())
-                    reload();
+                Toast.makeText(context, "Thay đổi rồi nè!", Toast.LENGTH_SHORT).show();
+//                if(pm.getTrangThai()!=phieuMuon.getTrangThai())
+//                    reload();
             }
         });
 
