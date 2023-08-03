@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Thay đổi màu sắc của ActionBar -->
+        <item name="colorPrimary">#1FB497</item>
+    </style>
+</resources>

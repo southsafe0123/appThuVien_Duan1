@@ -200,7 +200,7 @@ public class AdminPmFragment extends Fragment {
             public void onCallBack(PhieuMuon phieuMuon) {
                 Toast.makeText(context, "Thay đổi rồi nè!", Toast.LENGTH_SHORT).show();
                 pm=phieuMuon;
-                reload();
+//                reload();
             }
         });
     }

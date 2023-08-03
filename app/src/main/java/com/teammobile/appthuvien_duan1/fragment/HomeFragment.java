@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +29,8 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         RecyclerView rvHome = view.findViewById(R.id.rvHome);
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+        rvHome.setLayoutManager(layoutManager);
         khoiTao();
         SachDAO sachDAO = new SachDAO();
         sachDAO.getAll(new ISachDAO() {
@@ -42,7 +45,6 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(context, ""+list.size(), Toast.LENGTH_SHORT).show();
 //                Toast.makeText(getContext(), ""+list.size(), Toast.LENGTH_SHORT).show();
                 rvHome.setAdapter(new HomeAdapter(list,getContext()));
-                rvHome.setLayoutManager(new LinearLayoutManager(getContext()));
             }
         });
         return view;
