@@ -8,6 +8,7 @@
     android:background="#1fb497"
     android:layout_margin="10dp">
 
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -19,49 +20,48 @@
             android:id="@+id/btnEdit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:src="@drawable/baseline_info_24" />
         <RelativeLayout
             android:padding="10dp"
-            android:layout_weight="5"
+            android:layout_weight="4"
             android:layout_width="0dp"
             android:layout_height="match_parent">
-<!--            <TextView-->
-<!--                android:text="Trạng thái: "-->
-<!--                android:textSize="15dp"-->
-<!--                android:fontFamily="monospace"-->
-<!--                android:id="@+id/tvTitleTT"-->
-<!--                android:textAlignment="viewEnd"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"/>-->
+
+
             <TextView
-                android:id="@+id/tvTT"
-                android:textAlignment="textEnd"
-                android:text="trạng thái"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:layout_below="@+id/tvTT"
                 android:id="@+id/tvNgay"
-                android:text="Ngày thuê: "
+                android:text="Trạng Thai Don Hàng"
                 android:fontFamily="monospace"
                 android:textSize="15dp"
+                android:textAlignment="textEnd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:layout_below="@id/tvNgay"
                 android:id="@+id/tvMa"
-                android:fontFamily="@font/allerta_stencil"
+                android:fontFamily="monospace"
                 android:textSize="15dp"
-                android:text="Mã hóa đơn:"
-                android:maxLines="1"
-                android:ellipsize="end"
+                android:text="Tên Sách "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-
             <TextView
+                android:text="Ngày thuê "
+                android:textSize="15dp"
+                android:fontFamily="monospace"
+                android:id="@+id/tvTitleTT"
                 android:layout_below="@+id/tvMa"
-                android:text="Tổng tiền: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_below="@+id/tvTitleTT"
+                android:id="@+id/tvTT"
+                android:text="Mã hóa đơn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_below="@+id/tvTitleTT"
+                android:text="\nTổng tiền:1xxx VND "
                 android:textSize="15dp"
                 android:fontFamily="monospace"
                 android:id="@+id/tvTongTien"
@@ -72,5 +72,6 @@
         </RelativeLayout>
 
 
+
     </LinearLayout>
-    </androidx.cardview.widget.CardView>
+</androidx.cardview.widget.CardView>
