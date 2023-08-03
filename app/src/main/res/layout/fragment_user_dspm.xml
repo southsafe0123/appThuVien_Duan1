@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1fb497"
+    android:background="#1FB396"
     android:orientation="vertical">
         <TextView
             android:layout_gravity="center_horizontal"
@@ -13,6 +13,8 @@
             android:fontFamily="@font/bungee_inline"
             android:text="Đơn Hàng Hiện Tại"
             android:textColor="@color/white"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             android:textSize="35dp" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv"

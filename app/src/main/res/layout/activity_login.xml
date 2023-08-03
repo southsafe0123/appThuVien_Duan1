@@ -14,7 +14,6 @@
         android:orientation="horizontal"
         android:background="@mipmap/top_background">
         <TextView
-
             android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
