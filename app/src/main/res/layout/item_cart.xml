@@ -108,6 +108,7 @@
 
 
             <ImageView
+
                 android:layout_marginTop="5dp"
                 android:id="@+id/ivTang"
                 android:layout_marginLeft="20dp"
