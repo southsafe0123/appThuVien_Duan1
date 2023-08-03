@@ -2,25 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-    <EditText
-        android:id="@+id/edtTenTruyen"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+            android:id="@+id/edtTenTruyen"
+            android:hint="Tìm Kiếm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionSearch"
+            android:inputType="text"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSearched"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Ten Truyen"/>
-    <Spinner
-        android:id="@+id/spnTacGia"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-    <Spinner
-        android:id="@+id/spnTheLoai"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <Button
-        android:id="@+id/btnTimKiem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tim Kiem"
-        />
+        android:layout_height="match_parent">
+    </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>
