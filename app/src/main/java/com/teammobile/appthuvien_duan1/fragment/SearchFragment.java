@@ -67,11 +67,6 @@ public class SearchFragment extends Fragment {
         tacGiaDAO = new TacGiaDAO();
         loaiDAO = new LoaiDAO();
 
-
-
-        TacGiaDAO tacGiaDAO = new TacGiaDAO();
-        LoaiDAO theloaiDAO = new LoaiDAO();
-
         //thanh tim kiem
 
         SachDAO sachDAO = new SachDAO();
