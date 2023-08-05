@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,11 +37,13 @@ public class AdminPmFragment extends Fragment {
     private RecyclerView rcv;
     private AdminCartAdapter adapter;
     private AppCompatButton btnCapNhat, btnThanhToan,btnTuChoi,btnTraHang,btnXacNhan;
+    private TextView tvTrangThai;
     private SachDAO sachDAO;
     private PhieuMuonDAO phieuMuonDAO;
     private ArrayList<Sach> myList;
     private PhieuMuon pm;
     private View viewFM;
+    private String trangThai;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public class AdminPmFragment extends Fragment {
         btnTuChoi=viewFM.findViewById(R.id.btnHuyDon);
         btnThanhToan=viewFM.findViewById(R.id.btnThanhToan);
         btnTraHang=viewFM.findViewById(R.id.btnTraHang);
+        tvTrangThai=viewFM.findViewById(R.id.tvTrangThai);
         rcv=viewFM.findViewById(R.id.rcv);
         phieuMuonDAO.getCurPM(activity.getCurPM().getMa(), new PhieuMuonDAO.IGetCurPM() {
             @Override
@@ -58,10 +62,11 @@ public class AdminPmFragment extends Fragment {
                 if(!phieuMuon.getMa().equals(activity.getCurPM().getMa()))
                     return;
                 int tt=phieuMuon.getTrangThai();
+                trangThai="";
                 switch (tt){
                     case 0:
                     {
-                        Toast.makeText(context, "HELLO", Toast.LENGTH_SHORT).show();
+                        trangThai="Chờ xác nhận";
                         btnThanhToan.setVisibility(View.GONE);
                         btnTraHang.setVisibility(View.GONE);
                         btnXacNhan.setVisibility(View.VISIBLE);
@@ -70,6 +75,7 @@ public class AdminPmFragment extends Fragment {
                     }
                     case 1:
                     {
+                        trangThai="Chờ người dùng xác nhận";
                         btnCapNhat.setVisibility(View.GONE);
                         btnThanhToan.setVisibility(View.GONE);
                         btnTraHang.setVisibility(View.GONE);
@@ -78,6 +84,7 @@ public class AdminPmFragment extends Fragment {
                     }
                     case 2:
                     {
+                        trangThai="Đã xác nhận";
                         btnCapNhat.setVisibility(View.GONE);
                         btnThanhToan.setVisibility(View.VISIBLE);
                         btnTraHang.setVisibility(View.GONE);
@@ -86,6 +93,7 @@ public class AdminPmFragment extends Fragment {
                     }
                     case 3:
                     {
+                        trangThai="Thanh toán thành công";
                         btnCapNhat.setVisibility(View.GONE);
                         btnThanhToan.setVisibility(View.GONE);
                         btnTraHang.setVisibility(View.VISIBLE);
@@ -93,7 +101,17 @@ public class AdminPmFragment extends Fragment {
                         btnTuChoi.setVisibility(View.GONE);
                         break;
                     }
+                    case 4:{
+                        trangThai="Đã trả sách về thư viện";
+                        btnCapNhat.setVisibility(View.GONE);
+                        btnThanhToan.setVisibility(View.GONE);
+                        btnTraHang.setVisibility(View.GONE);
+                        btnXacNhan.setVisibility(View.GONE);
+                        btnTuChoi.setVisibility(View.GONE);
+                        break;
+                    }
                     default:{
+
                         btnCapNhat.setVisibility(View.GONE);
                         btnThanhToan.setVisibility(View.GONE);
                         btnTraHang.setVisibility(View.GONE);
@@ -163,6 +181,7 @@ public class AdminPmFragment extends Fragment {
     }
 
     public void fetchingData() {
+        tvTrangThai.setText("Trạng thái: "+ trangThai);
         sachDAO.getAll(new ISachDAO() {
             @Override
             public void onCallBackInsert(Boolean check) {
