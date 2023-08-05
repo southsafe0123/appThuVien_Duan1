@@ -24,6 +24,15 @@ public class QLPhieuMuonFragment extends Fragment {
     private PhieuMuonDAO phieuMuonDAO;
     private PhieuMuonAdminAdapter adapter;
     private RecyclerView rcv;
+
+    public PhieuMuonAdminAdapter getAdapter() {
+        return adapter;
+    }
+
+    public void setAdapter(PhieuMuonAdminAdapter adapter) {
+        this.adapter = adapter;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
