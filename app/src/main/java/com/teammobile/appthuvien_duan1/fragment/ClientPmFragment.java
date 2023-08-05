@@ -52,7 +52,8 @@ public class ClientPmFragment extends Fragment {
         phieuMuonDAO.getCurPM(activity.getCurPM().getMa(), new PhieuMuonDAO.IGetCurPM() {
             @Override
             public void onCallBack(PhieuMuon phieuMuon) {
-                if(!phieuMuon.getMa().equals(activity.getCurPM().getMa()))
+
+                if(phieuMuon==null&&!phieuMuon.getMa().equals(activity.getCurPM().getMa()))
                     return;
                 int tt=phieuMuon.getTrangThai();
                 tinhTrang="";
