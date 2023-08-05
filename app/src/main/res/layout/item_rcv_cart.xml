@@ -2,60 +2,60 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:weightSum="4">
+        android:weightSum="5">
 
         <ImageView
             android:id="@+id/ivHinh"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1.8" />
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3">
+            android:layout_weight="3.2">
 
             <TextView
                 android:id="@+id/tvTen"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="7dp"
-
+                android:fontFamily="monospace"
                 android:layout_marginTop="4dp"
                 android:text="Tên sách:"
+                android:textStyle="bold"
                 android:textSize="22sp" />
-
             <TextView
                 android:id="@+id/tvTtileSL"
                 style="@style/myStyle"
+                android:textSize="17dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvTen"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="7dp"
-                android:layout_marginTop="71dp"
+                android:fontFamily="monospace"
+                android:layout_marginTop="10dp"
                 android:text="Số lượng: " />
 
             <LinearLayout
-                android:background="@drawable/border"
                 android:id="@+id/viewSL"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-
-                android:layout_alignParentTop="true"
-
+                android:layout_height="35dp"
+                android:layout_below="@+id/tvTen"
+                android:layout_marginTop="5dp"
                 android:layout_marginLeft="1dp"
-                android:layout_marginTop="94dp"
                 android:layout_toRightOf="@+id/tvTtileSL"
-                android:gravity="center"
+
                 android:orientation="horizontal">
 
                 <ImageView
@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
                     android:gravity="center_horizontal"
-                    android:textSize="16sp" />
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:id="@+id/btnGiam"
@@ -85,18 +85,20 @@
                     android:visibility="invisible" />
             </LinearLayout>
 
+
             <TextView
                 android:id="@+id/tvGia"
                 style="@style/myStyle"
-                android:layout_width="wrap_content"
+                android:layout_below="@+id/tvTtileSL"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
+
                 android:layout_marginStart="7dp"
-                android:layout_marginLeft="-128dp"
-                android:layout_marginTop="39dp"
-                android:text="Giá: "
-                android:textSize="20sp" />
+                android:text="GIÁ: "
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:fontFamily="monospace"
+                android:textSize="22sp" />
         </RelativeLayout>
 
 

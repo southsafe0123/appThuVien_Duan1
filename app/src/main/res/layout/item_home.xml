@@ -10,9 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tvTen"
-        android:fontFamily="@font/allerta_stencil"
         android:textStyle="bold"
-        android:textColor="@color/material_dynamic_secondary30"
         android:text="Name"
         android:textSize="21dp"
         android:textAlignment="center"/>
@@ -77,8 +75,8 @@
                 android:id="@+id/btnThemGioHang"
                 android:text="Thêm giỏ hàng "
                 android:textColor="@color/white"
+                android:background="#1fb497"
                 android:drawableRight="@drawable/ic_cart"
-                android:backgroundTint="#FFE60B"
                 />
         </LinearLayout>
 
