@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="10dp"
+
     >
 
     <TextView
@@ -12,7 +12,7 @@
         android:id="@+id/tvTen"
         android:textStyle="bold"
         android:text="Name"
-        android:textSize="21dp"
+        android:textSize="23dp"
         android:textAlignment="center"/>
 
 
@@ -21,11 +21,12 @@
         android:layout_weight="10"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:orientation="horizontal">
 
 
         <LinearLayout
-            android:layout_weight="4"
+            android:layout_weight="5"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -38,7 +39,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:padding="6dp"
+
             android:layout_weight="6"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -50,23 +51,27 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tvTheloai"
                 android:fontFamily="monospace"
-                android:text="theloai"/>
+                android:text="theloai"
+                android:textSize="17dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvTacGia"
+                android:textSize="17dp"
                 android:fontFamily="monospace"
                 android:text="tacgia"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvSoluong"
+                android:textSize="17dp"
                 android:fontFamily="monospace"
                 android:text="tinhtrang"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvGia"
+                android:textSize="17dp"
                 android:fontFamily="monospace"
                 android:text="giathue"/>
             <androidx.appcompat.widget.AppCompatButton
@@ -74,6 +79,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/btnThemGioHang"
                 android:text="Thêm giỏ hàng "
+                android:textSize="17dp"
                 android:textColor="@color/white"
                 android:background="#1fb497"
                 android:drawableRight="@drawable/ic_cart"
