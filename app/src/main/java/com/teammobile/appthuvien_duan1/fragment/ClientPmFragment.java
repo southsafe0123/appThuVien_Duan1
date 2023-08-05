@@ -52,7 +52,7 @@ public class ClientPmFragment extends Fragment {
         phieuMuonDAO.getCurPM(pm.getMa(), new PhieuMuonDAO.IGetCurPM() {
             @Override
             public void onCallBack(PhieuMuon phieuMuon) {
-                if(phieuMuon.getMa().equals(pm.getMa())==false){
+                if(phieuMuon==null||!phieuMuon.getMa().equals(activity.getCurPM().getMa())){
                     Toast.makeText(context, "OKOK", Toast.LENGTH_SHORT).show();
                     return;
 

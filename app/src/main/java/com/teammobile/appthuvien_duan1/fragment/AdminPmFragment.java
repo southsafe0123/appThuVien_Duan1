@@ -59,7 +59,7 @@ public class AdminPmFragment extends Fragment {
         phieuMuonDAO.getCurPM(activity.getCurPM().getMa(), new PhieuMuonDAO.IGetCurPM() {
             @Override
             public void onCallBack(PhieuMuon phieuMuon) {
-                if(!phieuMuon.getMa().equals(activity.getCurPM().getMa())){
+                if(phieuMuon==null||!phieuMuon.getMa().equals(activity.getCurPM().getMa())){
                     Toast.makeText(context, "OKOK", Toast.LENGTH_SHORT).show();
                     return;
 
