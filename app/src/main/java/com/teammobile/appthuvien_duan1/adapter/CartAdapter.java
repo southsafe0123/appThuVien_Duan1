@@ -28,13 +28,17 @@ import com.teammobile.appthuvien_duan1.fragment.CartFragment;
 import com.teammobile.appthuvien_duan1.model.Cart;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 	private ArrayList<Sach> list;
 	private ArrayList<Integer> maxSoluong;
 	private Context context;
 	private int originalTextColor;
+
+	private NumberFormat format;
 
 	private AlertDialog alertDialog;
 
@@ -71,8 +75,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 		Sach sach = list.get(position);
 
+		 format = NumberFormat.getInstance(Locale.US);
+
+
 		holder.txtTen.setText(""+list.get(holder.getAdapterPosition()).getTenSach());
-		holder.txtGia.setText("Giá: " + list.get(holder.getAdapterPosition()).getGiaThue() + " VND");
+
+		holder.txtGia.setText("Giá: " + format.format(list.get(holder.getAdapterPosition()).getGiaThue())+ " VND");
 		holder.txtTacGia.setText("Tác giả: "+list.get(holder.getAdapterPosition()).getTacGia().getTenTacGia());
 		holder.txtTheLoai.setText("Thể loại: "+list.get(holder.getAdapterPosition()).getLoai().getTenLoai());
 		String soluong = "" + list.get(holder.getAdapterPosition()).getSoLuong();
@@ -231,7 +239,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 	public void loadData(){
 		tongGiohang = 0;
 		for(Sach sach: list){
-			tongGiohang += sach.getGiaThue()*sach.getSoLuong();
+			tongGiohang +=sach.getGiaThue()*sach.getSoLuong();
 		}
 		if(tongTien!=null){
 			tongTien.thayDoiTongTien(tongGiohang);

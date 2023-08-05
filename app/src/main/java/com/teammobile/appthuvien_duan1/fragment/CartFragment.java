@@ -34,10 +34,12 @@ import com.teammobile.appthuvien_duan1.model.User;
 
 import org.w3c.dom.Text;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class CartFragment extends Fragment implements CartAdapter.TongTien {
@@ -59,6 +61,8 @@ public class CartFragment extends Fragment implements CartAdapter.TongTien {
 
         btnSumbit=view.findViewById(R.id.btnSumbit);
         txtTongtien = view.findViewById(R.id.txtTongtien);
+        NumberFormat format = NumberFormat.getInstance(Locale.US);
+
 
         khoiTao();
         //ArrayList<Sach> list = cart.getList();
@@ -83,7 +87,7 @@ public class CartFragment extends Fragment implements CartAdapter.TongTien {
             if(tongGiohang==0){
                 txtTongtien.setText("Giỏ hàng hiện không có sách");
             } else{
-                txtTongtien.setText("Tổng đơn hàng: "+tongGiohang+" VND");
+                txtTongtien.setText("Tổng đơn hàng: "+format.format(tongGiohang)+" VND");
             }
         }
         adapter.setTongTien(new CartAdapter.TongTien() {
@@ -93,7 +97,7 @@ public class CartFragment extends Fragment implements CartAdapter.TongTien {
                     String tongGiaTri = "Giỏ hàng hiện không có sách";
                     txtTongtien.setText(tongGiaTri);
                 } else {
-                    String tongGiaTri = "Tổng đơn hàng: " + tongTien + " VND";
+                    String tongGiaTri = "Tổng đơn hàng: " +format.format(tongGiohang)+" VND";
                     SpannableString spannableString = new SpannableString(tongGiaTri);
                     spannableString.setSpan(new UnderlineSpan(), 0, tongGiaTri.length(), 0);
                     txtTongtien.setText(spannableString);
@@ -204,7 +208,8 @@ public class CartFragment extends Fragment implements CartAdapter.TongTien {
 
     @Override
     public void thayDoiTongTien(int tongTien) {
-        String tongGiaTri = "Tổng đơn hàng: " + tongTien + " VND";
+        NumberFormat format = NumberFormat.getInstance(Locale.US);
+        String tongGiaTri = "Tổng đơn hàng: " + format.format(tongTien) + " VND";
         SpannableString spannableString = new SpannableString(tongGiaTri);
         spannableString.setSpan(new UnderlineSpan(), 0, tongGiaTri.length(), 0);
         txtTongtien.setText(spannableString);
