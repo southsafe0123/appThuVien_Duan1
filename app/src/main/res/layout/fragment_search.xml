@@ -12,7 +12,7 @@
             android:layout_height="wrap_content"
             android:imeOptions="actionSearch"
             android:inputType="text"/>
-
+<!---->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSearched"
         android:layout_width="match_parent"
