@@ -21,6 +21,7 @@ import android.widget.Button;
 import com.teammobile.appthuvien_duan1.R;
 import com.teammobile.appthuvien_duan1.dao.SachDAO;
 import com.teammobile.appthuvien_duan1.fragment.AdminPmFragment;
+import com.teammobile.appthuvien_duan1.fragment.QLPhieuMuonFragment;
 import com.teammobile.appthuvien_duan1.fragment.QuanLyLoaiFragment;
 import com.teammobile.appthuvien_duan1.fragment.QuanLyMenuFragment;
 import com.teammobile.appthuvien_duan1.fragment.QuanLySachFragment;
@@ -138,6 +139,9 @@ public class QuanLyActivity extends AppCompatActivity {
                 QuanLySachFragment quanLySachFragment= (QuanLySachFragment) fm.findFragmentByTag("fragment_sach");
                 if(quanLySachFragment!=null)
                     quanLySachFragment.getAdapter().getFilter().filter(newText);
+                QLPhieuMuonFragment qlPhieuMuonFragment= (QLPhieuMuonFragment) fm.findFragmentByTag("fragment_pm");
+                if(qlPhieuMuonFragment!=null)
+                    qlPhieuMuonFragment.getAdapter().getFilter().filter(newText);
                 return false;
             }
         });

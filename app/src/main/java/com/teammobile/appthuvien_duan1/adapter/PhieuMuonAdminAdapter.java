@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,9 +25,9 @@ import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 
 import java.util.ArrayList;
 
-public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAdapter.ViewHolder> {
+public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAdapter.ViewHolder> implements Filterable {
     private Context context;
-    private ArrayList<PhieuMuon> list;
+    private ArrayList<PhieuMuon> list,tmp;
     private QuanLyActivity activity;
     private PhieuMuonDAO phieuMuonDAO;
     public PhieuMuonAdminAdapter(Context context, ArrayList<PhieuMuon> list) {
@@ -33,6 +35,7 @@ public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAd
         this.list = list;
         activity= (QuanLyActivity) context;
         phieuMuonDAO=new PhieuMuonDAO();
+        tmp=list;
     }
 
     @NonNull
@@ -100,6 +103,38 @@ public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAd
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String str=constraint.toString();
+                ArrayList<PhieuMuon> kq=new ArrayList<>();
+                if(str.equals("")){
+                    kq=tmp;
+                }
+                else{
+                    for(PhieuMuon phieuMuon: list){
+                        if(phieuMuon.getMa().toLowerCase().contains(str.toLowerCase())||
+                                phieuMuon.getUser().getEmail().toLowerCase().contains(str.toLowerCase())){
+                            kq.add(phieuMuon);
+                        }
+                    }
+                }
+
+                FilterResults filterResults=new FilterResults();
+                filterResults.values=kq;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                list= (ArrayList<PhieuMuon>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
