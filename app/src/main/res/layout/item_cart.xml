@@ -10,7 +10,7 @@
 
 
     <LinearLayout
-        android:background="#FFEEEE"
+        android:background="#F5FFFD"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -23,7 +23,7 @@
             <ImageView
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="6dp"
-                android:background="#FFFAFA"
+                android:background="#FFFF"
                 android:id="@+id/ivAnh"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/baseline_add_24"
@@ -41,7 +41,7 @@
 
 
                 <TextView
-                    android:textColor="#C85353"
+                    android:textColor="#FF5757"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="3dp"
                     android:id="@+id/txtTen"
@@ -100,47 +100,56 @@
         <LinearLayout
             android:gravity="center"
             android:scaleType="centerCrop"
-
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <LinearLayout
+                android:gravity="center"
+                android:layout_marginLeft="43dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/box_border"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp">
+
+
+                <ImageView
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/box_vuong"
+                    android:id="@+id/ivTang"
+                    android:src="@drawable/baseline_add_24"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"/>
+
+                <TextView
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:textSize="18dp"
+                    android:background="@drawable/box_vuong"
+                    android:id="@+id/txtSoluong"
+                    android:text="@string/soluong"
+                    android:textColor="#0B0B0B"
+                    android:textStyle="bold"
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content"/>
+
+                <ImageView
+                    android:id="@+id/ivGiam"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="18dp"
+                    android:background="@drawable/box_vuong"
+                    android:src="@drawable/outline_horizontal_rule_24" />
+
+            </LinearLayout>
 
 
             <ImageView
-
-                android:layout_marginTop="5dp"
-                android:id="@+id/ivTang"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="40dp"
-                android:src="@drawable/baseline_add_24"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-
-                android:id="@+id/txtSoluong"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="50dp"
-                android:textSize="32dp"
-                android:text="@string/soluong"
-                android:textColor="#222222"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <ImageView
-                android:layout_marginLeft="-5dp"
-                android:layout_marginTop="5dp"
-                android:id="@+id/ivGiam"
-                android:src="@drawable/outline_horizontal_rule_24"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <ImageView
-                android:layout_marginLeft="140dp"
-                android:layout_marginRight="-100dp"
-
+                android:layout_marginLeft="170dp"
+                android:background="@drawable/box_vuong"
                 android:id="@+id/ivXoa"
                 android:src="@drawable/baseline_delete_24"
                 android:layout_width="32dp"
