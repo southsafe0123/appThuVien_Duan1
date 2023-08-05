@@ -20,6 +20,8 @@
     import androidx.annotation.Nullable;
     import androidx.appcompat.app.AlertDialog;
     import androidx.fragment.app.Fragment;
+    import androidx.fragment.app.FragmentManager;
+    import androidx.fragment.app.FragmentTransaction;
     import androidx.recyclerview.widget.LinearLayoutManager;
     import androidx.recyclerview.widget.RecyclerView;
 
@@ -163,6 +165,16 @@
                                                 list.clear();
                                                 adapter.loadData();
                                                 txtTongtien.setText("Xin cảm ơn quý khách!");
+                                                btnSumbit.setText("Đến đơn hàng");
+                                                btnSumbit.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View v) {
+                                                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                                        fragmentTransaction.addToBackStack(null).replace(R.id.frag_main, new User_DSPM_Fragment());
+                                                        fragmentTransaction.commit();
+                                                    }
+                                                });
                                             }
                                             else
                                                 Toast.makeText(context, "Thanh toán đơn hàng thất bại", Toast.LENGTH_SHORT).show();
