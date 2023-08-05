@@ -97,7 +97,7 @@ public class CartFragment extends Fragment implements CartAdapter.TongTien {
                     String tongGiaTri = "Giỏ hàng hiện không có sách";
                     txtTongtien.setText(tongGiaTri);
                 } else {
-                    String tongGiaTri = "Tổng đơn hàng: " +format.format(tongGiohang)+" VND";
+                    String tongGiaTri = "Tổng đơn hàng: " +format.format(tongTien)+" VND";
                     SpannableString spannableString = new SpannableString(tongGiaTri);
                     spannableString.setSpan(new UnderlineSpan(), 0, tongGiaTri.length(), 0);
                     txtTongtien.setText(spannableString);

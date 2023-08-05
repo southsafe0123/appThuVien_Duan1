@@ -118,6 +118,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 					soluong++;
 					sach.setSoLuong(soluong);
 					list.set(vitribam,sach);
+
 					holder.txtSoluong.setTextColor(Color.RED);
 					holder.ivTang.setColorFilter(Color.BLACK);
 					holder.ivGiam.setColorFilter(originalTextColor);
@@ -148,7 +149,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 					holder.txtSoluong.setTextColor(Color.RED);
 					holder.ivGiam.setColorFilter(Color.BLACK);
 					holder.ivTang.setColorFilter(originalTextColor);
-
 
 
 					loadData();
