@@ -59,8 +59,10 @@ public class AdminPmFragment extends Fragment {
         phieuMuonDAO.getCurPM(activity.getCurPM().getMa(), new PhieuMuonDAO.IGetCurPM() {
             @Override
             public void onCallBack(PhieuMuon phieuMuon) {
-                if(phieuMuon==null||!phieuMuon.getMa().equals(activity.getCurPM().getMa()))
+                if(phieuMuon==null||activity.getCurPM()==null||!phieuMuon.getMa().equals(activity.getCurPM().getMa()))
+                {
                     return;
+                }
                 int tt=phieuMuon.getTrangThai();
                 trangThai="";
                 switch (tt){
@@ -111,7 +113,7 @@ public class AdminPmFragment extends Fragment {
                         break;
                     }
                     default:{
-
+                        trangThai="Hóa đơn bị hủy";
                         btnCapNhat.setVisibility(View.GONE);
                         btnThanhToan.setVisibility(View.GONE);
                         btnTraHang.setVisibility(View.GONE);
@@ -121,6 +123,7 @@ public class AdminPmFragment extends Fragment {
                 }
                 activity.setTrangThai(phieuMuon.getTrangThai());
                 fetchingData();
+
             }
         });
         btnCapNhat.setOnClickListener(new View.OnClickListener() {
@@ -128,11 +131,13 @@ public class AdminPmFragment extends Fragment {
             public void onClick(View v) {
                 pm.setTrangThai(1);
                 Map<String,Sach> map=new HashMap<>();
+                int tongTien=0;
                 for(Sach sach: myList){
                     map.put(sach.getMaSach(),new Sach(sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach(),sach.getIsActive()));
-
+                    tongTien+=sach.getGiaThue()*sach.getSoLuong();
                 }
                 pm.setSach(map);
+                pm.setTongTien(tongTien);
                 updatePM();
             }
         });
@@ -242,10 +247,8 @@ public class AdminPmFragment extends Fragment {
             sachDAO.update(sach.getMaSach(), mx + sach.getSoLuong()*choice, new SachDAO.IUpdate() {
                 @Override
                 public void onCallBack(Boolean check) {
-                        if(check&&choice==-1){
-                            pm.setTrangThai(3);
-                            updatePM();
-                        }
+                    if(check)
+                        Toast.makeText(context, "OK", Toast.LENGTH_SHORT).show();
                 }
             });
         }

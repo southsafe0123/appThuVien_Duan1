@@ -53,8 +53,9 @@ public class ClientPmFragment extends Fragment {
             @Override
             public void onCallBack(PhieuMuon phieuMuon) {
 
-                if(phieuMuon==null&&!phieuMuon.getMa().equals(activity.getCurPM().getMa()))
+                if(phieuMuon==null||activity.getCurPM()==null||!phieuMuon.getMa().equals(activity.getCurPM().getMa())){
                     return;
+                }
                 int tt=phieuMuon.getTrangThai();
                 tinhTrang="";
                 switch (tt){
@@ -93,7 +94,7 @@ public class ClientPmFragment extends Fragment {
                         break;
                     }
                     default:{
-                        tinhTrang="Bị hủy";
+                        tinhTrang="Hóa đơn bị hủy";
                         btnXacNhan.setVisibility(View.GONE);
                         btnHuyDon.setVisibility(View.GONE);
                     }
@@ -101,7 +102,8 @@ public class ClientPmFragment extends Fragment {
                 }
                 pm=phieuMuon;
                 fetchingData();
-            }
+                }
+
 
         });
         btnXacNhan.setOnClickListener(new View.OnClickListener() {
