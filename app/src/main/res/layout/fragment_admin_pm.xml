@@ -14,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <TextView
-        android:padding="5dp"
+        android:padding="7dp"
         android:textStyle="bold"
         style="@style/myStyle"
         android:text="Trạng thái: "
@@ -31,34 +31,43 @@
         android:orientation="vertical"
         >
         <androidx.appcompat.widget.AppCompatButton
+            android:layout_margin="3dp"
+            android:background="@drawable/my_btn_custom"
             android:text="Xác nhận hóa đơn"
             android:id="@+id/btnXacNhan"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"/>
         <androidx.appcompat.widget.AppCompatButton
+            android:layout_margin="3dp"
             android:id="@+id/btnCapNhat"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
+            android:background="@drawable/my_btn_custom"
             android:layout_height="wrap_content"
             android:text="Cập nhật"
             />
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
+            android:background="@drawable/my_btn_custom"
             android:text="Trả hàng"
             android:id="@+id/btnTraHang"
+            android:layout_margin="3dp"
             android:layout_height="wrap_content"/>
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnThanhToan"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
+            android:background="@drawable/my_btn_custom"
+            android:layout_margin="3dp"
             android:layout_height="wrap_content"
             android:text="Thanh toán"
             />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnHuyDon"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:text="Hủy đơn"
-
+            android:background="@drawable/my_btn_custom"
+            android:layout_margin="3dp"
             />
     </LinearLayout>
 
