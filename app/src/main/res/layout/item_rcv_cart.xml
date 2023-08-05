@@ -58,7 +58,6 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="1dp"
                 android:layout_toRightOf="@+id/tvTtileSL"
-
                 android:orientation="horizontal">
 
                 <ImageView
@@ -97,10 +96,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:layout_marginStart="7dp"
+                android:layout_marginStart="7sp"
                 android:text="GIÁ: "
                 android:textStyle="bold"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="20sp"
                 android:fontFamily="monospace"
                 android:textSize="22sp" />
         </RelativeLayout>

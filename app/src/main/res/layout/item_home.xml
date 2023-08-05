@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="10sp"
-    >
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvTen"
-        android:textStyle="bold"
-        android:text="Name"
-        android:textSize="23dp"
-        android:layout_marginStart="10sp"
-        />
-
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="@dimen/cardview_default_radius"
+    android:layout_margin="10sp"
+    app:cardElevation="5dp">
 
     <LinearLayout
         android:layout_weight="10"
@@ -24,12 +16,12 @@
         android:layout_gravity="center"
         android:orientation="horizontal">
 
-
         <LinearLayout
             android:layout_weight="3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="2sp">
 
             <ImageView
                 android:id="@+id/ivHinh"
@@ -39,59 +31,62 @@
         </LinearLayout>
 
         <LinearLayout
-
             android:layout_weight="6"
             android:layout_width="0dp"
 
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvTen"
+                android:textStyle="bold"
+                android:text="Name"
+                android:textSize="23sp"
+                android:layout_marginStart="10sp"
+                />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvTheloai"
-                android:fontFamily="monospace"
+                android:fontFamily="sans-serif"
                 android:text="theloai"
-                android:textSize="17dp"
+
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvTacGia"
-                android:textSize="17dp"
-                android:fontFamily="monospace"
+                android:fontFamily="sans-serif"
                 android:text="tacgia"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvSoluong"
-                android:textSize="17dp"
-                android:fontFamily="monospace"
+                android:fontFamily="sans-serif"
                 android:text="tinhtrang"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvGia"
-                android:textSize="17dp"
-                android:fontFamily="monospace"
+
+                android:fontFamily="sans-serif"
                 android:text="giathue"/>
             <androidx.appcompat.widget.AppCompatButton
-                android:layout_gravity="right"
-                android:layout_marginRight="10dp"
-                android:padding="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_width="wrap_content"
+                android:padding="10sp"
+                android:layout_margin="10sp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnThemGioHang"
-                android:text="Thêm giỏ hàng "
+                android:text="Thêm giỏ hàng"
                 android:textSize="17dp"
                 android:textColor="@color/white"
                 android:background="@drawable/backgr_btn2"
                 android:drawableRight="@drawable/ic_cart"
                 />
         </LinearLayout>
-
-
     </LinearLayout>
-</LinearLayout>
+
+</androidx.cardview.widget.CardView>
