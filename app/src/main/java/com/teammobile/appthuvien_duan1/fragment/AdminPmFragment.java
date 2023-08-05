@@ -59,8 +59,11 @@ public class AdminPmFragment extends Fragment {
         phieuMuonDAO.getCurPM(activity.getCurPM().getMa(), new PhieuMuonDAO.IGetCurPM() {
             @Override
             public void onCallBack(PhieuMuon phieuMuon) {
-                if(!phieuMuon.getMa().equals(activity.getCurPM().getMa()))
+                if(!phieuMuon.getMa().equals(activity.getCurPM().getMa())){
+                    Toast.makeText(context, "OKOK", Toast.LENGTH_SHORT).show();
                     return;
+
+                }
                 int tt=phieuMuon.getTrangThai();
                 trangThai="";
                 switch (tt){
@@ -111,7 +114,7 @@ public class AdminPmFragment extends Fragment {
                         break;
                     }
                     default:{
-
+                        trangThai="Hóa đơn bị hủy";
                         btnCapNhat.setVisibility(View.GONE);
                         btnThanhToan.setVisibility(View.GONE);
                         btnTraHang.setVisibility(View.GONE);

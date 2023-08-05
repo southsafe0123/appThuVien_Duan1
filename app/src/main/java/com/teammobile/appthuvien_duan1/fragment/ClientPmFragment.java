@@ -49,11 +49,14 @@ public class ClientPmFragment extends Fragment {
         btnHuyDon=view.findViewById(R.id.btnHuyDon);
         tvTinhTrang=view.findViewById(R.id.tvTinhTrang);
         rcv=view.findViewById(R.id.rcv);
-        phieuMuonDAO.getCurPM(activity.getCurPM().getMa(), new PhieuMuonDAO.IGetCurPM() {
+        phieuMuonDAO.getCurPM(pm.getMa(), new PhieuMuonDAO.IGetCurPM() {
             @Override
             public void onCallBack(PhieuMuon phieuMuon) {
-                if(!phieuMuon.getMa().equals(activity.getCurPM().getMa()))
+                if(phieuMuon.getMa().equals(pm.getMa())==false){
+                    Toast.makeText(context, "OKOK", Toast.LENGTH_SHORT).show();
                     return;
+
+                }
                 int tt=phieuMuon.getTrangThai();
                 tinhTrang="";
                 switch (tt){
