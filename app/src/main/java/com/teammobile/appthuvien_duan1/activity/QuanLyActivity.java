@@ -20,6 +20,7 @@ import android.widget.Button;
 
 import com.teammobile.appthuvien_duan1.R;
 import com.teammobile.appthuvien_duan1.dao.SachDAO;
+import com.teammobile.appthuvien_duan1.fragment.AdminPmFragment;
 import com.teammobile.appthuvien_duan1.fragment.QuanLyLoaiFragment;
 import com.teammobile.appthuvien_duan1.fragment.QuanLyMenuFragment;
 import com.teammobile.appthuvien_duan1.fragment.QuanLySachFragment;
@@ -41,6 +42,16 @@ public class QuanLyActivity extends AppCompatActivity {
     private int tongGia=0;
     private Map<String,Sach> stock;
     private PhieuMuon curPM;
+    private AdminPmFragment adminPmFragment;
+
+    public AdminPmFragment getAdminPmFragment() {
+        return adminPmFragment;
+    }
+
+    public void setAdminPmFragment(AdminPmFragment adminPmFragment) {
+        this.adminPmFragment = adminPmFragment;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -81,28 +81,11 @@ public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAd
             @Override
             public void onClick(View v) {
                 activity.setCurPM(list.get(holder.getAdapterPosition()));
-                phieuMuonDAO.getCurPM(list.get(holder.getAdapterPosition()).getMa(), new PhieuMuonDAO.IGetCurPM() {
-                    @Override
-                    public void onCallBack(PhieuMuon phieuMuon) {
-                        Fragment fragment=new AdminPmFragment();
-                        Bundle bundle=new Bundle();
-                        bundle.putSerializable("pm",phieuMuon);
-                        fragment.setArguments(bundle);
-                        if(activity.getCurPM()!=null){
-                            FragmentManager fm=activity.getSupportFragmentManager();
-                            if(!fm.isDestroyed()&&fm.findFragmentByTag("curPM")!=null&&phieuMuon.getMa().equals(activity.getCurPM().getMa())){
-                                fm.popBackStack();
-                                fm.beginTransaction().addToBackStack(null).replace(R.id.viewFragmentQuanLy,fragment,"curPM").commit();
-
-                            }
-//                            else if(!fm.isDestroyed()&&fm.findFragmentByTag("curPM")==null){
-//                                loadFragment(fragment,"curPM");
-
-                        }
-
-                    }
-                });
-                Fragment fragment=new AdminPmFragment();
+                Fragment fragment=activity.getAdminPmFragment();
+                if(fragment==null){
+                    fragment=new AdminPmFragment();
+                    activity.setAdminPmFragment((AdminPmFragment) fragment);
+                }
                 Bundle bundle=new Bundle();
                 bundle.putSerializable("pm",list.get(holder.getAdapterPosition()));
                 fragment.setArguments(bundle);

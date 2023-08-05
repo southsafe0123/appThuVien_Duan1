@@ -14,6 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.teammobile.appthuvien_duan1.R;
 import com.teammobile.appthuvien_duan1.fragment.CartFragment;
+import com.teammobile.appthuvien_duan1.fragment.ClientPmFragment;
 import com.teammobile.appthuvien_duan1.fragment.SearchFragment;
 import com.teammobile.appthuvien_duan1.fragment.UserFragment;
 import com.teammobile.appthuvien_duan1.fragment.HomeFragment;
@@ -22,6 +23,16 @@ import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 
 public class MainActivity extends AppCompatActivity {
     private PhieuMuon curPM;
+    private ClientPmFragment clientPmFragment;
+
+    public ClientPmFragment getClientPmFragment() {
+        return clientPmFragment;
+    }
+
+    public void setClientPmFragment(ClientPmFragment clientPmFragment) {
+        this.clientPmFragment = clientPmFragment;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

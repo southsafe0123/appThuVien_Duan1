@@ -1,9 +1,6 @@
     package com.teammobile.appthuvien_duan1.fragment;
 
-    import android.app.Activity;
     import android.content.Context;
-    import android.content.DialogInterface;
-    import android.content.Intent;
     import android.content.SharedPreferences;
     import android.os.Bundle;
     import android.text.SpannableString;
@@ -12,7 +9,6 @@
     import android.view.View;
     import android.view.ViewGroup;
     import android.widget.Button;
-    import android.widget.LinearLayout;
     import android.widget.TextView;
     import android.widget.Toast;
 
@@ -27,18 +23,13 @@
 
     import com.teammobile.appthuvien_duan1.R;
     import com.teammobile.appthuvien_duan1.adapter.CartAdapter;
-    import com.teammobile.appthuvien_duan1.adapter.ClientCartAdapter;
     import com.teammobile.appthuvien_duan1.adapter.HomeAdapter;
-    import com.teammobile.appthuvien_duan1.adapter.PhieuMuonClientAdapter;
     import com.teammobile.appthuvien_duan1.dao.CartDAO;
     import com.teammobile.appthuvien_duan1.dao.PhieuMuonDAO;
-    import com.teammobile.appthuvien_duan1.interfaces.IGioHang;
     import com.teammobile.appthuvien_duan1.model.Cart;
     import com.teammobile.appthuvien_duan1.model.PhieuMuon;
     import com.teammobile.appthuvien_duan1.model.Sach;
     import com.teammobile.appthuvien_duan1.model.User;
-
-    import org.w3c.dom.Text;
 
     import java.text.SimpleDateFormat;
     import java.util.ArrayList;
@@ -132,7 +123,7 @@
                         View dialogView = inflater.inflate(R.layout.item_alertdialog, null);
                         Button btnHuy,btnXacNhan;
                         btnHuy = dialogView.findViewById(R.id.btnHuy);
-                        btnXacNhan = dialogView.findViewById(R.id.btnXacnhan);
+                        btnXacNhan = dialogView.findViewById(R.id.btnXacNhan);
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
                         builder.setView(dialogView);
                         btnXacNhan.setOnClickListener(new View.OnClickListener() {
