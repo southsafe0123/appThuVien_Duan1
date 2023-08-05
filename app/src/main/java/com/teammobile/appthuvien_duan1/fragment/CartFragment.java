@@ -123,7 +123,7 @@ public class CartFragment extends Fragment implements CartAdapter.TongTien {
                     View dialogView = inflater.inflate(R.layout.item_alertdialog, null);
                     Button btnHuy,btnXacNhan;
                     btnHuy = dialogView.findViewById(R.id.btnHuy);
-                    btnXacNhan = dialogView.findViewById(R.id.btnXacnhan);
+                    btnXacNhan = dialogView.findViewById(R.id.btnXacNhan);
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setView(dialogView);
                     btnXacNhan.setOnClickListener(new View.OnClickListener() {

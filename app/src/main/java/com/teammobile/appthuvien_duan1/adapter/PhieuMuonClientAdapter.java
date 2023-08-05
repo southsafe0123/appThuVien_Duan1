@@ -84,23 +84,12 @@ public class PhieuMuonClientAdapter extends RecyclerView.Adapter<PhieuMuonClient
             @Override
             public void onClick(View v) {
                 activity.setCurPM(list.get(holder.getAdapterPosition()));
-                phieuMuonDAO.getCurPM(list.get(holder.getAdapterPosition()).getMa(), new PhieuMuonDAO.IGetCurPM() {
-                    @Override
-                    public void onCallBack(PhieuMuon phieuMuon) {
-                        Fragment fragment=new ClientPmFragment();
-                        Bundle bundle=new Bundle();
-                        bundle.putSerializable("pm",phieuMuon);
-                        fragment.setArguments(bundle);
-                        FragmentManager fm=activity.getSupportFragmentManager();
-                        if(!fm.isDestroyed()&&fm.findFragmentByTag("curPM")!=null&&phieuMuon.getMa().equals(activity.getCurPM().getMa())){
-                            Log.d("OK","fragment da load len");
-                            Toast.makeText(context, "fragment da load len", Toast.LENGTH_SHORT).show();
-                            fm.popBackStack();
-                            loadFragment(fragment,"curPM");
-                        }
-                    }
-                });
-                Fragment fragment=new ClientPmFragment();
+                Fragment fragment=activity.getClientPmFragment();
+                if(fragment==null){
+                    fragment=new ClientPmFragment();
+                    activity.setClientPmFragment((ClientPmFragment) fragment);
+
+                }
                 Bundle bundle=new Bundle();
                 bundle.putSerializable("pm",list.get(holder.getAdapterPosition()));
                 fragment.setArguments(bundle);

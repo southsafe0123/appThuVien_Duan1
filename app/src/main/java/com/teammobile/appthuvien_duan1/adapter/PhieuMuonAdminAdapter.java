@@ -7,9 +7,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -24,9 +25,9 @@ import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 
 import java.util.ArrayList;
 
-public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAdapter.ViewHolder> {
+public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAdapter.ViewHolder> implements Filterable {
     private Context context;
-    private ArrayList<PhieuMuon> list;
+    private ArrayList<PhieuMuon> list,tmp;
     private QuanLyActivity activity;
     private PhieuMuonDAO phieuMuonDAO;
     public PhieuMuonAdminAdapter(Context context, ArrayList<PhieuMuon> list) {
@@ -34,6 +35,7 @@ public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAd
         this.list = list;
         activity= (QuanLyActivity) context;
         phieuMuonDAO=new PhieuMuonDAO();
+        tmp=list;
     }
 
     @NonNull
@@ -82,29 +84,15 @@ public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAd
             @Override
             public void onClick(View v) {
                 activity.setCurPM(list.get(holder.getAdapterPosition()));
-                phieuMuonDAO.getCurPM(list.get(holder.getAdapterPosition()).getMa(), new PhieuMuonDAO.IGetCurPM() {
-                    @Override
-                    public void onCallBack(PhieuMuon phieuMuon) {
-                        Fragment fragment=new AdminPmFragment();
-                        Bundle bundle=new Bundle();
-                        bundle.putSerializable("pm",phieuMuon);
-                        fragment.setArguments(bundle);
-                        if(activity.getCurPM()!=null){
-                            FragmentManager fm=activity.getSupportFragmentManager();
-                            if(!fm.isDestroyed()&&fm.findFragmentByTag("curPM")!=null){
-                                Toast.makeText(context, "HAHA", Toast.LENGTH_SHORT).show();
-                                fm.popBackStack();
-                                fm.beginTransaction().addToBackStack(null).replace(R.id.viewFragmentQuanLy,fragment,"curPM").commit();
-
-                            }
-                            else if(!fm.isDestroyed()&&fm.findFragmentByTag("curPM")==null){
-                                loadFragment(fragment,"curPM");
-                            }
-                        }
-
-                    }
-                });
-
+                Fragment fragment=activity.getAdminPmFragment();
+                if(fragment==null){
+                    fragment=new AdminPmFragment();
+                    activity.setAdminPmFragment((AdminPmFragment) fragment);
+                }
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("pm",list.get(holder.getAdapterPosition()));
+                fragment.setArguments(bundle);
+                loadFragment(fragment,"curPM");
             }
         });
         holder.tvTenKH.setText("Tên KH: "+list.get(position).getUser().getUsername());
@@ -115,6 +103,38 @@ public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAd
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String str=constraint.toString();
+                ArrayList<PhieuMuon> kq=new ArrayList<>();
+                if(str.equals("")){
+                    kq=tmp;
+                }
+                else{
+                    for(PhieuMuon phieuMuon: list){
+                        if(phieuMuon.getMa().toLowerCase().contains(str.toLowerCase())||
+                                phieuMuon.getUser().getEmail().toLowerCase().contains(str.toLowerCase())){
+                            kq.add(phieuMuon);
+                        }
+                    }
+                }
+
+                FilterResults filterResults=new FilterResults();
+                filterResults.values=kq;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                list= (ArrayList<PhieuMuon>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

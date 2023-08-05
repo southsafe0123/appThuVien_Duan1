@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-
+    android:orientation="vertical"
     android:layout_height="match_parent">
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-
+        android:layout_height="0dp"
+        android:layout_weight="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+    <TextView
+        android:padding="7dp"
+        android:textStyle="bold"
+        style="@style/myStyle"
+        android:text="Trạng thái: "
+        android:id="@+id/tvTrangThai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,33 +30,45 @@
         android:gravity="center"
         android:orientation="vertical"
         >
-
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnSubmit"
-            android:layout_width="match_parent"
+            android:layout_margin="3dp"
+            android:background="@drawable/my_btn_custom"
+            android:text="Xác nhận hóa đơn"
+            android:id="@+id/btnXacNhan"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_margin="3dp"
+            android:id="@+id/btnCapNhat"
+            android:layout_width="350dp"
+            android:background="@drawable/my_btn_custom"
             android:layout_height="wrap_content"
-            android:visibility="invisible"
-
             android:text="Cập nhật"
-
             />
-
         <androidx.appcompat.widget.AppCompatButton
-            android:visibility="invisible"
-            android:id="@+id/btnAccept"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
+            android:background="@drawable/my_btn_custom"
+            android:text="Trả hàng"
+            android:id="@+id/btnTraHang"
+            android:layout_margin="3dp"
+            android:layout_height="wrap_content"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnThanhToan"
+            android:layout_width="350dp"
+            android:background="@drawable/my_btn_custom"
+            android:layout_margin="3dp"
             android:layout_height="wrap_content"
             android:text="Thanh toán"
-
             />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnDecline"
-            android:layout_width="match_parent"
+            android:id="@+id/btnHuyDon"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:text="Hủy đơn"
-
+            android:background="@drawable/my_btn_custom"
+            android:layout_margin="3dp"
             />
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

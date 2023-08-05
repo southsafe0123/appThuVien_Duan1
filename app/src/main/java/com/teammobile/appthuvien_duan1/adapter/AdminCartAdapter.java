@@ -43,6 +43,7 @@ public class AdminCartAdapter extends RecyclerView.Adapter<AdminCartAdapter.View
         holder.tvSL.setText(list.get(position).getSoLuong()+"");
         holder.tvTen.setText(list.get(position).getTenSach());
         int sl= Integer.parseInt(holder.tvSL.getText().toString());
+
         if(activity.getTrangThai()==0){
             holder.btnTang.setVisibility(View.VISIBLE);
             holder.btnGiam.setVisibility(View.VISIBLE);

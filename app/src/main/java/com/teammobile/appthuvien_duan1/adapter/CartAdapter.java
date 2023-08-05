@@ -3,7 +3,7 @@ package com.teammobile.appthuvien_duan1.adapter;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
+
 import com.bumptech.glide.Glide;
 
 import android.graphics.Color;
@@ -18,13 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.teammobile.appthuvien_duan1.R;
-import com.teammobile.appthuvien_duan1.dao.CartDAO;
-import com.teammobile.appthuvien_duan1.dao.SachDAO;
-import com.teammobile.appthuvien_duan1.fragment.CartFragment;
 import com.teammobile.appthuvien_duan1.model.Cart;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
@@ -200,7 +196,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 		View dialogView = inflater.inflate(R.layout.item_xoadialog, null);
 		Button btnHuy,btnXacNhan;
 		btnHuy = dialogView.findViewById(R.id.btnHuy);
-		btnXacNhan = dialogView.findViewById(R.id.btnXacnhan);
+		btnXacNhan = dialogView.findViewById(R.id.btnXacNhan);
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		builder.setView(dialogView);
