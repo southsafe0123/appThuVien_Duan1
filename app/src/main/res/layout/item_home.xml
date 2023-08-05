@@ -3,17 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="10dp"
+    >
 
-    <LinearLayout
-        android:layout_weight="10"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/tvTen"
+        android:textStyle="bold"
+        android:text="Name"
+        android:textSize="21dp"
+        android:textAlignment="center"/>
+
+
+    <LinearLayout
+
+        android:layout_weight="10"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="horizontal">
 
+
         <LinearLayout
-            android:padding="5dp"
-            android:layout_weight="1"
+            android:layout_weight="4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -21,55 +33,53 @@
             <ImageView
                 android:id="@+id/ivHinh"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                />
         </LinearLayout>
 
         <LinearLayout
-            android:padding="5dp"
-            android:layout_weight="2"
+            android:padding="6dp"
+            android:layout_weight="6"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvTen"
-                android:textStyle="bold"
-                android:text="Name"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvTheloai"
+                android:fontFamily="monospace"
                 android:text="theloai"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvTacGia"
+                android:fontFamily="monospace"
                 android:text="tacgia"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvSoluong"
+                android:fontFamily="monospace"
                 android:text="tinhtrang"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvGia"
+                android:fontFamily="monospace"
                 android:text="giathue"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnThemGioHang"
+                android:text="Thêm giỏ hàng "
+                android:textColor="@color/white"
+                android:background="#1fb497"
+                android:drawableRight="@drawable/ic_cart"
+                />
         </LinearLayout>
+
+
     </LinearLayout>
-
-
-    <Button
-        android:padding="5dp"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnThemGioHang"
-        android:textAllCaps="false"
-        android:text="Thêm giỏ hàng"/>
-
-
 </LinearLayout>

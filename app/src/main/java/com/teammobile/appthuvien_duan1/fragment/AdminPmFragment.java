@@ -80,16 +80,12 @@ public class AdminPmFragment extends Fragment {
             public void onClick(View v) {
                 if (pm.getTrangThai() == 0) {
                     Map<String, Sach> map = new HashMap<>();
-                    int tongTien=0;
-
                     for (Sach item : myList) {
                         Sach sach = new Sach(item.getLoai(), item.getTacGia(), item.getTenSach(), item.getHinhAnh(), item.getSoLuong(), item.getGiaThue(), item.getVitridesach(), item.getIsActive());
-                        tongTien+=sach.getGiaThue()*sach.getSoLuong();
                         map.put(item.getMaSach(), sach);
                     }
                     pm.setSach(map);
                     pm.setTrangThai(1);
-                    pm.setTongTien(tongTien);
                     updatePM();
                 }
             }
@@ -203,7 +199,7 @@ public class AdminPmFragment extends Fragment {
             @Override
             public void onCallBack(PhieuMuon phieuMuon) {
                 Toast.makeText(context, "Thay đổi rồi nè!", Toast.LENGTH_SHORT).show();
-//                pm=phieuMuon;
+                pm=phieuMuon;
 //                reload();
             }
         });

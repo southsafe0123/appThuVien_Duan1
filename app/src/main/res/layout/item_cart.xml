@@ -100,47 +100,47 @@
         <LinearLayout
             android:gravity="center"
             android:scaleType="centerCrop"
+
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:layout_marginLeft="38dp"
-                android:gravity="center"
-                android:background="@drawable/box_border"
-                android:orientation="horizontal"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/ivTang"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="12dp"
-                    android:background="@drawable/box_vuong"
-                    android:src="@drawable/baseline_add_24" />
 
-                <TextView
-                    android:id="@+id/txtSoluong"
-                    android:textSize="32dp"
-                    android:text="@string/soluong"
-                    android:textColor="#222222"
-                    android:textStyle="bold"
-                    android:layout_width="20dp"
-                    android:layout_height="wrap_content"/>
-
-                <ImageView
-                    android:background="@drawable/box_vuong"
-                    android:layout_marginLeft="12dp"
-                    android:layout_gravity="center"
-                    android:id="@+id/ivGiam"
-                    android:src="@drawable/outline_horizontal_rule_24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
             <ImageView
-                android:layout_marginLeft="200dp"
+
+                android:layout_marginTop="5dp"
+                android:id="@+id/ivTang"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="40dp"
+                android:src="@drawable/baseline_add_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+
+                android:id="@+id/txtSoluong"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="50dp"
+                android:textSize="32dp"
+                android:text="@string/soluong"
+                android:textColor="#222222"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:layout_marginLeft="-5dp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/ivGiam"
+                android:src="@drawable/outline_horizontal_rule_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:layout_marginLeft="140dp"
+                android:layout_marginRight="-100dp"
+
                 android:id="@+id/ivXoa"
                 android:src="@drawable/baseline_delete_24"
                 android:layout_width="32dp"

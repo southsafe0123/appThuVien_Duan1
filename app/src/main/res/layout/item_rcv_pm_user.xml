@@ -37,7 +37,9 @@
             <TextView
                 android:id="@+id/tvTT"
                 android:textAlignment="textEnd"
-                android:text="trạng thái"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <TextView
@@ -62,11 +64,12 @@
             <TextView
                 android:layout_below="@+id/tvMa"
                 android:text="Tổng tiền: "
-                android:textSize="15dp"
+                android:textSize="17dp"
+                android:background="#1fb497"
+                android:textColor="@color/white"
                 android:fontFamily="monospace"
                 android:id="@+id/tvTongTien"
-                android:textAlignment="textEnd"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
         </RelativeLayout>
