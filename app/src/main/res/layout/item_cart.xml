@@ -39,7 +39,7 @@
 
 
                 <TextView
-                    android:textColor="#FF5757"
+                    android:textColor="@color/black"
                     android:id="@+id/txtTen"
                     android:textSize="30dp"
                     android:text="Tên sách "
