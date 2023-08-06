@@ -9,6 +9,7 @@
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
             android:id="@+id/edtTenTruyen"
             android:hint="Tìm Kiếm"
+            android:backgroundTintMode="screen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:imeOptions="actionSearch"

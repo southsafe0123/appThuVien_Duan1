@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -82,6 +84,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
         if(list.get(holder.getAdapterPosition()).getSoLuong()==0){
             holder.btnThemGioHang.setText("Đã hết hàng");
             holder.btnThemGioHang.setBackgroundColor(Color.RED);
+            holder.btnThemGioHang.setTextColor(Color.WHITE);
+            holder.btnThemGioHang.setBackgroundResource(R.drawable.btn_hethang);
+
         } else{
 
             holder.btnThemGioHang.setOnClickListener(new View.OnClickListener() {

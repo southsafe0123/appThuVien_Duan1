@@ -54,7 +54,8 @@
 
         <activity
             android:name=".activity.Login_Activity"
-            android:exported="true" >
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -65,7 +66,8 @@
 
         <activity
             android:name=".activity.Register_Activity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <meta-data
             android:name="preloaded_fonts"
