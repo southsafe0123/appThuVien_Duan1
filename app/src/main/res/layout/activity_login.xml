@@ -14,7 +14,7 @@
         android:orientation="horizontal"
         android:background="@mipmap/top_background">
         <TextView
-            android:layout_weight="2"
+            android:layout_weight="1.5"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="Login Account"
@@ -25,84 +25,113 @@
             android:layout_marginRight="10dp"/>
 
         <ImageView
-            android:layout_weight="1.5"
-            android:layout_width="150dp"
-            android:layout_height="300dp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="200sp"
             android:src="@mipmap/women2"/>
     </LinearLayout>
 
-
-        <EditText
-            android:layout_margin="15dp"
-            android:hint="Nhập Email"
-            android:id="@+id/edtTaikhoan"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp"
+        android:background="@drawable/custom_layout">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></EditText>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="15dp">
-
-        <EditText
-            android:id="@+id/edtMatkhau"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Nhập Password"
-            android:inputType="textPassword" />
-        <ImageView
-            android:id="@+id/imageViewShowPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_hide_pass"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginStart="10dp">
-        <CheckBox
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:padding="20sp">
+            <EditText
 
-            android:layout_weight="1"
-            android:hint="Remember"
-            android:id="@+id/chkRemember"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></CheckBox>
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/edtTaikhoan"
+                android:drawableLeft="@drawable/ic_baseline_person_24"
+                android:drawablePadding="5sp"
+                android:hint="Nhập email"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/cardview_dark_background"
+                android:layout_marginTop="30dp"
 
-        <TextView
-            android:layout_weight="1.9"
-            android:textStyle="italic"
-            android:textSize="18dp"
-            android:textColor="@color/black"
-            android:textAlignment="center"
-            android:text="@string/quenmatkhau"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></TextView>
-    </LinearLayout>
+                ></EditText>
 
 
+            <LinearLayout
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnDangnhap"
-        android:text = "Đăng nhập"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="4dp"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:background="@drawable/backgr_btn2"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="32dp"></androidx.appcompat.widget.AppCompatButton>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                >
+
+                <EditText
+                    android:id="@+id/edtMatkhau"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="2"
+                    android:drawableLeft="@drawable/ic_look"
+                    android:drawablePadding="5dp"
+                    android:hint="Password"
+                    android:padding="8dp"
+
+                    android:inputType="textPassword"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/cardview_dark_background"
+                    android:layout_marginTop="20sp" />
+                <ImageView
+                    android:id="@+id/imageViewShowPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_hide_pass"
+                    android:layout_marginTop="30sp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="10sp">
+                <CheckBox
+
+                    android:layout_weight="1"
+                    android:hint="Remember"
+                    android:id="@+id/chkRemember"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></CheckBox>
+
+                <TextView
+                    android:layout_weight="1.9"
+                    android:textStyle="italic"
+                    android:textSize="18dp"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    android:text="@string/quenmatkhau"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></TextView>
+            </LinearLayout>
 
 
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnDangnhap"
+                android:text = "Đăng nhập"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:background="@drawable/backgr_btn2"
+                android:layout_marginTop="20sp"
+                ></androidx.appcompat.widget.AppCompatButton>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <TextView
-        android:layout_margin="20dp"
+
         android:textStyle="italic"
         android:textSize="20dp"
         android:textColor="@color/black"

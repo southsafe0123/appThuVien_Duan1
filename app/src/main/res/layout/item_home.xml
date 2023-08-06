@@ -21,7 +21,7 @@
             android:text="Name"
             android:textColor="@color/black"
             android:textSize="25sp"
-            android:textStyle="bold"
+            android:fontFamily="sans-serif-black"
             android:background="@color/beige_nhat" />
 
         <LinearLayout
@@ -55,7 +55,7 @@
                     android:id="@+id/tvTheloai"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="sans-serif-black"
                     android:text="theloai"
                     android:textSize="16sp" />
 
@@ -63,7 +63,7 @@
                     android:id="@+id/tvTacGia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="sans-serif-black"
                     android:text="tacgia"
                     android:textSize="16sp" />
 
@@ -71,7 +71,7 @@
                     android:id="@+id/tvSoluong"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="sans-serif-black"
                     android:text="tinhtrang"
                     android:textSize="16sp" />
 
@@ -81,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:text="giathue"
                     android:textSize="16sp"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="sans-serif-black"
                     android:layout_marginBottom="5sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
