@@ -1,42 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:padding="10dp"
-    android:background="@color/beige_nhat"
+    android:background="#FFFFFF"
     android:layout_height="match_parent">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RvCart"
-        android:layout_weight="12"
-
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="0dp"/>
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RvCart"
+            android:layout_weight="12"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
 
 
-    <TextView
+        <TextView
 
-        android:layout_marginRight="-40dp"
-        android:paddingEnd="50dp"
-        android:gravity="end"
-        android:id="@+id/txtTongtien"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="12dp"
-        android:layout_weight="1"
-        android:text=""
-        android:textColor="#222121"
-        android:textSize="19dp"
-        android:textStyle="bold" />
+            android:layout_marginRight="-40dp"
+            android:paddingEnd="50dp"
+            android:gravity="end"
+            android:id="@+id/txtTongtien"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="2dp"
+            android:layout_weight="1"
+            android:text=""
+            android:textColor="#222121"
+            android:textSize="19dp"
+            android:textStyle="bold" />
 
-    <Button
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="3dp"
-        android:backgroundTint="@color/xanhco_dam"
-        android:id="@+id/btnSumbit"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:layout_weight="1"
-        android:text="Thanh toán" />
+        <Button
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="3dp"
+            android:background="#1FB396"
+            android:id="@+id/btnSumbit"
+            android:textColor="#FFF"
+            android:textSize="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_weight="1"
+            android:text="Thanh toán" />
+
+    </LinearLayout>
 
 </LinearLayout>
