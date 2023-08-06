@@ -51,6 +51,7 @@ public class HomeFragment extends Fragment {
             }
         });
         return view;
+
     }
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
