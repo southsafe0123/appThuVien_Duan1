@@ -25,6 +25,7 @@ import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Locale;
 
 public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAdapter.ViewHolder> implements Filterable {
@@ -34,6 +35,7 @@ public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAd
     private PhieuMuonDAO phieuMuonDAO;
     public PhieuMuonAdminAdapter(Context context, ArrayList<PhieuMuon> list) {
         this.context = context;
+        Collections.reverse(list);
         this.list = list;
         activity= (QuanLyActivity) context;
         phieuMuonDAO=new PhieuMuonDAO();
@@ -91,16 +93,13 @@ public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAd
                     fragment=new AdminPmFragment();
                     activity.setAdminPmFragment((AdminPmFragment) fragment);
                 }
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("pm",list.get(holder.getAdapterPosition()));
-                fragment.setArguments(bundle);
                 loadFragment(fragment,"curPM");
             }
         });
         NumberFormat numberFormat = NumberFormat.getInstance(Locale.US);
 
         holder.tvTenKH.setText("Tên KH: "+list.get(position).getUser().getUsername());
-        holder.tvTongTien.setText("Tổng tiền: "+ numberFormat.format(list.get(position).getTongTien())+" VNĐ");
+        holder.tvTongTien.setText("Tổng đơn hàng: "+ numberFormat.format(list.get(position).getTongTien())+" VNĐ");
         holder.tvNgay.setText("Ngày tạo: "+list.get(position).getNgayTao());
     }
 

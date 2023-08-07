@@ -24,6 +24,7 @@ import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Locale;
 
 public class PhieuMuonClientAdapter extends RecyclerView.Adapter<PhieuMuonClientAdapter.ViewHolder> {
@@ -35,6 +36,7 @@ public class PhieuMuonClientAdapter extends RecyclerView.Adapter<PhieuMuonClient
 
     public PhieuMuonClientAdapter(Context context, ArrayList<PhieuMuon> list) {
         this.context = context;
+        Collections.reverse(list);
         this.list = list;
         activity= (MainActivity) context;
         phieuMuonDAO=new PhieuMuonDAO();
@@ -84,7 +86,7 @@ public class PhieuMuonClientAdapter extends RecyclerView.Adapter<PhieuMuonClient
         holder.tvTrangThai.setText(tt);
         holder.tvNgay.setText("Ngày thuê: "+list.get(position).getNgayTao());
         holder.tvMaPM.setText("Mã hóa đơn: "+list.get(position).getMa());
-        holder.tvTongTien.setText("Tổng tiền: "+format.format(list.get(position).getTongTien())+" VNĐ");
+        holder.tvTongTien.setText("Tổng đơn hàng: "+format.format(list.get(position).getTongTien())+" VNĐ");
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,9 +97,6 @@ public class PhieuMuonClientAdapter extends RecyclerView.Adapter<PhieuMuonClient
                     activity.setClientPmFragment((ClientPmFragment) fragment);
 
                 }
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("pm",list.get(holder.getAdapterPosition()));
-                fragment.setArguments(bundle);
                 loadFragment(fragment,"curPM");
             }
         });

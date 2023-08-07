@@ -26,6 +26,7 @@ import com.teammobile.appthuvien_duan1.interfaces.ISachDAO;
 import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,13 +40,31 @@ public class AdminPmFragment extends Fragment {
     private RecyclerView rcv;
     private AdminCartAdapter adapter;
     private AppCompatButton btnCapNhat, btnThanhToan,btnTuChoi,btnTraHang,btnXacNhan;
-    private TextView tvTrangThai;
+    private TextView tvTrangThai,tvTongTien;
     private SachDAO sachDAO;
     private PhieuMuonDAO phieuMuonDAO;
     private ArrayList<Sach> myList;
     private PhieuMuon pm;
     private View viewFM;
     private String trangThai;
+    private int tongTien;
+
+    public int getTongTien() {
+        return tongTien;
+    }
+
+    public void setTongTien(int tongTien) {
+        this.tongTien = tongTien;
+    }
+
+    public TextView getTvTongTien() {
+        return tvTongTien;
+    }
+
+    public void setTvTongTien(TextView tvTongTien) {
+        this.tvTongTien = tvTongTien;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -60,83 +79,104 @@ public class AdminPmFragment extends Fragment {
         btnTraHang=viewFM.findViewById(R.id.btnTraHang);
         tvTrangThai=viewFM.findViewById(R.id.tvTrangThai);
         rcv=viewFM.findViewById(R.id.rcv);
-        phieuMuonDAO.getCurPM(activity.getCurPM().getMa(), new PhieuMuonDAO.IGetCurPM() {
+        tvTongTien=viewFM.findViewById(R.id.tvTongTien);
+        phieuMuonDAO.getAll(new PhieuMuonDAO.GetAllCalBack() {
             @Override
-            public void onCallBack(PhieuMuon phieuMuon) {
-                if(phieuMuon==null||!phieuMuon.getMa().equals(activity.getCurPM().getMa()))
-                    return;
-                int tt=phieuMuon.getTrangThai();
-                trangThai="";
-                switch (tt){
-                    case 0:
-                    {
-                        trangThai="Chờ xác nhận";
-                        btnThanhToan.setVisibility(View.GONE);
-                        btnTraHang.setVisibility(View.GONE);
-                        btnXacNhan.setVisibility(View.VISIBLE);
-                        btnCapNhat.setVisibility(View.VISIBLE);
-                        break;
-                    }
-                    case 1:
-                    {
-                        trangThai="Chờ người dùng xác nhận";
-                        btnCapNhat.setVisibility(View.GONE);
-                        btnThanhToan.setVisibility(View.GONE);
-                        btnTraHang.setVisibility(View.GONE);
-                        btnXacNhan.setVisibility(View.GONE);
-                        break;
-                    }
-                    case 2:
-                    {
-                        trangThai="Đã xác nhận";
-                        btnCapNhat.setVisibility(View.GONE);
-                        btnThanhToan.setVisibility(View.VISIBLE);
-                        btnTraHang.setVisibility(View.GONE);
-                        btnXacNhan.setVisibility(View.GONE);
-                        break;
-                    }
-                    case 3:
-                    {
-                        trangThai="Thanh toán thành công";
-                        btnCapNhat.setVisibility(View.GONE);
-                        btnThanhToan.setVisibility(View.GONE);
-                        btnTraHang.setVisibility(View.VISIBLE);
-                        btnXacNhan.setVisibility(View.GONE);
-                        btnTuChoi.setVisibility(View.GONE);
-                        break;
-                    }
-                    case 4:{
-                        trangThai="Đã trả sách về thư viện";
-                        btnCapNhat.setVisibility(View.GONE);
-                        btnThanhToan.setVisibility(View.GONE);
-                        btnTraHang.setVisibility(View.GONE);
-                        btnXacNhan.setVisibility(View.GONE);
-                        btnTuChoi.setVisibility(View.GONE);
-                        break;
-                    }
-                    default:{
+            public void onCallBack(ArrayList<PhieuMuon> list) {
+                int ok=0;
+                PhieuMuon curPM=activity.getCurPM();
+                for(PhieuMuon phieuMuon: list){
 
-                        btnCapNhat.setVisibility(View.GONE);
-                        btnThanhToan.setVisibility(View.GONE);
-                        btnTraHang.setVisibility(View.GONE);
-                        btnXacNhan.setVisibility(View.GONE);
-                        btnTuChoi.setVisibility(View.GONE);
+                    if(curPM!=null&&curPM.getMa().equals(phieuMuon.getMa())){
+                        ok=1;
+                        pm=phieuMuon;
+                        break;
                     }
                 }
-                activity.setTrangThai(phieuMuon.getTrangThai());
-                fetchingData();
+
+                if(ok==1){
+                    int tt=pm.getTrangThai();
+                    trangThai="";
+                    switch (tt){
+                        case 0:
+                        {
+                            trangThai="Chờ xác nhận";
+                            btnThanhToan.setVisibility(View.GONE);
+                            btnTraHang.setVisibility(View.GONE);
+                            btnXacNhan.setVisibility(View.VISIBLE);
+                            btnCapNhat.setVisibility(View.VISIBLE);
+                            break;
+                        }
+                        case 1:
+                        {
+                            trangThai="Chờ người dùng xác nhận";
+                            btnCapNhat.setVisibility(View.GONE);
+                            btnThanhToan.setVisibility(View.GONE);
+                            btnTraHang.setVisibility(View.GONE);
+                            btnXacNhan.setVisibility(View.GONE);
+                            break;
+                        }
+                        case 2:
+                        {
+                            trangThai="Đã xác nhận";
+                            btnCapNhat.setVisibility(View.GONE);
+                            btnThanhToan.setVisibility(View.VISIBLE);
+                            btnTraHang.setVisibility(View.GONE);
+                            btnXacNhan.setVisibility(View.GONE);
+                            break;
+                        }
+                        case 3:
+                        {
+                            trangThai="Thanh toán thành công";
+                            btnCapNhat.setVisibility(View.GONE);
+                            btnThanhToan.setVisibility(View.GONE);
+                            btnTraHang.setVisibility(View.VISIBLE);
+                            btnXacNhan.setVisibility(View.GONE);
+                            btnTuChoi.setVisibility(View.GONE);
+                            break;
+                        }
+                        case 4:{
+                            trangThai="Đã trả sách về thư viện";
+                            btnCapNhat.setVisibility(View.GONE);
+                            btnThanhToan.setVisibility(View.GONE);
+                            btnTraHang.setVisibility(View.GONE);
+                            btnXacNhan.setVisibility(View.GONE);
+                            btnTuChoi.setVisibility(View.GONE);
+                            break;
+                        }
+                        default:{
+                            trangThai="Hóa đơn bị hủy";
+                            btnCapNhat.setVisibility(View.GONE);
+                            btnThanhToan.setVisibility(View.GONE);
+                            btnTraHang.setVisibility(View.GONE);
+                            btnXacNhan.setVisibility(View.GONE);
+                            btnTuChoi.setVisibility(View.GONE);
+                        }
+                    }
+                    activity.setTrangThai(pm.getTrangThai());
+                    fetchingData();
+                }
             }
         });
+//        phieuMuonDAO.getCurPM(activity.getCurPM().getMa(), new PhieuMuonDAO.IGetCurPM() {
+//            @Override
+//            public void onCallBack(PhieuMuon phieuMuon) {
+//
+//
+//            }
+//        });
         btnCapNhat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pm.setTrangThai(1);
                 Map<String,Sach> map=new HashMap<>();
+                int tongTien=0;
                 for(Sach sach: myList){
                     map.put(sach.getMaSach(),new Sach(sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach(),sach.getIsActive()));
-
+                    tongTien+=sach.getGiaThue()*sach.getSoLuong();
                 }
                 pm.setSach(map);
+                pm.setTongTien(tongTien);
                 updatePM();
             }
         });
@@ -177,15 +217,15 @@ public class AdminPmFragment extends Fragment {
         context = getContext();
         activity = (QuanLyActivity) context;
         sachDAO = new SachDAO();
-        Bundle bundle = getArguments();
         phieuMuonDAO = new PhieuMuonDAO();
-        pm = (PhieuMuon) bundle.getSerializable("pm");
-        activity.setTrangThai(pm.getTrangThai());
-
     }
 
     public void fetchingData() {
+        NumberFormat formatter = new DecimalFormat("#,###");
+
         tvTrangThai.setText("Trạng thái: "+ trangThai);
+        tvTongTien.setText("Tổng đơn hàng: "+formatter.format(pm.getTongTien())+" vnđ");
+        tongTien=pm.getTongTien();
         sachDAO.getAll(new ISachDAO() {
             @Override
             public void onCallBackInsert(Boolean check) {
@@ -214,7 +254,6 @@ public class AdminPmFragment extends Fragment {
             myList.add(new Sach(entry.getKey(), sach.getLoai(), sach.getTacGia(), sach.getTenSach(), sach.getHinhAnh(), sach.getSoLuong(), sach.getGiaThue(), sach.getVitridesach(), sach.getIsActive()));
 
         }
-        Toast.makeText(context, ""+myList.get(0).getTenSach(), Toast.LENGTH_SHORT).show();
         adapter = new AdminCartAdapter(context, myList);
         rcv.setLayoutManager(linearLayoutManager);
 //        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rcv.getContext(),
@@ -233,7 +272,7 @@ public class AdminPmFragment extends Fragment {
             @Override
             public void onCallBack(Boolean check) {
                 if (check) {
-                    Toast.makeText(context, "Cập nhật thành công rồi nè", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(context, "Cập nhật thành công rồi nè", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -246,10 +285,8 @@ public class AdminPmFragment extends Fragment {
             sachDAO.update(sach.getMaSach(), mx + sach.getSoLuong()*choice, new SachDAO.IUpdate() {
                 @Override
                 public void onCallBack(Boolean check) {
-                        if(check&&choice==-1){
-                            pm.setTrangThai(3);
-                            updatePM();
-                        }
+                    if(check)
+                        Toast.makeText(context, "OK", Toast.LENGTH_SHORT).show();
                 }
             });
         }

@@ -14,9 +14,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <TextView
+         android:background="@drawable/textline_top"
+        android:id="@+id/tvTongTien"
+        android:layout_width="match_parent"
+        android:textSize="17dp"
         android:padding="7dp"
-        android:textStyle="bold"
         style="@style/myStyle"
+        android:textColor="@color/black"
+        android:text="Tổng tiền"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:background="@drawable/textline_bottom"
+        android:padding="7dp"
+        android:textColor="@color/black"
+        style="@style/myStyle"
+        android:textSize="17sp"
         android:text="Trạng thái: "
         android:id="@+id/tvTrangThai"
         android:layout_width="match_parent"
@@ -31,6 +43,7 @@
         android:orientation="vertical"
         >
         <androidx.appcompat.widget.AppCompatButton
+            android:textColor="@color/white"
             android:layout_margin="3dp"
             android:background="@drawable/my_btn_custom"
             android:text="Xác nhận hóa đơn"
@@ -38,6 +51,8 @@
             android:layout_width="350dp"
             android:layout_height="wrap_content"/>
         <androidx.appcompat.widget.AppCompatButton
+            android:textColor="@color/white"
+
             android:layout_margin="3dp"
             android:id="@+id/btnCapNhat"
             android:layout_width="350dp"
@@ -47,6 +62,8 @@
             />
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="350dp"
+            android:textColor="@color/white"
+
             android:background="@drawable/my_btn_custom"
             android:text="Trả hàng"
             android:id="@+id/btnTraHang"
@@ -55,6 +72,8 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnThanhToan"
             android:layout_width="350dp"
+            android:textColor="@color/white"
+
             android:background="@drawable/my_btn_custom"
             android:layout_margin="3dp"
             android:layout_height="wrap_content"
@@ -64,9 +83,11 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnHuyDon"
             android:layout_width="350dp"
+            android:textColor="@color/white"
+
             android:layout_height="wrap_content"
             android:text="Hủy đơn"
-            android:background="@drawable/my_btn_custom"
+            android:background="@drawable/my_btn_custom_2"
             android:layout_margin="3dp"
             />
     </LinearLayout>

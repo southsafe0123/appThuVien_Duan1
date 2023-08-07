@@ -26,6 +26,8 @@ import com.teammobile.appthuvien_duan1.dao.PhieuMuonDAO;
 import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +39,7 @@ public class ClientPmFragment extends Fragment {
     private PhieuMuonDAO phieuMuonDAO;
     private ClientCartAdapter adapter;
     private RecyclerView rcv;
-    private TextView tvTinhTrang;
+    private TextView tvTinhTrang,tvTongTien;
     private MainActivity activity;
     private String tinhTrang;
     @Nullable
@@ -48,61 +50,67 @@ public class ClientPmFragment extends Fragment {
         btnXacNhan=view.findViewById(R.id.btnXacNhan);
         btnHuyDon=view.findViewById(R.id.btnHuyDon);
         tvTinhTrang=view.findViewById(R.id.tvTinhTrang);
+        tvTongTien=view.findViewById(R.id.tvTongTien);
         rcv=view.findViewById(R.id.rcv);
-        phieuMuonDAO.getCurPM(activity.getCurPM().getMa(), new PhieuMuonDAO.IGetCurPM() {
+        phieuMuonDAO.getAll(new PhieuMuonDAO.GetAllCalBack() {
             @Override
-            public void onCallBack(PhieuMuon phieuMuon) {
-
-                if(phieuMuon==null&&!phieuMuon.getMa().equals(activity.getCurPM().getMa()))
-                    return;
-                int tt=phieuMuon.getTrangThai();
-                tinhTrang="";
-                switch (tt){
-                    case 0:
-                    {
-                        tinhTrang="Chờ xác nhận";
-                        btnXacNhan.setVisibility(View.GONE);
-                        btnHuyDon.setVisibility(View.VISIBLE);
+            public void onCallBack(ArrayList<PhieuMuon> list) {
+                int ok=0;
+                PhieuMuon curPM=activity.getCurPM();
+                for(PhieuMuon phieuMuon: list){
+                    if(curPM!=null&&curPM.getMa().equals(phieuMuon.getMa())){
+                        ok=1;
+                        pm=phieuMuon;
                         break;
                     }
-                    case 2: {
-                        tinhTrang="Đã xác nhận";
-                        btnXacNhan.setVisibility(View.GONE);
-                        btnHuyDon.setVisibility(View.VISIBLE);
-                        break;
-                    }
-                    case 1:
-                    {
-                        tinhTrang="Hóa đơn được thay đổi";
-                        btnXacNhan.setVisibility(View.VISIBLE);
-                        btnHuyDon.setVisibility(View.VISIBLE);
-                        break;
-                    }
-                    case 3:
-                    {
-                        tinhTrang="Đã nhận sách";
-                        btnXacNhan.setVisibility(View.GONE);
-                        btnHuyDon.setVisibility(View.GONE);
-                        break;
-                    }
-                    case 4:
-                    {
-                        tinhTrang="Đã trả sách";
-                        btnXacNhan.setVisibility(View.GONE);
-                        btnHuyDon.setVisibility(View.GONE);
-                        break;
-                    }
-                    default:{
-                        tinhTrang="Bị hủy";
-                        btnXacNhan.setVisibility(View.GONE);
-                        btnHuyDon.setVisibility(View.GONE);
-                    }
-
                 }
-                pm=phieuMuon;
-                fetchingData();
+                if(ok==1){
+                    int tt=pm.getTrangThai();
+                    tinhTrang="";
+                    switch (tt){
+                        case 0:
+                        {
+                            tinhTrang="Chờ xác nhận";
+                            btnXacNhan.setVisibility(View.GONE);
+                            btnHuyDon.setVisibility(View.VISIBLE);
+                            break;
+                        }
+                        case 2: {
+                            tinhTrang="Đã xác nhận";
+                            btnXacNhan.setVisibility(View.GONE);
+                            btnHuyDon.setVisibility(View.VISIBLE);
+                            break;
+                        }
+                        case 1:
+                        {
+                            tinhTrang="Hóa đơn được thay đổi";
+                            btnXacNhan.setVisibility(View.VISIBLE);
+                            btnHuyDon.setVisibility(View.VISIBLE);
+                            break;
+                        }
+                        case 3:
+                        {
+                            tinhTrang="Đã nhận sách";
+                            btnXacNhan.setVisibility(View.GONE);
+                            btnHuyDon.setVisibility(View.GONE);
+                            break;
+                        }
+                        case 4:
+                        {
+                            tinhTrang="Đã trả sách";
+                            btnXacNhan.setVisibility(View.GONE);
+                            btnHuyDon.setVisibility(View.GONE);
+                            break;
+                        }
+                        default:{
+                            tinhTrang="Hóa đơn bị hủy";
+                            btnXacNhan.setVisibility(View.GONE);
+                            btnHuyDon.setVisibility(View.GONE);
+                        }
+                    }
+                    fetchingData();
+                }
             }
-
         });
         btnXacNhan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,13 +132,12 @@ public class ClientPmFragment extends Fragment {
     {
         context=getContext();
         activity= (MainActivity) context;
-        Bundle bundle=getArguments();
-        pm = (PhieuMuon) bundle.getSerializable("pm");
         phieuMuonDAO=new PhieuMuonDAO();
-
     }
     public void fetchingData()
     {
+        NumberFormat formatter = new DecimalFormat("#,###");
+
         tvTinhTrang.setText("Tình trạng: "+ tinhTrang);
         Map<String, Sach> map= (HashMap<String, Sach>) pm.getSach();
         ArrayList<Sach> list=new ArrayList<>();
@@ -138,6 +145,7 @@ public class ClientPmFragment extends Fragment {
             Sach sach=entry.getValue();
             list.add(new Sach(entry.getKey(),sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach(),sach.getIsActive()));
         }
+        tvTongTien.setText("Tổng đơn hàng: "+formatter.format(pm.getTongTien())+" vnđ");
         loadUI(list);
     }
     public void loadUI(ArrayList<Sach> list)
@@ -146,6 +154,7 @@ public class ClientPmFragment extends Fragment {
         LinearLayoutManager layoutManager=new LinearLayoutManager(context);
         rcv.setLayoutManager(layoutManager);
         rcv.setAdapter(adapter);
+
     }
 
     public void updatePM()
@@ -154,7 +163,7 @@ public class ClientPmFragment extends Fragment {
             @Override
             public void onCallBack(Boolean check) {
                 if(check){
-                    Toast.makeText(context, "Xác nhận với người dùng rồi nè!", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(context, "Xác nhận với người dùng rồi nè!", Toast.LENGTH_SHORT).show();
                 }
 
             }

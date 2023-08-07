@@ -139,11 +139,27 @@ public class ThemSachFragment extends Fragment {
     }
     public void themSach(View view)
     {
-
-
         Loai loai=getCurLoai();
         TacGia tg=getCurTG();
+        if(edtGia.getText().toString().trim().equals("")||
+                edtSL.getText().toString().trim().equals("")||
+                edtViTri.getText().toString().trim().equals("")||
+                edtTen.getText().toString().trim().equals("")||
+                loai==null||tg==null){
+            Toast.makeText(context, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
+            return;
+        }
+        if(selectedImg==null){
+            Toast.makeText(context, "Bạn phải chọn ảnh !", Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
+
+            return;
+        }
+
+
         String ten=edtTen.getText().toString();
+
         int gia= Integer.parseInt(edtGia.getText().toString());
         int sl=Integer.parseInt(edtSL.getText().toString());
         String viTri=edtViTri.getText().toString();
@@ -162,7 +178,7 @@ public class ThemSachFragment extends Fragment {
                             closeFragment();
                         }
                         else{
-                            Toast.makeText(context, "Thêm sách thành công", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Thêm sách thất bại", Toast.LENGTH_SHORT).show();
 
                         }
                     }
