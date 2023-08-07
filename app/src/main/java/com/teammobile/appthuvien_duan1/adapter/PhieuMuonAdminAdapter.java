@@ -89,9 +89,6 @@ public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAd
                     fragment=new AdminPmFragment();
                     activity.setAdminPmFragment((AdminPmFragment) fragment);
                 }
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("pm",list.get(holder.getAdapterPosition()));
-                fragment.setArguments(bundle);
                 loadFragment(fragment,"curPM");
             }
         });

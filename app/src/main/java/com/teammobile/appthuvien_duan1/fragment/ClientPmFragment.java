@@ -49,62 +49,65 @@ public class ClientPmFragment extends Fragment {
         btnHuyDon=view.findViewById(R.id.btnHuyDon);
         tvTinhTrang=view.findViewById(R.id.tvTinhTrang);
         rcv=view.findViewById(R.id.rcv);
-        phieuMuonDAO.getCurPM(activity.getCurPM().getMa(), new PhieuMuonDAO.IGetCurPM() {
+        phieuMuonDAO.getAll(new PhieuMuonDAO.GetAllCalBack() {
             @Override
-            public void onCallBack(PhieuMuon phieuMuon) {
-
-                if(phieuMuon==null||activity.getCurPM()==null||!phieuMuon.getMa().equals(activity.getCurPM().getMa())){
-                    return;
+            public void onCallBack(ArrayList<PhieuMuon> list) {
+                int ok=0;
+                PhieuMuon curPM=activity.getCurPM();
+                for(PhieuMuon phieuMuon: list){
+                    if(curPM!=null&&curPM.getMa().equals(phieuMuon.getMa())){
+                        ok=1;
+                        pm=phieuMuon;
+                        break;
+                    }
                 }
-                int tt=phieuMuon.getTrangThai();
-                tinhTrang="";
-                switch (tt){
-                    case 0:
-                    {
-                        tinhTrang="Chờ xác nhận";
-                        btnXacNhan.setVisibility(View.GONE);
-                        btnHuyDon.setVisibility(View.VISIBLE);
-                        break;
+                if(ok==1){
+                    int tt=pm.getTrangThai();
+                    tinhTrang="";
+                    switch (tt){
+                        case 0:
+                        {
+                            tinhTrang="Chờ xác nhận";
+                            btnXacNhan.setVisibility(View.GONE);
+                            btnHuyDon.setVisibility(View.VISIBLE);
+                            break;
+                        }
+                        case 2: {
+                            tinhTrang="Đã xác nhận";
+                            btnXacNhan.setVisibility(View.GONE);
+                            btnHuyDon.setVisibility(View.VISIBLE);
+                            break;
+                        }
+                        case 1:
+                        {
+                            tinhTrang="Hóa đơn được thay đổi";
+                            btnXacNhan.setVisibility(View.VISIBLE);
+                            btnHuyDon.setVisibility(View.VISIBLE);
+                            break;
+                        }
+                        case 3:
+                        {
+                            tinhTrang="Đã nhận sách";
+                            btnXacNhan.setVisibility(View.GONE);
+                            btnHuyDon.setVisibility(View.GONE);
+                            break;
+                        }
+                        case 4:
+                        {
+                            tinhTrang="Đã trả sách";
+                            btnXacNhan.setVisibility(View.GONE);
+                            btnHuyDon.setVisibility(View.GONE);
+                            break;
+                        }
+                        default:{
+                            tinhTrang="Hóa đơn bị hủy";
+                            btnXacNhan.setVisibility(View.GONE);
+                            btnHuyDon.setVisibility(View.GONE);
+                        }
                     }
-                    case 2: {
-                        tinhTrang="Đã xác nhận";
-                        btnXacNhan.setVisibility(View.GONE);
-                        btnHuyDon.setVisibility(View.VISIBLE);
-                        break;
-                    }
-                    case 1:
-                    {
-                        tinhTrang="Hóa đơn được thay đổi";
-                        btnXacNhan.setVisibility(View.VISIBLE);
-                        btnHuyDon.setVisibility(View.VISIBLE);
-                        break;
-                    }
-                    case 3:
-                    {
-                        tinhTrang="Đã nhận sách";
-                        btnXacNhan.setVisibility(View.GONE);
-                        btnHuyDon.setVisibility(View.GONE);
-                        break;
-                    }
-                    case 4:
-                    {
-                        tinhTrang="Đã trả sách";
-                        btnXacNhan.setVisibility(View.GONE);
-                        btnHuyDon.setVisibility(View.GONE);
-                        break;
-                    }
-                    default:{
-                        tinhTrang="Hóa đơn bị hủy";
-                        btnXacNhan.setVisibility(View.GONE);
-                        btnHuyDon.setVisibility(View.GONE);
-                    }
-
+                    fetchingData();
                 }
-                pm=phieuMuon;
-                fetchingData();
-                }
-
-
+            }
         });
         btnXacNhan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,10 +129,7 @@ public class ClientPmFragment extends Fragment {
     {
         context=getContext();
         activity= (MainActivity) context;
-        Bundle bundle=getArguments();
-        pm = (PhieuMuon) bundle.getSerializable("pm");
         phieuMuonDAO=new PhieuMuonDAO();
-
     }
     public void fetchingData()
     {

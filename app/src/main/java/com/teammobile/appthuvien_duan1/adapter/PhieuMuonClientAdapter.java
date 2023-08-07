@@ -90,9 +90,6 @@ public class PhieuMuonClientAdapter extends RecyclerView.Adapter<PhieuMuonClient
                     activity.setClientPmFragment((ClientPmFragment) fragment);
 
                 }
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("pm",list.get(holder.getAdapterPosition()));
-                fragment.setArguments(bundle);
                 loadFragment(fragment,"curPM");
             }
         });
