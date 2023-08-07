@@ -94,7 +94,7 @@ public class AdminCartAdapter extends RecyclerView.Adapter<AdminCartAdapter.View
             });
         }
         format = NumberFormat.getInstance(Locale.US);
-        holder.tvGia.setText("Tổng tiền: "+format.format(list.get(position).getSoLuong()*list.get(position).getGiaThue())+" VNĐ");
+        holder.tvGia.setText("Tổng: "+format.format(list.get(position).getSoLuong()*list.get(position).getGiaThue())+" VNĐ");
     }
 
     @Override

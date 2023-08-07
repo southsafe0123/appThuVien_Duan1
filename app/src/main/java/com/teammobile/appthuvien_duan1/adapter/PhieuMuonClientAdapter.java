@@ -86,7 +86,7 @@ public class PhieuMuonClientAdapter extends RecyclerView.Adapter<PhieuMuonClient
         holder.tvTrangThai.setText(tt);
         holder.tvNgay.setText("Ngày thuê: "+list.get(position).getNgayTao());
         holder.tvMaPM.setText("Mã hóa đơn: "+list.get(position).getMa());
-        holder.tvTongTien.setText("Tổng tiền: "+format.format(list.get(position).getTongTien())+" VNĐ");
+        holder.tvTongTien.setText("Tổng đơn hàng: "+format.format(list.get(position).getTongTien())+" VNĐ");
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
