@@ -19,7 +19,7 @@ public class IntroActivity extends AppCompatActivity {
 
         ImageView ivLogo = findViewById(R.id.ivLogo);
 
-        Glide.with(this).load(R.mipmap.tamgiac).into(ivLogo);
+        Glide.with(this).load(R.mipmap.logo2).into(ivLogo);
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -27,6 +27,6 @@ public class IntroActivity extends AppCompatActivity {
                 startActivity(new Intent(IntroActivity.this, Login_Activity.class));
 
             }
-        },3600);
+        },4000);
     }
 }
