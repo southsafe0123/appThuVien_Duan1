@@ -3,6 +3,8 @@ package com.teammobile.appthuvien_duan1.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -27,6 +29,7 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         RecyclerView rvHome = view.findViewById(R.id.rvHome);
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 1);
@@ -48,6 +51,11 @@ public class HomeFragment extends Fragment {
             }
         });
         return view;
+
+    }
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
     }
     private void khoiTao()
     {

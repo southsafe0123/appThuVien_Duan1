@@ -3,15 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:background="@color/xanh_troi">
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
             android:id="@+id/edtTenTruyen"
             android:hint="Tìm Kiếm"
+            android:backgroundTintMode="screen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:imeOptions="actionSearch"
-            android:inputType="text"/>
+            android:inputType="text"
+            android:drawableRight="@drawable/baseline_saved_search_24"/>
 <!---->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSearched"

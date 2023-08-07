@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         HomeFragment fragmentHome = new HomeFragment();
         BottomNavigationView navMain = findViewById(R.id.navMain);
         loadFragment(new HomeFragment());
+        getSupportActionBar().hide();
         navMain.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -52,12 +53,15 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.item_home:
 //                        Toast.makeText(MainActivity.this, "item_home", Toast.LENGTH_SHORT).show();
                         loadFragment(new HomeFragment());
+
                         break;
                     case R.id.item_giohang:
 //                        Toast.makeText(MainActivity.this, "item_giohang", Toast.LENGTH_SHORT).show();
                         loadFragment(new CartFragment());
+                        getSupportActionBar().hide();
                         break;
                     case R.id.item_search:
+                        getSupportActionBar().hide();
                         loadFragment(new SearchFragment());
 //                        Toast.makeText(MainActivity.this, "item_search", Toast.LENGTH_SHORT).show();
                         break;
