@@ -17,11 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@mipmap/logo_new"/>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_weight="0"
-            android:layout_height="250dp"
-            android:src="@mipmap/women"/>
+        
     </LinearLayout>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnInLogin"
