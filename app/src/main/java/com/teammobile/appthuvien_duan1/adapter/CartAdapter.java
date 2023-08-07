@@ -20,7 +20,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.teammobile.appthuvien_duan1.R;
+import com.teammobile.appthuvien_duan1.activity.MainActivity;
+import com.teammobile.appthuvien_duan1.fragment.BadgeCartFragment;
 import com.teammobile.appthuvien_duan1.model.Cart;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
@@ -36,7 +40,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
 	private NumberFormat format;
 
+	private BottomNavigationView bottomNavigationView;
+
 	private AlertDialog alertDialog;
+
+
 
 	private TongTien tongTien;
 
@@ -75,7 +83,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
 
 		holder.txtTen.setText(""+list.get(holder.getAdapterPosition()).getTenSach());
-
 		holder.txtGia.setText("Giá: " + format.format(list.get(holder.getAdapterPosition()).getGiaThue())+ " VND");
 		holder.txtTacGia.setText("Tác giả: "+list.get(holder.getAdapterPosition()).getTacGia().getTenTacGia());
 		holder.txtTheLoai.setText("Thể loại: "+list.get(holder.getAdapterPosition()).getLoai().getTenLoai());
@@ -123,7 +130,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 					holder.ivTang.setColorFilter(Color.BLACK);
 					holder.ivGiam.setColorFilter(originalTextColor);
 
-
+					BadgeCartFragment.cartCount++;
+					updateBadge();
 					loadData();
 
 
@@ -150,8 +158,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 					holder.ivGiam.setColorFilter(Color.BLACK);
 					holder.ivTang.setColorFilter(originalTextColor);
 
-
+					BadgeCartFragment.cartCount--;
+					updateBadge();
 					loadData();
+					if(Integer.parseInt(holder.txtSoluong.getText().toString())<3){
+						holder.txtSoluong.setTextColor(Color.BLACK);
+					}
 
 				}
 			}
@@ -206,9 +218,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 			@Override
 			public void onClick(View v) {
 				list.remove(holder.getAdapterPosition());
+				BadgeCartFragment.cartCount--;
+
 				maxSoluong.remove(holder.getAdapterPosition());
 				loadData();
 				alertDialog.dismiss();
+				updateBadge();
 			}
 		});
 		btnHuy.setOnClickListener(new View.OnClickListener() {
@@ -222,10 +237,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 		alertDialog.show();
 	}
 
+	public void updateBadge(){
+		((MainActivity)context).updateCartCount(BadgeCartFragment.cartCount);
+	}
+
 	public interface TongTien{
 		void thayDoiTongTien(int tongTien);
 	}
-
 
 
 
@@ -242,6 +260,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 		}
 		Cart cart = Cart.getInstance();
 		cart.updateList(list,maxSoluong);
+
+
 		notifyDataSetChanged();
 	}
 }
