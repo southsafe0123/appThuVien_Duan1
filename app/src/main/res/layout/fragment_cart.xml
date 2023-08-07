@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:padding="10dp"
-    android:background="@color/beige_nhat"
     android:layout_height="match_parent">
     <LinearLayout
         android:orientation="vertical"
@@ -31,13 +30,13 @@
             android:textSize="19dp"
             android:textStyle="bold" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:layout_marginTop="6dp"
             android:layout_marginBottom="3dp"
-            android:background="#1FB396"
+            android:background="@drawable/backgr_btn2"
             android:id="@+id/btnSumbit"
             android:textColor="#FFF"
-            android:textSize="15dp"
+            android:textSize="16dp"
             android:layout_width="match_parent"
             android:layout_height="5dp"
             android:layout_weight="1"

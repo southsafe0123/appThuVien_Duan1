@@ -7,11 +7,11 @@
     tools:context=".activity.IntroActivity"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#1CB4B8">
+    android:background="@color/xanh_btn">
     <ImageView
         android:id="@+id/ivLogo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/logo2"/>
+        android:src="@mipmap/logo1"/>
 
 </LinearLayout>
