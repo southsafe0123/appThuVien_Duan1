@@ -142,9 +142,9 @@
 
 
                                 if(list!=null || !list.isEmpty()){
-
+                                    tongGiohang = 0;
                                     for(Sach sach: list){
-
+                                        tongGiohang += sach.getGiaThue()*sach.getSoLuong();
                                         Sach item=new Sach(sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach(),sach.getIsActive());
                                         map.put(sach.getMaSach(),item);
                                     }
