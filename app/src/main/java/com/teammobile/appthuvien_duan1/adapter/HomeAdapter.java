@@ -99,7 +99,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
             holder.btnThemGioHang.setEnabled(true);
             holder.btnThemGioHang.setText("Thêm vào giỏ hàng");
             holder.btnThemGioHang.setTextColor(Color.WHITE);
-            holder.btnThemGioHang.setBackgroundResource(R.drawable.backgr_btn3);
+            holder.btnThemGioHang.setBackgroundResource(R.drawable.backgr_btn2);
             holder.btnThemGioHang.setOnClickListener(new View.OnClickListener() {
 
                 @Override
