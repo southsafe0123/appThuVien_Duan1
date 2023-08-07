@@ -14,10 +14,14 @@ import com.bumptech.glide.Glide;
 import com.teammobile.appthuvien_duan1.R;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ClientCartAdapter extends RecyclerView.Adapter<ClientCartAdapter.ViewHolder> {
     private Context context;
+    private NumberFormat format;
+
     private ArrayList<Sach> list;
 
     public ClientCartAdapter(Context context, ArrayList<Sach> list) {
@@ -34,10 +38,12 @@ public class ClientCartAdapter extends RecyclerView.Adapter<ClientCartAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        format = NumberFormat.getInstance(Locale.US);
         holder.tvTenSach.setText(list.get(position).getTenSach());
         Glide.with(context).load(list.get(position).getHinhAnh()).into(holder.ivHinh);
         holder.tvSL.setText(""+list.get(position).getSoLuong());
-        holder.tvGia.setText("Giá: "+list.get(position).getSoLuong()*list.get(position).getGiaThue());
+
+        holder.tvGia.setText("Giá: "+ format.format(list.get(position).getSoLuong()*list.get(position).getGiaThue()));
     }
 
     @Override

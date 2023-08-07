@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Size;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,7 +31,9 @@ import com.teammobile.appthuvien_duan1.model.Cart;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
 import java.sql.Array;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
@@ -41,6 +44,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
     private ArrayList<Sach> gioHang;
     private IGioHang iGioHang;
     private CartDAO cartDAO;
+    private NumberFormat format;
     private Cart cart;
     private Sach sach;
 
@@ -67,28 +71,35 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
     @Override
     public void onBindViewHolder(@NonNull HomeAdapter.ViewHolder holder, int position) {
         Glide.with(context).load(list.get(position).getHinhAnh()).fitCenter().into(holder.ivHinh);
-        holder.tvGia.setText(""+list.get(holder.getAdapterPosition()).getGiaThue());
+        format = NumberFormat.getInstance(Locale.US);
+        holder.tvGia.setText("Giá: "+""+format.format(list.get(holder.getAdapterPosition()).getGiaThue())+" VND");
         holder.tvTen.setText(list.get(holder.getAdapterPosition()).getTenSach());
-        holder.tvTheloai.setText(list.get(holder.getAdapterPosition()).getLoai().getTenLoai());
+        holder.tvTheloai.setText("Thể loại: "+list.get(holder.getAdapterPosition()).getLoai().getTenLoai());
+        holder.tvTacGia.setText("Tác giả: "+list.get(holder.getAdapterPosition()).getTacGia().getTenTacGia());
 
         if(list.get(holder.getAdapterPosition()).getSoLuong()<1){
             holder.tvSoluong.setText("Hết hàng");
+            holder.tvSoluong.setTextSize(19);
             holder.tvSoluong.setTextColor(Color.RED);
         }else {
             holder.tvSoluong.setText("Còn hàng");
             holder.tvSoluong.setTextColor(Color.GREEN);
         }
 
-        holder.tvTacGia.setText(list.get(holder.getAdapterPosition()).getTacGia().getTenTacGia());
-
-        if(list.get(holder.getAdapterPosition()).getSoLuong()==0){
+        if (list.get(holder.getAdapterPosition()).getSoLuong() < 1) {
+            holder.tvSoluong.setText("Hết hàng");
+            holder.tvSoluong.setTextColor(Color.RED);
+            holder.btnThemGioHang.setEnabled(false);
             holder.btnThemGioHang.setText("Đã hết hàng");
             holder.btnThemGioHang.setBackgroundColor(Color.RED);
             holder.btnThemGioHang.setTextColor(Color.WHITE);
             holder.btnThemGioHang.setBackgroundResource(R.drawable.btn_hethang);
-
-        } else{
-
+            holder.tvGia.setText("");
+        } else {
+            holder.btnThemGioHang.setEnabled(true);
+            holder.btnThemGioHang.setText("Thêm vào giỏ hàng");
+            holder.btnThemGioHang.setTextColor(Color.WHITE);
+            holder.btnThemGioHang.setBackgroundResource(R.drawable.backgr_btn3);
             holder.btnThemGioHang.setOnClickListener(new View.OnClickListener() {
 
                 @Override
