@@ -9,13 +9,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.teammobile.appthuvien_duan1.R;
 import com.teammobile.appthuvien_duan1.activity.QuanLyActivity;
+import com.teammobile.appthuvien_duan1.fragment.AdminPmFragment;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -47,7 +51,12 @@ public class AdminCartAdapter extends RecyclerView.Adapter<AdminCartAdapter.View
         holder.tvSL.setText(list.get(position).getSoLuong()+"");
         holder.tvTen.setText(list.get(position).getTenSach());
         int sl= Integer.parseInt(holder.tvSL.getText().toString());
+        FragmentManager fm=activity.getSupportFragmentManager();
+        AdminPmFragment fragment= (AdminPmFragment) fm.findFragmentById(R.id.viewFragmentQuanLy);
+        int tongTien= fragment.getTongTien();
+        NumberFormat formatter = new DecimalFormat("#,###");
 
+        TextView tvTongTien=fragment.getTvTongTien();
         if(activity.getTrangThai()==0){
             holder.btnTang.setVisibility(View.VISIBLE);
             holder.btnGiam.setVisibility(View.VISIBLE);
@@ -61,6 +70,9 @@ public class AdminCartAdapter extends RecyclerView.Adapter<AdminCartAdapter.View
                     }
                     int i=list.get(holder.getAdapterPosition()).getSoLuong();
                     list.get(holder.getAdapterPosition()).setSoLuong(i+1);
+                    int kq=tongTien+list.get(holder.getAdapterPosition()).getGiaThue();
+                    tvTongTien.setText("Tổng tiền: "+formatter.format(kq)+ " vnđ");
+                    fragment.setTongTien(kq);
                     notifyDataSetChanged();
                 }
             });
@@ -73,6 +85,10 @@ public class AdminCartAdapter extends RecyclerView.Adapter<AdminCartAdapter.View
                     }
                     int i=list.get(holder.getAdapterPosition()).getSoLuong();
                     list.get(holder.getAdapterPosition()).setSoLuong(i-1);
+                    int kq=tongTien-list.get(holder.getAdapterPosition()).getGiaThue();
+
+                    tvTongTien.setText("Tổng tiền: "+formatter.format(kq)+" vnđ");
+                    fragment.setTongTien(kq);
                     notifyDataSetChanged();
                 }
             });

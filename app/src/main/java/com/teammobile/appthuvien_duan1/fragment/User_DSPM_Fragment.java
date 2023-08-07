@@ -56,9 +56,9 @@ public class User_DSPM_Fragment extends Fragment {
     {
         LinearLayoutManager layoutManager=new LinearLayoutManager(context);
         adapter= new PhieuMuonClientAdapter(context,list);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rcv.getContext(),
-                layoutManager.getOrientation());
-        rcv.addItemDecoration(dividerItemDecoration);
+//        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rcv.getContext(),
+//                layoutManager.getOrientation());
+//        rcv.addItemDecoration(dividerItemDecoration);
         rcv.setLayoutManager(layoutManager);
         rcv.setAdapter(adapter);
     }
