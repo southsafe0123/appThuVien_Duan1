@@ -26,6 +26,8 @@ import com.teammobile.appthuvien_duan1.dao.PhieuMuonDAO;
 import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +39,7 @@ public class ClientPmFragment extends Fragment {
     private PhieuMuonDAO phieuMuonDAO;
     private ClientCartAdapter adapter;
     private RecyclerView rcv;
-    private TextView tvTinhTrang;
+    private TextView tvTinhTrang,tvTongTien;
     private MainActivity activity;
     private String tinhTrang;
     @Nullable
@@ -48,6 +50,7 @@ public class ClientPmFragment extends Fragment {
         btnXacNhan=view.findViewById(R.id.btnXacNhan);
         btnHuyDon=view.findViewById(R.id.btnHuyDon);
         tvTinhTrang=view.findViewById(R.id.tvTinhTrang);
+        tvTongTien=view.findViewById(R.id.tvTongTien);
         rcv=view.findViewById(R.id.rcv);
         phieuMuonDAO.getAll(new PhieuMuonDAO.GetAllCalBack() {
             @Override
@@ -133,6 +136,8 @@ public class ClientPmFragment extends Fragment {
     }
     public void fetchingData()
     {
+        NumberFormat formatter = new DecimalFormat("#,###");
+
         tvTinhTrang.setText("Tình trạng: "+ tinhTrang);
         Map<String, Sach> map= (HashMap<String, Sach>) pm.getSach();
         ArrayList<Sach> list=new ArrayList<>();
@@ -140,6 +145,7 @@ public class ClientPmFragment extends Fragment {
             Sach sach=entry.getValue();
             list.add(new Sach(entry.getKey(),sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach(),sach.getIsActive()));
         }
+        tvTongTien.setText("Tổng tiền: "+formatter.format(pm.getTongTien())+" vnđ");
         loadUI(list);
     }
     public void loadUI(ArrayList<Sach> list)
@@ -148,6 +154,7 @@ public class ClientPmFragment extends Fragment {
         LinearLayoutManager layoutManager=new LinearLayoutManager(context);
         rcv.setLayoutManager(layoutManager);
         rcv.setAdapter(adapter);
+
     }
 
     public void updatePM()
@@ -156,7 +163,7 @@ public class ClientPmFragment extends Fragment {
             @Override
             public void onCallBack(Boolean check) {
                 if(check){
-                    Toast.makeText(context, "Xác nhận với người dùng rồi nè!", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(context, "Xác nhận với người dùng rồi nè!", Toast.LENGTH_SHORT).show();
                 }
 
             }

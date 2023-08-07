@@ -26,6 +26,7 @@ import com.teammobile.appthuvien_duan1.interfaces.ISachDAO;
 import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,13 +40,31 @@ public class AdminPmFragment extends Fragment {
     private RecyclerView rcv;
     private AdminCartAdapter adapter;
     private AppCompatButton btnCapNhat, btnThanhToan,btnTuChoi,btnTraHang,btnXacNhan;
-    private TextView tvTrangThai;
+    private TextView tvTrangThai,tvTongTien;
     private SachDAO sachDAO;
     private PhieuMuonDAO phieuMuonDAO;
     private ArrayList<Sach> myList;
     private PhieuMuon pm;
     private View viewFM;
     private String trangThai;
+    private int tongTien;
+
+    public int getTongTien() {
+        return tongTien;
+    }
+
+    public void setTongTien(int tongTien) {
+        this.tongTien = tongTien;
+    }
+
+    public TextView getTvTongTien() {
+        return tvTongTien;
+    }
+
+    public void setTvTongTien(TextView tvTongTien) {
+        this.tvTongTien = tvTongTien;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -60,6 +79,7 @@ public class AdminPmFragment extends Fragment {
         btnTraHang=viewFM.findViewById(R.id.btnTraHang);
         tvTrangThai=viewFM.findViewById(R.id.tvTrangThai);
         rcv=viewFM.findViewById(R.id.rcv);
+        tvTongTien=viewFM.findViewById(R.id.tvTongTien);
         phieuMuonDAO.getAll(new PhieuMuonDAO.GetAllCalBack() {
             @Override
             public void onCallBack(ArrayList<PhieuMuon> list) {
@@ -201,7 +221,11 @@ public class AdminPmFragment extends Fragment {
     }
 
     public void fetchingData() {
+        NumberFormat formatter = new DecimalFormat("#,###");
+
         tvTrangThai.setText("Trạng thái: "+ trangThai);
+        tvTongTien.setText("Tổng tiền: "+formatter.format(pm.getTongTien())+" vnđ");
+        tongTien=pm.getTongTien();
         sachDAO.getAll(new ISachDAO() {
             @Override
             public void onCallBackInsert(Boolean check) {
@@ -230,7 +254,6 @@ public class AdminPmFragment extends Fragment {
             myList.add(new Sach(entry.getKey(), sach.getLoai(), sach.getTacGia(), sach.getTenSach(), sach.getHinhAnh(), sach.getSoLuong(), sach.getGiaThue(), sach.getVitridesach(), sach.getIsActive()));
 
         }
-        Toast.makeText(context, ""+myList.get(0).getTenSach(), Toast.LENGTH_SHORT).show();
         adapter = new AdminCartAdapter(context, myList);
         rcv.setLayoutManager(linearLayoutManager);
 //        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rcv.getContext(),
@@ -249,7 +272,7 @@ public class AdminPmFragment extends Fragment {
             @Override
             public void onCallBack(Boolean check) {
                 if (check) {
-                    Toast.makeText(context, "Cập nhật thành công rồi nè", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(context, "Cập nhật thành công rồi nè", Toast.LENGTH_SHORT).show();
                 }
             }
         });

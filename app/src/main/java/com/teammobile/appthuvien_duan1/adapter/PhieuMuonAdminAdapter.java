@@ -25,6 +25,7 @@ import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Locale;
 
 public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAdapter.ViewHolder> implements Filterable {
@@ -34,6 +35,7 @@ public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAd
     private PhieuMuonDAO phieuMuonDAO;
     public PhieuMuonAdminAdapter(Context context, ArrayList<PhieuMuon> list) {
         this.context = context;
+        Collections.reverse(list);
         this.list = list;
         activity= (QuanLyActivity) context;
         phieuMuonDAO=new PhieuMuonDAO();
