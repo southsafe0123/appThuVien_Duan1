@@ -99,7 +99,7 @@ public class PhieuMuonAdminAdapter extends RecyclerView.Adapter<PhieuMuonAdminAd
         NumberFormat numberFormat = NumberFormat.getInstance(Locale.US);
 
         holder.tvTenKH.setText("Tên KH: "+list.get(position).getUser().getUsername());
-        holder.tvTongTien.setText("Tổng tiền: "+ numberFormat.format(list.get(position).getTongTien())+" VNĐ");
+        holder.tvTongTien.setText("Tổng đơn hàng: "+ numberFormat.format(list.get(position).getTongTien())+" VNĐ");
         holder.tvNgay.setText("Ngày tạo: "+list.get(position).getNgayTao());
     }
 

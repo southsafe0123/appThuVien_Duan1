@@ -145,7 +145,7 @@ public class ClientPmFragment extends Fragment {
             Sach sach=entry.getValue();
             list.add(new Sach(entry.getKey(),sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach(),sach.getIsActive()));
         }
-        tvTongTien.setText("Tổng tiền: "+formatter.format(pm.getTongTien())+" vnđ");
+        tvTongTien.setText("Tổng đơn hàng: "+formatter.format(pm.getTongTien())+" vnđ");
         loadUI(list);
     }
     public void loadUI(ArrayList<Sach> list)
