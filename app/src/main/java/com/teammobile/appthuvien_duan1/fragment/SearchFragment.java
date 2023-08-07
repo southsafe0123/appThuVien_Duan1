@@ -8,6 +8,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -58,6 +60,7 @@ public class SearchFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         edtTenTruyen = view.findViewById(R.id.edtTenTruyen);
         rvSearched = view.findViewById(R.id.rvSearched);
@@ -136,6 +139,10 @@ public class SearchFragment extends Fragment {
         });
 
         return view;
+    }
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
     }
     public void timkiem(String key, Context context){
         sachDAO.searchAll(key, new SachDAO.IGetSlSachByTen() {
