@@ -26,10 +26,8 @@ import com.teammobile.appthuvien_duan1.interfaces.ISachDAO;
 import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class AdminPmFragment extends Fragment {
@@ -50,8 +48,6 @@ public class AdminPmFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         khoiTao();
-        NumberFormat format = NumberFormat.getInstance(Locale.US);
-
         viewFM=LayoutInflater.from(context).inflate(R.layout.fragment_admin_pm,container,false);
         btnCapNhat=viewFM.findViewById(R.id.btnCapNhat);
         btnXacNhan=viewFM.findViewById(R.id.btnXacNhan);

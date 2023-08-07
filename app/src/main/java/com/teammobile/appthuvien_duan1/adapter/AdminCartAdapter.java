@@ -16,16 +16,12 @@ import com.teammobile.appthuvien_duan1.R;
 import com.teammobile.appthuvien_duan1.activity.QuanLyActivity;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class AdminCartAdapter extends RecyclerView.Adapter<AdminCartAdapter.ViewHodler> {
     private Context context;
     private ArrayList<Sach> list;
     private QuanLyActivity activity;
-
-    private NumberFormat format;
 
     public AdminCartAdapter(Context context, ArrayList<Sach> list) {
         this.context = context;
@@ -77,8 +73,7 @@ public class AdminCartAdapter extends RecyclerView.Adapter<AdminCartAdapter.View
                 }
             });
         }
-        format = NumberFormat.getInstance(Locale.US);
-        holder.tvGia.setText("Giá: "+format.format(list.get(position).getSoLuong()*list.get(position).getGiaThue())+" VNĐ");
+        holder.tvGia.setText("Giá: "+list.get(position).getSoLuong()*list.get(position).getGiaThue()+" VNĐ");
     }
 
     @Override
