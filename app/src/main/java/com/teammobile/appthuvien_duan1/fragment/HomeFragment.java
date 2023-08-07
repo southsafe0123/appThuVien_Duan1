@@ -1,5 +1,6 @@
 package com.teammobile.appthuvien_duan1.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.teammobile.appthuvien_duan1.R;
+import com.teammobile.appthuvien_duan1.activity.MainActivity;
+import com.teammobile.appthuvien_duan1.adapter.CartAdapter;
 import com.teammobile.appthuvien_duan1.adapter.HomeAdapter;
 import com.teammobile.appthuvien_duan1.dao.SachDAO;
 import com.teammobile.appthuvien_duan1.interfaces.ISachDAO;
@@ -44,12 +47,13 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onCallBackGetAll(ArrayList<Sach> list) {
-
                 Toast.makeText(context, ""+list.size(), Toast.LENGTH_SHORT).show();
 //                Toast.makeText(getContext(), ""+list.size(), Toast.LENGTH_SHORT).show();
                 rvHome.setAdapter(new HomeAdapter(list,getContext()));
             }
         });
+
+
         return view;
 
     }

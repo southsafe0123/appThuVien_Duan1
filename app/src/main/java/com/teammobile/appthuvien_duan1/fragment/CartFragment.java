@@ -26,6 +26,7 @@
     import androidx.recyclerview.widget.RecyclerView;
 
     import com.teammobile.appthuvien_duan1.R;
+    import com.teammobile.appthuvien_duan1.activity.MainActivity;
     import com.teammobile.appthuvien_duan1.adapter.CartAdapter;
     import com.teammobile.appthuvien_duan1.adapter.HomeAdapter;
     import com.teammobile.appthuvien_duan1.dao.CartDAO;
@@ -124,7 +125,6 @@
                         Toast.makeText(context, "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
                         return;
                     } else{
-
                         LayoutInflater inflater = getLayoutInflater();
                         View dialogView = inflater.inflate(R.layout.item_alertdialog, null);
                         Button btnHuy,btnXacNhan;
@@ -162,6 +162,8 @@
 
                                             if(check){
                                                 Toast.makeText(context, "Thanh toán đơn hàng thành công", Toast.LENGTH_SHORT).show();
+                                                BadgeCartFragment.cartCount=0;
+                                                ((MainActivity)context).updateCartCount(BadgeCartFragment.cartCount);
                                                 list.clear();
                                                 adapter.loadData();
                                                 txtTongtien.setText("Xin cảm ơn quý khách!");
