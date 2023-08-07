@@ -43,7 +43,7 @@ public class ClientCartAdapter extends RecyclerView.Adapter<ClientCartAdapter.Vi
         Glide.with(context).load(list.get(position).getHinhAnh()).into(holder.ivHinh);
         holder.tvSL.setText(""+list.get(position).getSoLuong());
 
-        holder.tvGia.setText("Giá: "+ format.format(list.get(position).getSoLuong()*list.get(position).getGiaThue())+" vnđ");
+        holder.tvGia.setText("Tổng tiền: "+ format.format(list.get(position).getSoLuong()*list.get(position).getGiaThue())+" vnđ");
     }
 
     @Override

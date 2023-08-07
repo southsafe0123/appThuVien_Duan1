@@ -71,7 +71,7 @@ public class AdminCartAdapter extends RecyclerView.Adapter<AdminCartAdapter.View
                     int i=list.get(holder.getAdapterPosition()).getSoLuong();
                     list.get(holder.getAdapterPosition()).setSoLuong(i+1);
                     int kq=tongTien+list.get(holder.getAdapterPosition()).getGiaThue();
-                    tvTongTien.setText("Tổng tiền: "+formatter.format(kq)+ " vnđ");
+                    tvTongTien.setText("Tổng hóa đơn: "+formatter.format(kq)+ " vnđ");
                     fragment.setTongTien(kq);
                     notifyDataSetChanged();
                 }
@@ -87,14 +87,14 @@ public class AdminCartAdapter extends RecyclerView.Adapter<AdminCartAdapter.View
                     list.get(holder.getAdapterPosition()).setSoLuong(i-1);
                     int kq=tongTien-list.get(holder.getAdapterPosition()).getGiaThue();
 
-                    tvTongTien.setText("Tổng tiền: "+formatter.format(kq)+" vnđ");
+                    tvTongTien.setText("Tổng hóa đơn: "+formatter.format(kq)+" vnđ");
                     fragment.setTongTien(kq);
                     notifyDataSetChanged();
                 }
             });
         }
         format = NumberFormat.getInstance(Locale.US);
-        holder.tvGia.setText("Giá: "+format.format(list.get(position).getSoLuong()*list.get(position).getGiaThue())+" VNĐ");
+        holder.tvGia.setText("Tổng tiền: "+format.format(list.get(position).getSoLuong()*list.get(position).getGiaThue())+" VNĐ");
     }
 
     @Override

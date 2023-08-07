@@ -224,7 +224,7 @@ public class AdminPmFragment extends Fragment {
         NumberFormat formatter = new DecimalFormat("#,###");
 
         tvTrangThai.setText("Trạng thái: "+ trangThai);
-        tvTongTien.setText("Tổng tiền: "+formatter.format(pm.getTongTien())+" vnđ");
+        tvTongTien.setText("Tổng đơn hàng: "+formatter.format(pm.getTongTien())+" vnđ");
         tongTien=pm.getTongTien();
         sachDAO.getAll(new ISachDAO() {
             @Override
