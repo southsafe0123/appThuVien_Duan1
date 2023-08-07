@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/xanh_troi">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv"
@@ -17,6 +18,7 @@
         android:id="@+id/tvTinhTrang"
         android:text="Tình trạng: "
         style="@style/myStyle"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <LinearLayout
