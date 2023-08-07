@@ -26,7 +26,7 @@
                 android:padding="3sp"
                 android:src="@drawable/baseline_add_24"
                 android:layout_width="wrap_content"
-                android:layout_weight="1.5"
+                android:layout_weight="1"
                 android:layout_height="match_parent"/>
 
 
@@ -105,39 +105,38 @@
 
 
                 <ImageView
-
-                    android:layout_weight="1"
+                    android:layout_weight="0.08"
                     android:id="@+id/ivTang"
                     android:src="@drawable/baseline_add_24"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
                 <TextView
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.15"
                     android:textSize="18dp"
                     android:gravity="center"
                     android:id="@+id/txtSoluong"
                     android:text="@string/soluong"
                     android:textColor="#0B0B0B"
                     android:textStyle="bold"
-                    android:layout_width="wrap_content"
+                    android:layout_width="20sp"
                     android:layout_height="wrap_content"/>
 
 
                 <ImageView
-                    android:layout_weight="1"
+                    android:layout_weight="0.1"
                     android:id="@+id/ivGiam"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/outline_horizontal_rule_24" />
                 <ImageView
-                    android:layout_weight="1"
+                    android:layout_weight="1.4"
                     android:visibility="invisible"
                     android:src="@drawable/baseline_delete_24"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <ImageView
-                    android:layout_weight="1"
+                    android:layout_weight="0.2"
                     android:id="@+id/ivXoa"
                     android:src="@drawable/baseline_delete_24"
                     android:layout_width="wrap_content"
