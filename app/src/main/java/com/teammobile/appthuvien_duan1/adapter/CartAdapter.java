@@ -131,7 +131,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 					holder.ivGiam.setColorFilter(originalTextColor);
 
 					BadgeCartFragment.cartCount++;
-					updateBadge();
 					loadData();
 
 
@@ -159,7 +158,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 					holder.ivTang.setColorFilter(originalTextColor);
 
 					BadgeCartFragment.cartCount--;
-					updateBadge();
 					loadData();
 					if(Integer.parseInt(holder.txtSoluong.getText().toString())<3){
 						holder.txtSoluong.setTextColor(Color.BLACK);
@@ -223,7 +221,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 				maxSoluong.remove(holder.getAdapterPosition());
 				loadData();
 				alertDialog.dismiss();
-				updateBadge();
 			}
 		});
 		btnHuy.setOnClickListener(new View.OnClickListener() {
@@ -237,9 +234,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 		alertDialog.show();
 	}
 
-	public void updateBadge(){
-		((MainActivity)context).updateCartCount(BadgeCartFragment.cartCount);
-	}
+
 
 	public interface TongTien{
 		void thayDoiTongTien(int tongTien);

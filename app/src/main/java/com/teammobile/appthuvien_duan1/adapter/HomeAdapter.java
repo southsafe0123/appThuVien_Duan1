@@ -161,7 +161,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
     public void setGioHang(){
         Toast.makeText(context, "Thêm giỏ hàng thành công", Toast.LENGTH_SHORT).show();
         BadgeCartFragment.cartCount++;
-        ((MainActivity)context).updateCartCount(BadgeCartFragment.cartCount);
+        //((MainActivity)context).updateCartCount(BadgeCartFragment.cartCount);
         cart.addCart(sach);
         gioHang = cartDAO.setSoluong1();
     }

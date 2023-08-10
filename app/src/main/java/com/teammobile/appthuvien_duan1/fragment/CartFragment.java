@@ -164,7 +164,7 @@
                                             if(check){
                                                 Toast.makeText(context, "Thanh toán đơn hàng thành công", Toast.LENGTH_SHORT).show();
                                                 BadgeCartFragment.cartCount=0;
-                                                ((MainActivity)context).updateCartCount(BadgeCartFragment.cartCount);
+                                                //((MainActivity)context).updateCartCount(BadgeCartFragment.cartCount);
                                                 list.clear();
                                                 maxSoluong.clear();
                                                 adapter.loadData();
