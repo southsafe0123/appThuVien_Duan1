@@ -26,7 +26,7 @@
         android:textSize="17dp" />
 
     <TextView
-        android:background="@drawable/textline_bottom"
+        android:background="@drawable/textline_top"
         android:padding="10dp"
         android:textColor="@color/black"
         android:fontFamily="sans-serif-condensed-medium"
@@ -36,6 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <LinearLayout
+        android:background="@drawable/textline_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
