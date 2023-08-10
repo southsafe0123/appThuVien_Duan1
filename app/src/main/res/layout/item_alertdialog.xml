@@ -9,6 +9,7 @@
     android:padding="20dp">
 
     <LinearLayout
+        android:padding="10sp"
         android:background="#FFF7F9"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -29,19 +30,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnXacNhan"
                 android:text="Xác nhận"
-                android:textSize="15dp"
-                android:layout_marginLeft="27dp"
-                android:backgroundTint="#4C4C4C"
+                android:padding="10sp"
+                android:textSize="16dp"
+                android:textColor="@color/white"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/backgr_btn2"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"/>
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnHuy"
                 android:text="Hủy"
+                android:background="@drawable/backgr_btn"
                 android:layout_marginLeft="100dp"
-                android:backgroundTint="#4C4C4C"
+                android:backgroundTint="@android:color/darker_gray"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"/>
 

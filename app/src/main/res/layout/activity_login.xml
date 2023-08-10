@@ -17,7 +17,7 @@
             android:layout_weight="1.5"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="Login Account"
+            android:text="Đăng nhập tài khoản"
             android:textSize="33sp"
             android:textStyle="bold"
             android:textColor="@color/white"
@@ -43,7 +43,10 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center_horizontal"
-            android:padding="20sp">
+            android:paddingRight="10sp"
+            android:paddingLeft="10sp"
+            android:paddingTop="20sp"
+            android:paddingBottom="20sp">
             <EditText
 
                 android:layout_width="match_parent"
@@ -53,6 +56,7 @@
                 android:drawablePadding="5sp"
                 android:hint="Nhập email"
                 android:padding="8dp"
+                android:inputType="text"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background"
                 android:layout_marginTop="30dp"
@@ -74,7 +78,7 @@
                     android:layout_weight="2"
                     android:drawableLeft="@drawable/ic_look"
                     android:drawablePadding="5dp"
-                    android:hint="Password"
+                    android:hint="Nhập mật khẩu"
                     android:padding="8dp"
 
                     android:inputType="textPassword"
@@ -97,7 +101,7 @@
                 <CheckBox
 
                     android:layout_weight="1"
-                    android:hint="Remember"
+                    android:hint="Ghi nhớ đăng nhập"
                     android:id="@+id/chkRemember"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"></CheckBox>

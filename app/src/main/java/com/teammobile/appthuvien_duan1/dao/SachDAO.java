@@ -149,24 +149,41 @@ public class SachDAO {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Sach> tempList = new ArrayList<>();
+
                 list.clear();
+
                 if (ten.equals("")) {
                     list.clear();
                 } else {
                     for (DataSnapshot data : snapshot.getChildren()) {
+
+
                         Sach sach = data.getValue(Sach.class);
-                        if(!list.contains(sach)){
                             if (sach.getTenSach().toLowerCase().contains(ten.toLowerCase()) && sach.getIsActive() > 0) {
-                                list.add(new Sach(data.getKey(), sach.getLoai(), sach.getTacGia(), sach.getTenSach(), sach.getHinhAnh(), sach.getSoLuong(), sach.getGiaThue(), sach.getVitridesach(), sach.getIsActive()));
+                                tempList.add(new Sach(data.getKey(), sach.getLoai(), sach.getTacGia(), sach.getTenSach(), sach.getHinhAnh(), sach.getSoLuong(), sach.getGiaThue(), sach.getVitridesach(), sach.getIsActive()));
+
                             }
                             if (sach.getTacGia().getTenTacGia().toLowerCase().contains(ten.toLowerCase()) && sach.getIsActive() > 0) {
-                                list.add(new Sach(data.getKey(), sach.getLoai(), sach.getTacGia(), sach.getTenSach(), sach.getHinhAnh(), sach.getSoLuong(), sach.getGiaThue(), sach.getVitridesach(), sach.getIsActive()));
+                                tempList.add(new Sach(data.getKey(), sach.getLoai(), sach.getTacGia(), sach.getTenSach(), sach.getHinhAnh(), sach.getSoLuong(), sach.getGiaThue(), sach.getVitridesach(), sach.getIsActive()));
+
                             }
                             if (sach.getLoai().getTenLoai().toLowerCase().contains(ten.toLowerCase()) && sach.getIsActive() > 0) {
-                                list.add(new Sach(data.getKey(), sach.getLoai(), sach.getTacGia(), sach.getTenSach(), sach.getHinhAnh(), sach.getSoLuong(), sach.getGiaThue(), sach.getVitridesach(), sach.getIsActive()));
+                                tempList.add(new Sach(data.getKey(), sach.getLoai(), sach.getTacGia(), sach.getTenSach(), sach.getHinhAnh(), sach.getSoLuong(), sach.getGiaThue(), sach.getVitridesach(), sach.getIsActive()));
+                            }
+
+                    }
+                    for (Sach sach : tempList) {
+                        boolean sachExists = false;
+                        for (Sach existingSach : list) {
+                            if (existingSach.getMaSach().equals(sach.getMaSach())) {
+                                sachExists = true;
+                                break;
                             }
                         }
-
+                        if (!sachExists) {
+                            list.add(sach);
+                        }
                     }
                 }
 
@@ -180,6 +197,7 @@ public class SachDAO {
             }
         });
     }
+
     public void delete(String ma, DeleteCallBack deleteCallBack) {
         DatabaseReference mRef = reference.child(ma + "/isActive");
         mRef.setValue(0).addOnCompleteListener(new OnCompleteListener<Void>() {
