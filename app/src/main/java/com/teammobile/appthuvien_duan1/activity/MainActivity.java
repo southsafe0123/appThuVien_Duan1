@@ -19,9 +19,6 @@ import com.teammobile.appthuvien_duan1.fragment.SearchFragment;
 import com.teammobile.appthuvien_duan1.fragment.UserFragment;
 import com.teammobile.appthuvien_duan1.fragment.HomeFragment;
 import com.teammobile.appthuvien_duan1.model.PhieuMuon;
-import com.teammobile.appthuvien_duan1.model.Sach;
-
-import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -34,15 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void setClientPmFragment(ClientPmFragment clientPmFragment) {
         this.clientPmFragment = clientPmFragment;
-    }
-    private Map<String, Sach> stock;
-
-    public Map<String, Sach> getStock() {
-        return stock;
-    }
-
-    public void setStock(Map<String, Sach> stock) {
-        this.stock = stock;
     }
 
     @Override
