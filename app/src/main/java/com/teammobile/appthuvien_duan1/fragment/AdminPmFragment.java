@@ -214,7 +214,6 @@ public class AdminPmFragment extends Fragment {
             public void onClick(View v) {
                 pm.setTrangThai(3);
                 updatePM();
-                updateStock(myList,-1);
             }
         });
         btnTraHang.setOnClickListener(new View.OnClickListener() {
@@ -228,6 +227,9 @@ public class AdminPmFragment extends Fragment {
         btnTuChoi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(pm.getTrangThai()>1){
+                    updateStock(myList,1);
+                }
                 pm.setTrangThai(-1);
                 updatePM();
             }
