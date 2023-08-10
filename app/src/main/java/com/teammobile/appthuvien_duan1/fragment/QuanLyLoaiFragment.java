@@ -128,5 +128,5 @@ public class QuanLyLoaiFragment extends Fragment {
     public LoaiAdapter getLoaiAdapter() {
         return adapter;
     }
-
+//
 }

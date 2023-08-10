@@ -61,6 +61,7 @@ public class HomeFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
     }
+//
     private void khoiTao()
     {
         context=getContext();

@@ -237,4 +237,5 @@
             spannableString.setSpan(new UnderlineSpan(), 0, tongGiaTri.length(), 0);
             txtTongtien.setText(spannableString);
         }
+//
     }

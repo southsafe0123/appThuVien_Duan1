@@ -128,4 +128,5 @@ public class QLSachAdapter extends RecyclerView.Adapter<QLSachAdapter.ViewHolder
         });
         builder.show();
     }
+//
 }

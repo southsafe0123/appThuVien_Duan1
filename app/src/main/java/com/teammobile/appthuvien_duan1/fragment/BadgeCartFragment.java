@@ -32,4 +32,5 @@ public class BadgeCartFragment {
 		BadgeDrawable badge = bottomNavigationView.getOrCreateBadge(R.id.navMain);
 		badge.setNumber(cartCount);
 	}
+//
 }

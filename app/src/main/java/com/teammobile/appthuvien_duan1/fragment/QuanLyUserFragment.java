@@ -58,4 +58,5 @@ public class QuanLyUserFragment extends Fragment {
         adapter=new UserAdapter(context,data);
         rcv.setAdapter(adapter);
     }
+//
 }

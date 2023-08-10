@@ -116,4 +116,5 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> im
             btnCapQuyen=itemView.findViewById(R.id.btnCapQuyen);
         }
     }
+//
 }

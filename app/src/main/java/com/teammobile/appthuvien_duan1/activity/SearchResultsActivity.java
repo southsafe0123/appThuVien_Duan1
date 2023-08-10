@@ -33,4 +33,5 @@ public class SearchResultsActivity extends Activity {
             Toast.makeText(SearchResultsActivity.this, "OK", Toast.LENGTH_SHORT).show();
         }
     }
+//
 }

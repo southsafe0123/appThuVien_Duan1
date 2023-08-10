@@ -30,5 +30,6 @@ public class IntroActivity extends AppCompatActivity {
 
             }
         },5000);
+//
     }
 }

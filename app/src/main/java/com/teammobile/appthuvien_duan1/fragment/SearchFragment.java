@@ -158,4 +158,5 @@ public class SearchFragment extends Fragment {
         rvSearched.setAdapter(new HomeAdapter(list,context));
         rvSearched.setLayoutManager(new LinearLayoutManager(context));
     }
+//
 }
