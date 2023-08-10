@@ -157,11 +157,12 @@ public class Login_Activity extends AppCompatActivity {
 	}
 	public void checkUser(){
 		mUser = mAuth.getCurrentUser();
+		ProgressDialog progressDialog=new ProgressDialog(Login_Activity.this);
+
 		if(mUser!=null){
 			mAuth = FirebaseAuth.getInstance();
 			mUser=mAuth.getCurrentUser();
 			userDAO=new UserDAO(this);
-			ProgressDialog progressDialog=new ProgressDialog(Login_Activity.this);
 			progressDialog.show();
 			userDAO.loadInfo(mUser.getUid(), new UserDAO.LoadInfoCallBack() {
 				@Override
@@ -174,6 +175,7 @@ public class Login_Activity extends AppCompatActivity {
 			});
 
 		}
+		progressDialog.dismiss();
 	}
 
 }
