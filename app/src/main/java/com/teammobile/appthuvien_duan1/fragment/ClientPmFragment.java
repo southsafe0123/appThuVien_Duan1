@@ -169,6 +169,8 @@ public class ClientPmFragment extends Fragment {
             }
         });
 
+        tvTongTien.setText("Tổng đơn hàng: "+formatter.format(pm.getTongTien())+" vnđ");
+        loadUI(list);
     }
     public void loadUI(ArrayList<Sach> list)
     {
