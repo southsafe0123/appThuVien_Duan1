@@ -189,6 +189,7 @@ public class AdminPmFragment extends Fragment {
                 if(ok>0){
                     pm.setTrangThai(2);
                     updatePM();
+                    myList=toList(pm.getSach());
                     updateStock(myList,-1);
 
                 }
