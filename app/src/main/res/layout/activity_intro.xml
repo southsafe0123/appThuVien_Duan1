@@ -1,49 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.IntroActivity"
     android:orientation="vertical"
-    tools:context=".activity.IntroActivity">
-
-    <LinearLayout
-        android:layout_weight="1"
+    android:gravity="center"
+    android:background="@color/xanh_btn">
+    <ImageView
+        android:id="@+id/ivLogo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@mipmap/background_intro">
-        <ImageView
-            android:id="@+id/ivLogo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/logo_new"/>
-        
-    </LinearLayout>
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnInLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/backgr_btn2"
-        android:text="Login"
-        android:textSize="25dp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        />
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnInSignup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/backgr_btn3"
-        android:text="Sign Up"
-        android:textColor="@color/white"
-        android:textSize="25dp"
-        android:textStyle="bold"/>
+        android:layout_height="match_parent"
+        android:src="@mipmap/logo1"/>
 
 </LinearLayout>

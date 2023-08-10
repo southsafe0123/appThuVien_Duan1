@@ -13,27 +13,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
-         android:background="@drawable/textline_top"
         android:id="@+id/tvTongTien"
         android:layout_width="match_parent"
-        android:textSize="17dp"
-        android:padding="7dp"
-        style="@style/myStyle"
-        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:background="@drawable/textline_top"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:padding="10dp"
         android:text="Tổng tiền"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:background="@drawable/textline_bottom"
-        android:padding="7dp"
         android:textColor="@color/black"
-        style="@style/myStyle"
+        android:textSize="17dp" />
+
+    <TextView
+        android:background="@drawable/textline_top"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:fontFamily="sans-serif-condensed-medium"
         android:textSize="17sp"
         android:text="Trạng thái: "
         android:id="@+id/tvTrangThai"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <LinearLayout
+        android:background="@drawable/textline_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -44,7 +47,7 @@
         >
         <androidx.appcompat.widget.AppCompatButton
             android:textColor="@color/white"
-            android:layout_margin="3dp"
+            android:layout_margin="12sp"
             android:background="@drawable/my_btn_custom"
             android:text="Xác nhận hóa đơn"
             android:id="@+id/btnXacNhan"
@@ -52,8 +55,7 @@
             android:layout_height="wrap_content"/>
         <androidx.appcompat.widget.AppCompatButton
             android:textColor="@color/white"
-
-            android:layout_margin="3dp"
+            android:layout_margin="12sp"
             android:id="@+id/btnCapNhat"
             android:layout_width="350dp"
             android:background="@drawable/my_btn_custom"
@@ -67,15 +69,14 @@
             android:background="@drawable/my_btn_custom"
             android:text="Trả hàng"
             android:id="@+id/btnTraHang"
-            android:layout_margin="3dp"
+            android:layout_margin="12sp"
             android:layout_height="wrap_content"/>
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnThanhToan"
             android:layout_width="350dp"
             android:textColor="@color/white"
-
             android:background="@drawable/my_btn_custom"
-            android:layout_margin="3dp"
+            android:layout_margin="12sp"
             android:layout_height="wrap_content"
             android:text="Thanh toán"
             />
@@ -84,11 +85,10 @@
             android:id="@+id/btnHuyDon"
             android:layout_width="350dp"
             android:textColor="@color/white"
-
             android:layout_height="wrap_content"
             android:text="Hủy đơn"
             android:background="@drawable/my_btn_custom_2"
-            android:layout_margin="3dp"
+            android:layout_margin="12sp"
             />
     </LinearLayout>
 
