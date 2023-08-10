@@ -146,7 +146,27 @@ public class ClientPmFragment extends Fragment {
             list.add(new Sach(entry.getKey(),sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach(),sach.getIsActive()));
         }
         tvTongTien.setText("Tổng đơn hàng: "+formatter.format(pm.getTongTien())+" vnđ");
-        loadUI(list);
+    
+        tvTongTien.setText("Tổng tiền: "+formatter.format(pm.getTongTien())+" vnđ");
+        sachDAO.getAll(new ISachDAO() {
+            @Override
+            public void onCallBackInsert(Boolean check) {
+
+            }
+
+            @Override
+            public void onCallBackGetAll(ArrayList<Sach> list) {
+                Map<String, Sach> map = new HashMap<>();
+                for (Sach item : list) {
+                    Sach sach = new Sach(item.getLoai(), item.getTacGia(), item.getTenSach(), item.getHinhAnh(), item.getSoLuong(), item.getGiaThue(), item.getVitridesach(), item.getIsActive());
+                    map.put(item.getMaSach(), sach);
+                }
+                activity.setStock(map);
+                loadUI(myList);
+
+            }
+        });
+
     }
     public void loadUI(ArrayList<Sach> list)
     {
