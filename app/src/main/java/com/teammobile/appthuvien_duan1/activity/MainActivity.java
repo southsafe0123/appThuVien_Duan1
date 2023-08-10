@@ -40,15 +40,6 @@ public class MainActivity extends AppCompatActivity {
     public void setClientPmFragment(ClientPmFragment clientPmFragment) {
         this.clientPmFragment = clientPmFragment;
     }
-    private Map<String, Sach> stock;
-
-    public Map<String, Sach> getStock() {
-        return stock;
-    }
-
-    public void setStock(Map<String, Sach> stock) {
-        this.stock = stock;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
