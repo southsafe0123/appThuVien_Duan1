@@ -28,6 +28,15 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     private PhieuMuon curPM;
     private ClientPmFragment clientPmFragment;
+    private Map<String, Sach> stock;
+
+    public Map<String, Sach> getStock() {
+        return stock;
+    }
+
+    public void setStock(Map<String, Sach> stock) {
+        this.stock = stock;
+    }
 
     public ClientPmFragment getClientPmFragment() {
         return clientPmFragment;

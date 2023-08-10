@@ -1,6 +1,8 @@
 package com.teammobile.appthuvien_duan1.fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -185,6 +187,25 @@ public class AdminPmFragment extends Fragment {
             public void onClick(View v) {
                 pm.setTrangThai(2);
                 updatePM();
+                int ok=1;
+                ArrayList<Sach> kq=new ArrayList<>();
+                for(Map.Entry<String, Sach> item: pm.getSach().entrySet()){
+                    String key=item.getKey();
+                    int maxSL=activity.getStock().get(key).getSoLuong();
+                    if(item.getValue().getSoLuong()>maxSL){
+                        ok=0;
+                        break;
+                    }
+                }
+                if(ok>0){
+                    pm.setTrangThai(2);
+                    updatePM();
+                    updateStock(myList,-1);
+
+                }
+                else{
+                    showDialog();
+                }
             }
         });
         btnThanhToan.setOnClickListener(new View.OnClickListener() {
@@ -212,7 +233,36 @@ public class AdminPmFragment extends Fragment {
         });
         return viewFM;
     }
+    public void showDialog()
+    {
+        AlertDialog.Builder builder=new AlertDialog.Builder(context);
+        builder.setTitle("Thông báo");
+        builder.setMessage("Số lượng hàng đã được thay đổi, bạn có muốn cập nhật lại ?");
+        builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                pm.setTrangThai(1);
+                tongTien=0;
+                for(Map.Entry<String,Sach> entry: pm.getSach().entrySet()){
+                    String key=entry.getKey();
+                    int maxSL=activity.getStock().get(key).getSoLuong();
+                    if(maxSL<entry.getValue().getSoLuong()){
+                        pm.getSach().get(key).setSoLuong(maxSL);
+                    }
+                    Sach sach=pm.getSach().get(key);
+                    tongTien+=sach.getGiaThue()*sach.getSoLuong();
+                }
+                pm.setTongTien(tongTien);
+                updatePM();
+            }
+        }).setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
+            }
+        });
+        builder.show();
+    }
     private void khoiTao() {
         context = getContext();
         activity = (QuanLyActivity) context;
@@ -248,12 +298,7 @@ public class AdminPmFragment extends Fragment {
 
     public void loadUI() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
-        myList = new ArrayList<>();
-        for (Map.Entry<String, Sach> entry : pm.getSach().entrySet()) {
-            Sach sach = entry.getValue();
-            myList.add(new Sach(entry.getKey(), sach.getLoai(), sach.getTacGia(), sach.getTenSach(), sach.getHinhAnh(), sach.getSoLuong(), sach.getGiaThue(), sach.getVitridesach(), sach.getIsActive()));
-
-        }
+        myList=toList(pm.getSach());
         adapter = new AdminCartAdapter(context, myList);
         rcv.setLayoutManager(linearLayoutManager);
 //        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rcv.getContext(),
@@ -261,7 +306,14 @@ public class AdminPmFragment extends Fragment {
 //        rcv.addItemDecoration(dividerItemDecoration);
         rcv.setAdapter(adapter);
     }
-
+    public ArrayList<Sach> toList(Map<String,Sach> map){
+        ArrayList<Sach> kq=new ArrayList<>();
+        for (Map.Entry<String, Sach> entry : map.entrySet()) {
+            Sach sach = entry.getValue();
+            kq.add(new Sach(entry.getKey(), sach.getLoai(), sach.getTacGia(), sach.getTenSach(), sach.getHinhAnh(), sach.getSoLuong(), sach.getGiaThue(), sach.getVitridesach(), sach.getIsActive()));
+        }
+        return kq;
+    }
     public void thanhToan() {
         updateStock(myList,-1);
     }

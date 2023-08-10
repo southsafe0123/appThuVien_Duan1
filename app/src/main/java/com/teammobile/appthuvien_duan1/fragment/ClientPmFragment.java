@@ -23,6 +23,8 @@ import com.teammobile.appthuvien_duan1.activity.MainActivity;
 import com.teammobile.appthuvien_duan1.activity.QuanLyActivity;
 import com.teammobile.appthuvien_duan1.adapter.ClientCartAdapter;
 import com.teammobile.appthuvien_duan1.dao.PhieuMuonDAO;
+import com.teammobile.appthuvien_duan1.dao.SachDAO;
+import com.teammobile.appthuvien_duan1.interfaces.ISachDAO;
 import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
@@ -42,6 +44,9 @@ public class ClientPmFragment extends Fragment {
     private TextView tvTinhTrang,tvTongTien;
     private MainActivity activity;
     private String tinhTrang;
+    private SachDAO sachDAO;
+    private ArrayList<Sach> myList;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -122,17 +127,35 @@ public class ClientPmFragment extends Fragment {
         btnHuyDon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(pm.getTrangThai()>1){
+                    updateStock(myList,1);
+                }
                 pm.setTrangThai(-1);
                 updatePM();
             }
         });
         return view;
     }
+    public void updateStock(ArrayList<Sach> list,int choice)
+    {
+        for(Sach sach: list){
+            int mx=activity.getStock().get(sach.getMaSach()).getSoLuong();
+            sachDAO.update(sach.getMaSach(), mx + sach.getSoLuong()*choice, new SachDAO.IUpdate() {
+                @Override
+                public void onCallBack(Boolean check) {
+                    if(check)
+                        Toast.makeText(context, "OK", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
     public void khoiTao()
     {
         context=getContext();
         activity= (MainActivity) context;
         phieuMuonDAO=new PhieuMuonDAO();
+        sachDAO=new SachDAO();
+
     }
     public void fetchingData()
     {
@@ -140,10 +163,10 @@ public class ClientPmFragment extends Fragment {
 
         tvTinhTrang.setText("Tình trạng: "+ tinhTrang);
         Map<String, Sach> map= (HashMap<String, Sach>) pm.getSach();
-        ArrayList<Sach> list=new ArrayList<>();
+        myList=new ArrayList<>();
         for(Map.Entry<String,Sach> entry: map.entrySet()){
             Sach sach=entry.getValue();
-            list.add(new Sach(entry.getKey(),sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach(),sach.getIsActive()));
+            myList.add(new Sach(entry.getKey(),sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach(),sach.getIsActive()));
         }
         tvTongTien.setText("Tổng đơn hàng: "+formatter.format(pm.getTongTien())+" vnđ");
     
