@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
             android:gravity="center"
+            android:textStyle="bold"
             android:text="Thông tin sách"
             android:textSize="27sp">
 
@@ -90,16 +91,25 @@
             android:id="@+id/actvTG"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:text="Chọn ảnh"
+            android:textSize="18sp"
             android:id="@+id/btnPickImg"
+            android:background="@drawable/backgr_btn2"
+            android:textColor="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <Button
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            />
+        <androidx.appcompat.widget.AppCompatButton
             android:text="Thêm sách"
             android:id="@+id/btnAdd"
+            android:textSize="18sp"
+            android:background="@drawable/backgr_btn2"
+            android:textColor="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
