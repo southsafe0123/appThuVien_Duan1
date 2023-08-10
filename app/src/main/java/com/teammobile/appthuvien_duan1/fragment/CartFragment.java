@@ -58,6 +58,7 @@
         private SharedPreferences sharedPreferences;
         private Context context;
         private int tongGiohang;
+        private ArrayList<Integer> maxSoluong;
         @Nullable
         @Override
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -77,7 +78,7 @@
 
             CartDAO cartDAO = new CartDAO();
             ArrayList<Sach> list = cartDAO.setSoluong1();
-            ArrayList<Integer> maxSoluong = Cart.getInstance().getMaxSoLuong();
+            maxSoluong = Cart.getInstance().getMaxSoLuong();
             CartAdapter adapter = new CartAdapter(list,maxSoluong,context);
 
 
@@ -165,7 +166,9 @@
                                                 BadgeCartFragment.cartCount=0;
                                                 ((MainActivity)context).updateCartCount(BadgeCartFragment.cartCount);
                                                 list.clear();
+                                                maxSoluong.clear();
                                                 adapter.loadData();
+
                                                 txtTongtien.setText("Xin cảm ơn quý khách!");
                                                 btnSumbit.setText("Đến đơn hàng");
                                                 btnSumbit.setOnClickListener(new View.OnClickListener() {
