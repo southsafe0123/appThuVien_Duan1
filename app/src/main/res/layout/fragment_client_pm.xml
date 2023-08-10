@@ -15,10 +15,10 @@
     <TextView
         android:background="@drawable/textline_top"
         android:id="@+id/tvTongTien"
-        android:textSize="17dp"
+        android:textSize="17sp"
         android:text="Tổng tiền: "
         android:padding="7dp"
-        style="@style/myStyle"
+        android:fontFamily="sans-serif-condensed-medium"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:layout_width="match_parent"
@@ -28,8 +28,9 @@
         android:textStyle="bold"
         android:id="@+id/tvTinhTrang"
         android:text="Tình trạng: "
+        android:fontFamily="sans-serif-condensed-medium"
         android:background="@drawable/textline_bottom"
-        style="@style/myStyle"
+        android:textSize="17sp"
         android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -44,7 +45,7 @@
             android:layout_width="350dp"
             android:text="Xác nhận với thủ thư"
             android:textColor="@color/white"
-            android:layout_margin="3dp"
+            android:layout_margin="12sp"
             android:id="@+id/btnXacNhan"
             android:background="@drawable/my_btn_custom"
             android:layout_height="wrap_content"/>
@@ -54,7 +55,7 @@
             android:textColor="@color/white"
             android:background="@drawable/my_btn_custom_2"
             android:layout_width="350dp"
-            android:layout_margin="3dp"
+            android:layout_margin="12sp"
             android:layout_height="wrap_content"
             android:text="Hủy đơn" />
     </LinearLayout>
