@@ -116,7 +116,7 @@
         android:id="@+id/txtPass3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Already have an account?"
+        android:text="Đã có tài khoản?"
         android:textColor="#757578"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -130,7 +130,7 @@
         android:layout_marginEnd="25dp"
         android:background="@drawable/backgr_btn2"
         android:padding="4dp"
-        android:text="Login"
+        android:text="Đăng nhập"
         android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold" />
