@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/xanh_troi">
+    android:background="@color/white">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv"
@@ -20,21 +20,21 @@
         android:padding="7dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:textColor="@color/black"
-        android:textStyle="bold"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <TextView
         android:padding="7dp"
-        android:textStyle="bold"
         android:id="@+id/tvTinhTrang"
         android:text="Tình trạng: "
         android:fontFamily="sans-serif-condensed-medium"
-        android:background="@drawable/textline_bottom"
+        android:background="@drawable/textline_top"
         android:textSize="17sp"
         android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <LinearLayout
+        android:background="@drawable/textline_top"
         android:gravity="center"
         android:layout_below="@+id/rcv"
         android:orientation="vertical"
