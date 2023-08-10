@@ -3,20 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:weightSum="4"
-
+    android:weightSum="3.25"
+    android:gravity="center"
     android:layout_height="match_parent"
     android:orientation="vertical">
     <LinearLayout
-        android:layout_margin="6dp"
-
+        android:layout_margin="10sp"
         android:gravity="center"
         android:layout_weight="1"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp">
         <LinearLayout
-
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -39,13 +37,14 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="3dp"
+                android:layout_margin="3sp"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="Loại"
-                android:textSize="17sp" />
+                android:textAllCaps="true"
+                android:textSize="17sp"
+                android:textStyle="bold" />
         </LinearLayout>
         <LinearLayout
 
@@ -74,12 +73,15 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="3dp"
+                android:layout_margin="3sp"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="Sách"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:textAllCaps="true"
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>
@@ -90,16 +92,14 @@
 
 
     <LinearLayout
-        android:layout_margin="6dp"
+        android:layout_margin="10sp"
         android:gravity="center"
         android:layout_weight="1"
-        android:weightSum="2"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         >
         <LinearLayout
-
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -125,7 +125,9 @@
                 android:fontFamily="sans-serif-condensed-medium"
                 android:layout_margin="3dp"
                 android:textSize="17sp"
+                android:textStyle="bold"
                 android:text="Tác giả"
+                android:textAllCaps="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -155,19 +157,21 @@
                 android:fontFamily="sans-serif-condensed-medium"
                 android:layout_margin="3dp"
                 android:textSize="17sp"
+                android:textStyle="bold"
                 android:text="Người dùng"
+                android:textAllCaps="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
-        android:layout_margin="6dp"
+        android:layout_margin="10sp"
         android:weightSum="2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
 
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -192,8 +196,11 @@
                 android:fontFamily="sans-serif-condensed-medium"
                 android:layout_margin="3dp"
                 android:textSize="17sp"
+                android:textStyle="bold"
                 android:text="Hóa đơn"
-                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:textAllCaps="true"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
