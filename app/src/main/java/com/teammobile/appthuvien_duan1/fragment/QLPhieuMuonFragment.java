@@ -65,4 +65,5 @@ public class QLPhieuMuonFragment extends Fragment {
         context=getContext();
 
     }
+//
 }

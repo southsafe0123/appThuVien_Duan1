@@ -105,5 +105,5 @@ public class SearchAdapter extends BaseAdapter implements Filterable {
         TextView tv_item_search;
     }
 
-    //ok
+    //
 }

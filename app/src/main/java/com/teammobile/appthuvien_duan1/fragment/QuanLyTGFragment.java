@@ -115,7 +115,7 @@ public class QuanLyTGFragment extends Fragment {
         rcv.setAdapter(adapter);
 
     }
-
+//
     public TacGiaAdapter getAdapter() {
         return adapter;
     }

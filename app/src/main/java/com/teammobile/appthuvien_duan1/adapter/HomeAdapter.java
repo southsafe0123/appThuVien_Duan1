@@ -165,7 +165,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
         cart.addCart(sach);
         gioHang = cartDAO.setSoluong1();
     }
-
+//
 }
 
 

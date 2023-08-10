@@ -116,5 +116,5 @@ public class LoaiAdapter extends RecyclerView.Adapter<LoaiAdapter.ViewHolder> im
             tvSlSach=itemView.findViewById(R.id.tvSlSach);
         }
     }
-
+//
 }

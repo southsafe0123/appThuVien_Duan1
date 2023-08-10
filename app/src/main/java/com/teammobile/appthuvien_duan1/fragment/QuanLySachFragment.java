@@ -108,7 +108,7 @@ public class QuanLySachFragment extends Fragment {
         rcv.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
         rcv.setAdapter(adapter);
     }
-
+//
     public QLSachAdapter getAdapter() {
         return adapter;
     }

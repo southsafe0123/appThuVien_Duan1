@@ -127,4 +127,5 @@ public class PhieuMuonClientAdapter extends RecyclerView.Adapter<PhieuMuonClient
             fm.beginTransaction().addToBackStack(null).replace(R.id.frag_main,fragment,tag).commit();
         }
     }
+//
 }
