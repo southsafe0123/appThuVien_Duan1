@@ -23,8 +23,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.teammobile.appthuvien_duan1.R;
+import com.teammobile.appthuvien_duan1.activity.MainActivity;
 import com.teammobile.appthuvien_duan1.dao.CartDAO;
 import com.teammobile.appthuvien_duan1.dao.SachDAO;
+import com.teammobile.appthuvien_duan1.fragment.BadgeCartFragment;
 import com.teammobile.appthuvien_duan1.fragment.HomeFragment;
 import com.teammobile.appthuvien_duan1.interfaces.IGioHang;
 import com.teammobile.appthuvien_duan1.model.Cart;
@@ -43,6 +45,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
     private Context context;
     private ArrayList<Sach> gioHang;
     private IGioHang iGioHang;
+
+    private MainActivity mainActivity;
+
     private CartDAO cartDAO;
     private NumberFormat format;
     private Cart cart;
@@ -113,6 +118,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
                         if(gioHang.isEmpty()){
                             setGioHang();
                         } else{
+
                             for(int i =0;i<gioHang.size();i++){
                                 if (gioHang.get(i).getMaSach().equals(list.get(holder.getAdapterPosition()).getMaSach())){
                                     flag = true;
@@ -122,7 +128,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
                             }
                             if (!flag){
 //                        Toast.makeText(context, ""+sach.getMaSach(), Toast.LENGTH_SHORT).show();
-                                Toast.makeText(context, "Thêm giỏ hàng thành công", Toast.LENGTH_SHORT).show();
                                 setGioHang();
                             }
                         }
@@ -154,9 +159,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
         }
     }
     public void setGioHang(){
+        Toast.makeText(context, "Thêm giỏ hàng thành công", Toast.LENGTH_SHORT).show();
+        BadgeCartFragment.cartCount++;
+        ((MainActivity)context).updateCartCount(BadgeCartFragment.cartCount);
         cart.addCart(sach);
         gioHang = cartDAO.setSoluong1();
     }
+
 }
 
 
