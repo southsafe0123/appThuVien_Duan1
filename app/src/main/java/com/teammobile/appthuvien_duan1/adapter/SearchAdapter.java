@@ -104,4 +104,6 @@ public class SearchAdapter extends BaseAdapter implements Filterable {
     private static class ViewHolder {
         TextView tv_item_search;
     }
+
+    //ok
 }

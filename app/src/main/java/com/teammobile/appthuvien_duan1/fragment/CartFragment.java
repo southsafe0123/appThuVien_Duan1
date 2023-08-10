@@ -1,14 +1,14 @@
     package com.teammobile.appthuvien_duan1.fragment;
 
-    import android.app.Activity;
     import android.content.Context;
     import android.content.DialogInterface;
-    import android.content.Intent;
     import android.content.SharedPreferences;
     import android.os.Bundle;
     import android.text.SpannableString;
     import android.text.style.UnderlineSpan;
     import android.view.LayoutInflater;
+    import android.view.Menu;
+    import android.view.MenuInflater;
     import android.view.View;
     import android.view.ViewGroup;
     import android.widget.Button;
@@ -26,10 +26,9 @@
     import androidx.recyclerview.widget.RecyclerView;
 
     import com.teammobile.appthuvien_duan1.R;
+    import com.teammobile.appthuvien_duan1.activity.MainActivity;
     import com.teammobile.appthuvien_duan1.adapter.CartAdapter;
-    import com.teammobile.appthuvien_duan1.adapter.ClientCartAdapter;
     import com.teammobile.appthuvien_duan1.adapter.HomeAdapter;
-    import com.teammobile.appthuvien_duan1.adapter.PhieuMuonClientAdapter;
     import com.teammobile.appthuvien_duan1.dao.CartDAO;
     import com.teammobile.appthuvien_duan1.dao.PhieuMuonDAO;
     import com.teammobile.appthuvien_duan1.interfaces.IGioHang;
@@ -40,19 +39,17 @@
 
     import org.w3c.dom.Text;
 
+    import java.text.NumberFormat;
     import java.text.SimpleDateFormat;
     import java.util.ArrayList;
     import java.util.Calendar;
     import java.util.HashMap;
+    import java.util.Locale;
     import java.util.Map;
 
     public class CartFragment extends Fragment implements CartAdapter.TongTien {
         private HomeAdapter homeAdapter;
         private RecyclerView recyclerView;
-
-        private User_DSPM_Fragment user_dspm_fragment;
-
-
         private TextView txtTongtien;
         private AlertDialog alertDialog;
         private Button btnSumbit;
@@ -64,11 +61,15 @@
         @Nullable
         @Override
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            setHasOptionsMenu(true);
+
             View view = inflater.inflate(R.layout.fragment_cart, container, false);
             recyclerView = view.findViewById(R.id.RvCart);
 
             btnSumbit=view.findViewById(R.id.btnSumbit);
             txtTongtien = view.findViewById(R.id.txtTongtien);
+            NumberFormat format = NumberFormat.getInstance(Locale.US);
+
 
             khoiTao();
             //ArrayList<Sach> list = cart.getList();
@@ -78,15 +79,13 @@
             ArrayList<Sach> list = cartDAO.setSoluong1();
             ArrayList<Integer> maxSoluong = Cart.getInstance().getMaxSoLuong();
             CartAdapter adapter = new CartAdapter(list,maxSoluong,context);
-            ArrayList<PhieuMuon> listPm = new ArrayList<>();
-            user_dspm_fragment = new User_DSPM_Fragment();
 
 
 
             if(list==null){
 
             } else {
-                tongGiohang=0;
+                tongGiohang = 0;
                 for(Sach sach: list){
                     tongGiohang += sach.getGiaThue()*sach.getSoLuong();
                 }
@@ -95,7 +94,7 @@
                 if(tongGiohang==0){
                     txtTongtien.setText("Giỏ hàng hiện không có sách");
                 } else{
-                    txtTongtien.setText("Tổng đơn hàng: "+tongGiohang+" VND");
+                    txtTongtien.setText("Tổng đơn hàng: "+format.format(tongGiohang)+" VND");
                 }
             }
             adapter.setTongTien(new CartAdapter.TongTien() {
@@ -105,7 +104,7 @@
                         String tongGiaTri = "Giỏ hàng hiện không có sách";
                         txtTongtien.setText(tongGiaTri);
                     } else {
-                        String tongGiaTri = "Tổng đơn hàng: " + tongTien + " VND";
+                        String tongGiaTri = "Tổng đơn hàng: " +format.format(tongTien)+" VND";
                         SpannableString spannableString = new SpannableString(tongGiaTri);
                         spannableString.setSpan(new UnderlineSpan(), 0, tongGiaTri.length(), 0);
                         txtTongtien.setText(spannableString);
@@ -118,7 +117,6 @@
             } else{
 
             }
-
             btnSumbit.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -127,12 +125,11 @@
                         Toast.makeText(context, "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
                         return;
                     } else{
-
                         LayoutInflater inflater = getLayoutInflater();
                         View dialogView = inflater.inflate(R.layout.item_alertdialog, null);
                         Button btnHuy,btnXacNhan;
                         btnHuy = dialogView.findViewById(R.id.btnHuy);
-                        btnXacNhan = dialogView.findViewById(R.id.btnXacnhan);
+                        btnXacNhan = dialogView.findViewById(R.id.btnXacNhan);
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
                         builder.setView(dialogView);
                         btnXacNhan.setOnClickListener(new View.OnClickListener() {
@@ -148,7 +145,6 @@
                                     tongGiohang = 0;
                                     for(Sach sach: list){
                                         tongGiohang += sach.getGiaThue()*sach.getSoLuong();
-
                                         Sach item=new Sach(sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach(),sach.getIsActive());
                                         map.put(sach.getMaSach(),item);
                                     }
@@ -166,11 +162,12 @@
 
                                             if(check){
                                                 Toast.makeText(context, "Thanh toán đơn hàng thành công", Toast.LENGTH_SHORT).show();
+                                                BadgeCartFragment.cartCount=0;
+                                                ((MainActivity)context).updateCartCount(BadgeCartFragment.cartCount);
                                                 list.clear();
                                                 adapter.loadData();
                                                 txtTongtien.setText("Xin cảm ơn quý khách!");
                                                 btnSumbit.setText("Đến đơn hàng");
-
                                                 btnSumbit.setOnClickListener(new View.OnClickListener() {
                                                     @Override
                                                     public void onClick(View v) {
@@ -180,7 +177,6 @@
                                                         fragmentTransaction.commit();
                                                     }
                                                 });
-
                                             }
                                             else
                                                 Toast.makeText(context, "Thanh toán đơn hàng thất bại", Toast.LENGTH_SHORT).show();
@@ -224,23 +220,16 @@
            context=getContext();
        }
 
-//        private void gotoCart() {
-//            ArrayList<PhieuMuon> listPm;
-//            listPm = new ArrayList<>();
-//            phieuMuonClientAdapter = new PhieuMuonClientAdapter(context,listPm);
-//            Fragment fragment = new PhieuMuonClientAdapter(context,listPm);
-//            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-//            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//            fragmentTransaction.replace(R.id.item_user, fragment);
-//            fragmentTransaction.commit();
-//        }
-
-
-
+        @Override
+        public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+            super.onCreateOptionsMenu(menu, inflater);
+            menu.clear();
+        }
 
         @Override
         public void thayDoiTongTien(int tongTien) {
-            String tongGiaTri = "Tổng đơn hàng: " + tongTien + " VND";
+            NumberFormat format = NumberFormat.getInstance(Locale.US);
+            String tongGiaTri = "Tổng đơn hàng: " + format.format(tongTien) + " VND";
             SpannableString spannableString = new SpannableString(tongGiaTri);
             spannableString.setSpan(new UnderlineSpan(), 0, tongGiaTri.length(), 0);
             txtTongtien.setText(spannableString);

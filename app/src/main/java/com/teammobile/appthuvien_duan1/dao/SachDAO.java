@@ -151,12 +151,7 @@ public class SachDAO {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
                 if (ten.equals("")) {
-                    for (DataSnapshot data : snapshot.getChildren()) {
-                        Sach sach = data.getValue(Sach.class);
-                        if (sach.getIsActive() > 0) {
-                            list.add(new Sach(data.getKey(), sach.getLoai(), sach.getTacGia(), sach.getTenSach(), sach.getHinhAnh(), sach.getSoLuong(), sach.getGiaThue(), sach.getVitridesach(), sach.getIsActive()));
-                        }
-                    }
+                    list.clear();
                 } else {
                     for (DataSnapshot data : snapshot.getChildren()) {
                         Sach sach = data.getValue(Sach.class);

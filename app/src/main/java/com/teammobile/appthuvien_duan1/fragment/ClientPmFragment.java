@@ -2,9 +2,12 @@ package com.teammobile.appthuvien_duan1.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,6 +26,8 @@ import com.teammobile.appthuvien_duan1.dao.PhieuMuonDAO;
 import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,78 +35,117 @@ import java.util.Map;
 public class ClientPmFragment extends Fragment {
     private Context context;
     private PhieuMuon pm;
-    private AppCompatButton btnConfirm,btnDecline;
+    private Button btnXacNhan,btnHuyDon;
     private PhieuMuonDAO phieuMuonDAO;
     private ClientCartAdapter adapter;
     private RecyclerView rcv;
+    private TextView tvTinhTrang,tvTongTien;
     private MainActivity activity;
+    private String tinhTrang;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         khoiTao();
         View view=LayoutInflater.from(context).inflate(R.layout.fragment_client_pm,container,false);
-        btnConfirm=view.findViewById(R.id.btnConfirm);
-        btnDecline=view.findViewById(R.id.btnDecline);
+        btnXacNhan=view.findViewById(R.id.btnXacNhan);
+        btnHuyDon=view.findViewById(R.id.btnHuyDon);
+        tvTinhTrang=view.findViewById(R.id.tvTinhTrang);
+        tvTongTien=view.findViewById(R.id.tvTongTien);
         rcv=view.findViewById(R.id.rcv);
-        if(pm.getTrangThai()==-1){
-            btnDecline.setText("Đã hủy đơn");
-            btnDecline.setEnabled(false);
-        }
-        if(pm.getTrangThai()==4)
-            btnDecline.setText("DONE");
-        if(pm.getTrangThai()==1){
-            btnConfirm.setVisibility(View.VISIBLE);
-            btnConfirm.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    pm.setTrangThai(0);
-                    phieuMuonDAO.update(pm, new PhieuMuonDAO.IUpdate() {
-                        @Override
-                        public void onCallBack(Boolean check) {
-                            if(check){
-                                Toast.makeText(context, "Xác nhận hóa đơn với thủ thư", Toast.LENGTH_SHORT).show();
-                                reload();
-                            }
-                        }
-                    });
-                }
-            });
-        }
-        btnDecline.setOnClickListener(new View.OnClickListener() {
+        phieuMuonDAO.getAll(new PhieuMuonDAO.GetAllCalBack() {
             @Override
-            public void onClick(View v) {
-                if(pm.getTrangThai()>=3){
-                    Toast.makeText(context, "Bạn ko thể hủy hóa đơn ngay lúc này!", Toast.LENGTH_SHORT).show();
-                    return;
+            public void onCallBack(ArrayList<PhieuMuon> list) {
+                int ok=0;
+                PhieuMuon curPM=activity.getCurPM();
+                for(PhieuMuon phieuMuon: list){
+                    if(curPM!=null&&curPM.getMa().equals(phieuMuon.getMa())){
+                        ok=1;
+                        pm=phieuMuon;
+                        break;
+                    }
                 }
-                else if(pm.getTrangThai()!=-1){
-                    pm.setTrangThai(-1);
-                    updatePM();
+                if(ok==1){
+                    int tt=pm.getTrangThai();
+                    tinhTrang="";
+                    switch (tt){
+                        case 0:
+                        {
+                            tinhTrang="Chờ xác nhận";
+                            btnXacNhan.setVisibility(View.GONE);
+                            btnHuyDon.setVisibility(View.VISIBLE);
+                            break;
+                        }
+                        case 2: {
+                            tinhTrang="Đã xác nhận";
+                            btnXacNhan.setVisibility(View.GONE);
+                            btnHuyDon.setVisibility(View.VISIBLE);
+                            break;
+                        }
+                        case 1:
+                        {
+                            tinhTrang="Hóa đơn được thay đổi";
+                            btnXacNhan.setVisibility(View.VISIBLE);
+                            btnHuyDon.setVisibility(View.VISIBLE);
+                            break;
+                        }
+                        case 3:
+                        {
+                            tinhTrang="Đã nhận sách";
+                            btnXacNhan.setVisibility(View.GONE);
+                            btnHuyDon.setVisibility(View.GONE);
+                            break;
+                        }
+                        case 4:
+                        {
+                            tinhTrang="Đã trả sách";
+                            btnXacNhan.setVisibility(View.GONE);
+                            btnHuyDon.setVisibility(View.GONE);
+                            break;
+                        }
+                        default:{
+                            tinhTrang="Hóa đơn bị hủy";
+                            btnXacNhan.setVisibility(View.GONE);
+                            btnHuyDon.setVisibility(View.GONE);
+                        }
+                    }
+                    fetchingData();
                 }
-
             }
         });
-        fetchingData();
+        btnXacNhan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pm.setTrangThai(0);
+                updatePM();
+            }
+        });
+        btnHuyDon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pm.setTrangThai(-1);
+                updatePM();
+            }
+        });
         return view;
     }
     public void khoiTao()
     {
-
         context=getContext();
         activity= (MainActivity) context;
-        Bundle bundle=getArguments();
-        pm = (PhieuMuon) bundle.getSerializable("pm");
         phieuMuonDAO=new PhieuMuonDAO();
-//
     }
     public void fetchingData()
     {
+        NumberFormat formatter = new DecimalFormat("#,###");
+
+        tvTinhTrang.setText("Tình trạng: "+ tinhTrang);
         Map<String, Sach> map= (HashMap<String, Sach>) pm.getSach();
         ArrayList<Sach> list=new ArrayList<>();
         for(Map.Entry<String,Sach> entry: map.entrySet()){
             Sach sach=entry.getValue();
             list.add(new Sach(entry.getKey(),sach.getLoai(),sach.getTacGia(),sach.getTenSach(),sach.getHinhAnh(),sach.getSoLuong(),sach.getGiaThue(),sach.getVitridesach(),sach.getIsActive()));
         }
+        tvTongTien.setText("Tổng đơn hàng: "+formatter.format(pm.getTongTien())+" vnđ");
         loadUI(list);
     }
     public void loadUI(ArrayList<Sach> list)
@@ -110,41 +154,20 @@ public class ClientPmFragment extends Fragment {
         LinearLayoutManager layoutManager=new LinearLayoutManager(context);
         rcv.setLayoutManager(layoutManager);
         rcv.setAdapter(adapter);
-    }
-    public void reload()
-    {
-        Fragment fragment=new ClientPmFragment();
-        Bundle bundle=new Bundle();
-        bundle.putSerializable("pm", pm);
-        fragment.setArguments(bundle);
-        FragmentManager fm=activity.getSupportFragmentManager();
-        if(fm.findFragmentById(R.id.frag_main)!=null){
-            fm.popBackStack();
-            fm.beginTransaction().addToBackStack(null).replace(R.id.frag_main,fragment).commit();
-        }
 
     }
+
     public void updatePM()
     {
         phieuMuonDAO.update(pm, new PhieuMuonDAO.IUpdate() {
             @Override
             public void onCallBack(Boolean check) {
                 if(check){
-
-                    pm.setTrangThai(pm.getTrangThai());
-
+                   // Toast.makeText(context, "Xác nhận với người dùng rồi nè!", Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
-        phieuMuonDAO.getCurPM(pm.getMa(), new PhieuMuonDAO.IGetCurPM() {
-            @Override
-            public void onCallBack(PhieuMuon phieuMuon) {
-                Toast.makeText(context, "Thay đổi rồi nè!", Toast.LENGTH_SHORT).show();
-//                if(pm.getTrangThai()!=phieuMuon.getTrangThai())
-//                    reload();
-            }
-        });
-
+        
     }
 }

@@ -2,178 +2,185 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:weightSum="6"
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <androidx.cardview.widget.CardView
-        android:layout_margin="10dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="20dp"
-        android:id="@+id/btnQuanLy"
+    android:orientation="vertical">
+
+    <RelativeLayout
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp">
-        <LinearLayout
-
-            android:gravity="center"
-            android:padding="5dp"
-            android:weightSum="4"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-
-                android:src="@drawable/ic_neural" />
-
-            <TextView
-                android:gravity="center"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-               android:layout_weight="2"
-                android:fontFamily="sans-serif"
-                android:text="Quản lý"
-                android:textSize="30sp" />
-
-            <ImageView
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-
-                android:src="@drawable/ic_arrow_right" />
-        </LinearLayout>
-
-
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:layout_margin="10dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="20dp"
-        android:id="@+id/btnUser"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
-
-        <LinearLayout
+        <View
+            android:id="@+id/topView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:weightSum="4">
+            android:background="@drawable/bgr"/>
+        <TextView
+            android:id="@+id/txtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dashboard"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:fontFamily="@font/bungee_inline"
+            android:layout_centerHorizontal="true"
+            />
+    </RelativeLayout>
 
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/ic_man" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:fontFamily="sans-serif"
-                android:gravity="center"
-                android:text="Thông tin"
-                android:textSize="30sp" />
-
-            <ImageView
-                android:layout_gravity="center"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-
-                android:layout_weight="1"
-                android:src="@drawable/ic_arrow_right" />
-        </LinearLayout>
-
-
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:layout_margin="10dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="20dp"
-        android:id="@+id/btnPMUser"
-        android:layout_weight="1"
+    <LinearLayout
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="5">
 
         <LinearLayout
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:weightSum="4">
-
-            <ImageView
+            android:layout_height="0dp"
+            android:orientation="horizontal">
+            <androidx.cardview.widget.CardView
+                android:layout_weight="1"
+                android:id="@+id/btnQuanLy"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/ic_bill" />
+                app:cardCornerRadius="15sp"
+                app:cardElevation="12sp"
+                android:layout_margin="12sp">
 
-            <TextView
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="80sp"
+                        android:layout_height="80sp"
+                        android:src="@drawable/ic_neural"
+                        android:layout_gravity="center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Quản lý"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btnPMUser"
+                android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:fontFamily="sans-serif"
-                android:gravity="center"
-                android:text="Đơn hàng"
-                android:textSize="30sp" />
+                app:cardCornerRadius="15sp"
+                app:cardElevation="12sp"
+                android:layout_margin="12sp">
 
-            <ImageView
-                android:layout_gravity="center"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="80sp"
+                        android:layout_height="80sp"
+                        android:src="@drawable/ic_bill"
+                        android:layout_gravity="center"/>
 
-                android:layout_weight="1"
-                android:src="@drawable/ic_arrow_right" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Đơn hàng"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
-
-
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:layout_margin="10dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="20dp"
-        android:id="@+id/btnLogOut"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
 
         <LinearLayout
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:weightSum="4">
-
-            <ImageView
+            android:layout_height="0dp"
+            android:orientation="horizontal">
+            <androidx.cardview.widget.CardView
+                android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/ic_logout" />
+                app:cardCornerRadius="15sp"
+                app:cardElevation="12sp"
+                android:layout_margin="12sp">
 
-            <TextView
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="80sp"
+                        android:layout_height="80sp"
+                        android:src="@drawable/ic_man"
+                        android:layout_gravity="center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Thông tin"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_weight="1"
+                android:id="@+id/btnLogOut"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:fontFamily="sans-serif"
-                android:gravity="center"
-                android:text="Đăng xuất"
-                android:textSize="30sp" />
+                app:cardCornerRadius="15sp"
+                app:cardElevation="12sp"
+                android:layout_margin="12sp">
 
-            <ImageView
-                android:layout_gravity="center"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="80sp"
+                        android:layout_height="80sp"
+                        android:src="@drawable/ic_logout"
+                        android:layout_gravity="center"/>
 
-                android:layout_weight="1"
-                android:src="@drawable/ic_arrow_right" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Đăng xuất"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
 
-
-    </androidx.cardview.widget.CardView>
-
-
+    </LinearLayout>
 </LinearLayout>

@@ -1,64 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="5dp"
-    app:cardCornerRadius="15dp"
+    android:layout_width="wrap_content"
+    android:layout_height="130dp"
+    app:cardCornerRadius="25dp"
     app:cardElevation="15dp"
-    android:layout_height="150dp">
+    android:layout_margin="10dp"
+    >
+
     <LinearLayout
         android:orientation="horizontal"
-        android:weightSum="6"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:weightSum="6"
+        android:layout_height="match_parent"
 
+        >
+        <ImageView
+            android:background="@drawable/ring_bgr"
+            android:layout_gravity="center"
+            android:id="@+id/btnEdit"
+            android:layout_width="0dp"
+            android:layout_height="33sp"
+            android:layout_weight="1"
+            android:src="@drawable/baseline_info_24" />
         <RelativeLayout
             android:padding="10dp"
             android:layout_weight="5"
             android:layout_width="0dp"
             android:layout_height="match_parent">
+<!--            <TextView-->
+<!--                android:text="Trạng thái: "-->
+<!--                android:textSize="15dp"-->
+<!--                android:fontFamily="monospace"-->
+<!--                android:id="@+id/tvTitleTT"-->
+<!--                android:textAlignment="viewEnd"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"/>-->
             <TextView
-                android:id="@+id/tvNgay"
-                android:text="Ngày: "
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
+                android:id="@+id/tvTT"
+                android:textAlignment="textEnd"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:background="@color/white"
+                android:fontFamily="sans-serif-black"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5sp"
+                />
+            <TextView
+                android:layout_below="@+id/tvTT"
+                android:id="@+id/tvNgay"
+                android:text="Ngày thuê: "
+                android:fontFamily="sans-serif-black"
+                android:textSize="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3sp"/>
             <TextView
                 android:layout_below="@id/tvNgay"
                 android:id="@+id/tvMa"
-                android:text="Mã hóa đơn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:text="Trạng thái: "
-                android:id="@+id/tvTitleTT"
-                android:layout_below="@+id/tvMa"
+                android:fontFamily="sans-serif-black"
+                android:textSize="15dp"
+                android:text="Mã hóa đơn:"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:layout_marginTop="39dp"
-                android:layout_toRightOf="@id/tvTitleTT"
-                android:id="@+id/tvTT"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5sp"/>
 
-                android:text="Trạng thái: "
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
             <TextView
-                android:layout_below="@+id/tvTitleTT"
+                android:layout_below="@+id/tvMa"
                 android:text="Tổng tiền: "
+                android:textSize="17dp"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-black"
+                android:textStyle="bold"
                 android:id="@+id/tvTongTien"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
         </RelativeLayout>
 
-        <ImageView
-            android:layout_gravity="center"
-            android:id="@+id/btnEdit"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/baseline_info_24" />
+
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>

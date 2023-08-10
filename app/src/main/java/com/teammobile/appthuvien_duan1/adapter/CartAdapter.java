@@ -3,7 +3,7 @@ package com.teammobile.appthuvien_duan1.adapter;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
+
 import com.bumptech.glide.Glide;
 
 import android.graphics.Color;
@@ -18,17 +18,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.teammobile.appthuvien_duan1.R;
-import com.teammobile.appthuvien_duan1.dao.CartDAO;
-import com.teammobile.appthuvien_duan1.dao.SachDAO;
-import com.teammobile.appthuvien_duan1.fragment.CartFragment;
+import com.teammobile.appthuvien_duan1.activity.MainActivity;
+import com.teammobile.appthuvien_duan1.fragment.BadgeCartFragment;
 import com.teammobile.appthuvien_duan1.model.Cart;
 import com.teammobile.appthuvien_duan1.model.Sach;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 	private ArrayList<Sach> list;
@@ -36,7 +38,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 	private Context context;
 	private int originalTextColor;
 
+	private NumberFormat format;
+
+	private BottomNavigationView bottomNavigationView;
+
 	private AlertDialog alertDialog;
+
+
 
 	private TongTien tongTien;
 
@@ -71,8 +79,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 		Sach sach = list.get(position);
 
+		 format = NumberFormat.getInstance(Locale.US);
+
+
 		holder.txtTen.setText(""+list.get(holder.getAdapterPosition()).getTenSach());
-		holder.txtGia.setText("Giá tiền: " + list.get(holder.getAdapterPosition()).getGiaThue() + " VND");
+		holder.txtGia.setText("Giá: " + format.format(list.get(holder.getAdapterPosition()).getGiaThue())+ " VND");
 		holder.txtTacGia.setText("Tác giả: "+list.get(holder.getAdapterPosition()).getTacGia().getTenTacGia());
 		holder.txtTheLoai.setText("Thể loại: "+list.get(holder.getAdapterPosition()).getLoai().getTenLoai());
 		String soluong = "" + list.get(holder.getAdapterPosition()).getSoLuong();
@@ -114,11 +125,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 					soluong++;
 					sach.setSoLuong(soluong);
 					list.set(vitribam,sach);
+
 					holder.txtSoluong.setTextColor(Color.RED);
 					holder.ivTang.setColorFilter(Color.BLACK);
 					holder.ivGiam.setColorFilter(originalTextColor);
 
-
+					BadgeCartFragment.cartCount++;
+					updateBadge();
 					loadData();
 
 
@@ -145,9 +158,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 					holder.ivGiam.setColorFilter(Color.BLACK);
 					holder.ivTang.setColorFilter(originalTextColor);
 
-
-
+					BadgeCartFragment.cartCount--;
+					updateBadge();
 					loadData();
+					if(Integer.parseInt(holder.txtSoluong.getText().toString())<3){
+						holder.txtSoluong.setTextColor(Color.BLACK);
+					}
 
 				}
 			}
@@ -192,7 +208,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 		View dialogView = inflater.inflate(R.layout.item_xoadialog, null);
 		Button btnHuy,btnXacNhan;
 		btnHuy = dialogView.findViewById(R.id.btnHuy);
-		btnXacNhan = dialogView.findViewById(R.id.btnXacnhan);
+		btnXacNhan = dialogView.findViewById(R.id.btnXacNhan);
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		builder.setView(dialogView);
@@ -202,9 +218,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 			@Override
 			public void onClick(View v) {
 				list.remove(holder.getAdapterPosition());
+				BadgeCartFragment.cartCount--;
+
 				maxSoluong.remove(holder.getAdapterPosition());
 				loadData();
 				alertDialog.dismiss();
+				updateBadge();
 			}
 		});
 		btnHuy.setOnClickListener(new View.OnClickListener() {
@@ -218,6 +237,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 		alertDialog.show();
 	}
 
+	public void updateBadge(){
+		((MainActivity)context).updateCartCount(BadgeCartFragment.cartCount);
+	}
+
 	public interface TongTien{
 		void thayDoiTongTien(int tongTien);
 	}
@@ -227,17 +250,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
 
 
-
 	public void loadData(){
 		tongGiohang = 0;
 		for(Sach sach: list){
-			tongGiohang += sach.getGiaThue()*sach.getSoLuong();
+			tongGiohang +=sach.getGiaThue()*sach.getSoLuong();
 		}
 		if(tongTien!=null){
 			tongTien.thayDoiTongTien(tongGiohang);
 		}
 		Cart cart = Cart.getInstance();
 		cart.updateList(list,maxSoluong);
+
+
 		notifyDataSetChanged();
 	}
 }

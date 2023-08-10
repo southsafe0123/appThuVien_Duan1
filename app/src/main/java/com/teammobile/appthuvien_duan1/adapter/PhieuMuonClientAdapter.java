@@ -3,11 +3,13 @@ package com.teammobile.appthuvien_duan1.adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,15 +22,21 @@ import com.teammobile.appthuvien_duan1.dao.PhieuMuonDAO;
 import com.teammobile.appthuvien_duan1.fragment.ClientPmFragment;
 import com.teammobile.appthuvien_duan1.model.PhieuMuon;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Locale;
 
 public class PhieuMuonClientAdapter extends RecyclerView.Adapter<PhieuMuonClientAdapter.ViewHolder> {
     private Context context;
     private ArrayList<PhieuMuon> list;
     private MainActivity activity;
     private PhieuMuonDAO phieuMuonDAO;
+    private NumberFormat format;
+
     public PhieuMuonClientAdapter(Context context, ArrayList<PhieuMuon> list) {
         this.context = context;
+        Collections.reverse(list);
         this.list = list;
         activity= (MainActivity) context;
         phieuMuonDAO=new PhieuMuonDAO();
@@ -74,32 +82,21 @@ public class PhieuMuonClientAdapter extends RecyclerView.Adapter<PhieuMuonClient
             default:
 
         }
+        format = NumberFormat.getInstance(Locale.US);
         holder.tvTrangThai.setText(tt);
         holder.tvNgay.setText("Ngày thuê: "+list.get(position).getNgayTao());
         holder.tvMaPM.setText("Mã hóa đơn: "+list.get(position).getMa());
-        holder.tvTongTien.setText("Tổng tiền: "+list.get(position).getTongTien()+" VNĐ");
+        holder.tvTongTien.setText("Tổng đơn hàng: "+format.format(list.get(position).getTongTien())+" VNĐ");
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 activity.setCurPM(list.get(holder.getAdapterPosition()));
-                phieuMuonDAO.getCurPM(list.get(holder.getAdapterPosition()).getMa(), new PhieuMuonDAO.IGetCurPM() {
-                    @Override
-                    public void onCallBack(PhieuMuon phieuMuon) {
-                        Fragment fragment=new ClientPmFragment();
-                        Bundle bundle=new Bundle();
-                        bundle.putSerializable("pm",phieuMuon);
-                        fragment.setArguments(bundle);
-                        FragmentManager fm=activity.getSupportFragmentManager();
-                        if(!fm.isDestroyed()&&fm.findFragmentByTag("curPM")!=null&&phieuMuon.getMa().equals(activity.getCurPM().getMa())){
-                            fm.popBackStack();
-                            loadFragment(fragment,"curPM");
-                        }
-                    }
-                });
-                Fragment fragment=new ClientPmFragment();
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("pm",list.get(holder.getAdapterPosition()));
-                fragment.setArguments(bundle);
+                Fragment fragment=activity.getClientPmFragment();
+                if(fragment==null){
+                    fragment=new ClientPmFragment();
+                    activity.setClientPmFragment((ClientPmFragment) fragment);
+
+                }
                 loadFragment(fragment,"curPM");
             }
         });

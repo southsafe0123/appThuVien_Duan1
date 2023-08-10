@@ -81,7 +81,7 @@ public class QuanLyTGFragment extends Fragment {
 
                     @Override
                     public void onCallBackGetAll(ArrayList<TacGia> list) {
-
+                        dialog.dismiss();
                     }
                 });
             }

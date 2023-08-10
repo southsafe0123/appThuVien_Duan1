@@ -82,9 +82,8 @@ public class QuanLyLoaiFragment extends Fragment {
 
                     @Override
                     public void onCallBackGetAll(ArrayList<Loai> list) {
-
+                        dialog.dismiss();
                     }
-
 
                 });
             }
