@@ -19,25 +19,16 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
-        Button btnLogin = findViewById(R.id.btnInLogin);
-        Button btnSignup = findViewById(R.id.btnInSignup);
         ImageView ivLogo = findViewById(R.id.ivLogo);
 
-        Glide.with(this).load(R.mipmap.logo_new).into(ivLogo);
+        Glide.with(this).load(R.mipmap.logo1).into(ivLogo);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(IntroActivity.this, Login_Activity.class);
-                startActivity(intent);
+            public void run() {
+                startActivity(new Intent(IntroActivity.this, Login_Activity.class));
+
             }
-        });
-        btnSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(IntroActivity.this, Register_Activity.class);
-                startActivity(intent);
-            }
-        });
+        },5000);
     }
 }
