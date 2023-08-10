@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         return stock;
     }
 
+//
     public void setStock(Map<String, Sach> stock) {
         this.stock = stock;
     }
