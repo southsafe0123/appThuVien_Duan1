@@ -47,7 +47,7 @@ public class UserFragment extends Fragment {
                     getActivity().finish();
                 }
                 else
-                    Toast.makeText(context, "LỖI ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Bạn không được cấp quyền sử dụng", Toast.LENGTH_SHORT).show();
             }
         });
         btnLogOut.setOnClickListener(new View.OnClickListener() {

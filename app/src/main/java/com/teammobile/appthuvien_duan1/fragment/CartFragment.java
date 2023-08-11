@@ -114,7 +114,7 @@
                 }
             });
             if(list==null || list.isEmpty()){
-                Toast.makeText(context, "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
             } else{
 
             }
@@ -123,7 +123,7 @@
                 @Override
                 public void onClick(View v) {
                     if(list==null || list.isEmpty()){
-                        Toast.makeText(context, "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
                         return;
                     } else{
                         LayoutInflater inflater = getLayoutInflater();
@@ -156,13 +156,13 @@
                                         @Override
                                         public void onCallBack(Boolean check) {
                                             if(list==null || list.isEmpty()){
-                                                Toast.makeText(context, "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
+                                                //Toast.makeText(context, "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
                                                 alertDialog.dismiss();
                                                 return;
                                             }
 
                                             if(check){
-                                                Toast.makeText(context, "Thanh toán đơn hàng thành công", Toast.LENGTH_SHORT).show();
+                                                //Toast.makeText(context, "Thanh toán đơn hàng thành công", Toast.LENGTH_SHORT).show();
                                                 BadgeCartFragment.cartCount=0;
                                                 ((MainActivity)context).updateCartCount(BadgeCartFragment.cartCount);
                                                 list.clear();
