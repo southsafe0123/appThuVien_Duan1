@@ -218,8 +218,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 			@Override
 			public void onClick(View v) {
 				list.remove(holder.getAdapterPosition());
-				BadgeCartFragment.cartCount--;
-
+				int sl= Integer.parseInt(holder.txtSoluong.getText().toString());
+				BadgeCartFragment.cartCount-=sl;
+				
 				maxSoluong.remove(holder.getAdapterPosition());
 				loadData();
 				alertDialog.dismiss();
