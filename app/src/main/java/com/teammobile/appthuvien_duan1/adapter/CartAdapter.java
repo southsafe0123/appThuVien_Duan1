@@ -220,7 +220,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 				list.remove(holder.getAdapterPosition());
 				int sl= Integer.parseInt(holder.txtSoluong.getText().toString());
 				BadgeCartFragment.cartCount-=sl;
-
 				maxSoluong.remove(holder.getAdapterPosition());
 				loadData();
 				alertDialog.dismiss();
