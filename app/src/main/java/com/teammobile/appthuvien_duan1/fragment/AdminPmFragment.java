@@ -327,8 +327,10 @@ public class AdminPmFragment extends Fragment {
             sachDAO.update(sach.getMaSach(), mx + sach.getSoLuong()*choice, new SachDAO.IUpdate() {
                 @Override
                 public void onCallBack(Boolean check) {
-                    if(check)
-                        Toast.makeText(context, "OK", Toast.LENGTH_SHORT).show();
+                    if(check){
+
+                    }
+                        //Toast.makeText(context, "OK", Toast.LENGTH_SHORT).show();
                 }
             });
         }

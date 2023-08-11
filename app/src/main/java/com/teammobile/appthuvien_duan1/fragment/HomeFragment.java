@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onCallBackGetAll(ArrayList<Sach> list) {
-                Toast.makeText(context, ""+list.size(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, ""+list.size(), Toast.LENGTH_SHORT).show();
 //                Toast.makeText(getContext(), ""+list.size(), Toast.LENGTH_SHORT).show();
                 rvHome.setAdapter(new HomeAdapter(list,getContext()));
             }
