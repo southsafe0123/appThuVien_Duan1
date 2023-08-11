@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fm=getSupportFragmentManager();
         if(!fm.isDestroyed()){
 //            fm.popBackStack();
-            fm.beginTransaction().addToBackStack(null).replace(R.id.frag_main,fragment).commit();
+            fm.beginTransaction().replace(R.id.frag_main,fragment).commit();
         }
 
     }
